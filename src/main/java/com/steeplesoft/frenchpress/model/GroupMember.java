@@ -147,6 +147,6 @@ public class GroupMember implements Serializable {
 
     @Override
     public String toString() {
-        return "com.steeplesoft.meetspace.model.GroupMember[id=" + id + "]";
+        return "com.steeplesoft.frenchpress.model.GroupMember[id=" + id + "]";
     }
 }

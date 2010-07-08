@@ -157,6 +157,6 @@ public class BlogEntry implements Serializable {
 
     @Override
     public String toString() {
-        return "com.steeplesoft.meetspace.model.BlogEntry[id=" + id + "]";
+        return "com.steeplesoft.frenchpress.model.BlogEntry[id=" + id + "]";
     }
 }

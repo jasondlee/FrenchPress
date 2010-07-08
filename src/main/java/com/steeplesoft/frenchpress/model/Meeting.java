@@ -188,6 +188,6 @@ public class Meeting implements Serializable {
 
     @Override
     public String toString() {
-        return "com.steeplesoft.meetspace.model.Meeting[id=" + id + "]";
+        return "com.steeplesoft.frenchpress.model.Meeting[id=" + id + "]";
     }
 }

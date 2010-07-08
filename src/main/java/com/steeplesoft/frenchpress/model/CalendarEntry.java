@@ -54,7 +54,7 @@ public class CalendarEntry implements Serializable {
 
     @Override
     public String toString() {
-        return "com.steeplesoft.meetspace.model.CalendarEntry[id=" + id + "]";
+        return "com.steeplesoft.frenchpress.model.CalendarEntry[id=" + id + "]";
     }
 
 }

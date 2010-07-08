@@ -3,7 +3,7 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence">
     <persistence-unit name="em" transaction-type="JTA">
-        <jta-data-source>jdbc/meetspace</jta-data-source>
+        <jta-data-source>jdbc/frenchpress</jta-data-source>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
             <property name="hibernate.jdbc.batch_size" value="20"/>

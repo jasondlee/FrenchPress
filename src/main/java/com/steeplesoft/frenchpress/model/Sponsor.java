@@ -148,6 +148,6 @@ public class Sponsor implements Serializable {
 
     @Override
     public String toString() {
-        return "com.steeplesoft.meetspace.model.Sponsor[id=" + id + ", name=" + name + "]";
+        return "com.steeplesoft.frenchpress.model.Sponsor[id=" + id + ", name=" + name + "]";
     }
 }

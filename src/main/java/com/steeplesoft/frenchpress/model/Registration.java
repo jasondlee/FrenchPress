@@ -113,7 +113,7 @@ public class Registration implements Serializable {
 
     @Override
     public String toString() {
-        return "com.steeplesoft.meetspace.model.Registration[id=" + id + "]";
+        return "com.steeplesoft.frenchpress.model.Registration[id=" + id + "]";
     }
 
 }
