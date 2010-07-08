@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+      template="/themes/#{main.preferences['theme'].value}/layout.xhtml">
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:viewParam id="model" name="model" value="#{autoAdminBean.modelClassName}"
+                         required="true"
+                         requiredMessage="You did not specify a model class. (The model parameter is missing)"
+                         validatorMessage="Invalid model class. (The model parameter is too short to be a class name)">
+                <f:validateLength minimum="1"/>
+            </f:viewParam>
+            <f:viewParam id="id" name="id" value="#{autoAdminBean.id}"
+                         validatorMessage="Invalid id. (The id parameter is too short to be a class name)"/>
+        </f:metadata>
+    </ui:define>
+    <ui:define name="content">
+            <h:form id="memberForm">
+                <h:panelGrid id="grid" width="100%" binding="#{autoAdminBean.panelGrid}"/>
+                <h:outputLink value="#{request.contextPath}/autoAdmin/form.jsf">Edit
+                    <f:param name="model" value="#{autoAdminBean.modelClassName}"/>
+                    <f:param name="id" value="#{autoAdminBean.selected.id}"/>
+                </h:outputLink>
+                &#160;
+                <h:outputLink value="#{request.contextPath}/autoAdmin/form.jsf">Add New
+                    <f:param name="model" value="#{autoAdminBean.modelClassName}"/>
+                </h:outputLink>
+                &#160;
+                <h:outputLink value="#{request.contextPath}/autoAdmin/list.jsf">List
+                    <f:param name="model" value="#{autoAdminBean.modelClassName}"/>
+                </h:outputLink>
+                &#160;
+            </h:form>
+    </ui:define>
+</ui:composition>

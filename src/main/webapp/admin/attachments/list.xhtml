@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+      template="/themes/#{main.preferences['theme'].value}/layout.xhtml">
+    <ui:define name="content">
+        <h:form id="attachmentListForm">
+            <h:commandLink action="#{attachmentBean.prepareCreate}" value="Add"/>
+            <h:dataTable id="attachmentTable" value="#{attachmentBean.list}" var="attachment" style="border-collapse: collapse;" border="1" width="100%">
+                <h:column>
+                    <f:facet name="header"><h:outputText style="font-weight: bold;" value="Title"/></f:facet>
+                    #{attachment.title}
+                </h:column>
+                <h:column>
+                    <f:facet name="header"><h:outputText style="font-weight: bold;" value="Description"/></f:facet>
+                    #{attachment.description}
+                </h:column>
+                <h:column>
+                    <f:facet name="header"><h:outputText style="font-weight: bold;" value="File Name"/></f:facet>
+                    #{attachment.fileName}
+                </h:column>
+                <h:column>
+                    <f:facet name="header"><h:outputText style="font-weight: bold;" value="Mime Type"/></f:facet>
+                    #{attachment.mimeType}
+                </h:column>
+                <h:column>
+                    <f:facet name="header"><h:outputText style="font-weight: bold;" value="Attached To"/></f:facet>
+                    #{attachment.owner.title}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="&nbsp;"/>
+                    </f:facet>
+                    <h:commandLink action="#{attachmentBean.prepareView}" value="View"/>
+                    &nbsp;
+                    <h:commandLink action="#{attachmentBean.prepareEdit}" value="Edit"/>
+                    &nbsp;
+                    <h:commandLink action="#{attachmentBean.delete}" value="Delete"
+                                   onclick="return confirm('Are you sure you want to delete #{attachment.title}?');" >
+                        <f:ajax execute="@this" render="@form"/>
+                    </h:commandLink>
+                </h:column>
+            </h:dataTable>
+            <div id="tableNav">
+                <div id="prevdiv" style="float: left;">
+                    <h:commandLink id="prevLink" action="#{attachmentBean.previous}" value="Previous #{attachmentBean.paginator.pageSize}" rendered="#{attachmentBean.paginator.hasPreviousPage}">
+                        <f:ajax execute="@this" render="@form"/>
+                    </h:commandLink>&#160;
+                </div>
+                <div id="countdiv" style="text-align: center; float: left;">
+                    <h:outputText value="#{attachmentBean.paginator.pageFirstItem + 1} to #{attachmentBean.paginator.pageLastItem + 1} of #{attachmentBean.paginator.itemsCount}"/>
+                    (
+                    <h:selectOneMenu id="rowsPerPage" value="#{attachmentBean.rowsPerPage}"
+                                     valueChangeListener="#{attachment.resetPagination}"
+                                     onchange1="jsf.ajax.request(this, event, {execute: 'attachmentListForm:rowsPerPage', render: 'attachmentListForm'}); return false;">
+                                     <f:ajax execute="@this" render="@form"/>
+                        <f:selectItem itemValue="5" />
+                        <f:selectItem itemValue="10" />
+                        <f:selectItem itemValue="15" />
+                    </h:selectOneMenu>
+                    ) per page
+                </div>
+                <div id="nextdiv" style="text-align: right; float: left;">
+                    &#160;
+                    <h:commandLink id="nextLink" action="#{attachmentBean.next}" value="Next #{attachmentBean.paginator.pageSize}" rendered="#{attachmentBean.paginator.hasNextPage}">
+                        <f:ajax execute="@this" render="@form"/>
+                    </h:commandLink>
+                </div>
+                <script type="text/javascript">
+                    var width = document.getElementById("attachmentListForm:attachmentTable").clientWidth;
+                    document.getElementById("prevdiv").style.width = (width/4)+"px";
+                    document.getElementById("countdiv").style.width = (width/2)+"px";
+                    document.getElementById("nextdiv").style.width = (width/4)+"px";
+                </script>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

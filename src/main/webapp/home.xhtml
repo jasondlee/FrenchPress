@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+    <title>Should Not Be Displayed</title>
+</head>
+<body>   <!-- template="/WEB-INF/demotemplate.xhtml" -->
+<ui:composition id="composition" template="/themes/#{main.preferences['theme'].value}/layout.xhtml">
+    <ui:define name="title">Oklahoma City Java Users Group</ui:define>
+    <ui:define name="content">
+        <h:panelGroup id="marker"/>
+        <h:messages layout="table"/>
+        Welcome to the online home of the Oklahoma City Java Users Group, Inc.
+        <br />
+        <br />
+        <ui:repeat id="blogsTable" value="#{main.recentBlogEntries}" var="entry" varStatus="status">
+            <div id="blogEntry_#{status.index}" class="blogEntry post">
+                <div class="info">
+                    <div id="entryTitle" class="entryTitle">
+                        #{entry.title}
+                    </div>
+                    <div id="entryByLine" class="date" style="float: none;">
+                        Posted by #{entry.postedBy.firstName} #{entry.postedBy.lastName} on
+                        <h:outputText value="#{entry.startPublishing}">
+                            <f:convertDateTime dateStyle="long"/>
+                        </h:outputText>
+                    </div>
+                </div>
+                <div id="entryBody" class="entryBody">
+                    <h:outputText value="#{entry.body}" escape="false"/>
+                </div>
+            </div>
+        </ui:repeat>
+    </ui:define>
+</ui:composition>
+</body>
+</html>

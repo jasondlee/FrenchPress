@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+                template="/themes/#{main.preferences['theme'].value}/layout.xhtml">
+    <ui:define name="content">
+        <h:form id="memberForm">
+            <h:panelGrid columns="2" style="vertical-align: top">
+                <h:outputLabel value="Name" for="name"/>
+                <h:outputText id="name" value="#{sponsorBean.selected.name}" title="Name"/>
+
+                <h:outputLabel value="Home Page" for="homePage"/>
+                <h:outputText id="homePage" value="#{sponsorBean.selected.homePage}" title="Home Page"/>
+
+                <h:outputLabel value="Contact" for="contactPerson"/>
+                <h:outputText id="contactPerson" value="#{sponsorBean.selected.contactPerson}" title="Contact"/>
+
+                <h:outputLabel value="Email" for="email"/>
+                <h:outputText id="email" value="#{sponsorBean.selected.email}" title="Email"/>
+
+                <h:outputLabel value="Logo URL" for="logoUrl"/>
+                <h:graphicImage id="logoUrl" value="#{sponsorBean.selected.logoUrl}" title="Logo Url"/>
+
+                <h:outputLabel value="Active?" for="active"/>
+                <h:outputText id="active" value="#{sponsorBean.selected.active ? 'Yes' : 'No'}" title="Active?"/>
+            </h:panelGrid>
+            <h:commandLink action="form" value="Edit"/>&#160;
+            <h:commandLink action="#{sponsorBean.prepareCreate}" value="Add New"/>&#160;
+            <h:commandLink action="#{sponsorBean.prepareList}" value="Sponsor List" immediate="true"/>&#160;
+        </h:form>
+    </ui:define>
+</ui:composition>

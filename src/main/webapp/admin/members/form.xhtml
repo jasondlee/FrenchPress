@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+      template="/themes/#{main.preferences['theme'].value}/layout.xhtml">
+    <ui:define name="content">
+            <h:form id="memberForm">
+                <h:outputText rendered="#{empty memberBean.selected.id}" value="&lt;h1&gt;Add a Member&lt;/h1&gt;" escape="false"/>
+                <h:outputText rendered="#{!empty memberBean.selected.id}" value="&lt;h1&gt;Update a Member&lt;/h1&gt;" escape="false"/>
+                <h:commandLink action="#{memberBean.prepareList}" value="Member List" immediate="true"/>
+
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="First Name" for="firstName" />
+                    <h:inputText id="firstName" value="#{memberBean.selected.firstName}" title="First Name" />
+
+                    <h:outputLabel value="Last Name" for="lastName" />
+                    <h:inputText id="lastName" value="#{memberBean.selected.lastName}" title="Last Name" />
+
+                    <h:outputLabel value="Email Address" for="emailAddress" />
+                    <h:inputText id="emailAddress" value="#{memberBean.selected.emailAddress}" title="Email Address" />
+                </h:panelGrid>
+                <h:commandButton action="#{memberBean.create}" value="Add" rendered="#{empty memberBean.selected.id}"/>
+                <h:commandButton action="#{memberBean.edit}" value="Update" rendered="#{!empty memberBean.selected.id}"/>
+                <h:commandButton action="list" value="Cancel"/>
+            </h:form>
+    </ui:define>
+</ui:composition>

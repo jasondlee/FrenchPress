@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+      template="/themes/#{main.preferences['theme'].value}/layout.xhtml">
+    <ui:define name="content">
+        <h:form id="memberListForm">
+            <h:commandLink action="#{memberBean.prepareCreate}" value="Add"/>
+            <h:dataTable id="memberTable" value="#{memberBean.list}" var="member" style="border-collapse: collapse;" border="1" width="100%">
+                <h:column>
+                    <f:facet name="header"><h:outputText style="font-weight: bold;" value="Last Name"/></f:facet>
+                    #{member.lastName}
+                </h:column>
+                <h:column>
+                    <f:facet name="header"><h:outputText style="font-weight: bold;" value="First Name"/></f:facet>
+                    #{member.firstName}
+                </h:column>
+                <h:column>
+                    <f:facet name="header"><h:outputText style="font-weight: bold;" value="Email Addresss"/></f:facet>
+                    #{member.emailAddress}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="&nbsp;"/>
+                    </f:facet>
+                    <h:commandLink action="#{memberBean.prepareView}" value="View"/>
+                    &nbsp;
+                    <h:commandLink action="#{memberBean.prepareEdit}" value="Edit"/>
+                    &nbsp;
+                    <h:commandLink action="#{memberBean.delete}" value="Delete" 
+                                   onclick="return confirm('Are you sure you want to delete #{member.firstName} #{member.lastName}?');" >
+                        <f:ajax execute="@this" render="@form"/>
+                    </h:commandLink>
+                </h:column>
+            </h:dataTable>
+            <div id="tableNav">
+                <div id="prevdiv" style="float: left;">
+                    <h:commandLink id="prevLink" action="#{memberBean.previous}" value="Previous #{memberBean.paginator.pageSize}" rendered="#{memberBean.paginator.hasPreviousPage}">
+                        <f:ajax execute="@this" render="@form"/>
+                    </h:commandLink>&#160;
+                </div>
+                <div id="countdiv" style="text-align: center; float: left;">
+                    <h:outputText value="#{memberBean.paginator.pageFirstItem + 1} to #{memberBean.paginator.pageLastItem + 1} of #{memberBean.paginator.itemsCount}"/>
+                    (
+                    <h:selectOneMenu id="rowsPerPage" value="#{memberBean.rowsPerPage}"
+                                     valueChangeListener="#{member.resetPagination}"
+                                     onchange1="jsf.ajax.request(this, event, {execute: 'memberListForm:rowsPerPage', render: 'memberListForm'}); return false;">
+                                     <f:ajax execute="@this" render="@form"/>
+                        <f:selectItem itemValue="5" />
+                        <f:selectItem itemValue="10" />
+                        <f:selectItem itemValue="15" />
+                    </h:selectOneMenu>
+                    ) per page
+                </div>
+                <div id="nextdiv" style="text-align: right; float: left;">
+                    &#160;
+                    <h:commandLink id="nextLink" action="#{memberBean.next}" value="Next #{memberBean.paginator.pageSize}" rendered="#{memberBean.paginator.hasNextPage}">
+                        <f:ajax execute="@this" render="@form"/>
+                    </h:commandLink>
+                </div>
+                <script type="text/javascript">
+                    var width = document.getElementById("memberListForm:memberTable").clientWidth;
+                    document.getElementById("prevdiv").style.width = (width/4)+"px";
+                    document.getElementById("countdiv").style.width = (width/2)+"px";
+                    document.getElementById("nextdiv").style.width = (width/4)+"px";
+                </script>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

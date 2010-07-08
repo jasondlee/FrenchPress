@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+      template="/themes/#{main.preferences['theme'].value}/layout.xhtml">
+    <ui:define name="content">
+            <h:form id="memberForm">
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="First Name" for="firstName" />
+                    <h:outputText id="firstName" value="#{memberBean.selected.firstName}" title="First Name" />
+
+                    <h:outputLabel value="Last Name" for="lastName" />
+                    <h:outputText id="lastName" value="#{memberBean.selected.lastName}" title="Last Name" />
+
+                    <h:outputLabel value="Email Address" for="emailAddress" />
+                    <h:outputText id="emailAddress" value="#{memberBean.selected.emailAddress}" title="Email Address" />
+                </h:panelGrid>
+                <h:commandLink action="form" value="Edit"/>&#160;
+                <h:commandLink action="#{memberBean.prepareCreate}" value="Add New"/>&#160;
+                <h:commandLink action="#{memberBean.prepareList}" value="Member List" immediate="true"/>&#160;
+            </h:form>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:sc="http://java.sun.com/mojarra/scales">
+<head>
+    <title>Should Not Be Displayed</title>
+</head>
+<body>
+<!-- template="/WEB-INF/demotemplate.xhtml" -->
+<ui:composition template="/themes/#{main.preferences['theme'].value}/layout.xhtml">
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:viewParam id="meetingId" name="meetingId" value="#{registrationBean.meetingId}"
+                         required="true"
+                         requiredMessage="You did not specify a meeting id. (The meetingId parameter is missing)"
+                         converterMessage="Invalid meeting id. (The meetingId parameter is not a number)"
+                         validatorMessage="Invalid meeting id. (The meetingId parameter is not a positive number)">
+                <f:validateLongRange minimum="0"/>
+            </f:viewParam>
+        </f:metadata>
+    </ui:define>
+    <ui:define name="title">Oklahoma City Java Users Group Meeting Registration</ui:define>
+    <ui:define name="content">
+        <h:messages/>
+        <table>
+            <tr>
+                <td>Date and Time:</td>
+                <td>
+                    <h:outputText value="#{registrationBean.meeting.meetingDate}">
+                        <f:convertDateTime type="date" dateStyle="full"/>
+                    </h:outputText>
+                    ,
+                    <h:outputText value="#{registrationBean.meeting.startTime}">
+                        <f:convertDateTime type="time"/>
+                    </h:outputText>
+                    -
+                    <h:outputText value="#{registrationBean.meeting.endTime}">
+                        <f:convertDateTime type="time"/>
+                    </h:outputText>
+                </td>
+            </tr>
+        </table>
+        <h:form id="regForm">
+            <h:inputHidden value="#{registrationBean.meetingId}"/>
+            <h:panelGrid columns="2">
+                <h:outputLabel for="regForm:fullName" value="Full Name:"/>
+                <h:inputText id="fullName" value="#{registrationBean.registration.fullName}"/>
+
+                <h:outputLabel for="regForm:emailAddress" value="Email Address:"/>
+                <h:inputText id="emailAddress" value="#{registrationBean.registration.emailAddress}"/>
+
+                Enter the text:
+                <sc:captcha id="captcha"/>
+                <h:message for="captcha"/>
+                <ui:remove>
+                    <h:panelGroup>
+                        <h:inputText value="#{registrationBean.captchaText}">
+                            <f:validator validatorId="captchaValidator"/>
+                        </h:inputText>
+                        <br/>
+                        <sc:download data="#{registrationBean.captchaImage}" mimeType="image/png">
+                            <h:graphicImage url="#{downloadUrl}" width="200px"/>
+                        </sc:download>
+                    </h:panelGroup>
+                </ui:remove>
+            </h:panelGrid>
+            <h:commandButton action="#{registrationBean.saveRegistration}" value="Register"/>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</body>
+</html>

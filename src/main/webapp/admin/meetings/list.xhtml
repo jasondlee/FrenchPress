@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+      template="/themes/#{main.preferences['theme'].value}/layout.xhtml">
+    <ui:define name="content">
+        <h:form id="meetingListForm">
+            <h:commandLink action="#{meetingBean.prepareCreate}" value="Add"/>
+            <h:dataTable id="meetingTable" value="#{meetingBean.list}" var="meeting" style="border-collapse: collapse;" border="1" width="100%">
+                <h:column>
+                    <f:facet name="header"><h:outputText style="font-weight: bold;" value="Name"/></f:facet>
+                    #{meeting.name}
+                </h:column>
+                <h:column>
+                    <f:facet name="header"><h:outputText style="font-weight: bold;" value="Topic"/></f:facet>
+                    #{meeting.topic}
+                </h:column>
+                <h:column>
+                    <f:facet name="header"><h:outputText style="font-weight: bold;" value="Speaker"/></f:facet>
+                    #{meeting.speaker}
+                </h:column>
+                <h:column>
+                    <f:facet name="header"><h:outputText style="font-weight: bold;" value="Date(s)"/></f:facet>
+                    <h:outputText value="#{meeting.startDate}">
+                        <f:convertDateTime dateStyle="medium"/>
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header"><h:outputText style="font-weight: bold;" value="Time"/></f:facet>
+                    <h:outputText value="#{meeting.startTime}">
+                        <f:convertDateTime type="time" timeStyle="short"/>
+                    </h:outputText> -
+                    <h:outputText value="#{meeting.endTime}">
+                        <f:convertDateTime type="time" timeStyle="short"/>
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="&nbsp;"/>
+                    </f:facet>
+                    <h:commandLink action="#{meetingBean.prepareView}" value="View"/>
+                    &nbsp;
+                    <h:commandLink action="#{meetingBean.prepareEdit}" value="Edit"/>
+                    &nbsp;
+                    <h:commandLink action="#{meetingBean.delete}" value="Delete" 
+                                   onclick="return confirm('Are you sure you want to delete #{meeting.name}?');" >
+                        <f:ajax execute="@this" render="@form"/>
+                    </h:commandLink>
+                </h:column>
+            </h:dataTable>
+            <div id="tableNav">
+                <div id="prevdiv" style="float: left;">
+                    <h:commandLink id="prevLink" action="#{meetingBean.previous}" value="Previous #{meetingBean.paginator.pageSize}" rendered="#{meetingBean.paginator.hasPreviousPage}">
+                        <f:ajax execute="@this" render="@form"/>
+                    </h:commandLink>&#160;
+                </div>
+                <div id="countdiv" style="text-align: center; float: left;">
+                    <h:outputText value="#{meetingBean.paginator.pageFirstItem + 1} to #{meetingBean.paginator.pageLastItem + 1} of #{meetingBean.paginator.itemsCount}"/>
+                    (
+                    <h:selectOneMenu id="rowsPerPage" value="#{meetingBean.rowsPerPage}"
+                                     valueChangeListener="#{meeting.resetPagination}"
+                                     onchange1="jsf.ajax.request(this, event, {execute: 'meetingListForm:rowsPerPage', render: 'meetingListForm'}); return false;">
+                                     <f:ajax execute="@this" render="@form"/>
+                        <f:selectItem itemValue="5" />
+                        <f:selectItem itemValue="10" />
+                        <f:selectItem itemValue="15" />
+                    </h:selectOneMenu>
+                    ) per page
+                </div>
+                <div id="nextdiv" style="text-align: right; float: left;">
+                    &#160;
+                    <h:commandLink id="nextLink" action="#{meetingBean.next}" value="Next #{meetingBean.paginator.pageSize}" rendered="#{meetingBean.paginator.hasNextPage}">
+                        <f:ajax execute="@this" render="@form"/>
+                    </h:commandLink>
+                </div>
+                <script type="text/javascript">
+                    var width = document.getElementById("meetingListForm:meetingTable").clientWidth;
+                    document.getElementById("prevdiv").style.width = (width/4)+"px";
+                    document.getElementById("countdiv").style.width = (width/2)+"px";
+                    document.getElementById("nextdiv").style.width = (width/4)+"px";
+                </script>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
