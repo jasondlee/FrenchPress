@@ -31,6 +31,14 @@ public abstract class ControllerBean implements Serializable {
 
     public abstract Class getEntityClass();
 
+    public DataAccessController getDataAccess() {
+        return dataAccess;
+    }
+
+    public void setDataAccess(DataAccessController dataAccess) {
+        this.dataAccess = dataAccess;
+    }
+
     protected void setNavigationIds(String add, String edit, String list, String view) {
         this.NAV_ADD = add;
         this.NAV_EDIT = edit;

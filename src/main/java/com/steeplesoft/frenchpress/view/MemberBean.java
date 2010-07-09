@@ -5,7 +5,7 @@
 
 package com.steeplesoft.frenchpress.view;
 
-import com.steeplesoft.frenchpress.model.GroupMember;
+import com.steeplesoft.frenchpress.model.User;
 import com.steeplesoft.frenchpress.service.impl.DataAccessController;
 import com.steeplesoft.frenchpress.view.util.JsfUtil;
 import com.steeplesoft.frenchpress.view.util.Paginator;
@@ -43,6 +43,6 @@ public class MemberBean extends ControllerBean implements Serializable {
 
     @Override
     public Class getEntityClass() {
-        return GroupMember.class;
+        return User.class;
     }
 }

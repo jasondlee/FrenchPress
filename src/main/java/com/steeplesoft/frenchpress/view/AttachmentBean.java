@@ -24,29 +24,25 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @SessionScoped
 public class AttachmentBean extends ControllerBean {
-
     public static final String NAV_ADD = "/admin/attachments/form";
-
     public static final String NAV_EDIT = "/admin/attachments/form";
-
     public static final String NAV_LIST = "/admin/attachments/list";
-
     public static final String NAV_VIEW = "/admin/attachments/view";
 
-    @ManagedProperty("#{meetspaceBean}")
-    private MeetSpaceBean meetspaceBean;
+    @ManagedProperty("#{frecnPressBean}")
+    private FrenchPressBean frenchPressBean;
 
     public AttachmentBean() {
         setNavigationIds(NAV_ADD, NAV_EDIT, NAV_LIST, NAV_VIEW);
     }
 
 
-    public MeetSpaceBean getMeetspaceBean() {
-        return meetspaceBean;
+    public FrenchPressBean getFrenchPressBean() {
+        return frenchPressBean;
     }
 
-    public void setMeetspaceBean(MeetSpaceBean meetspaceBean) {
-        this.meetspaceBean = meetspaceBean;
+    public void setFrenchPressBean(FrenchPressBean frenchPressBean) {
+        this.frenchPressBean = frenchPressBean;
     }
 
     @Override
@@ -60,7 +56,7 @@ public class AttachmentBean extends ControllerBean {
             System.out.println("create");
             //HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
             MultipartRequest request = (MultipartRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-            String uploadPath = meetspaceBean.getHome() + File.separator + "uploads";
+            String uploadPath = frenchPressBean.getHome() + File.separator + "uploads";
 
             Attachment attachment = (Attachment) getSelected();
             FileHolder item = request.getFile("contents");

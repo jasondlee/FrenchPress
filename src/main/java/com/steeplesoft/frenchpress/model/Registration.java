@@ -42,7 +42,7 @@ public class Registration implements Serializable {
     
     @JoinColumn(name = "member_id", referencedColumnName = "id")
     @ManyToOne
-    private GroupMember memberId;
+    private User memberId;
 
     public Registration() {
     }
@@ -83,11 +83,11 @@ public class Registration implements Serializable {
         this.meeting = meeting;
     }
 
-    public GroupMember getMemberId() {
+    public User getMemberId() {
         return memberId;
     }
 
-    public void setMemberId(GroupMember memberId) {
+    public void setMemberId(User memberId) {
         this.memberId = memberId;
     }
 

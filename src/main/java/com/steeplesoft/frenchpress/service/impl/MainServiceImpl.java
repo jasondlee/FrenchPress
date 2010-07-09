@@ -6,7 +6,7 @@
 package com.steeplesoft.frenchpress.service.impl;
 
 import com.steeplesoft.frenchpress.model.BlogEntry;
-import com.steeplesoft.frenchpress.model.GroupMember;
+import com.steeplesoft.frenchpress.model.User;
 import com.steeplesoft.frenchpress.model.Registration;
 import com.steeplesoft.frenchpress.model.Sponsor;
 import com.steeplesoft.frenchpress.service.MainService;
@@ -33,8 +33,8 @@ public class MainServiceImpl implements MainService {
     @PersistenceContext(unitName="em")//(name = "em")
     private EntityManager em;
 
-    public GroupMember getMember(Long id) {
-        return em.find(GroupMember.class, id);
+    public User getMember(Long id) {
+        return em.find(User.class, id);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class MainServiceImpl implements MainService {
         }
     }
 
-    public Long saveMember(GroupMember member) {
+    public Long saveMember(User member) {
         if (!em.contains(member)) {
             member = em.merge(member);
         }
@@ -68,7 +68,7 @@ public class MainServiceImpl implements MainService {
         return member.getId();
     }
 
-    public List<GroupMember> getMembers() {
+    public List<User> getMembers() {
         return em.createNamedQuery("GroupMember.findAll").getResultList();
     }
 
