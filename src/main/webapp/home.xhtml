@@ -19,7 +19,6 @@
         <h:panelGroup id="marker"/>
         <h:messages layout="table"/>
         Welcome to the online home of the Oklahoma City Java Users Group, Inc.
-<ui:remove>
         <h3 style="width: 100%; border-bottom: 1px; border-bottom-style: solid;">Next Meeting</h3>
         <table border="0">
             <tr>
@@ -67,7 +66,6 @@
                 <h:graphicImage value="#{main.randomSponsor.logoUrl}"/>
             </h:outputLink>
         </div>
-</ui:remove>
         <ui:repeat id="blogsTable" value="#{main.recentBlogEntries}" var="entry" varStatus="status">
             <div id="blogEntry_#{status.index}" class="blogEntry post">
                 <div class="info">

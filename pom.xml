@@ -15,6 +15,10 @@
             <name>Java.net Repository for Maven</name>
             <url>http://download.java.net/maven/2/</url>
         </repository>
+        <repository>
+            <id>jboss nexus</id>
+            <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+        </repository>
     </repositories>
 
     <properties>
@@ -27,7 +31,21 @@
         <jta.version>1.1</jta.version>
         <junit.version>4.8.1</junit.version>
         <hibernate-validator.version>4.0.2.GA</hibernate-validator.version>
+        <scales.version>2.0.0-SNAPSHOT</scales.version>
+        <org.richfaces.ui.version>4.0.0.20100715-M1</org.richfaces.ui.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.richfaces.ui</groupId>
+                <artifactId>richfaces-components-bom</artifactId>
+                <version>${org.richfaces.ui.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -59,6 +77,11 @@
             <artifactId>jsf-impl</artifactId>
             <version>${jsf.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.mojarra</groupId>
+            <artifactId>mojarra-scales</artifactId>
+            <version>${scales.version}</version>
         </dependency>
         <dependency>
             <groupId>com.steeplesoft.jsf.facestester</groupId>
@@ -101,18 +124,32 @@
             <artifactId>el-api</artifactId>
             <version>2.2</version>
         </dependency>
-        <!--
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
+            <groupId>org.richfaces.ui</groupId>
+            <artifactId>richfaces-components-ui</artifactId>
         </dependency>
-        -->
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>${javaee-api.version}</version>
-            <scope>provided</scope>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.servlet</artifactId>
+            <version>3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>1.8.0.10</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.asm</artifactId>
+            <version>2.1.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.antlr</artifactId>
+            <version>2.1.0</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

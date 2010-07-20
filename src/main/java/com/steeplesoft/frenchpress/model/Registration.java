@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  * @author jasonlee
  */
 @Entity
-@Table(name = "registration")
+@Table(name = "registrations")
 @NamedQueries({
         @NamedQuery(name = "Registration.findAll", query = "SELECT r FROM Registration r"),
         @NamedQuery(name = "Registration.findById", query = "SELECT r FROM Registration r WHERE r.id = :id"),

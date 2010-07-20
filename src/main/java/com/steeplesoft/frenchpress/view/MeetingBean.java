@@ -11,14 +11,12 @@ import com.steeplesoft.frenchpress.service.MeetingService;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import java.io.Serializable;
 
 /**
  *
  * @author jasonlee
  */
 @ManagedBean(name="meetingBean")
-@SessionScoped
 public class MeetingBean extends ControllerBean {
     public static final String NAV_ADD  = "/admin/meetings/form";
     public static final String NAV_EDIT = "/admin/meetings/form";
@@ -31,14 +29,9 @@ public class MeetingBean extends ControllerBean {
 
     @ManagedProperty("#{meetingService}")
     private MeetingService meetingService;
-    private Meeting nextMeeting = null;
 
     public Meeting getNextMeeting() {
-        if (nextMeeting == null) {
-            nextMeeting = meetingService.getUpcomingMeeting();
-        }
-
-        return nextMeeting;
+        return meetingService.getUpcomingMeeting();
     }
 
     public MeetingService getMeetingService() {
@@ -56,7 +49,6 @@ public class MeetingBean extends ControllerBean {
 
     @Override
     public String edit() {
-        nextMeeting = null;
         return super.edit();
     }
 }

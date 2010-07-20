@@ -74,7 +74,8 @@ public abstract class ControllerBean implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(dataAccess.findRange(getEntityClass(), getPageFirstItem(), getPageFirstItem()+getPageSize()));
+                    return new ListDataModel(dataAccess.findAll(getEntityClass()));
+                            //.findRange(getEntityClass(), getPageFirstItem(), getPageFirstItem()+getPageSize()));
                 }
             };
         }

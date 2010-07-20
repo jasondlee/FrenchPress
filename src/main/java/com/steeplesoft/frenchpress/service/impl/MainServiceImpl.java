@@ -30,7 +30,7 @@ public class MainServiceImpl implements MainService {
     @Resource
     private UserTransaction txn;
     
-    @PersistenceContext(unitName="em")//(name = "em")
+    @PersistenceContext(unitName="em")
     private EntityManager em;
 
     public User getMember(Long id) {

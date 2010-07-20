@@ -17,10 +17,10 @@ import javax.validation.constraints.Size;
  * @author jasonlee
  */
 @Entity
-@Table(name = "meeting")
+@Table(name = "meetings")
 @NamedQueries({
     @NamedQuery(name="getMeeting", query="SELECT m FROM Meeting m WHERE m.id = :meetingId"),
-    @NamedQuery(name="nextMeeting", query="SELECT m FROM Meeting m WHERE m.meetingDate >= CURRENT_DATE"),
+    @NamedQuery(name="nextMeeting", query="SELECT m FROM Meeting m WHERE m.meetingDate >= CURRENT_DATE ORDER BY m.meetingDate"),
     @NamedQuery(name = "Meeting.findAll", query = "SELECT m FROM Meeting m"),
     @NamedQuery(name = "Meeting.findById", query = "SELECT m FROM Meeting m WHERE m.id = :id"),
     @NamedQuery(name = "Meeting.findByDescription", query = "SELECT m FROM Meeting m WHERE m.description = :description"),

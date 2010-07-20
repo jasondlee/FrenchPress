@@ -9,9 +9,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "blog_entry")
+@Table(name = "blog_entries")
 @NamedQueries({
-        @NamedQuery(name = "BlogEntry.findAll", query = "SELECT be FROM BlogEntry be"),
+        @NamedQuery(name = "BlogEntry.findAll", query = "SELECT be FROM BlogEntry be ORDER BY be.createdDate, be.modifiedDate"),
         @NamedQuery(name = "BlogEntry.findById", query = "SELECT be FROM BlogEntry be WHERE be.id = :id"),
         @NamedQuery(name = "BlogEntry.findSticky", query = "SELECT be FROM BlogEntry be where be.isSticky = true ORDER by be.createdDate desc"),
         @NamedQuery(name = "BlogEntry.mostRecent", query = "SELECT be FROM BlogEntry be where be.isSticky = false ORDER by be.createdDate desc ")
@@ -34,7 +34,7 @@ public class BlogEntry implements Serializable {
     private Boolean isSticky;
 
     @ManyToOne()
-    private BlogEntry postedBy;
+    private User postedBy;
 
     @Column
     @Temporal(TemporalType.TIMESTAMP)
@@ -67,11 +67,11 @@ public class BlogEntry implements Serializable {
         this.body = body;
     }
 
-    public BlogEntry getPostedBy() {
+    public User getPostedBy() {
         return postedBy;
     }
 
-    public void setPostedBy(BlogEntry postedBy) {
+    public void setPostedBy(User postedBy) {
         this.postedBy = postedBy;
     }
 

@@ -5,15 +5,11 @@
 package com.steeplesoft.frenchpress.test;
 
 import org.junit.Test;
-import com.steeplesoft.frenchpress.model.Sponsor;
-import com.steeplesoft.frenchpress.service.MainService;
-import javax.inject.Inject;
-import static org.junit.Assert.*;
 
 //@RunWith(Arquillian.class)
 public class MainServiceTest {
-    @Inject
-    MainService mainService;
+//    @Inject
+//    MainService mainService;
 
 //    @Deployment
 //    public static Archive<?> createTestArchive() {
@@ -24,8 +20,8 @@ public class MainServiceTest {
 
 //    @Test
     public void testgetRandomSponsor() {
-        Sponsor sponsor = mainService.getRandomSponsor();
-        assertNotNull(sponsor);
+//        Sponsor sponsor = mainService.getRandomSponsor();
+//        assertNotNull(sponsor);
     }
     @Test
     public void dummy() {

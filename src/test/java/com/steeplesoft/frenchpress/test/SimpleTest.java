@@ -6,7 +6,6 @@
 package com.steeplesoft.frenchpress.test;
 
 import com.steeplesoft.frenchpress.view.DummyBean;
-import javax.inject.Inject;
 import org.junit.Test;
 
 /**
@@ -15,7 +14,7 @@ import org.junit.Test;
  */
 //@RunWith(Arquillian.class)
 public class SimpleTest {
-    @Inject
+//    @Inject
     DummyBean dummy;
 
 //    @Deployment

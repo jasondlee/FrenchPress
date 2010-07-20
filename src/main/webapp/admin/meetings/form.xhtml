@@ -1,6 +1,4 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:sc="http://java.sun.com/mojarra/scales"
@@ -34,20 +32,11 @@
 
                 <h:outputLabel value="Start Date" for="startDate"/>
                 <h:panelGroup>
-                    <sc:dateSelector id="startDate" value="#{meetingBean.selected.startDate}" title="Start Date">
+                    <sc:dateSelector id="startDate" value="#{meetingBean.selected.meetingDate}" title="Start Date">
                         <f:convertDateTime pattern="yyyy/MM/dd"/>
                     </sc:dateSelector>
                     <h:message for="startDate"/>
                 </h:panelGroup>
-
-                <h:outputLabel value="End Date" for="endDate"/>
-                <h:panelGroup>
-                    <sc:dateSelector id="endDate" value="#{meetingBean.selected.endDate}" title="End Date">
-                        <f:convertDateTime pattern="yyyy/MM/dd"/>
-                    </sc:dateSelector>
-                    <h:message for="endDate"/>
-                </h:panelGroup>
-
                 <h:outputLabel value="Start Time" for="startTime"/>
                 <h:panelGroup>
                     <h:inputText id="startTime" value="#{meetingBean.selected.startTime}" title="Start Time">

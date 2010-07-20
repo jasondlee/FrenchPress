@@ -1,86 +1,51 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-      template="/themes/#{main.preferences['theme'].value}/layout.xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich"
+                template="/themes/#{main.preferences['theme'].value}/layout.xhtml">
     <ui:define name="content">
         <h:form id="meetingListForm">
             <h:commandLink action="#{meetingBean.prepareCreate}" value="Add"/>
-            <h:dataTable id="meetingTable" value="#{meetingBean.list}" var="meeting" style="border-collapse: collapse;" border="1" width="100%">
-                <h:column>
-                    <f:facet name="header"><h:outputText style="font-weight: bold;" value="Name"/></f:facet>
-                    #{meeting.name}
-                </h:column>
-                <h:column>
-                    <f:facet name="header"><h:outputText style="font-weight: bold;" value="Topic"/></f:facet>
-                    #{meeting.topic}
-                </h:column>
-                <h:column>
-                    <f:facet name="header"><h:outputText style="font-weight: bold;" value="Speaker"/></f:facet>
-                    #{meeting.speaker}
-                </h:column>
-                <h:column>
-                    <f:facet name="header"><h:outputText style="font-weight: bold;" value="Date(s)"/></f:facet>
-                    <h:outputText value="#{meeting.meetingDate}">
+            <rich:dataTable value="#{meetingBean.list}" var="dataItem" sortMode="single"
+                            rowClasses="row1, row2" id="meetingTable"
+                            columnClasses="50,100,100,100"
+                            onRowMouseOver="this.style.backgroundColor='#B5F3FB'"
+                            onRowMouseOut="this.style.backgroundColor='#{a4jSkin.rowBackgroundColor}'"
+                            width="100%">
+                <rich:column>
+                    <f:facet name="header">Name</f:facet>
+                    #{dataItem.name}
+                </rich:column>
+                <rich:column>
+                    <f:facet name="header">Topic</f:facet>
+                    #{dataItem.topic}
+                </rich:column>
+                <rich:column>
+                    <f:facet name="header">Speaker</f:facet>
+                    #{dataItem.speaker}
+                </rich:column>
+                <rich:column>
+                    <f:facet name="header">Date</f:facet>
+                    <h:outputText value="#{dataItem.meetingDate}">
                         <f:convertDateTime dateStyle="medium"/>
                     </h:outputText>
-                </h:column>
-                <h:column>
-                    <f:facet name="header"><h:outputText style="font-weight: bold;" value="Time"/></f:facet>
-                    <h:outputText value="#{meeting.startTime}">
+                </rich:column>
+                <rich:column>
+                    <f:facet name="header">Time</f:facet>
+                    <h:outputText value="#{dataItem.startTime}">
                         <f:convertDateTime type="time" timeStyle="short"/>
                     </h:outputText> -
-                    <h:outputText value="#{meeting.endTime}">
+                    <h:outputText value="#{dataItem.endTime}">
                         <f:convertDateTime type="time" timeStyle="short"/>
                     </h:outputText>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="&nbsp;"/>
-                    </f:facet>
-                    <h:commandLink action="#{meetingBean.prepareView}" value="View"/>
-                    &nbsp;
-                    <h:commandLink action="#{meetingBean.prepareEdit}" value="Edit"/>
-                    &nbsp;
-                    <h:commandLink action="#{meetingBean.delete}" value="Delete" 
-                                   onclick="return confirm('Are you sure you want to delete #{meeting.name}?');" >
-                        <f:ajax execute="@this" render="@form"/>
-                    </h:commandLink>
-                </h:column>
-            </h:dataTable>
-            <div id="tableNav">
-                <div id="prevdiv" style="float: left;">
-                    <h:commandLink id="prevLink" action="#{meetingBean.previous}" value="Previous #{meetingBean.paginator.pageSize}" rendered="#{meetingBean.paginator.hasPreviousPage}">
-                        <f:ajax execute="@this" render="@form"/>
-                    </h:commandLink>&#160;
-                </div>
-                <div id="countdiv" style="text-align: center; float: left;">
-                    <h:outputText value="#{meetingBean.paginator.pageFirstItem + 1} to #{meetingBean.paginator.pageLastItem + 1} of #{meetingBean.paginator.itemsCount}"/>
-                    (
-                    <h:selectOneMenu id="rowsPerPage" value="#{meetingBean.rowsPerPage}"
-                                     valueChangeListener="#{meeting.resetPagination}"
-                                     onchange1="jsf.ajax.request(this, event, {execute: 'meetingListForm:rowsPerPage', render: 'meetingListForm'}); return false;">
-                                     <f:ajax execute="@this" render="@form"/>
-                        <f:selectItem itemValue="5" />
-                        <f:selectItem itemValue="10" />
-                        <f:selectItem itemValue="15" />
-                    </h:selectOneMenu>
-                    ) per page
-                </div>
-                <div id="nextdiv" style="text-align: right; float: left;">
+                </rich:column>
+                <rich:column>
                     &#160;
-                    <h:commandLink id="nextLink" action="#{meetingBean.next}" value="Next #{meetingBean.paginator.pageSize}" rendered="#{meetingBean.paginator.hasNextPage}">
-                        <f:ajax execute="@this" render="@form"/>
-                    </h:commandLink>
-                </div>
-                <script type="text/javascript">
-                    var width = document.getElementById("meetingListForm:meetingTable").clientWidth;
-                    document.getElementById("prevdiv").style.width = (width/4)+"px";
-                    document.getElementById("countdiv").style.width = (width/2)+"px";
-                    document.getElementById("nextdiv").style.width = (width/4)+"px";
-                </script>
-            </div>
+                </rich:column>
+            </rich:dataTable>
         </h:form>
     </ui:define>
 </ui:composition>

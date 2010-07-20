@@ -22,7 +22,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  * @author jasonlee
  */
 @Entity
-@Table(name = "sponsor")
+@Table(name = "sponsors")
 @NamedQueries({
     @NamedQuery(name = "Sponsor.findAll", query = "SELECT s FROM Sponsor s"),
     @NamedQuery(name = "Sponsor.findById", query = "SELECT s FROM Sponsor s WHERE s.id = :id"),

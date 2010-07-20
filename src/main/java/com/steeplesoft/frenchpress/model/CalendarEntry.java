@@ -17,7 +17,7 @@ import javax.persistence.Table;
  * @author jasonlee
  */
 @Entity
-@Table(name="calendar_entry")
+@Table(name="calendar_entries")
 public class CalendarEntry implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
