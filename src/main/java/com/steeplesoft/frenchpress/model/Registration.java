@@ -23,9 +23,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Registration implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
 
     @Column(name = "emailAddress", length = 255)

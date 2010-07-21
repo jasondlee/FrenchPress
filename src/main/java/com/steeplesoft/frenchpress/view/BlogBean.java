@@ -15,7 +15,7 @@ import javax.faces.bean.ManagedProperty;
  *
  * @author jasonlee
  */
-@ManagedBean
+@ManagedBean(name="blogBean")
 public class BlogBean {
     @ManagedProperty("#{blogService}")
     BlogService blogService;

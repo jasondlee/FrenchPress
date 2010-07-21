@@ -21,14 +21,13 @@ import java.io.Serializable;
 @ManagedBean(name="meetingService")
 @ApplicationScoped
 public class MeetingServiceImpl implements MeetingService, Serializable {
-    @PersistenceContext(name = "em")
+    @PersistenceContext(unitName = "em")
     private EntityManager em;
 
     @Override
     public Meeting getUpcomingMeeting() {
         try {
             Meeting meeting = (Meeting) em.createNamedQuery("nextMeeting").getResultList().get(0);
-            System.err.println("Meeting = " + meeting);
             return meeting;
         } catch (NoResultException nre) {
         }

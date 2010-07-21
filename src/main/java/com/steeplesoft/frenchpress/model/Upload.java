@@ -7,10 +7,9 @@ import java.io.Serializable;
 @Table(name = "uploads")
 public class Upload implements Serializable {
     private static final long serialVersionUID = 1L;
+
     @Id
-    @Basic(optional = false)
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
     @Column

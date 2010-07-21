@@ -17,11 +17,18 @@ import java.util.Date;
         @NamedQuery(name = "BlogEntry.mostRecent", query = "SELECT be FROM BlogEntry be where be.isSticky = false ORDER by be.createdDate desc ")
 })
 public class BlogEntry implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
+    public BlogEntry() {
+        final Date date = new Date();
+        setCreatedDate(date);
+        setModifiedDate(date);
+        setStartPublishing(date);
+        setStopPublishing(date);
+    }
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false)
@@ -157,6 +164,6 @@ public class BlogEntry implements Serializable {
 
     @Override
     public String toString() {
-        return "com.steeplesoft.frenchpress.model.BlogEntry[id=" + id + "]";
+        return "com.steeplesoft.frenchpress.model.BlogEntry[id=" + id + ", title='" + title +"', owner=" + postedBy.getFullName() + "]";
     }
 }
