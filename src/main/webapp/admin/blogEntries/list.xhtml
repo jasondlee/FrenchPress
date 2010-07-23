@@ -21,7 +21,8 @@
                             columnClasses="50,100,100,100"
                             onRowMouseOver="this.style.backgroundColor='#B5F3FB'"
                             onRowMouseOut="this.style.backgroundColor='#{a4jSkin.rowBackgroundColor}'"
-                            width="350" sortMode="single">
+                            width="350" binding="#{blogBean.dataTable}"
+                            sortMode="single">
                 <rich:column>
                     <f:facet name="header">Title</f:facet>
                     #{dataItem.title}
@@ -59,7 +60,7 @@
                     </h:outputText>
                 </rich:column>
                 <rich:column>
-                    &#160;
+                    <h:commandLink value="Edt" action="#{blogBean.editEntry}" />
                 </rich:column>
             </rich:dataTable>
         </h:form>

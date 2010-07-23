@@ -10,6 +10,7 @@ import com.steeplesoft.frenchpress.service.BlogService;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import org.richfaces.component.UIDataTable;
 
 /**
  *
@@ -18,7 +19,9 @@ import javax.faces.bean.ManagedProperty;
 @ManagedBean(name="blogBean")
 public class BlogBean {
     @ManagedProperty("#{blogService}")
-    BlogService blogService;
+    protected BlogService blogService;
+    protected UIDataTable dataTable;
+    protected BlogEntry selected;
 
     public List<BlogEntry> getEntryList() {
         return blogService.getMostRecentBlogEntries(-1);
@@ -34,5 +37,26 @@ public class BlogBean {
 
     public void setBlogService(BlogService blogService) {
         this.blogService = blogService;
+    }
+
+    public UIDataTable getDataTable() {
+        return dataTable;
+    }
+
+    public void setDataTable(UIDataTable dataTable) {
+        this.dataTable = dataTable;
+    }
+
+    public BlogEntry getSelected() {
+        return selected;
+    }
+
+    public void setSelected(BlogEntry selected) {
+        this.selected = selected;
+    }
+
+    public String editEntry() {
+        selected = (BlogEntry) dataTable.getRowData();
+        return "/admin/blogEntries/form";
     }
 }

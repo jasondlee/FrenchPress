@@ -13,21 +13,28 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
  * @author jasonlee
  */
-@ManagedBean(name="meetingService")
-@ApplicationScoped
+@ManagedBean(name = "meetingService")
 public class MeetingServiceImpl implements MeetingService, Serializable {
+
     @PersistenceContext(unitName = "em")
     private EntityManager em;
+    private Meeting meeting;
 
     @Override
     public Meeting getUpcomingMeeting() {
         try {
-            Meeting meeting = (Meeting) em.createNamedQuery("nextMeeting").getResultList().get(0);
+            if (meeting == null) {
+                List<Meeting> list = (List<Meeting>) em.createNamedQuery("nextMeeting").getResultList();
+                if (list.size() > 0) {
+                    meeting = list.get(0);
+                }
+            }
             return meeting;
         } catch (NoResultException nre) {
         }

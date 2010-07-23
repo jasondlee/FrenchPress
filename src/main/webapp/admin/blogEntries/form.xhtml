@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:sc="http://java.sun.com/mojarra/scales"
+                template="/themes/#{main.preferences['theme'].value}/layout.xhtml">
+    <ui:define name="content">
+        <h:form id="blogEntryForm">
+            <h1><h:outputText value="#{empty blogBean.selected.id ? 'Add' : 'Update'}"/> a Blog Entry</h1>
+            <h:commandLink action="/admin/blogEntries/list" value="Blog Entry List" immediate="true"/>
+
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Title" for="title"/>
+                <h:panelGroup>
+                    <h:inputText id="title" value="#{blogBean.selected.title}" title="Title"/>
+                    <h:message for="title"/>
+                </h:panelGroup>
+                <h:outputLabel value="Body" for="body"/>
+                <h:panelGroup>
+                    <h:inputTextarea id="body" value="#{blogBean.selected.body}" title="Body" rows="20" cols="80"/>
+                    <h:message for="body"/>
+                </h:panelGroup>
+                <h:outputLabel value="Sticky Post" for="sticky"/>
+                <h:panelGroup>
+                    <h:selectBooleanCheckbox id="sticky" value="#{blogBean.selected.isSticky}" title="Sticky Post"/>
+                    <h:message for="sticky"/>
+                </h:panelGroup>
+            </h:panelGrid>
+            <h:commandButton action="#{blogBean.create}" value="Add" rendered="#{empty blogBean.selected.id}"/>
+            <h:commandButton action="#{blogBean.update}" value="Update" rendered="#{!empty blogBean.selected.id}"/>
+            <h:commandButton action="/admin/blogEntries/list" value="Cancel"/>
+        </h:form>
+    </ui:define>
+</ui:composition>
