@@ -20,8 +20,8 @@ import javax.faces.model.ListDataModel;
  *
  * @author jasonlee
  */
-@ManagedBean(name="memberBean")
-@SessionScoped
+//@ManagedBean(name="memberBean")
+//@SessionScoped
 public class MemberBean extends ControllerBean implements Serializable {
     public static final String NAV_ADD = "/admin/members/form";
     public static final String NAV_EDIT = "/admin/members/form";

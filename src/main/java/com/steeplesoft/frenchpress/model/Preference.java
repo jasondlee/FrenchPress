@@ -71,6 +71,6 @@ public class Preference implements Serializable {
 
     @Override
     public String toString() {
-        return "com.steeplesoft.frenchpress.model.Preference[id=" + name + "]";
+        return getValue();
     }
 }

@@ -1,12 +1,18 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--xmlns:rich="http://richfaces.org/rich"-->
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:sc="http://java.sun.com/mojarra/scales"
+                xmlns:ice="http://www.icesoft.com/icefaces/component"
                 template="/themes/#{main.preferences['theme'].value}/layout.xhtml">
+
     <ui:define name="content">
+        <h:messages/>
         <h:form id="blogEntryForm">
             <h1><h:outputText value="#{empty blogBean.selected.id ? 'Add' : 'Update'}"/> a Blog Entry</h1>
             <h:commandLink action="/admin/blogEntries/list" value="Blog Entry List" immediate="true"/>
+
+            <h:inputHidden id="id" value="#{blogBean.selected.id}" rendered="#{!empty blogBean.selected.id}"/>
 
             <h:panelGrid columns="2">
                 <h:outputLabel value="Title" for="title"/>
@@ -16,13 +22,32 @@
                 </h:panelGroup>
                 <h:outputLabel value="Body" for="body"/>
                 <h:panelGroup>
-                    <h:inputTextarea id="body" value="#{blogBean.selected.body}" title="Body" rows="20" cols="80"/>
+                    <ice:inputRichText id="body" height="300" width="540" toolbar="Basic"
+                                       value="#{blogBean.selected.body}"
+                                       language="en" skin="silver"/>
                     <h:message for="body"/>
                 </h:panelGroup>
                 <h:outputLabel value="Sticky Post" for="sticky"/>
                 <h:panelGroup>
                     <h:selectBooleanCheckbox id="sticky" value="#{blogBean.selected.isSticky}" title="Sticky Post"/>
                     <h:message for="sticky"/>
+                </h:panelGroup>
+                <h:outputLabel value="Start Publishing" for="startPublishing"/>
+                <h:panelGroup>
+                    <ice:selectInputDate id="startPublishing" value="#{blogBean.selected.startPublishing}" highlightClass="weekend: august:"
+                                         highlightUnit="DAY_OF_WEEK: MONTH" highlightValue="1,7: 8">
+                    </ice:selectInputDate>
+                    <h:message for="startPublishing"/>
+                </h:panelGroup>
+                <h:outputLabel value="Stop Publishing" for="stopPublishing"/>
+                <h:panelGroup>
+                    <ice:selectInputDate id="stopPublishing"
+                                         value="#{blogBean.selected.stopPublishing}"
+                                         highlightClass="weekend: august:"
+                                         highlightUnit="DAY_OF_WEEK: MONTH"
+                                         highlightValue="1,7: 8">
+                    </ice:selectInputDate>
+                    <h:message for="stopPublishing"/>
                 </h:panelGroup>
             </h:panelGrid>
             <h:commandButton action="#{blogBean.create}" value="Add" rendered="#{empty blogBean.selected.id}"/>

@@ -4,8 +4,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:a4j="http://richfaces.org/a4j"
-                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ice="http://www.icesoft.com/icefaces/component"
                 template="/themes/#{main.preferences['theme'].value}/layout.xhtml">
     <ui:define name="metadata">
     </ui:define>
@@ -16,53 +15,40 @@
 
     <ui:define name="content">
         <h:form id="blogEntryForm">
-            <rich:dataTable value="#{blogBean.entryList}" var="dataItem"
+            <ice:dataTable value="#{blogBean.entryList}" var="dataItem"
                             rowClasses="row1, row2" id="blogEntryTable" rows="4"
                             columnClasses="50,100,100,100"
-                            onRowMouseOver="this.style.backgroundColor='#B5F3FB'"
-                            onRowMouseOut="this.style.backgroundColor='#{a4jSkin.rowBackgroundColor}'"
-                            width="350" binding="#{blogBean.dataTable}"
-                            sortMode="single">
-                <rich:column>
+                            width="350">
+                <ice:column>
                     <f:facet name="header">Title</f:facet>
-                    #{dataItem.title}
-                </rich:column>
-                <rich:column>
+                    <ice:outputText value="#{dataItem.title}"/>
+                </ice:column>
+                <ice:column>
                     <f:facet name="header">Sticky Post</f:facet>
                     #{dataItem.isSticky}
-                </rich:column>
-                <rich:column>
+                </ice:column>
+                <ice:column>
                     <f:facet name="header">Posted By</f:facet>
                     #{dataItem.postedBy.firstName} #{dataItem.postedBy.lastName}
-                </rich:column>
-                <rich:column>
+                </ice:column>
+                <ice:column>
                     <f:facet name="header">Pub Start Date</f:facet>
                     <h:outputText value="#{dataItem.startPublishing}">
                         <f:convertDateTime type="date" dateStyle="full"/>
                     </h:outputText>
-                </rich:column>
-                <rich:column>
+                </ice:column>
+                <ice:column>
                     <f:facet name="header">Pub End Date</f:facet>
                     <h:outputText value="#{dataItem.stopPublishing}">
                         <f:convertDateTime type="date" dateStyle="full"/>
                     </h:outputText>
-                </rich:column>
-                <rich:column>
-                    <f:facet name="header">Created Date</f:facet>
-                    <h:outputText value="#{dataItem.createdDate}">
-                        <f:convertDateTime type="date" dateStyle="full"/>
-                    </h:outputText>
-                </rich:column>
-                <rich:column>
-                    <f:facet name="header">Modified Date</f:facet>
-                    <h:outputText value="#{dataItem.modifiedDate}">
-                        <f:convertDateTime type="date" dateStyle="full"/>
-                    </h:outputText>
-                </rich:column>
-                <rich:column>
-                    <h:commandLink value="Edt" action="#{blogBean.editEntry}" />
-                </rich:column>
-            </rich:dataTable>
+                </ice:column>
+                <ice:column>
+                    <h:commandLink value="Add" action="#{blogBean.createEntry}" />
+                    &#160;|&#160;
+                    <h:commandLink value="Edit" action="#{blogBean.editEntry}" />
+                </ice:column>
+            </ice:dataTable>
         </h:form>
     </ui:define>
 

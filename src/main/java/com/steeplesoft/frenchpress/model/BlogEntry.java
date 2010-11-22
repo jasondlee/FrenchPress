@@ -164,6 +164,7 @@ public class BlogEntry implements Serializable {
 
     @Override
     public String toString() {
-        return "com.steeplesoft.frenchpress.model.BlogEntry[id=" + id + ", title='" + title +"', owner=" + postedBy.getFullName() + "]";
+        return "com.steeplesoft.frenchpress.model.BlogEntry[id=" + id + ", title='" + title +"', owner=" +
+                ((postedBy != null) ? postedBy.getFullName() : "") + "]";
     }
 }

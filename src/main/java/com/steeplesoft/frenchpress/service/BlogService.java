@@ -12,5 +12,8 @@ import java.util.List;
  * @author jasonlee
  */
 public interface BlogService {
-    public List<BlogEntry> getMostRecentBlogEntries(int max);
+    BlogEntry getEntry(Long id);
+    BlogEntry createBlogEntry(BlogEntry entry);
+    BlogEntry updateBlogEntry(BlogEntry entry);
+    List<BlogEntry> getMostRecentBlogEntries(int max);
 }

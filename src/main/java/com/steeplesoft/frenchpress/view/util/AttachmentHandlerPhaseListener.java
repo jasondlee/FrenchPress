@@ -13,8 +13,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 public class AttachmentHandlerPhaseListener implements PhaseListener {
-    @PersistenceContext(unitName = "em")
-    private EntityManager em;
+    @PersistenceUnit(unitName = "em")
+    private EntityManagerFactory emf;
 
     @Override
     public PhaseId getPhaseId() {
@@ -36,7 +36,7 @@ public class AttachmentHandlerPhaseListener implements PhaseListener {
                 HttpServletRequest req = (HttpServletRequest) fc.getExternalContext().getRequest();
                 HttpServletResponse resp = (HttpServletResponse) fc.getExternalContext().getResponse();
                 try {
-
+                    EntityManager em = emf.createEntityManager();
                     fc.responseComplete();
 
                     String uri = req.getRequestURI();
@@ -47,8 +47,8 @@ public class AttachmentHandlerPhaseListener implements PhaseListener {
                     }
                     Integer id = Integer.parseInt(parts[3]);
                     String fileName = parts[4];
-                    EntityManagerFactory emf = Persistence.createEntityManagerFactory("em");
-                    EntityManager em = emf.createEntityManager();
+//                    EntityManagerFactory emf = Persistence.createEntityManagerFactory("em");
+//                    EntityManager em = emf.createEntityManager();
                     Query query = em.createQuery("select a from Attachment a where a.id = :ID and a.fileName = :FILENAME");
                     query.setParameter("ID", id);
                     query.setParameter("FILENAME", fileName);

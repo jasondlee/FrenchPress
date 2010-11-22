@@ -2,10 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:a4j="http://richfaces.org/a4j"
-      xmlns:rich="http://richfaces.org/rich"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:sc="http://java.sun.com/mojarra/scales">
+      xmlns:ice="http://www.icesoft.com/icefaces/component">
+<!--
+      xmlns:a4j="http://richfaces.org/a4j"
+xmlns:rich="http://richfaces.org/rich"
+-->
     <ui:insert name="metadata"/>
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -18,8 +20,8 @@
         <style type="text/css" media="screen">@import url( http://okcjug.org/wp-content/themes/inove/style.css );</style>
         <!-- for translations -->
         <!--[if IE 6]>
-		<link rel="stylesheet" href="http://okcjug.org/wp-content/themes/inove/ie6.css" type="text/css" media="screen" />
-	<![endif]-->
+		    <link rel="stylesheet" href="http://okcjug.org/wp-content/themes/inove/ie6.css" type="text/css" media="screen" />
+	<   ![endif]-->
         <!-- style END -->
 
         <!-- script START -->
@@ -84,6 +86,7 @@
 
                     <!-- main START -->
                     <div id="main">
+                        <h:messages />
                         <ui:insert name="content">
                             Something's wrong!
                         </ui:insert>
@@ -119,62 +122,12 @@
                                 </div>
                             </div>
 
-                            <div class="widget">
-                                <h3 style="width: 100%; border-bottom: 1px; border-bottom-style: solid;">Next Meeting</h3>
-                                <table border="0">
-                                    <tr>
-                                        <td>Name:</td>
-                                        <td>
-                                            #{meetingBean.nextMeeting.name} (Register <a href="#{request.contextPath}/register.jsf?meetingId=#{meetingBean.nextMeeting.id}">here</a>)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Topic:</td>
-                                        <td>
-                                            #{meetingBean.nextMeeting.topic}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Speaker:</td>
-                                        <td>
-                                            #{meetingBean.nextMeeting.speaker}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Date:</td>
-                                        <td>
-                                            <h:outputText value="#{meetingBean.nextMeeting.meetingDate}">
-                                                <f:convertDateTime type="date" dateStyle="full"/>
-                                            </h:outputText>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Location:</td>
-                                        <td>#{meetingBean.nextMeeting.address} (#{meetingBean.nextMeeting.moreInfo})</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2"><h:outputText value="#{meetingBean.nextMeeting.description}" escape="false"/></td>
-                                    </tr>
-                                </table>
-                            </div>
-
-                            <div class="widget">
+\                            <div class="widget">
                                 <h3>Partner</h3>
                                 <a href="http://okccoco.com" style="border: 0; width: 168px; display: block; margin: auto;"><img src="#{request.contextPath}/wp-content/uploads/2009/09/okccoco-transparent.png"/></a>
                             </div>
 
-                            <div class="widget">
-                                <h3>Sponsors</h3>
-                                <h:outputLink value="#{main.randomSponsor.homePage}">
-                                    <h:graphicImage value="#{main.randomSponsor.logoUrl}"/>
-                                </h:outputLink>
-                            </div>
-
-                            <!-- showcase -->
-
-
                             <!-- posts -->
-
                             <div class="widget">
                                 <h3>Random Posts</h3>
 
@@ -182,10 +135,7 @@
                                     <li><a href="#{request.contextPath}/meetings/september-2009">September 2009</a></li><li><a href="#{request.contextPath}/meetings/september-2007">September 2007</a></li><li><a href="#{request.contextPath}/bios/scott-centille">Scott Centille</a></li><li><a href="#{request.contextPath}/bios/michael-e-shorter">Michael E. Shorter</a></li><li><a href="#{request.contextPath}/meetings/june-2008">June 2008</a></li>		</ul>
                             </div>
 
-                            <!-- recent comments -->
-
                             <!-- tag cloud -->
-
                             <div id="tag_cloud" class="widget">
                                 <h3>Tag Cloud</h3>
                             </div>
@@ -203,13 +153,9 @@
                                 <div class="widget widget_categories">
                                     <h3>Categories</h3>
                                     <ul>
-                                        <li class="cat-item cat-item-6"><a href="#{request.contextPath}/category/general-information" title="View all posts filed under General Information">General Information</a>
-                                        </li>
-                                        <li class="cat-item cat-item-5"><a href="#{request.contextPath}/category/meetings" title="View all posts filed under Meeting Information">Meeting Information</a>
-                                        </li>
-
-                                        <li class="cat-item cat-item-3"><a href="#{request.contextPath}/category/bios" title="View all posts filed under Speaker Bios">Speaker Bios</a>
-                                        </li>
+                                        <li class="cat-item cat-item-6"><a href="#{request.contextPath}/category/general-information" title="View all posts filed under General Information">General Information</a></li>
+                                        <li class="cat-item cat-item-5"><a href="#{request.contextPath}/category/meetings" title="View all posts filed under Meeting Information">Meeting Information</a></li>
+                                        <li class="cat-item cat-item-3"><a href="#{request.contextPath}/category/bios" title="View all posts filed under Speaker Bios">Speaker Bios</a></li>
                                     </ul>
                                 </div>
 
@@ -218,8 +164,6 @@
 
                             <!-- sidebar west START -->
                             <div id="westsidebar" class="sidebar">
-
-
                                 <!-- archives -->
                                 <div class="widget widget_archive">
                                     <h3>Archives</h3>
@@ -227,9 +171,7 @@
                                         <li><a href='#{request.contextPath}/2009/10' title='October 2009'>October 2009</a></li>
                                         <li><a href='#{request.contextPath}/2009/09' title='September 2009'>September 2009</a></li>
                                     </ul>
-
                                 </div>
-
                             </div>
                             <!-- sidebar west END -->
                             <div class="fixed"></div>
@@ -237,19 +179,15 @@
 
                         <!-- sidebar south START -->
                         <div id="southsidebar" class="sidebar">
-
                             <!-- meta -->
                             <div class="widget">
-
                                 <h3>Meta</h3>
                                 <ul>
                                     <li><a href="#{request.contextPath}/wp-admin/">Site Admin</a></li>			<li><a href="#{request.contextPath}/wp-login.php?action=logout&amp;_wpnonce=a3bc0301ef">Log out</a></li>
                                 </ul>
                             </div>
-
                         </div>
                         <!-- sidebar south END -->
-
                     </div>
                     <!-- sidebar END -->
                     <div class="fixed"></div>
@@ -260,20 +198,15 @@
                 <div id="footer">
                     <a id="gotop" href="#" onclick="MGJS.goTop();return false;">Top</a>
                     <a id="powered" href="http://wordpress.org/">WordPress</a>
-                    <div id="copyright">
-
-		Copyright &#x000A9; 2009 Oklahoma City Java Users Group	</div>
+                    <div id="copyright">Copyright &#x000A9; 2009 Oklahoma City Java Users Group	</div>
                     <div id="themeinfo">
-		Theme by <a href="http://www.neoease.com/">mg12</a>. Valid <a href="http://validator.w3.org/check?uri=referer">XHTML 1.1</a> and <a href="http://jigsaw.w3.org/css-validator/">CSS 3</a>.	</div>
-
+		                Theme by <a href="http://www.neoease.com/">mg12</a>. Valid <a href="http://validator.w3.org/check?uri=referer">XHTML 1.1</a> and <a href="http://jigsaw.w3.org/css-validator/">CSS 3</a>.
+                    </div>
                 </div>
                 <!-- footer END -->
-
             </div>
             <!-- container END -->
         </div>
         <!-- wrap END -->
-
-
     </h:body>
 </html>

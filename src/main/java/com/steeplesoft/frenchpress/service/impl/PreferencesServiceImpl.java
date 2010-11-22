@@ -12,8 +12,10 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
 
 /**
@@ -21,16 +23,17 @@ import javax.persistence.Query;
  * @author jasonlee
  */
 @ManagedBean(name="prefsService")
-@ApplicationScoped
+@SessionScoped
 public class PreferencesServiceImpl implements PreferencesService, Serializable {
-    @PersistenceContext(unitName="em")
-    protected EntityManager em;
+    @PersistenceUnit(unitName="em")
+    protected EntityManagerFactory emf;
 
     public PreferencesServiceImpl() {
     }
 
     @Override
     public Map<String, Preference> getPreferences() {
+        EntityManager em = emf.createEntityManager();
         Map<String, Preference> prefs = new ConcurrentHashMap<String, Preference>();
         Query query = em.createQuery("SELECT p from Preference p");
         List<Preference> list = query.getResultList();
@@ -42,6 +45,7 @@ public class PreferencesServiceImpl implements PreferencesService, Serializable 
 
     @Override
     public void savePreferences(Map<String, Preference> prefs) {
+        EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         for (Preference pref : prefs.values()) {
             em.merge(pref);

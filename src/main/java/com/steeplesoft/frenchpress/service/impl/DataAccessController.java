@@ -25,7 +25,7 @@ import javax.transaction.UserTransaction;
 @SessionScoped
 public class DataAccessController implements Serializable {
 
-    @PersistenceContext(unitName = "em")
+//    @PersistenceContext(unitName = "em")
     protected EntityManager em;
     @Resource
     private UserTransaction utx;

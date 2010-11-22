@@ -8,20 +8,20 @@ package com.steeplesoft.frenchpress.view;
 import com.steeplesoft.frenchpress.model.Preference;
 import com.steeplesoft.frenchpress.service.PreferencesService;
 
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import java.io.File;
 import java.io.Serializable;
 import java.util.Map;
-import javax.annotation.PostConstruct;
-import javax.faces.bean.ApplicationScoped;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 
 /**
  *
  * @author jasonlee
  */
 @ManagedBean(eager=true)
-@ApplicationScoped
+@SessionScoped
 public class FrenchPressBean implements Serializable {
     @ManagedProperty("#{prefsService}")
     private PreferencesService prefsService;

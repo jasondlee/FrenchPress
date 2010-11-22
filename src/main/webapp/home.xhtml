@@ -3,70 +3,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ice="http://www.icesoft.com/icefaces/component">
 <head>
     <title>Should Not Be Displayed</title>
 </head>
-<body>   <!-- template="/WEB-INF/demotemplate.xhtml" -->
-<!--
-<ui:remove>
-<ui:composition id="composition" template="/themes/plain/layout.xhtml">
-</ui:remove>
--->
-<ui:composition id="composition" template="/themes/#{main.preferences['theme'].value}/layout.xhtml">
-    <ui:define name="title">Oklahoma City Java Users Group</ui:define>
+<body>
+<ui:composition id="composition" template="/themes/#{main.preferences['theme']}/layout.xhtml">
+    <ui:define name="title">#{main.preferences['blogTitle']}</ui:define>
     <ui:define name="content">
+        <h1>#{main.preferences['theme']}</h1>
         <h:panelGroup id="marker"/>
         <h:messages layout="table"/>
         Welcome to the online home of the Oklahoma City Java Users Group, Inc.
-        <h3 style="width: 100%; border-bottom: 1px; border-bottom-style: solid;">Next Meeting</h3>
-        <table border="0">
-            <tr>
-                <td>Name:</td>
-                <td>
-                    #{meetingBean.nextMeeting.name} (Register <a href="#{request.contextPath}/register.jsf?meetingId=#{meetingBean.nextMeeting.id}">here</a>)
-                </td>
-            </tr>
-            <tr>
-                <td>Topic:</td>
-                <td>
-                    #{meetingBean.nextMeeting.topic}
-                </td>
-            </tr>
-            <tr>
-                <td>Speaker:</td>
-                <td>
-                    #{meetingBean.nextMeeting.speaker}
-                </td>
-            </tr>
-            <tr>
-                <td>Date:</td>
-                <td>
-                    <h:outputText value="#{meetingBean.nextMeeting.meetingDate}">
-                        <f:convertDateTime type="date" dateStyle="full"/>
-                    </h:outputText>
-                </td>
-            </tr>
-            <tr>
-                <td>Location:</td>
-                <td>#{meetingBean.nextMeeting.address} (#{meetingBean.nextMeeting.moreInfo})</td>
-            </tr>
-            <tr>
-                <td colspan="2"><h:outputText value="#{meetingBean.nextMeeting.description}" escape="false"/></td>
-            </tr>
-        </table>
-        <div class="widget">
-            <h3>Partner</h3>
-            <a href="http://okccoco.com" style="border: 0; width: 168px; display: block; margin: auto;"><img src="#{request.contextPath}/wp-content/uploads/2009/09/okccoco-transparent.png"/></a>
-        </div>
-
-        <div class="widget">
-            <h3>Sponsors</h3>
-            <h:outputLink value="#{main.randomSponsor.homePage}">
-                <h:graphicImage value="#{main.randomSponsor.logoUrl}"/>
-            </h:outputLink>
-        </div>
-        <ui:repeat id="blogsTable" value="#{main.recentBlogEntries}" var="entry" varStatus="status">
+        <ui:repeat id="blogsTable" value="#{blogBean.getLimitedEntryList(5)}" var="entry" varStatus="status">
             <div id="blogEntry_#{status.index}" class="blogEntry post">
                 <div class="info">
                     <div id="entryTitle" class="entryTitle">
@@ -84,7 +34,6 @@
                 </div>
             </div>
         </ui:repeat>
-
     </ui:define>
 </ui:composition>
 </body>

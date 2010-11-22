@@ -37,7 +37,7 @@ public class MainBean implements Serializable {
 
     @PostConstruct
     public void setup() {
-        sponsor = mainService.getRandomSponsor();
+//        sponsor = mainService.getRandomSponsor();
     }
 
     public Map<String, Preference> getPreferences() {
@@ -55,10 +55,6 @@ public class MainBean implements Serializable {
 
     public Sponsor getRandomSponsor() {
         return sponsor;
-    }
-
-    public List<BlogEntry> getRecentBlogEntries() {
-        return mainService.getMostRecentBlogEntries(10);
     }
 
     public MainService getMainService() {

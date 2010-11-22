@@ -16,7 +16,7 @@ import java.util.List;
  * @author jasonlee
  */
 public interface MainService extends Serializable {
-    public Registration saveRegistration(Registration reg);
-    public Sponsor getRandomSponsor();
-    public List<BlogEntry> getMostRecentBlogEntries(int max);
+//    public Registration saveRegistration(Registration reg);
+//    public Sponsor getRandomSponsor();
+//    public List<BlogEntry> getMostRecentBlogEntries(int max);
 }
