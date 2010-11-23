@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:fp="http://java.sun.com/jsf/composite/frenchpress">
+    <ui:insert name="metadata"/>
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.2.0/build/cssgrids/grids-min.css"></link>
+        <style>
+            body {
+                margin: auto; /* center in viewport */
+                width: 100%;
+                padding: 0px;
+                background-color: #F9F9F9;
+            }
+            
+            .logobg {
+                background-image: url(#{request.contextPath}/images/fpbackground.png);
+                background-attachment: fixed;
+                background-position: right bottom;
+                background-repeat: no-repeat;
+                min-height: 700px
+            }
+
+            .header {
+                font-size: xx-large;
+                font-weight: bold;
+                text-transform: capitalize;
+                background-color: #D7D7D7;
+                padding: 5px;
+            }
+            
+            a {
+                text-decoration: none;
+            }
+            
+            /* fluid Grids layout */
+            #bd {
+                padding: 5px;
+                padding-left: 170px; /* allow for left column (#nav) */
+            }
+
+            #side {
+                padding: 5px;
+                margin-left: -170px;
+                width: 170px;
+            }
+            
+            #main {
+                padding: 5px 5px 5px 0px;
+            }
+
+            #side .content {
+                margin-right: 10px; /* gutter between #nav and #main */
+            }
+
+        </style>
+
+        <title><ui:insert name="title">frenchpress</ui:insert></title>
+    </h:head>
+
+    <body class="yui3-skin-sam">
+        <div class="header">
+            <h:graphicImage value="/images/fplogo.png" alt="FrenchPress Logo"/>FrenchPress Administration
+        </div>
+        <div class="yui3-g logobg" id="bd"> 
+           <div class="yui3-u" id="side">
+               <rich:accordion switchType="client">
+                   <rich:accordionItem header="Posts">
+                       <fp:link value="/admin/blogEntries/list.jsf">List all</fp:link><br/>
+                       <fp:link value="/admin/blogEntries/form.jsf">Add New</fp:link>
+                   </rich:accordionItem>
+                   <rich:accordionItem header="Media">Media</rich:accordionItem>
+                   <rich:accordionItem header="Pages">Pages</rich:accordionItem>
+               </rich:accordion>
+               <hr/>
+               <rich:accordion switchType="client">
+                   <rich:accordionItem header="Users">Users</rich:accordionItem>
+                   <rich:accordionItem header="Tools">Tools</rich:accordionItem>
+                   <rich:accordionItem header="Settings">Settings</rich:accordionItem>
+               </rich:accordion>
+            </div>
+            <div class="yui3-u" id="main"> 
+                <ui:insert name="content"/>
+            </div>
+        </div>
+    </body>
+</html>
