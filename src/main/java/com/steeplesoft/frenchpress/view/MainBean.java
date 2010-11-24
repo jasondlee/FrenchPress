@@ -5,7 +5,7 @@
 
 package com.steeplesoft.frenchpress.view;
 
-import com.steeplesoft.frenchpress.model.BlogEntry;
+import com.steeplesoft.frenchpress.model.Post;
 import com.steeplesoft.frenchpress.model.Preference;
 import com.steeplesoft.frenchpress.model.Sponsor;
 import com.steeplesoft.frenchpress.service.MainService;

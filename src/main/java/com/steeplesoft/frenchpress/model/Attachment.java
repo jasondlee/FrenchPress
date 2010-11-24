@@ -41,7 +41,7 @@ public class Attachment implements Serializable {
     private String path;
 
     @ManyToOne
-    private BlogEntry owner;
+    private Post owner;
 
     public String getDescription() {
         return description;
@@ -83,11 +83,11 @@ public class Attachment implements Serializable {
         this.mimeType = mimeType;
     }
 
-    public BlogEntry getOwner() {
+    public Post getOwner() {
         return owner;
     }
 
-    public void setOwner(BlogEntry owner) {
+    public void setOwner(Post owner) {
         this.owner = owner;
     }
 

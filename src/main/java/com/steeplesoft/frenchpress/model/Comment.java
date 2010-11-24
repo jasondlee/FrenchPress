@@ -23,7 +23,7 @@ public class Comment implements Serializable {
     private String commenterUrl;
 
     @ManyToOne()
-    private BlogEntry blogEntry;
+    private Post post;
 
     @Column
     @Temporal(TemporalType.TIMESTAMP)
@@ -72,12 +72,12 @@ public class Comment implements Serializable {
         this.commenterUrl = commenterUrl;
     }
 
-    public BlogEntry getBlogEntry() {
-        return blogEntry;
+    public Post getPost() {
+        return post;
     }
 
-    public void setBlogEntry(BlogEntry blogEntry) {
-        this.blogEntry = blogEntry;
+    public void setPost(Post post) {
+        this.post = post;
     }
 
     public Date getCreatedDate() {

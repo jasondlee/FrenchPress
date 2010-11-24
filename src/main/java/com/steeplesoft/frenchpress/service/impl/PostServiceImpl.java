@@ -1,7 +1,7 @@
 package com.steeplesoft.frenchpress.service.impl;
 
-import com.steeplesoft.frenchpress.model.BlogEntry;
-import com.steeplesoft.frenchpress.service.BlogService;
+import com.steeplesoft.frenchpress.model.Post;
+import com.steeplesoft.frenchpress.service.PostService;
 import com.steeplesoft.frenchpress.service.Transactional;
 import java.io.Serializable;
 
@@ -17,19 +17,19 @@ import javax.inject.Inject;
  * @author jasonlee
  */
 @Model
-public class BlogServiceImpl implements BlogService, Serializable {
+public class PostServiceImpl implements PostService, Serializable {
 //    @PersistenceUnit
     @Inject
     private EntityManagerFactory emf;
 
     @Override
-    public BlogEntry getEntry(Long id) {
-        return emf.createEntityManager().find(BlogEntry.class, id);
+    public Post getPost(Long id) {
+        return emf.createEntityManager().find(Post.class, id);
     }
 
     @Override
     @Transactional
-    public BlogEntry createBlogEntry(BlogEntry entry) {
+    public Post createPost(Post entry) {
         final EntityManager em = emf.createEntityManager();
         em.persist(entry);
         return entry;
@@ -37,19 +37,19 @@ public class BlogServiceImpl implements BlogService, Serializable {
 
     @Override
     @Transactional
-    public BlogEntry updateBlogEntry(BlogEntry entry) {
+    public Post updatePost(Post entry) {
         EntityManager em = emf.createEntityManager();
         entry = em.merge(entry);
         em.close();
         return entry;
     }
 
-    public List<BlogEntry> getMostRecentBlogEntries(int max) {
+    public List<Post> getMostRecentPosts(int max) {
         EntityManager em = emf.createEntityManager();
-        final List results = em.createNamedQuery("BlogEntry.findSticky").getResultList();
+        final List results = em.createNamedQuery("Post.findSticky").getResultList();
         int recentMax = max - results.size();
         if (recentMax <= max) {
-            final Query recentQuery = em.createNamedQuery("BlogEntry.mostRecent");
+            final Query recentQuery = em.createNamedQuery("Post.mostRecent");
             if (max > 0) {
                 recentQuery.setMaxResults(recentMax);
             }

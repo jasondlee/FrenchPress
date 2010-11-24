@@ -5,7 +5,7 @@
 
 package com.steeplesoft.frenchpress.service.impl;
 
-import com.steeplesoft.frenchpress.model.BlogEntry;
+import com.steeplesoft.frenchpress.model.Post;
 import com.steeplesoft.frenchpress.model.User;
 import com.steeplesoft.frenchpress.model.Registration;
 import com.steeplesoft.frenchpress.model.Sponsor;

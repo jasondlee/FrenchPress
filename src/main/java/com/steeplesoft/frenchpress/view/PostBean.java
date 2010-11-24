@@ -5,8 +5,8 @@
 
 package com.steeplesoft.frenchpress.view;
 
-import com.steeplesoft.frenchpress.model.BlogEntry;
-import com.steeplesoft.frenchpress.service.BlogService;
+import com.steeplesoft.frenchpress.model.Post;
+import com.steeplesoft.frenchpress.service.PostService;
 import java.io.Serializable;
 
 import java.util.List;
@@ -20,38 +20,38 @@ import javax.inject.Named;
  */
 @Named
 @SessionScoped
-public class BlogBean implements Serializable {
+public class PostBean implements Serializable {
     @Inject
-    protected BlogService blogService;
-    protected BlogEntry selected = new BlogEntry();
+    protected PostService postService;
+    protected Post selected = new Post();
     
-    public List<BlogEntry> getEntryList() {
-        return blogService.getMostRecentBlogEntries(-1);
+    public List<Post> getEntryList() {
+        return postService.getMostRecentPosts(-1);
     }
 
-    public List<BlogEntry> getLimitedEntryList(int max) {
-        final List<BlogEntry> entries = blogService.getMostRecentBlogEntries(max);
+    public List<Post> getLimitedEntryList(int max) {
+        final List<Post> entries = postService.getMostRecentPosts(max);
         return entries;
     }
 
-    public BlogService getBlogService() {
-        return blogService;
+    public PostService getBlogService() {
+        return postService;
     }
 
-    public void setBlogService(BlogService blogService) {
-        this.blogService = blogService;
+    public void setBlogService(PostService blogService) {
+        this.postService = blogService;
     }
 
-    public BlogEntry getSelected() {
+    public Post getSelected() {
         return selected;
     }
 
-    public void setSelected(BlogEntry selected) {
+    public void setSelected(Post selected) {
         this.selected = selected;
     }
 
     public String createEntry() {
-        selected = new BlogEntry();
+        selected = new Post();
         return "form?faces-redirect=true";
     }
     public String editEntry() {
@@ -60,12 +60,12 @@ public class BlogBean implements Serializable {
     }
 
     public String create() {
-        blogService.createBlogEntry(selected);
+        postService.createPost(selected);
         return "list?faces-redirect=true";
     }
 
     public String update() {
-        blogService.updateBlogEntry(selected);
+        postService.updatePost(selected);
         return "list?faces-redirect=true";
     }
 }

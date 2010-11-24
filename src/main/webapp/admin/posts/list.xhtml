@@ -9,12 +9,12 @@
     </ui:define>
 
     <ui:define name="title">
-        FrenchPress Blog Entry Administration
+        FrenchPress Post Administration
     </ui:define>
 
     <ui:define name="content">
         <h:form id="blogEntryForm">
-            <rich:dataTable value="#{blogBean.entryList}" var="dataItem">
+            <rich:dataTable value="#{postBean.entryList}" var="dataItem">
                 <rich:column>
                     <f:facet name="header">Title</f:facet>
                     <h:outputText value="#{dataItem.title}"/>
@@ -40,9 +40,9 @@
                     </h:outputText>
                 </rich:column>
                 <rich:column>
-                    <h:commandLink value="Add" action="#{blogBean.createEntry}" />
+                    <h:commandLink value="Add" action="#{postBean.createEntry}" />
                     &#160;|&#160;
-                    <h:commandLink value="Edit" action="#{blogBean.editEntry}" />
+                    <h:commandLink value="Edit" action="#{postBean.editEntry}" />
                 </rich:column>
             </rich:dataTable>
         </h:form>

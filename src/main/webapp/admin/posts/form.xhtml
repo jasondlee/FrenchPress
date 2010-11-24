@@ -10,24 +10,24 @@
 
     <ui:define name="content">
         <h:messages/>
-        <h:form id="blogEntryForm">
-            <h1><h:outputText value="#{empty blogBean.selected.id ? 'Add' : 'Update'}"/> a Blog Entry</h1>
-            <h:commandLink action="/admin/blogEntries/list" value="Blog Entry List" immediate="true"/>
+        <h:form id="postForm">
+            <h1><h:outputText value="#{empty postBean.selected.id ? 'Add' : 'Update'}"/> a Post</h1>
+            <h:commandLink action="/admin/posts/list" value="Post List" immediate="true"/>
 
-            <h:inputHidden id="id" value="#{blogBean.selected.id}" rendered="#{!empty blogBean.selected.id}"/>
+            <h:inputHidden id="id" value="#{postBean.selected.id}" rendered="#{!empty postBean.selected.id}"/>
 
             <h:panelGrid columns="2">
                 <h:outputLabel value="Title" for="title"/>
                 <h:panelGroup>
-                    <h:inputText id="title" value="#{blogBean.selected.title}" title="Title"/>
+                    <h:inputText id="title" value="#{postBean.selected.title}" title="Title"/>
                     <h:message for="title"/>
                 </h:panelGroup>
                 <h:outputLabel value="Body" for="body"/>
                 <h:panelGroup>
-                    <h:inputTextarea id="body" value="#{blogBean.selected.body}"/>
+                    <h:inputTextarea id="body" value="#{postBean.selected.body}"/>
                     <ui:remove>
                         ice:inputRichText id="body" height="300" width="540" toolbar="Basic"
-                                       value="#{blogBean.selected.body}"
+                                       value="#{postBean.selected.body}"
                                        language="en" skin="silver"
                     
                     <h:message for="body"/>
@@ -35,23 +35,23 @@
                 </h:panelGroup>
                 <h:outputLabel value="Sticky Post" for="sticky"/>
                 <h:panelGroup>
-                    <h:selectBooleanCheckbox id="sticky" value="#{blogBean.selected.isSticky}" title="Sticky Post"/>
+                    <h:selectBooleanCheckbox id="sticky" value="#{postBean.selected.isSticky}" title="Sticky Post"/>
                     <h:message for="sticky"/>
                 </h:panelGroup>
                 <h:outputLabel value="Start Publishing" for="startPublishing"/>
                 <h:panelGroup>
-                    <rich:calendar id="startPublishing" value="#{blogBean.selected.startPublishing}" popup="true"/>
+                    <rich:calendar id="startPublishing" value="#{postBean.selected.startPublishing}" popup="true"/>
                     <h:message for="startPublishing"/>
                 </h:panelGroup>
                 <h:outputLabel value="Stop Publishing" for="stopPublishing"/>
                 <h:panelGroup>
-                    <rich:calendar id="stopPublishing" value="#{blogBean.selected.stopPublishing}" popup="true" datePattern="yyyy/mm/dd hh:mm a"/>
+                    <rich:calendar id="stopPublishing" value="#{postBean.selected.stopPublishing}" popup="true" datePattern="yyyy/mm/dd hh:mm a"/>
                     <h:message for="stopPublishing"/>
                 </h:panelGroup>
             </h:panelGrid>
-            <h:commandButton action="#{blogBean.create}" value="Add" rendered="#{empty blogBean.selected.id}"/>
-            <h:commandButton action="#{blogBean.update}" value="Update" rendered="#{!empty blogBean.selected.id}"/>
-            <h:commandButton action="/admin/blogEntries/list" value="Cancel"/>
+            <h:commandButton action="#{postBean.create}" value="Add" rendered="#{empty postBean.selected.id}"/>
+            <h:commandButton action="#{postBean.update}" value="Update" rendered="#{!empty postBean.selected.id}"/>
+            <h:commandButton action="/admin/posts/list" value="Cancel"/>
         </h:form>
     </ui:define>
 </ui:composition>

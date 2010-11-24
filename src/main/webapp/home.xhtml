@@ -16,7 +16,7 @@
         <h:panelGroup id="marker"/>
         <h:messages layout="table"/>
         Welcome to the online home of the Oklahoma City Java Users Group, Inc.
-        <ui:repeat id="blogsTable" value="#{blogBean.getLimitedEntryList(5)}" var="entry" varStatus="status">
+        <ui:repeat id="blogsTable" value="#{postBean.getLimitedEntryList(5)}" var="entry" varStatus="status">
             <div id="blogEntry_#{status.index}" class="blogEntry post">
                 <div class="info">
                     <div id="entryTitle" class="entryTitle">

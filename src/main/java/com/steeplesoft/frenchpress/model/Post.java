@@ -9,17 +9,17 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "blog_entries")
+@Table(name = "posts")
 @NamedQueries({
-        @NamedQuery(name = "BlogEntry.findAll", query = "SELECT be FROM BlogEntry be ORDER BY be.createdDate, be.modifiedDate"),
-        @NamedQuery(name = "BlogEntry.findById", query = "SELECT be FROM BlogEntry be WHERE be.id = :id"),
-        @NamedQuery(name = "BlogEntry.findSticky", query = "SELECT be FROM BlogEntry be where be.isSticky = true ORDER by be.createdDate desc"),
-        @NamedQuery(name = "BlogEntry.mostRecent", query = "SELECT be FROM BlogEntry be where be.isSticky = false ORDER by be.createdDate desc ")
+        @NamedQuery(name = "Post.findAll", query = "SELECT p FROM Post p ORDER BY p.createdDate, p.modifiedDate"),
+        @NamedQuery(name = "Post.findById", query = "SELECT p FROM Post p WHERE p.id = :id"),
+        @NamedQuery(name = "Post.findSticky", query = "SELECT p FROM Post p where p.isSticky = true ORDER by p.createdDate desc"),
+        @NamedQuery(name = "Post.mostRecent", query = "SELECT p FROM Post p where p.isSticky = false ORDER by p.createdDate desc ")
 })
-public class BlogEntry implements Serializable {
+public class Post implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public BlogEntry() {
+    public Post() {
         final Date date = new Date();
         setCreatedDate(date);
         setModifiedDate(date);
@@ -152,10 +152,10 @@ public class BlogEntry implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof BlogEntry)) {
+        if (!(object instanceof Post)) {
             return false;
         }
-        BlogEntry other = (BlogEntry) object;
+        Post other = (Post) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -164,7 +164,7 @@ public class BlogEntry implements Serializable {
 
     @Override
     public String toString() {
-        return "com.steeplesoft.frenchpress.model.BlogEntry[id=" + id + ", title='" + title +"', owner=" +
+        return "com.steeplesoft.frenchpress.model.Post[id=" + id + ", title='" + title +"', owner=" +
                 ((postedBy != null) ? postedBy.getFullName() : "") + "]";
     }
 }

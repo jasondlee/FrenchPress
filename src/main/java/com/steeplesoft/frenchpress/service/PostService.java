@@ -6,16 +6,15 @@
 package com.steeplesoft.frenchpress.service;
 
 import com.steeplesoft.frenchpress.model.Post;
-import com.steeplesoft.frenchpress.model.Registration;
-import com.steeplesoft.frenchpress.model.Sponsor;
 import java.io.Serializable;
 import java.util.List;
-
 /**
  *
  * @author jasonlee
  */
-public interface MainService extends Serializable {
-//    public Registration saveRegistration(Registration reg);
-//    public Sponsor getRandomSponsor();
+public interface PostService extends Serializable {
+    Post getPost(Long id);
+    Post createPost(Post entry);
+    Post updatePost(Post entry);
+    List<Post> getMostRecentPosts(int max);
 }
