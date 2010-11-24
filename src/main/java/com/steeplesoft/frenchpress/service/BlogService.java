@@ -6,12 +6,13 @@
 package com.steeplesoft.frenchpress.service;
 
 import com.steeplesoft.frenchpress.model.BlogEntry;
+import java.io.Serializable;
 import java.util.List;
 /**
  *
  * @author jasonlee
  */
-public interface BlogService {
+public interface BlogService extends Serializable {
     BlogEntry getEntry(Long id);
     BlogEntry createBlogEntry(BlogEntry entry);
     BlogEntry updateBlogEntry(BlogEntry entry);

@@ -7,20 +7,21 @@ package com.steeplesoft.frenchpress.view;
 
 import com.steeplesoft.frenchpress.model.BlogEntry;
 import com.steeplesoft.frenchpress.service.BlogService;
+import java.io.Serializable;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
 import java.util.List;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  *
  * @author jasonlee
  */
-@ManagedBean(name="blogBean")
+@Named
 @SessionScoped
-public class BlogBean {
-    @ManagedProperty("#{blogService}")
+public class BlogBean implements Serializable {
+    @Inject
     protected BlogService blogService;
     protected BlogEntry selected = new BlogEntry();
     

@@ -1,10 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!--xmlns:rich="http://richfaces.org/rich"-->
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:ice="http://www.icesoft.com/icefaces/component"
-                template="/themes/#{main.preferences['theme'].value}/layout.xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:fp="http://java.sun.com/jsf/composite/frenchpress"
+                template="/admin/layout.xhtml">
 
     <ui:define name="content">
         <h:messages/>
@@ -22,10 +24,14 @@
                 </h:panelGroup>
                 <h:outputLabel value="Body" for="body"/>
                 <h:panelGroup>
-                    <ice:inputRichText id="body" height="300" width="540" toolbar="Basic"
+                    <h:inputTextarea id="body" value="#{blogBean.selected.body}"/>
+                    <ui:remove>
+                        ice:inputRichText id="body" height="300" width="540" toolbar="Basic"
                                        value="#{blogBean.selected.body}"
-                                       language="en" skin="silver"/>
+                                       language="en" skin="silver"
+                    
                     <h:message for="body"/>
+                    </ui:remove>
                 </h:panelGroup>
                 <h:outputLabel value="Sticky Post" for="sticky"/>
                 <h:panelGroup>
@@ -34,19 +40,12 @@
                 </h:panelGroup>
                 <h:outputLabel value="Start Publishing" for="startPublishing"/>
                 <h:panelGroup>
-                    <ice:selectInputDate id="startPublishing" value="#{blogBean.selected.startPublishing}" highlightClass="weekend: august:"
-                                         highlightUnit="DAY_OF_WEEK: MONTH" highlightValue="1,7: 8">
-                    </ice:selectInputDate>
+                    <rich:calendar id="startPublishing" value="#{blogBean.selected.startPublishing}" popup="true"/>
                     <h:message for="startPublishing"/>
                 </h:panelGroup>
                 <h:outputLabel value="Stop Publishing" for="stopPublishing"/>
                 <h:panelGroup>
-                    <ice:selectInputDate id="stopPublishing"
-                                         value="#{blogBean.selected.stopPublishing}"
-                                         highlightClass="weekend: august:"
-                                         highlightUnit="DAY_OF_WEEK: MONTH"
-                                         highlightValue="1,7: 8">
-                    </ice:selectInputDate>
+                    <rich:calendar id="stopPublishing" value="#{blogBean.selected.stopPublishing}" popup="true" datePattern="yyyy/mm/dd hh:mm a"/>
                     <h:message for="stopPublishing"/>
                 </h:panelGroup>
             </h:panelGrid>

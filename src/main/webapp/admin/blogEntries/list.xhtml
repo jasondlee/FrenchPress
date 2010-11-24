@@ -1,11 +1,10 @@
-<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:ice="http://www.icesoft.com/icefaces/component"
-                template="/themes/#{main.preferences['theme'].value}/layout.xhtml">
+                xmlns:rich="http://richfaces.org/rich"
+                template="/admin/layout.xhtml">
     <ui:define name="metadata">
     </ui:define>
 
@@ -15,40 +14,37 @@
 
     <ui:define name="content">
         <h:form id="blogEntryForm">
-            <ice:dataTable value="#{blogBean.entryList}" var="dataItem"
-                            rowClasses="row1, row2" id="blogEntryTable" rows="4"
-                            columnClasses="50,100,100,100"
-                            width="350">
-                <ice:column>
+            <rich:dataTable value="#{blogBean.entryList}" var="dataItem">
+                <rich:column>
                     <f:facet name="header">Title</f:facet>
-                    <ice:outputText value="#{dataItem.title}"/>
-                </ice:column>
-                <ice:column>
+                    <h:outputText value="#{dataItem.title}"/>
+                </rich:column>
+                <rich:column>
                     <f:facet name="header">Sticky Post</f:facet>
                     #{dataItem.isSticky}
-                </ice:column>
-                <ice:column>
+                </rich:column>
+                <rich:column>
                     <f:facet name="header">Posted By</f:facet>
                     #{dataItem.postedBy.firstName} #{dataItem.postedBy.lastName}
-                </ice:column>
-                <ice:column>
+                </rich:column>
+                <rich:column>
                     <f:facet name="header">Pub Start Date</f:facet>
                     <h:outputText value="#{dataItem.startPublishing}">
                         <f:convertDateTime type="date" dateStyle="full"/>
                     </h:outputText>
-                </ice:column>
-                <ice:column>
+                </rich:column>
+                <rich:column>
                     <f:facet name="header">Pub End Date</f:facet>
                     <h:outputText value="#{dataItem.stopPublishing}">
                         <f:convertDateTime type="date" dateStyle="full"/>
                     </h:outputText>
-                </ice:column>
-                <ice:column>
+                </rich:column>
+                <rich:column>
                     <h:commandLink value="Add" action="#{blogBean.createEntry}" />
                     &#160;|&#160;
                     <h:commandLink value="Edit" action="#{blogBean.editEntry}" />
-                </ice:column>
-            </ice:dataTable>
+                </rich:column>
+            </rich:dataTable>
         </h:form>
     </ui:define>
 

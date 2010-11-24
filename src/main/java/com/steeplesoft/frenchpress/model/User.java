@@ -6,7 +6,6 @@ package com.steeplesoft.frenchpress.model;
 
 import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -51,7 +50,7 @@ public class User implements Serializable {
     @NotEmpty
     private String lastName;
 
-    @OneToMany(mappedBy = "memberId")
+//    @OneToMany(mappedBy = "memberId")
     private Collection<Registration> registrationCollection;
 
     @Column

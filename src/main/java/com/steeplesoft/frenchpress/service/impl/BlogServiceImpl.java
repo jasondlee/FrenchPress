@@ -2,28 +2,24 @@ package com.steeplesoft.frenchpress.service.impl;
 
 import com.steeplesoft.frenchpress.model.BlogEntry;
 import com.steeplesoft.frenchpress.service.BlogService;
+import com.steeplesoft.frenchpress.service.Transactional;
+import java.io.Serializable;
 
-import javax.annotation.Resource;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
-import javax.transaction.SystemException;
-import javax.transaction.UserTransaction;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.enterprise.inject.Model;
+import javax.inject.Inject;
 
 /**
  *
  * @author jasonlee
  */
-@ManagedBean(name="blogService")
-@SessionScoped
-public class BlogServiceImpl implements BlogService {
-    @PersistenceUnit(unitName="em")
+@Model
+public class BlogServiceImpl implements BlogService, Serializable {
+//    @PersistenceUnit
+    @Inject
     private EntityManagerFactory emf;
 
     @Override
@@ -32,30 +28,19 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    @Transactional
     public BlogEntry createBlogEntry(BlogEntry entry) {
         final EntityManager em = emf.createEntityManager();
-        try {
-            em.getTransaction().begin();
-            em.persist(entry);
-            em.getTransaction().commit();
-        } catch (Exception ex) {
-            Logger.getLogger(BlogServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
-            em.getTransaction().rollback();
-        }
+        em.persist(entry);
         return entry;
     }
 
     @Override
+    @Transactional
     public BlogEntry updateBlogEntry(BlogEntry entry) {
-        try {
-            EntityManager em = emf.createEntityManager();
-            em.getTransaction().begin();
-            entry = em.merge(entry);
-            em.getTransaction().commit();
-            em.close();
-        } catch (Exception ex) {
-            Logger.getLogger(BlogServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        EntityManager em = emf.createEntityManager();
+        entry = em.merge(entry);
+        em.close();
         return entry;
     }
 
@@ -65,7 +50,7 @@ public class BlogServiceImpl implements BlogService {
         int recentMax = max - results.size();
         if (recentMax <= max) {
             final Query recentQuery = em.createNamedQuery("BlogEntry.mostRecent");
-            if (max >0) {
+            if (max > 0) {
                 recentQuery.setMaxResults(recentMax);
             }
             results.addAll(recentQuery.getResultList());

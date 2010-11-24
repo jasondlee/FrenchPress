@@ -16,6 +16,7 @@ import javax.validation.constraints.Size;
  *
  * @author jasonlee
  */
+/*
 @Entity
 @Table(name = "meetings")
 @NamedQueries({
@@ -28,6 +29,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Meeting.findByName", query = "SELECT m FROM Meeting m WHERE m.name = :name"),
     @NamedQuery(name = "Meeting.findByMeetingDate", query = "SELECT m FROM Meeting m WHERE m.meetingDate = :meetingDate"),
     @NamedQuery(name = "Meeting.findByStartTime", query = "SELECT m FROM Meeting m WHERE m.startTime = :startTime")})
+*/
 public class Meeting implements Serializable {
 
     private static final long serialVersionUID = 1L;

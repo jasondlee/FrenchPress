@@ -1,16 +1,26 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-                template="/themes/#{main.preferences['theme'].value}/layout.xhtml">
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:fp="http://java.sun.com/jsf/composite/frenchpress"
+                template="/admin/layout.xhtml">
+    <ui:define name="metadata">
+    </ui:define>
+
+    <ui:define name="title">
+        FrenchPress Blog Entry Administration
+    </ui:define>
+
     <ui:define name="content">
-        <h1>FrenchPress Administration</h1>
-        <ul style="margin-left: 15px">
-            <li><h:outputLink value="#{request.contextPath}/admin/attachments/list.jsf">Attachments</h:outputLink></li>
-            <li><h:outputLink value="#{request.contextPath}/admin/meetings/list.jsf">Meetings</h:outputLink></li>
-            <li><h:outputLink value="#{request.contextPath}/admin/members/list.jsf">Members</h:outputLink></li>
-            <li><h:outputLink value="#{request.contextPath}/admin/sponsors/list.jsf">Sponsors</h:outputLink></li>
-        </ul>
+                Body!
+                <ul style="margin-left: 15px">
+                    <li><fp:link value="/admin/attachments/list.jsf">Attachments</fp:link></li>
+                    <li><fp:link value="/admin/meetings/list.jsf">Meetings</fp:link></li>
+                    <li><fp:link value="/admin/members/list.jsf">Members</fp:link></li>
+                    <li><fp:link value="/admin/sponsors/list.jsf">Sponsors</fp:link></li>
+                </ul>
+                #{blogBean.shoppingCart.message}
     </ui:define>
 </ui:composition>

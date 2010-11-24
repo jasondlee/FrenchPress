@@ -12,6 +12,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 /**
  * @author jasonlee
  */
+/*
 @Entity
 @Table(name = "registrations")
 @NamedQueries({
@@ -20,6 +21,7 @@ import org.hibernate.validator.constraints.NotEmpty;
         @NamedQuery(name = "Registration.findByEmailAddress", query = "SELECT r FROM Registration r WHERE r.emailAddress = :emailAddress"),
         @NamedQuery(name = "Registration.findByFullName", query = "SELECT r FROM Registration r WHERE r.fullName = :fullName")
 })
+*/
 public class Registration implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

@@ -17,7 +17,7 @@
         </repository>
         <repository>
             <id>jboss nexus</id>
-            <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+            <url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
         </repository>
     </repositories>
 
@@ -25,7 +25,7 @@
         <dbunit.version>2.4.5</dbunit.version>
         <eclipselink.version>2.0.0-M9</eclipselink.version>
         <facestester.version>0.4-SNAPSHOT</facestester.version>
-        <hsqldb.version>1.8.0.7</hsqldb.version>
+        <hsqldb.version>1.8.0.10</hsqldb.version>
         <javaee-api.version>6.0</javaee-api.version>
         <jsf.version>2.0.2</jsf.version>
         <jta.version>1.1</jta.version>
@@ -33,15 +33,16 @@
         <hibernate-validator.version>4.0.2.GA</hibernate-validator.version>
         <icefaces.version>2.0-Beta1</icefaces.version>
         <scales.version>2.0.0-SNAPSHOT</scales.version>
-        <org.richfaces.ui.version>4.0.0-SNAPSHOT</org.richfaces.ui.version>
+        <org.richfaces.version1>4.0.0.20101110-M4</org.richfaces.version1>
+        <org.richfaces.version>4.0.0-SNAPSHOT</org.richfaces.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.richfaces.ui</groupId>
-                <artifactId>richfaces-components-bom</artifactId>
-                <version>${org.richfaces.ui.version}</version>
+                <groupId>org.richfaces</groupId>
+                <artifactId>richfaces-bom</artifactId>
+                <version>${org.richfaces.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -50,13 +51,56 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.richfaces.ui</groupId>
+            <artifactId>richfaces-components-ui</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-api</artifactId>
+            <version>${jsf.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate-validator.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.servlet</artifactId>
+            <version>3.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>javax.persistence</artifactId>
+            <version>${eclipselink.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>el-api</artifactId>
+            <version>2.2</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.transaction</groupId>
+            <artifactId>transaction-api</artifactId>
+            <version>${jta.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Test -->
+        <!--
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>hsqldb</groupId>
+            <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
             <version>${hsqldb.version}</version>
             <scope>test</scope>
@@ -66,12 +110,6 @@
             <artifactId>dbunit</artifactId>
             <version>${dbunit.version}</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.faces</groupId>
-            <artifactId>jsf-api</artifactId>
-            <version>${jsf.version}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.sun.faces</groupId>
@@ -91,12 +129,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>${hibernate-validator.version}</version>
-        </dependency>
-        <!-- TEST -->
-        <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>javax.persistence</artifactId>
             <version>${eclipselink.version}</version>
@@ -114,34 +146,9 @@
             <version>${eclipselink.version}</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>javax.transaction</groupId>
-            <artifactId>transaction-api</artifactId>
-            <version>${jta.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.el</groupId>
-            <artifactId>el-api</artifactId>
-            <version>2.2</version>
-        </dependency>
 
-        <dependency>
-            <groupId>org.richfaces.ui</groupId>
-            <artifactId>richfaces-components-ui</artifactId>
-        </dependency>
 
-        <dependency>
-            <groupId>org.glassfish</groupId>
-            <artifactId>javax.servlet</artifactId>
-            <version>3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <version>1.8.0.10</version>
-            <scope>test</scope>
-        </dependency>
+
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>org.eclipse.persistence.asm</artifactId>
@@ -153,6 +160,18 @@
             <artifactId>org.eclipse.persistence.antlr</artifactId>
             <version>2.1.0</version>
             <scope>test</scope>
+        </dependency>
+        -->
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>1.0-SP3</version>
         </dependency>
     </dependencies>
 
