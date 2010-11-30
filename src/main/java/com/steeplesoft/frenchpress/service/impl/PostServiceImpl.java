@@ -18,7 +18,7 @@ import javax.inject.Inject;
  */
 @Model
 public class PostServiceImpl implements PostService, Serializable {
-//    @PersistenceUnit
+    //@PersistenceUnit
     @Inject
     private EntityManagerFactory emf;
 

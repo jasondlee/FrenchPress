@@ -10,21 +10,23 @@ import com.steeplesoft.frenchpress.service.PostService;
 import java.io.Serializable;
 
 import java.util.List;
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
+import javax.enterprise.inject.Model;
+import javax.faces.context.FacesContext;
 
 /**
  *
  * @author jasonlee
  */
-@Named
-@SessionScoped
+@Model
 public class PostBean implements Serializable {
     @Inject
     protected PostService postService;
     protected Post selected = new Post();
     
+    @Inject
+    private FacesContext facesContext;
+
     public List<Post> getEntryList() {
         return postService.getMostRecentPosts(-1);
     }
@@ -67,5 +69,16 @@ public class PostBean implements Serializable {
     public String update() {
         postService.updatePost(selected);
         return "list?faces-redirect=true";
+    }
+    
+    public void loadPost() {
+        String id = facesContext.getExternalContext().getRequestParameterMap().get("id");
+        if ((id != null) && !id.isEmpty()) {
+            try {
+                selected = postService.getPost(Long.parseLong(id));
+            }catch (NumberFormatException nfe) {
+                facesContext.getApplication().getNavigationHandler().handleNavigation(facesContext, null, "/admin");
+            }
+        }
     }
 }

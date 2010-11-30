@@ -25,9 +25,4 @@ public class FrenchPressUtil {
 
         return sb.toString().trim();
     }
-
-    public static void main(String ... args) {
-        String fixed = splitCamelCasedString("nowIsTheTimeForAllGoodMen");
-        System.out.println(fixed);
-    }
 }

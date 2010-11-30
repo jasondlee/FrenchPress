@@ -2,10 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.steeplesoft.frenchpress.view.util;
 
 import javax.el.ValueExpression;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -44,6 +45,6 @@ public class JsfUtil {
         FacesContext fc = FacesContext.getCurrentInstance();
         ValueExpression ve = fc.getApplication().getExpressionFactory().createValueExpression(fc.getELContext(), el, c);
 
-        return (T)ve.getValue(fc.getELContext());
+        return (T) ve.getValue(fc.getELContext());
     }
 }

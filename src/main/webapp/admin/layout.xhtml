@@ -17,7 +17,7 @@
                 padding: 0px;
                 background-color: #F9F9F9;
             }
-            
+
             .logobg {
                 background-image: url(#{request.contextPath}/images/fpbackground.png);
                 background-attachment: fixed;
@@ -33,11 +33,11 @@
                 background-color: #D7D7D7;
                 padding: 5px;
             }
-            
+
             a {
                 text-decoration: none;
             }
-            
+
             /* fluid Grids layout */
             #bd {
                 padding: 5px;
@@ -49,7 +49,7 @@
                 margin-left: -170px;
                 width: 170px;
             }
-            
+
             #main {
                 padding: 5px 5px 5px 0px;
             }
@@ -68,25 +68,28 @@
             <h:graphicImage value="/images/fplogo.png" alt="FrenchPress Logo"/>FrenchPress Administration
         </div>
         <div class="yui3-g logobg" id="bd"> 
-           <div class="yui3-u" id="side">
-               <rich:accordion switchType="client">
-                   <rich:accordionItem header="Posts">
-                       <fp:link value="/admin/posts/list.jsf">List all</fp:link><br/>
-                       <fp:link value="/admin/posts/form.jsf">Add New</fp:link>
-                   </rich:accordionItem>
-                   <rich:accordionItem header="Media">Media</rich:accordionItem>
-                   <rich:accordionItem header="Pages">Pages</rich:accordionItem>
-               </rich:accordion>
-               <hr/>
-               <rich:accordion switchType="client">
-                   <rich:accordionItem header="Users">Users</rich:accordionItem>
-                   <rich:accordionItem header="Tools">Tools</rich:accordionItem>
-                   <rich:accordionItem header="Settings">Settings</rich:accordionItem>
-               </rich:accordion>
+            <div class="yui3-u" id="side">
+                <rich:accordion switchType="client">
+                    <rich:accordionItem header="Posts">
+                        <fp:link value="/admin/posts/list.jsf">List all</fp:link><br/>
+                        <fp:link value="/admin/posts/form.jsf">Add New</fp:link>
+                    </rich:accordionItem>
+                    <rich:accordionItem header="Media">Media</rich:accordionItem>
+                    <rich:accordionItem header="Pages">Pages</rich:accordionItem>
+                </rich:accordion>
+                <hr/>
+                <rich:accordion switchType="client">
+                    <rich:accordionItem header="Users">Users</rich:accordionItem>
+                    <rich:accordionItem header="Tools">Tools</rich:accordionItem>
+                    <rich:accordionItem header="Settings">Settings</rich:accordionItem>
+                </rich:accordion>
             </div>
             <div class="yui3-u" id="main"> 
+                <div id="beforeContent">bc</div>
                 <ui:insert name="content"/>
+                <div id="afterContent">ac</div>
             </div>
         </div>
+        <div id="afterBody">ab</div>
     </body>
 </html>
