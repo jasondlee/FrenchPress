@@ -32,6 +32,7 @@ public class PostServiceImpl implements PostService, Serializable {
     public Post createPost(Post entry) {
         final EntityManager em = emf.createEntityManager();
         em.persist(entry);
+        em.close();
         return entry;
     }
 

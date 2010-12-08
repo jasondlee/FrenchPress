@@ -10,9 +10,78 @@
     <ui:define name="metadata">
         <f:event type="javax.faces.event.PreRenderViewEvent" listener="#{postBean.loadPost}"/>
     </ui:define>
+    <ui:define name="resources">
+        <!-- Combo-handled YUI CSS files: -->
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.2r1/build/editor/assets/skins/sam/simpleeditor.css"></link>
+        <!-- Combo-handled YUI JS files: -->
+        <script type="text/javascript" src="http://yui.yahooapis.com/combo?2.8.2r1/build/yahoo-dom-event/yahoo-dom-event.js&amp;2.8.2r1/build/element/element-min.js&amp;2.8.2r1/build/editor/simpleeditor-min.js"></script>
+    </ui:define>
     <ui:define name="content">
         <h:messages/>
+        <h1><h:outputText value="#{empty postBean.selected.id ? 'Add' : 'Update'}"/> a Post</h1>
         <h:form id="postForm">
+            <h:inputHidden id="id" value="#{postBean.selected.id}" rendered="#{postBean.selected.id != null}" />
+
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Title" for="title"/>
+                <h:panelGroup>
+                    <h:inputText id="title" value="#{postBean.selected.title}" title="Title"/>
+                    <h:message for="title"/>
+                </h:panelGroup>
+
+                <h:outputLabel value="Body" for="body"/>
+                <h:panelGroup>
+                    <div class="yui-skin-sam">
+
+                        <h:inputTextarea id="body" styleClass="te1" value="#{postBean.selected.body}"/>
+                        <div id="foo" class="te"></div>
+                        <h:message for="body"/>
+                        <script type="text/javascript">
+                            var el = document.getElementById("postForm:body");
+                            var myEditor = new YAHOO.widget.SimpleEditor(el, {
+                                height: '300px',
+                                width: '522px',
+                                dompath: true, //Turns on the bar at the bottom
+                                animate: true //Animates the opening, closing and moving of Editor windows
+                            });
+                            myEditor.render();
+                            /*
+                            YUI().use('editor-base', function(Y) {
+
+                                var editor = new Y.EditorBase({
+                                    content: '<b>Hello!</b>'
+                                });
+
+                                //Rendering the Editor.
+                                editor.render('#foo');
+
+                            });
+                            */
+                        </script>
+                    </div>
+                </h:panelGroup>
+                <h:outputLabel value="Sticky Post" for="sticky"/>
+                <h:panelGroup>
+                    <h:selectBooleanCheckbox id="sticky" value="#{postBean.selected.isSticky}" title="Sticky Post"/>
+                    <h:message for="sticky"/>
+                </h:panelGroup>
+
+                <h:outputLabel value="Start Publishing" for="startPublishing"/>
+                <h:panelGroup>
+                    <rich:calendar id="startPublishing" value="#{postBean.selected.startPublishing}" popup="true" datePattern="yyyy/MM/dd hh:mm a"/>
+                    <h:message for="startPublishing"/>
+                </h:panelGroup>
+
+                <h:outputLabel value="Stop Publishing" for="stopPublishing"/>
+                <h:panelGroup>
+                    <rich:calendar id="stopPublishing" value="#{postBean.selected.stopPublishing}" popup="true" datePattern="yyyy/MM/dd hh:mm a"/>
+                    <h:message for="stopPublishing"/>
+                </h:panelGroup>
+            </h:panelGrid>
+
+            <h:commandButton action="#{postBean.create}" value="Add" rendered="#{empty postBean.selected.id}" />
+            <h:commandButton action="#{postBean.update}" value="Update" rendered="#{!empty postBean.selected.id}" />
+            <h:commandButton action="/admin/posts/list" value="Cancel" />
         </h:form>
     </ui:define>
 </ui:composition>

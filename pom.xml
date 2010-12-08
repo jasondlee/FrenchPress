@@ -27,13 +27,14 @@
         <facestester.version>0.4-SNAPSHOT</facestester.version>
         <hsqldb.version>1.8.0.10</hsqldb.version>
         <javaee-api.version>6.0</javaee-api.version>
-        <jsf.version>2.0.2</jsf.version>
         <jta.version>1.1</jta.version>
         <junit.version>4.8.1</junit.version>
         <hibernate-validator.version>4.0.2.GA</hibernate-validator.version>
         <icefaces.version>2.0-Beta1</icefaces.version>
         <scales.version>2.0.0-SNAPSHOT</scales.version>
-        <org.richfaces.version1>4.0.0.20101110-M4</org.richfaces.version1>
+        <!--
+        <org.richfaces.version>4.0.0.20101110-M4</org.richfaces.version>
+        -->
         <org.richfaces.version>4.0.0-SNAPSHOT</org.richfaces.version>
     </properties>
 
@@ -50,6 +51,13 @@
     </dependencyManagement>
 
     <dependencies>
+        <!--
+        <dependency>
+            <groupId>org.jboss.seam.persistence</groupId>
+            <artifactId>seam-persistence-impl</artifactId>
+            <version>3.0.0.Beta1</version>
+        </dependency>
+        -->
         <dependency>
             <groupId>org.richfaces.ui</groupId>
             <artifactId>richfaces-components-ui</artifactId>
@@ -57,15 +65,33 @@
         <dependency>
             <groupId>com.sun.faces</groupId>
             <artifactId>jsf-api</artifactId>
-            <version>${jsf.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>${hibernate-validator.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.validation</groupId>
+                    <artifactId>validation-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.xml.bind</groupId>
+                    <artifactId>jaxb-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.xml.bind</groupId>
+                    <artifactId>jaxb-impl</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
-
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.0.0.GA</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>javax.servlet</artifactId>
@@ -90,78 +116,6 @@
             <version>${jta.version}</version>
             <scope>provided</scope>
         </dependency>
-
-        <!-- Test -->
-        <!--
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <version>${hsqldb.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.dbunit</groupId>
-            <artifactId>dbunit</artifactId>
-            <version>${dbunit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.faces</groupId>
-            <artifactId>jsf-impl</artifactId>
-            <version>${jsf.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.mojarra</groupId>
-            <artifactId>mojarra-scales</artifactId>
-            <version>${scales.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.steeplesoft.jsf.facestester</groupId>
-            <artifactId>facestester-connector-mojarra-jsf2.0</artifactId>
-            <version>${facestester.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>javax.persistence</artifactId>
-            <version>${eclipselink.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>org.eclipse.persistence.core</artifactId>
-            <version>${eclipselink.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>org.eclipse.persistence.jpa</artifactId>
-            <version>${eclipselink.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-
-
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>org.eclipse.persistence.asm</artifactId>
-            <version>2.1.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>org.eclipse.persistence.antlr</artifactId>
-            <version>2.1.0</version>
-            <scope>test</scope>
-        </dependency>
-        -->
         <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
@@ -172,6 +126,7 @@
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
             <version>1.0-SP3</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

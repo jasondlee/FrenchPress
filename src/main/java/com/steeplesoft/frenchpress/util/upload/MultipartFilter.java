@@ -37,8 +37,8 @@ import javax.servlet.http.HttpServletRequest;
  * @link http://balusc.blogspot.com/2009/12/uploading-files-in-servlet-30.html
  */
 
-@WebFilter(urlPatterns = { "/*" }, initParams = {
-    @WebInitParam(name = "location", value = "/upload") })
+//@WebFilter(urlPatterns = { "/*" }, initParams = {
+//    @WebInitParam(name = "location", value = "/upload") })
 public class MultipartFilter implements Filter {
 
     // Constants ----------------------------------------------------------------------------------

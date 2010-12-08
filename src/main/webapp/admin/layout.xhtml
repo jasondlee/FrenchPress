@@ -9,16 +9,18 @@
     <ui:insert name="metadata"/>
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <!--
         <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.2.0/build/cssgrids/grids-min.css"></link>
+        <script type="text/javascript" charset="utf-8" src="http://yui.yahooapis.com/3.2.0/build/yui/yui.js"></script>
+        -->
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.2r1/build/fonts/fonts-min.css&amp;2.8.2r1/build/grids/grids-min.css"></link>
         <style>
             body {
                 margin: auto; /* center in viewport */
                 width: 100%;
                 padding: 0px;
                 background-color: #F9F9F9;
-            }
 
-            .logobg {
                 background-image: url(#{request.contextPath}/images/fpbackground.png);
                 background-attachment: fixed;
                 background-position: right bottom;
@@ -39,57 +41,60 @@
             }
 
             /* fluid Grids layout */
-            #bd {
-                padding: 5px;
-                padding-left: 170px; /* allow for left column (#nav) */
-            }
-
             #side {
                 padding: 5px;
-                margin-left: -170px;
-                width: 170px;
             }
 
-            #main {
-                padding: 5px 5px 5px 0px;
+            .main {
+                padding: 5px 5px 5px 5px;
             }
 
             #side .content {
                 margin-right: 10px; /* gutter between #nav and #main */
             }
+            
+            #doc {
+                width: 100%;
+            }
+            
+            h1,h2,h3,h4,h5,h6 {
+                margin-top: 0px;
+            }
 
         </style>
-
+        <ui:insert name="resources"/>
         <title><ui:insert name="title">frenchpress</ui:insert></title>
     </h:head>
 
-    <body class="yui3-skin-sam">
-        <div class="header">
-            <h:graphicImage value="/images/fplogo.png" alt="FrenchPress Logo"/>FrenchPress Administration
-        </div>
-        <div class="yui3-g logobg" id="bd"> 
-            <div class="yui3-u" id="side">
-                <rich:accordion switchType="client">
-                    <rich:accordionItem header="Posts">
-                        <fp:link value="/admin/posts/list.jsf">List all</fp:link><br/>
-                        <fp:link value="/admin/posts/form.jsf">Add New</fp:link>
-                    </rich:accordionItem>
-                    <rich:accordionItem header="Media">Media</rich:accordionItem>
-                    <rich:accordionItem header="Pages">Pages</rich:accordionItem>
-                </rich:accordion>
-                <hr/>
-                <rich:accordion switchType="client">
-                    <rich:accordionItem header="Users">Users</rich:accordionItem>
-                    <rich:accordionItem header="Tools">Tools</rich:accordionItem>
-                    <rich:accordionItem header="Settings">Settings</rich:accordionItem>
-                </rich:accordion>
+    <body class="yui-skin-sam logobg">
+        <div id="doc" class="yui-t2">
+            <div id="hd" class="header">
+                <h:graphicImage value="/images/fplogo.png" alt="FrenchPress Logo"/>FrenchPress Administration
             </div>
-            <div class="yui3-u" id="main"> 
-                <div id="beforeContent">bc</div>
-                <ui:insert name="content"/>
-                <div id="afterContent">ac</div>
+            <div id="bd" class="main"> 
+                <div class="yui-b">
+                    <rich:accordion switchType="client">
+                        <rich:accordionItem header="Posts">
+                            <fp:link value="/admin/posts/list.jsf">List all</fp:link><br/>
+                            <fp:link value="/admin/posts/form.jsf">Add New</fp:link>
+                        </rich:accordionItem>
+                        <rich:accordionItem header="Media">Media</rich:accordionItem>
+                        <rich:accordionItem header="Pages">Pages</rich:accordionItem>
+                    </rich:accordion>
+                    <hr/>
+                    <rich:accordion switchType="client">
+                        <rich:accordionItem header="Users">Users</rich:accordionItem>
+                        <rich:accordionItem header="Tools">Tools</rich:accordionItem>
+                        <rich:accordionItem header="Settings">Settings</rich:accordionItem>
+                    </rich:accordion>
+                </div>
+                <div id="yui-main">
+                    <div class="yui-b"> 
+                        <ui:insert name="content"/>
+                    </div>
+                </div>
             </div>
+            <div id="ft"></div>
         </div>
-        <div id="afterBody">ab</div>
     </body>
 </html>
