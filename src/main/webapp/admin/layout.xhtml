@@ -6,13 +6,10 @@
       xmlns:a4j="http://richfaces.org/a4j"
       xmlns:rich="http://richfaces.org/rich"
       xmlns:fp="http://java.sun.com/jsf/composite/frenchpress">
+    <f:view contentType="text/html">
     <ui:insert name="metadata"/>
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <!--
-        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.2.0/build/cssgrids/grids-min.css"></link>
-        <script type="text/javascript" charset="utf-8" src="http://yui.yahooapis.com/3.2.0/build/yui/yui.js"></script>
-        -->
         <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.2r1/build/fonts/fonts-min.css&amp;2.8.2r1/build/grids/grids-min.css"></link>
         <style>
             body {
@@ -25,7 +22,11 @@
                 background-attachment: fixed;
                 background-position: right bottom;
                 background-repeat: no-repeat;
-                min-height: 700px
+                min-height: 700px;
+            }
+
+            td {
+                vertical-align: text-top;
             }
 
             .header {
@@ -52,11 +53,11 @@
             #side .content {
                 margin-right: 10px; /* gutter between #nav and #main */
             }
-            
+
             #doc {
                 width: 100%;
             }
-            
+
             h1,h2,h3,h4,h5,h6 {
                 margin-top: 0px;
             }
@@ -66,7 +67,7 @@
         <title><ui:insert name="title">frenchpress</ui:insert></title>
     </h:head>
 
-    <body class="yui-skin-sam logobg">
+    <body class="yui-skin-sam">
         <div id="doc" class="yui-t2">
             <div id="hd" class="header">
                 <h:graphicImage value="/images/fplogo.png" alt="FrenchPress Logo"/>FrenchPress Administration
@@ -97,4 +98,5 @@
             <div id="ft"></div>
         </div>
     </body>
+    </f:view>
 </html>

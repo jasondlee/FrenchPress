@@ -33,9 +33,9 @@
         <icefaces.version>2.0-Beta1</icefaces.version>
         <scales.version>2.0.0-SNAPSHOT</scales.version>
         <!--
-        <org.richfaces.version>4.0.0.20101110-M4</org.richfaces.version>
-        -->
         <org.richfaces.version>4.0.0-SNAPSHOT</org.richfaces.version>
+        -->
+        <org.richfaces.version>4.0.0.20101110-M4</org.richfaces.version>
     </properties>
 
     <dependencyManagement>
@@ -93,17 +93,24 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <!--
             <groupId>org.glassfish</groupId>
             <artifactId>javax.servlet</artifactId>
             <version>3.0</version>
+            -->
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>6.0</version>
             <scope>provided</scope>
         </dependency>
+        <!--
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>javax.persistence</artifactId>
             <version>${eclipselink.version}</version>
             <scope>provided</scope>
         </dependency>
+        -->
         <dependency>
             <groupId>javax.el</groupId>
             <artifactId>el-api</artifactId>
