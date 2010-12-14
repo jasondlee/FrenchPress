@@ -19,14 +19,6 @@ import java.util.Date;
 public class Post implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public Post() {
-        final Date date = new Date();
-        setCreatedDate(date);
-        setModifiedDate(date);
-        setStartPublishing(date);
-        setStopPublishing(date);
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -53,10 +45,10 @@ public class Post implements Serializable {
 
     @Column
     @Temporal(TemporalType.TIMESTAMP)
-    protected Date createdDate;
+    protected Date createdDate = new Date();
     @Column
     @Temporal(TemporalType.TIMESTAMP)
-    protected Date modifiedDate;
+    protected Date modifiedDate = new Date();
 
     public Long getId() {
         return id;
