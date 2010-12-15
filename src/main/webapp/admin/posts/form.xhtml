@@ -8,7 +8,6 @@
                 xmlns:fp="http://java.sun.com/jsf/composite/frenchpress"
                 template="/admin/layout.xhtml">
     <ui:define name="metadata">
-        <f:event type="javax.faces.event.PreRenderViewEvent" listener="#{postBean.loadPost}"/>
     </ui:define>
     <ui:define name="resources">
         <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.2r1/build/assets/skins/sam/skin.css"></link>
@@ -30,12 +29,12 @@
 
                 <h:outputLabel value="Body" for="body"/>
                 <h:panelGroup>
-                    <h:inputTextarea id="text" styleClass="te1" value="#{postBean.selected.body}" rows="20" cols="80"/>
+                    <h:inputTextarea id="body" styleClass="te1" value="#{postBean.selected.body}" rows="20" cols="80"/>
                     <h:message for="text"/>
                     <script type="text/javascript">
                         YAHOO.util.Event.onDOMReady(function() {
                             try {
-                                var el = document.getElementsByName("postForm:text").item(0);
+                                var el = document.getElementsByName("postForm:body").item(0);
                                 var myEditor = new YAHOO.widget.Editor(el, {
                                     height: '300px',
                                     width: '600px',
@@ -45,6 +44,7 @@
                                     titlebar: 'Text Editing Tools',
                                     draggable: false,
                                     buttonType: 'advanced',
+                                    handleSubmit: true,
                                     toolbar: frenchpress.admin.editorToolbar
                                 });
                                 myEditor.render();

@@ -10,6 +10,7 @@ import java.io.Serializable;
 
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
@@ -73,18 +74,21 @@ public class PostBean implements Serializable {
         return "list?faces-redirect=true";
     }
 
+    @PostConstruct
     public void loadPost() {
+        String id = null;
         if (facesContext.isPostback()) {
             Map<String, String> map = facesContext.getExternalContext().getRequestParameterMap();
             System.out.println(map);
+            id = map.get("postForm:id");
         } else {
-            String id = facesContext.getExternalContext().getRequestParameterMap().get("id");
-            if ((id != null) && !id.isEmpty()) {
-                try {
-                    selected = postService.getPost(Long.parseLong(id));
-                } catch (NumberFormatException nfe) {
-                    facesContext.getApplication().getNavigationHandler().handleNavigation(facesContext, null, "/admin");
-                }
+            id = facesContext.getExternalContext().getRequestParameterMap().get("id");
+        }
+        if ((id != null) && !id.isEmpty()) {
+            try {
+                selected = postService.getPost(Long.parseLong(id));
+            } catch (NumberFormatException nfe) {
+                facesContext.getApplication().getNavigationHandler().handleNavigation(facesContext, null, "/admin");
             }
         }
     }
