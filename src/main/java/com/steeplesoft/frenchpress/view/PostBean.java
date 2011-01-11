@@ -9,17 +9,18 @@ import com.steeplesoft.frenchpress.service.PostService;
 import java.io.Serializable;
 
 import java.util.List;
-import java.util.Map;
+import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
+import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
-import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
 
 /**
  *
  * @author jasonlee
  */
-@Model
+@ManagedBean
+@RequestScoped
 public class PostBean implements Serializable {
     @Inject
     protected PostService postService;
@@ -28,7 +29,7 @@ public class PostBean implements Serializable {
 
     @Inject
     private FacesContext facesContext;
-
+    
     public List<Post> getEntryList() {
         return postService.getMostRecentPosts(-1);
     }
@@ -38,30 +39,12 @@ public class PostBean implements Serializable {
         return entries;
     }
 
-    public PostService getBlogService() {
-        return postService;
-    }
-
-    public void setBlogService(PostService blogService) {
-        this.postService = blogService;
-    }
-
     public Post getSelected() {
         return selected;
     }
 
     public void setSelected(Post selected) {
         this.selected = selected;
-    }
-
-    public String createEntry() {
-        selected = new Post();
-        return "form?faces-redirect=true";
-    }
-
-    public String editEntry() {
-//        selected = (BlogEntry) dataTable.getRowData();
-        return "form?faces-redirect=true";
     }
 
     public String create() {
@@ -76,14 +59,10 @@ public class PostBean implements Serializable {
 
     @PostConstruct
     public void loadPost() {
-        String id = null;
-        if (facesContext.isPostback()) {
-            Map<String, String> map = facesContext.getExternalContext().getRequestParameterMap();
-            System.out.println(map);
-            id = map.get("postForm:id");
-        } else {
-            id = facesContext.getExternalContext().getRequestParameterMap().get("id");
-        }
+        String id = (facesContext.isPostback() ?
+            facesContext.getExternalContext().getRequestParameterMap().get("postForm:id") :
+            facesContext.getExternalContext().getRequestParameterMap().get("id"));
+
         if ((id != null) && !id.isEmpty()) {
             try {
                 selected = postService.getPost(Long.parseLong(id));

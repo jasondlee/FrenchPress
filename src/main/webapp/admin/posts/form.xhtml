@@ -18,7 +18,7 @@
         <h:messages/>
         <h1><h:outputText value="#{empty postBean.selected.id ? 'Add' : 'Update'}"/> a Post</h1>
         <h:form id="postForm">
-            <h:inputHidden id="id" value="#{postBean.selected.id}" rendered="#{postBean.selected.id != null}" />
+            <h:inputHidden id="id" value="#{postBean.selected.id}" rendered="#{!empty postBean.selected.id}" />
 
             <h:panelGrid columns="2">
                 <h:outputLabel value="Title" for="title"/>
@@ -27,10 +27,11 @@
                     <h:message for="title"/>
                 </h:panelGroup>
 
+                <ui:remove>
                 <h:outputLabel value="Body" for="body"/>
                 <h:panelGroup>
                     <h:inputTextarea id="body" styleClass="te1" value="#{postBean.selected.body}" rows="20" cols="80"/>
-                    <h:message for="text"/>
+                    <h:message for="body"/>
                     <script type="text/javascript">
                         YAHOO.util.Event.onDOMReady(function() {
                             try {
@@ -72,12 +73,13 @@
                     <rich:calendar id="stopPublishing" value="#{postBean.selected.stopPublishing}" popup="true" datePattern="yyyy/MM/dd hh:mm a"/>
                     <h:message for="stopPublishing"/>
                  </h:panelGroup>
+                </ui:remove>
                 
             </h:panelGrid>
 
-            <h:commandButton action="#{postBean.create}" value="Add" rendered="#{empty postBean.selected.id}" />
-            <h:commandButton action="#{postBean.update}" value="Update" rendered="#{!empty postBean.selected.id}" />
-            <h:commandButton action="/admin/posts/list" value="Cancel" />
+            <h:commandButton action="#{postBean.create}" value="Add" rendered1="#{empty postBean.selected.id}" />
+            <h:commandButton action="#{postBean.update}" value="Update" rendered1="#{!empty postBean.selected.id}" />
+            <h:commandButton action="#{postBean.cancel}" value="Cancel" />
         </h:form>
     </ui:define>
 </ui:composition>

@@ -26,7 +26,7 @@ public class Post implements Serializable {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false, length = Integer.MAX_VALUE)
+    @Column(nullable = true, length = Integer.MAX_VALUE)
     private String body;
 
     @Column
