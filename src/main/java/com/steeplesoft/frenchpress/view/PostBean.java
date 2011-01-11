@@ -9,9 +9,8 @@ import com.steeplesoft.frenchpress.service.PostService;
 import java.io.Serializable;
 
 import java.util.List;
-import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 import javax.faces.context.FacesContext;
 
@@ -19,8 +18,7 @@ import javax.faces.context.FacesContext;
  *
  * @author jasonlee
  */
-@ManagedBean
-@RequestScoped
+@Model
 public class PostBean implements Serializable {
     @Inject
     protected PostService postService;
@@ -31,7 +29,8 @@ public class PostBean implements Serializable {
     private FacesContext facesContext;
     
     public List<Post> getEntryList() {
-        return postService.getMostRecentPosts(-1);
+        List<Post> posts = postService.getMostRecentPosts(-1);
+        return posts;
     }
 
     public List<Post> getLimitedEntryList(int max) {

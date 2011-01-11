@@ -22,19 +22,10 @@
     </repositories>
 
     <properties>
-        <dbunit.version>2.4.5</dbunit.version>
-        <eclipselink.version>2.0.0-M9</eclipselink.version>
-        <facestester.version>0.4-SNAPSHOT</facestester.version>
-        <hsqldb.version>1.8.0.10</hsqldb.version>
         <javaee-api.version>6.0</javaee-api.version>
         <jta.version>1.1</jta.version>
         <junit.version>4.8.1</junit.version>
         <hibernate-validator.version>4.0.2.GA</hibernate-validator.version>
-        <icefaces.version>2.0-Beta1</icefaces.version>
-        <scales.version>2.0.0-SNAPSHOT</scales.version>
-        <!--
-        <org.richfaces.version>4.0.0.20101110-M4</org.richfaces.version>
-        -->
         <org.richfaces.version>4.0.0-SNAPSHOT</org.richfaces.version>
     </properties>
 
@@ -51,13 +42,6 @@
     </dependencyManagement>
 
     <dependencies>
-        <!--
-        <dependency>
-            <groupId>org.jboss.seam.persistence</groupId>
-            <artifactId>seam-persistence-impl</artifactId>
-            <version>3.0.0.Beta1</version>
-        </dependency>
-        -->
         <dependency>
             <groupId>org.richfaces.ui</groupId>
             <artifactId>richfaces-components-ui</artifactId>
@@ -97,24 +81,12 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <!--
-            <groupId>org.glassfish</groupId>
-            <artifactId>javax.servlet</artifactId>
-            <version>3.0</version>
-            -->
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>6.0</version>
             <scope>provided</scope>
         </dependency>
         <!--
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>javax.persistence</artifactId>
-            <version>${eclipselink.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        -->
         <dependency>
             <groupId>javax.el</groupId>
             <artifactId>el-api</artifactId>
@@ -133,6 +105,7 @@
             <version>1</version>
             <scope>provided</scope>
         </dependency>
+        -->
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>

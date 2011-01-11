@@ -6,11 +6,10 @@ import com.steeplesoft.frenchpress.service.Transactional;
 import java.io.Serializable;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import java.util.List;
 import javax.enterprise.inject.Model;
-import javax.inject.Inject;
+import javax.persistence.PersistenceUnit;
 
 /**
  *
@@ -18,19 +17,19 @@ import javax.inject.Inject;
  */
 @Model
 public class PostServiceImpl implements PostService, Serializable {
-    //@PersistenceUnit
-    @Inject
-    private EntityManagerFactory emf;
+    @PersistenceUnit
+//    @Inject
+    private EntityManager em;
 
     @Override
     public Post getPost(Long id) {
-        return emf.createEntityManager().find(Post.class, id);
+        return em.find(Post.class, id);
     }
 
     @Override
     @Transactional
     public Post createPost(Post entry) {
-        final EntityManager em = emf.createEntityManager();
+//        final EntityManager em = emf.createEntityManager();
         em.persist(entry);
         em.close();
         return entry;
@@ -39,14 +38,14 @@ public class PostServiceImpl implements PostService, Serializable {
     @Override
     @Transactional
     public Post updatePost(Post entry) {
-        EntityManager em = emf.createEntityManager();
+//        EntityManager em = emf.createEntityManager();
         entry = em.merge(entry);
         em.close();
         return entry;
     }
 
     public List<Post> getMostRecentPosts(int max) {
-        EntityManager em = emf.createEntityManager();
+//        EntityManager em = emf.createEntityManager();
         final List results = em.createNamedQuery("Post.findSticky").getResultList();
         int recentMax = max - results.size();
         if (recentMax <= max) {
