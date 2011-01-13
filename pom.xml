@@ -35,7 +35,7 @@
         <junit.version>4.8.2</junit.version>
         <hibernate-validator.version>4.0.2.GA</hibernate-validator.version>
         <org.richfaces.version>4.0.0-SNAPSHOT</org.richfaces.version>
-        <arquillian.version>1.0.0.Alpha4.SP1</arquillian.version>
+        <arquillian.version>1.0.0.Alpha4</arquillian.version>
     </properties>
 
     <dependencyManagement>
