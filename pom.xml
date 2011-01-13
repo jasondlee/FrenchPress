@@ -16,17 +16,25 @@
             <url>http://download.java.net/maven/2/</url>
         </repository>
         <repository>
-            <id>jboss nexus</id>
-            <url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+            <id>jboss-public-repository</id>
+            <name>JBoss Repository</name>
+            <url>https://repository.jboss.org/nexus/content/groups/public</url>
+            <releases>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <updatePolicy>daily</updatePolicy>
+            </snapshots>
         </repository>
     </repositories>
 
     <properties>
         <javaee-api.version>6.0</javaee-api.version>
         <jta.version>1.1</jta.version>
-        <junit.version>4.8.1</junit.version>
+        <junit.version>4.8.2</junit.version>
         <hibernate-validator.version>4.0.2.GA</hibernate-validator.version>
         <org.richfaces.version>4.0.0-SNAPSHOT</org.richfaces.version>
+        <arquillian.version>1.0.0.Alpha4.SP1</arquillian.version>
     </properties>
 
     <dependencyManagement>
@@ -74,6 +82,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!--
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
@@ -81,36 +90,51 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>6.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <!--
-        <dependency>
-            <groupId>javax.el</groupId>
-            <artifactId>el-api</artifactId>
-            <version>2.2</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>javax.transaction</groupId>
-            <artifactId>transaction-api</artifactId>
-            <version>${jta.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-            <version>1</version>
+            <artifactId>jta</artifactId>
+            <version>1.0.1B</version>
             <scope>provided</scope>
         </dependency>
         -->
         <dependency>
             <groupId>javax.enterprise</groupId>
             <artifactId>cdi-api</artifactId>
-            <version>1.0-SP3</version>
+            <version>1.0-SP4</version>
             <scope>provided</scope>
+        </dependency>
+        <!--
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>6.0</version>
+            <scope>provided</scope>
+        </dependency>
+        -->
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian</groupId>
+            <artifactId>arquillian-junit</artifactId>
+            <version>${arquillian.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.container</groupId>
+            <artifactId>arquillian-glassfish-embedded-3</artifactId>
+            <version>${arquillian.version}</version>
+            <scope>test</scope>
+        </dependency>
+            <!-- This imports the Java EE 6 runtime libraries provided by GlassFish Embedded -->
+        <dependency>
+            <groupId>org.glassfish.extras</groupId>
+            <artifactId>glassfish-embedded-all</artifactId>
+            <version>3.0.1</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -121,7 +145,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>cobertura-maven-plugin</artifactId>
-                    <version>2.2</version>
+                    <version>2.4</version>
                     <configuration>
                         <formats>
                             <format>xml</format>
@@ -142,6 +166,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
@@ -149,8 +174,34 @@
             </plugin>
             <plugin>
                 <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.5</version>
                 <configuration>
                     <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.7.1</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <artifactId>surefire-junit47</artifactId>
+                        <version>2.7.1</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <systemProperties>
+                        <!-- This optional property fixes an annoyance with Glassfish that puts derby.log in the project root -->
+                        <property>
+                            <name>derby.stream.error.file</name>
+                           <!-- If you save the log in target it is less likely to get committed in your project -->
+                            <value>target/derby.log</value>
+                        </property>
+                    </systemProperties>
+                    <!--
+                    <forkMode>never</forkMode>
+                    <parallel>classes</parallel>
+                    --> 
                 </configuration>
             </plugin>
         </plugins>

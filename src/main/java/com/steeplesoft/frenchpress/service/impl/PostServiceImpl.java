@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
 import javax.enterprise.inject.Model;
-import javax.persistence.PersistenceUnit;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -17,9 +17,9 @@ import javax.persistence.PersistenceUnit;
  */
 @Model
 public class PostServiceImpl implements PostService, Serializable {
-    @PersistenceUnit
+    @PersistenceContext(unitName="em")
 //    @Inject
-    private EntityManager em;
+    protected EntityManager em;
 
     @Override
     public Post getPost(Long id) {
@@ -29,23 +29,18 @@ public class PostServiceImpl implements PostService, Serializable {
     @Override
     @Transactional
     public Post createPost(Post entry) {
-//        final EntityManager em = emf.createEntityManager();
         em.persist(entry);
-        em.close();
         return entry;
     }
 
     @Override
     @Transactional
     public Post updatePost(Post entry) {
-//        EntityManager em = emf.createEntityManager();
         entry = em.merge(entry);
-        em.close();
         return entry;
     }
 
     public List<Post> getMostRecentPosts(int max) {
-//        EntityManager em = emf.createEntityManager();
         final List results = em.createNamedQuery("Post.findSticky").getResultList();
         int recentMax = max - results.size();
         if (recentMax <= max) {
@@ -55,7 +50,6 @@ public class PostServiceImpl implements PostService, Serializable {
             }
             results.addAll(recentQuery.getResultList());
         }
-        em.close();
         return results;
     }
 }
