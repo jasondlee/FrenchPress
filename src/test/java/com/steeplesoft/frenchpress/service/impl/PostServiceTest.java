@@ -16,6 +16,7 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import static org.junit.Assert.*;
+import java.io.File;
 
 /**
  *
@@ -25,11 +26,10 @@ import static org.junit.Assert.*;
 public class PostServiceTest {
     @Deployment
     public static Archive<?> createDeployment() {
-        return ShrinkWrap.create(WebArchive.class, "frenchpress.war")
+        return ShrinkWrap.create(WebArchive.class, "test.war")
                 .addClasses(Post.class, User.class, PostService.class, PostServiceImpl.class, TransactionalInterceptor.class, Transactional.class)
                 .addManifestResource("test-persistence.xml", "persistence.xml")
-                .addWebResource(EmptyAsset.INSTANCE, ArchivePaths.create("beans.xml"));
-//                .addWebResource("beans.xml");
+                .addWebResource(new File("src/main/webapp/WEB-INF/beans.xml"), "beans.xml");
     }
     
     @Inject
