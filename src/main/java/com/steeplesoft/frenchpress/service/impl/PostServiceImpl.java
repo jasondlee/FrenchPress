@@ -3,22 +3,21 @@ package com.steeplesoft.frenchpress.service.impl;
 import com.steeplesoft.frenchpress.model.Post;
 import com.steeplesoft.frenchpress.service.PostService;
 import com.steeplesoft.frenchpress.service.Transactional;
-import java.io.Serializable;
 
+import javax.inject.Named;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import java.util.List;
-import javax.enterprise.inject.Model;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  *
  * @author jasonlee
  */
-@Model
+@Named
 public class PostServiceImpl implements PostService, Serializable {
-    @PersistenceContext(unitName="em")
-//    @Inject
+    @PersistenceContext
     protected EntityManager em;
 
     @Override

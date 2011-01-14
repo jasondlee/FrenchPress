@@ -1,29 +1,28 @@
 package com.steeplesoft.frenchpress.service.impl;
 
-import org.jboss.shrinkwrap.api.ArchivePaths;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import com.steeplesoft.frenchpress.model.Post;
 import com.steeplesoft.frenchpress.model.User;
 import com.steeplesoft.frenchpress.service.PostService;
 import com.steeplesoft.frenchpress.service.Transactional;
 import com.steeplesoft.frenchpress.service.TransactionalInterceptor;
-import javax.inject.Inject;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.jboss.arquillian.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import static org.junit.Assert.*;
+import org.testng.annotations.Test;
+
+import javax.inject.Inject;
 import java.io.File;
+import java.util.List;
+
+import static org.testng.Assert.*;
 
 /**
  *
  * @author jasonlee
  */
-@RunWith(Arquillian.class)
-public class PostServiceTest {
+public class PostServiceTest extends Arquillian {
     @Deployment
     public static Archive<?> createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "test.war")
@@ -39,5 +38,18 @@ public class PostServiceTest {
     public void temp() {
         System.out.println("TEMP!");
         assertNotNull(postService);
+    }
+
+    @Test
+    public void entityManagerInjected() {
+        System.out.println("postService.em = " + postService.em);
+        assertNotNull(postService.em);
+    }
+
+    @Test
+    public void mostRecentEntries() {
+        List<Post> mostRecentPosts = postService.getMostRecentPosts(5);
+        assertNotNull(mostRecentPosts);
+        System.out.println("****** " + mostRecentPosts);
     }
 }
