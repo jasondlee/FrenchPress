@@ -26,11 +26,11 @@ public class Post implements Serializable {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = true, length = Integer.MAX_VALUE)
+    @Column(nullable = true)//, length = Integer.MAX_VALUE)
     private String body;
 
     @Column
-    private Boolean isSticky;
+    private Boolean isSticky = false;
 
     @ManyToOne()
     private User postedBy;

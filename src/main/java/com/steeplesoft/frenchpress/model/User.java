@@ -51,7 +51,7 @@ public class User implements Serializable {
     private String lastName;
 
 //    @OneToMany(mappedBy = "memberId")
-    private Collection<Registration> registrationCollection;
+    //private Collection<Registration> registrationCollection;
 
     @Column
     private Boolean canPost;
@@ -123,6 +123,7 @@ public class User implements Serializable {
         isAdmin = admin;
     }
 
+    /*
     public Collection<Registration> getRegistrationCollection() {
         return registrationCollection;
     }
@@ -130,6 +131,7 @@ public class User implements Serializable {
     public void setRegistrationCollection(Collection<Registration> registrationCollection) {
         this.registrationCollection = registrationCollection;
     }
+    */
 
     @Override
     public int hashCode() {

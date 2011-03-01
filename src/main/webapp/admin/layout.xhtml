@@ -3,15 +3,14 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:a4j="http://richfaces.org/a4j"
-      xmlns:rich="http://richfaces.org/rich"
       xmlns:fp="http://java.sun.com/jsf/composite/frenchpress">
     <f:view contentType="text/html">
     <ui:insert name="metadata"/>
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.2r1/build/fonts/fonts-min.css&amp;2.8.2r1/build/grids/grids-min.css"></link>
-        <style>
+        <script type="text/javascript" src="#{request.contextPath}/admin/admin.js"></script>
+        <style type="text/css">
             body {
                 margin: auto; /* center in viewport */
                 width: 100%;
@@ -74,20 +73,8 @@
             </div>
             <div id="bd" class="main"> 
                 <div class="yui-b">
-                    <rich:accordion switchType="client">
-                        <rich:accordionItem header="Posts">
-                            <fp:link value="/admin/posts/list.jsf">List all</fp:link><br/>
-                            <fp:link value="/admin/posts/form.jsf">Add New</fp:link>
-                        </rich:accordionItem>
-                        <rich:accordionItem header="Media">Media</rich:accordionItem>
-                        <rich:accordionItem header="Pages">Pages</rich:accordionItem>
-                    </rich:accordion>
-                    <hr/>
-                    <rich:accordion switchType="client">
-                        <rich:accordionItem header="Users">Users</rich:accordionItem>
-                        <rich:accordionItem header="Tools">Tools</rich:accordionItem>
-                        <rich:accordionItem header="Settings">Settings</rich:accordionItem>
-                    </rich:accordion>
+                    <ui:remove>
+                    </ui:remove>
                 </div>
                 <div id="yui-main">
                     <div class="yui-b"> 

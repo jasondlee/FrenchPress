@@ -7,11 +7,12 @@
   <!-- INTERFACE -->
   <cc:interface>
       <cc:attribute name="value" required="true" type="String"/>
+      <cc:attribute name="style" type="String"/>
       <cc:attribute name="target" default="" type="String"/>
   </cc:interface>
 
   <!-- IMPLEMENTATION -->
   <cc:implementation>
-      <h:outputLink value="#{request.contextPath}#{cc.attrs.value}" target="#{cc.attrs.target}"><cc:insertChildren/></h:outputLink>
+      <h:outputLink value="#{request.contextPath}#{cc.attrs.value}" style="#{cc.attrs.style}" target="#{cc.attrs.target}"><cc:insertChildren/></h:outputLink>
   </cc:implementation>
 </html>

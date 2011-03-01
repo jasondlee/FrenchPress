@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  * 
- * Copyright (c) 2010 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2011 Oracle and/or its affiliates. All rights reserved.
  * 
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -37,24 +37,39 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-
 package com.steeplesoft.frenchpress.service;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import javax.interceptor.InterceptorBinding;
+import com.steeplesoft.frenchpress.model.Post;
+import java.util.List;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
  * @author jasonlee
  */
-@Inherited
-@InterceptorBinding
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.TYPE})
-public @interface Transactional {
+@Stateless
+public class PostServiceImpl implements PostService {
+    @PersistenceContext
+    EntityManager em;
 
+    @Override
+    public List<Post> getPosts() {
+        final Query query = em.createQuery("select p from Post p");
+        return query.getResultList();
+    }
+
+    @Override
+    public void create(Post post) {
+        em.persist(post);
+    }
+
+    @Override
+    public void update(Post post) {
+        em.merge(post);
+    }
+    
+    
 }

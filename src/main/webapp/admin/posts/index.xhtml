@@ -3,7 +3,6 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:rich="http://richfaces.org/rich"
                 xmlns:fp="http://java.sun.com/jsf/composite/frenchpress"
                 template="/admin/layout.xhtml">
     <ui:define name="metadata">
@@ -16,34 +15,33 @@
     <ui:define name="content">
         <h:form id="blogEntryForm">
             <h1>Posts</h1>
-            <fp:link style="float:left" value="/admin/posts/form.jsf">Add New</fp:link>
-            <rich:dataTable value="#{postBean.entryList}" var="dataItem" width="100%">
-                <rich:column>
+            <fp:link style="float: left;" value="/admin/posts/form.jsf">Add New</fp:link>
+            <h:dataTable value="#{postBean.posts}" var="dataItem" width="100%">
+                <h:column>
                     <f:facet name="header">Title</f:facet>
-                    <fp:link style="float:left" value="/admin/posts/form.jsf?id=#{dataItem.id}">#{dataItem.title}</fp:link>
-                </rich:column>
-                <rich:column>
+                    <fp:link style="float: left" value="/admin/posts/form.jsf?id=#{dataItem.id}">#{dataItem.title}</fp:link>
+                </h:column>
+                <h:column>
                     <f:facet name="header">Sticky Post</f:facet>
                     #{dataItem.isSticky}
-                </rich:column>
-                <rich:column>
+                </h:column>
+                <h:column>
                     <f:facet name="header">Posted By</f:facet>
                     #{dataItem.postedBy.firstName} #{dataItem.postedBy.lastName}
-                </rich:column>
-                <rich:column>
+                </h:column>
+                <h:column>
                     <f:facet name="header">Pub Start Date</f:facet>
                     <h:outputText value="#{dataItem.startPublishing}">
                         <f:convertDateTime type="date" dateStyle="full"/>
                     </h:outputText>
-                </rich:column>
-                <rich:column>
+                </h:column>
+                <h:column>
                     <f:facet name="header">Pub End Date</f:facet>
                     <h:outputText value="#{dataItem.stopPublishing}">
                         <f:convertDateTime type="date" dateStyle="full"/>
                     </h:outputText>
-                </rich:column>
-            </rich:dataTable>
+                </h:column>
+            </h:dataTable>
         </h:form>
     </ui:define>
-
 </ui:composition>

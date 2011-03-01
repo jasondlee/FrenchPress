@@ -1,10 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html" 
                 xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:a4j="http://richfaces.org/a4j"
-                xmlns:rich="http://richfaces.org/rich"
                 xmlns:fp="http://java.sun.com/jsf/composite/frenchpress"
                 template="/admin/layout.xhtml">
     <ui:define name="metadata">
@@ -27,7 +24,6 @@
                     <h:message for="title"/>
                 </h:panelGroup>
 
-                <ui:remove>
                 <h:outputLabel value="Body" for="body"/>
                 <h:panelGroup>
                     <h:inputTextarea id="body" styleClass="te1" value="#{postBean.selected.body}" rows="20" cols="80"/>
@@ -55,7 +51,7 @@
                         });
                     </script>
                 </h:panelGroup>
-                
+
                 <h:outputLabel value="Sticky Post" for="sticky"/>
                 <h:panelGroup>
                     <h:selectBooleanCheckbox id="sticky" value="#{postBean.selected.isSticky}" title="Sticky Post"/>
@@ -64,21 +60,16 @@
 
                 <h:outputLabel value="Start Publishing" for="startPublishing"/>
                 <h:panelGroup>
-                    <rich:calendar id="startPublishing" value="#{postBean.selected.startPublishing}" popup="true" datePattern="yyyy/MM/dd hh:mm a"/>
-                    <h:message for="startPublishing"/>
                 </h:panelGroup>
 
                 <h:outputLabel value="Stop Publishing" for="stopPublishing"/>
                 <h:panelGroup>
-                    <rich:calendar id="stopPublishing" value="#{postBean.selected.stopPublishing}" popup="true" datePattern="yyyy/MM/dd hh:mm a"/>
-                    <h:message for="stopPublishing"/>
-                 </h:panelGroup>
-                </ui:remove>
-                
+                </h:panelGroup>
+
             </h:panelGrid>
 
-            <h:commandButton action="#{postBean.create}" value="Add" rendered1="#{empty postBean.selected.id}" />
-            <h:commandButton action="#{postBean.update}" value="Update" rendered1="#{!empty postBean.selected.id}" />
+            <h:commandButton action="#{postBean.create}" value="Add" />
+            <h:commandButton action="#{postBean.update}" value="Update" />
             <h:commandButton action="#{postBean.cancel}" value="Cancel" />
         </h:form>
     </ui:define>

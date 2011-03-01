@@ -6,19 +6,15 @@
         <jta-data-source>jdbc/frenchpress</jta-data-source>
         <properties>
             <property name="eclipselink.logging.level" value="FINE" />
+
             <property name="eclipselink.ddl-generation" value="create-tables" />
             <property name="eclipselink.ddl-generation.output-mode" value="database" />
-<!--            <property name="eclipselink.ddl-generation" value="drop-and-create-tables" />-->
+
+            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+
             <property name="eclipselink.application-location" value="/Users/jasonlee/tmp" />
             <property name="eclipselink.create-ddl-jdbc-file-name" value="create.sql" />
             <property name="eclipselink.drop-ddl-jdbc-file-name" value="drop.sql" />
-            <!--
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
-            <property name="hibernate.jdbc.batch_size" value="20"/>
-            <property name="hibernate.cache.provider_class" value="org.hibernate.cache.HashtableCacheProvider"/>
-            <property name="hibernate.transaction.manager_lookup_class"
-                      value="org.hibernate.transaction.SunONETransactionManagerLookup"/>
-            -->
         </properties>
     </persistence-unit>
 </persistence>
