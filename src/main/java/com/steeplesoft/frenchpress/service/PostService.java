@@ -10,6 +10,7 @@ import javax.ejb.Local;
  */
 @Local
 public interface PostService {
+    Post getPost(Long id);
     List<Post> getPosts();
     void create(Post post);
     void update(Post post);

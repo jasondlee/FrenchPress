@@ -15,11 +15,15 @@
     <ui:define name="content">
         <h:form id="blogEntryForm">
             <h1>Posts</h1>
-            <fp:link style="float: left;" value="/admin/posts/form.jsf">Add New</fp:link>
+            <fp:link style="float: left;" value="/admin/posts/add.jsf">Add New</fp:link>
             <h:dataTable value="#{postBean.posts}" var="dataItem" width="100%">
                 <h:column>
+                    <f:facet name="header">ID</f:facet>
+                    #{dataItem.id}
+                </h:column>
+                <h:column>
                     <f:facet name="header">Title</f:facet>
-                    <fp:link style="float: left" value="/admin/posts/form.jsf?id=#{dataItem.id}">#{dataItem.title}</fp:link>
+                    <fp:link style="float: left" value="/admin/posts/edit.jsf?id=#{dataItem.id}">#{dataItem.title}</fp:link>
                 </h:column>
                 <h:column>
                     <f:facet name="header">Sticky Post</f:facet>

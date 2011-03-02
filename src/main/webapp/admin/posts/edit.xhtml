@@ -13,9 +13,9 @@
     </ui:define>
     <ui:define name="content">
         <h:messages/>
-        <h1><h:outputText value="#{empty postBean.selected.id ? 'Add' : 'Update'}"/> a Post</h1>
+        <h1>Update a Post</h1>
         <h:form id="postForm">
-            <h:inputHidden id="id" value="#{postBean.selected.id}" rendered="#{!empty postBean.selected.id}" />
+            <h:inputHidden id="id" value="#{postBean.postId}" />
 
             <h:panelGrid columns="2">
                 <h:outputLabel value="Title" for="title"/>
@@ -57,20 +57,10 @@
                     <h:selectBooleanCheckbox id="sticky" value="#{postBean.selected.isSticky}" title="Sticky Post"/>
                     <h:message for="sticky"/>
                 </h:panelGroup>
-
-                <h:outputLabel value="Start Publishing" for="startPublishing"/>
-                <h:panelGroup>
-                </h:panelGroup>
-
-                <h:outputLabel value="Stop Publishing" for="stopPublishing"/>
-                <h:panelGroup>
-                </h:panelGroup>
-
             </h:panelGrid>
 
-            <h:commandButton action="#{postBean.create}" value="Add" />
             <h:commandButton action="#{postBean.update}" value="Update" />
-            <h:commandButton action="#{postBean.cancel}" value="Cancel" />
+            <h:commandButton action="/admin/post/index" value="Cancel" />
         </h:form>
     </ui:define>
 </ui:composition>

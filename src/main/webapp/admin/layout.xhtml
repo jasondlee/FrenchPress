@@ -3,6 +3,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
       xmlns:fp="http://java.sun.com/jsf/composite/frenchpress">
     <f:view contentType="text/html">
     <ui:insert name="metadata"/>
@@ -73,8 +75,21 @@
             </div>
             <div id="bd" class="main"> 
                 <div class="yui-b">
-                    <ui:remove>
-                    </ui:remove>
+                    <ul>
+                        <li>Posts
+                            <ul>
+                                <li><fp:link value="/admin/posts/index.jsf">List all</fp:link></li>
+                                <li><fp:link value="/admin/posts/add.jsf">Add New</fp:link></li>
+                            </ul>
+                        </li>
+                        <li>Media</li>
+                        <li>Pages</li>
+                    </ul>
+                    <ul>
+                        <li>Users</li>
+                        <li>Tools</li>
+                        <li>Settings</li>
+                    </ul>
                 </div>
                 <div id="yui-main">
                     <div class="yui-b"> 

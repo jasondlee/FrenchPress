@@ -56,6 +56,11 @@ public class PostServiceImpl implements PostService {
     EntityManager em;
 
     @Override
+    public Post getPost(Long id) {
+        return em.find(Post.class, id);
+    }
+    
+    @Override
     public List<Post> getPosts() {
         final Query query = em.createQuery("select p from Post p");
         return query.getResultList();
