@@ -8,7 +8,6 @@ import javax.ejb.Local;
  *
  * @author jasonlee
  */
-@Local
 public interface PostService {
     Post getPost(Long id);
     List<Post> getPosts();

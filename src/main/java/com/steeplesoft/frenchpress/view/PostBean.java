@@ -4,19 +4,17 @@ import com.steeplesoft.frenchpress.model.Post;
 import com.steeplesoft.frenchpress.service.PostService;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
 /**
  *
  * @author jasonlee
  */
-@ManagedBean
-@RequestScoped
+@Model
 public class PostBean {
-    @EJB
+    @Inject
     private PostService postService;
     private Post selected = new Post();
     private String postId = null;
