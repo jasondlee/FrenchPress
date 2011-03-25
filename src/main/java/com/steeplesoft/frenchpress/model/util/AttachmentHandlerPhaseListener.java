@@ -1,4 +1,4 @@
-package com.steeplesoft.frenchpress.view.util;
+package com.steeplesoft.frenchpress.model.util;
 
 import com.steeplesoft.frenchpress.model.Attachment;
 
@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 public class AttachmentHandlerPhaseListener implements PhaseListener {
-    @PersistenceUnit(unitName = "em")
+//    @PersistenceUnit
     private EntityManagerFactory emf;
 
     @Override
