@@ -26,6 +26,10 @@
                 <updatePolicy>daily</updatePolicy>
             </snapshots>
         </repository>
+        <repository>
+            <id>snapshots</id>
+            <url>http://anonsvn.icefaces.org/repo/maven2/snapshots</url>
+        </repository>
     </repositories>
 
     <properties>
@@ -38,10 +42,12 @@
 
         <seam.persistence.version>3.0.0-SNAPSHOT</seam.persistence.version>
         <seam.solder.version>3.0.0-SNAPSHOT</seam.solder.version>
-        <org.richfaces.version>4.0.0.20110227-CR1</org.richfaces.version>
-        <org.richfaces.version>4.0.0-SNAPSHOT</org.richfaces.version>
+        <org.richfaces.version>4.0.0.Final</org.richfaces.version>
         <arquillian1.version>1.0.0.Alpha4.SP1</arquillian1.version>
         <arquillian.version>1.0.0-SNAPSHOT</arquillian.version>
+
+        <ice.version>2.0.0</ice.version>
+        <icepush.version>2.0.0</icepush.version>
     </properties>
 
     <dependencyManagement>
@@ -64,6 +70,7 @@
             <scope>provided</scope>
         </dependency>
 
+<!--
         <dependency>
             <groupId>org.richfaces.ui</groupId>
             <artifactId>richfaces-components-ui</artifactId>
@@ -72,7 +79,34 @@
             <groupId>org.richfaces.core</groupId>
             <artifactId>richfaces-core-impl</artifactId>
         </dependency>
- 
+-->
+        <dependency>
+            <groupId>org.icefaces</groupId>
+            <artifactId>icefaces-ace</artifactId>
+            <version>${ice.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.icefaces</groupId>
+            <artifactId>icefaces-compat</artifactId>
+            <version>${ice.version}</version>
+            <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>servlet-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.el</groupId>
+                    <artifactId>el-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.icepush</groupId>
+            <artifactId>icepush</artifactId>
+            <version>${icepush.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
