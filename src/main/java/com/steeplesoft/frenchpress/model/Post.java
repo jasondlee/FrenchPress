@@ -1,0 +1,124 @@
+/*
+ * To change this template, choose Tools | Templates and open the template in
+ * the editor.
+ */
+package com.steeplesoft.frenchpress.model;
+
+import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
+
+/**
+ *
+ * @author jdlee
+ */
+@Entity
+@Table(name="posts",
+        uniqueConstraints=@UniqueConstraint(columnNames="slug"))
+public class Post implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @NotNull
+    private String title;
+    private String slug;
+    private String body;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date posted;
+    @ManyToOne
+    private User author;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
+
+    public Date getPosted() {
+        return posted;
+    }
+
+    public void setPosted(Date posted) {
+        this.posted = posted;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Post other = (Post) obj;
+        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
+            return false;
+        }
+        if ((this.title == null) ? (other.title != null) : !this.title.equals(other.title)) {
+            return false;
+        }
+        if ((this.body == null) ? (other.body != null) : !this.body.equals(other.body)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 17 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 17 * hash + (this.title != null ? this.title.hashCode() : 0);
+        hash = 17 * hash + (this.body != null ? this.body.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" + "id=" + id + ", title=" + title + ", slug=" + slug + ", body=" + body + ", author=" + author + '}';
+    }
+}

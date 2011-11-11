@@ -1,0 +1,183 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:fp="http://java.sun.com/jsf/composite/frenchpress">
+    <ui:insert name="metadata"/>
+    <h:head>
+        <title><ui:insert name="title">frenchpress</ui:insert></title>
+        <link rel="stylesheet" href="#{request.contextPath}/style.css" type="text/css"/>
+        <style type="text/css" media="screen">@import url( http://okcjug.org/wp-content/themes/inove/style.css );</style>
+        <!-- for translations -->
+        <!--[if IE 6]>
+                    <link rel="stylesheet" href="http://okcjug.org/wp-content/themes/inove/ie6.css" type="text/css" media="screen" />
+        <   ![endif]-->
+        <!-- style END -->
+
+        <!-- script START -->
+        <script type="text/javascript" src="http://okcjug.org/wp-content/themes/inove/js/util.js"></script>
+        <script type="text/javascript" src="http://okcjug.org/wp-content/themes/inove/js/menu.js"></script>
+        <!-- script END -->
+    </h:head>
+
+    <h:body>
+        <!-- wrap START -->
+        <div id="wrap">
+
+            <!-- container START -->
+            <div id="container">
+
+                <!-- header START -->
+                <div id="header">
+                    <div id="caption">
+
+                        <h1 id="title"><a href="">French Press</a></h1>
+                        <div id="tagline">Some sort of tag line</div>
+                    </div>
+
+                    <!-- navigation START -->
+                    <div id="navigation">
+                        <ul id="menus">
+                            <li class="page_item"><a class="home" title="Home" href="#{request.contextPath}">Home</a></li>
+                            <li class="page_item page-item-2"><a href="#{request.contextPath}/about" title="About">About</a></li>
+                            <li class="page_item page-item-180"><a href="#{request.contextPath}/registration" title="Registration">Registration</a></li>
+                            <li class="page_item page-item-184"><a href="#{request.contextPath}/contact-us" title="Contact Us">Contact Us</a></li>
+                            <li class="page_item page-item-184"><a href="#{request.contextPath}/admin" title="Admin">Admin</a></li>
+                            <li><a class="lastmenu" href="javascript:void(0);"></a></li>
+                        </ul>
+
+                        <!-- searchbox START -->
+                        <div id="searchbox">
+                            <form action="#{request.contextPath}" method="get">
+                                <div class="content">
+                                    <input type="text" class="textfield" name="s" size="24" value="" />
+                                    <span class="switcher" >Switcher</span>
+                                </div>
+                            </form>
+
+                        </div>
+                        <!-- searchbox END -->
+
+                        <div class="fixed"></div>
+                    </div>
+                    <!-- navigation END -->
+
+                    <div class="fixed"></div>
+                </div>
+                <!-- header END -->
+
+                <!-- content START -->
+                <div id="content">
+
+                    <!-- main START -->
+                    <div id="main">
+                        <h:messages />
+                        <ui:insert name="content">
+                            Something's wrong!
+                        </ui:insert>
+                    </div>
+                    <!-- main END -->
+
+
+                    <!-- sidebar START -->
+                    <div id="sidebar">
+
+                        <!-- sidebar north START -->
+                        <div id="northsidebar" class="sidebar">
+                            <!-- feeds -->
+                            <div class="widget widget_feeds">
+                                <div class="content">
+
+                                    <div id="subscribe">
+                                        <a id="feedrss" title="Subscribe to this blog..." href="#{request.contextPath}/feed"><abbr title="Really Simple Syndication">RSS</abbr> feed</a>
+                                        <ul id="feed_readers">
+                                            <li id="google_reader"><a class="reader" title="Subscribe with Google" href="http://fusion.google.com/add?feedurl=#{request.contextPath}/feed"><span>Google</span></a></li>
+                                            <li id="youdao_reader"><a class="reader" title="Subscribe with Youdao" href="http://reader.youdao.com/#url=#{request.contextPath}/feed"><span>Youdao</span></a></li>
+                                            <li id="xianguo_reader"><a class="reader" title="Subscribe with Xian Guo" href="http://www.xianguo.com/subscribe.php?url=#{request.contextPath}/feed"><span>Xian Guo</span></a></li>
+
+                                            <li id="zhuaxia_reader"><a class="reader" title="Subscribe with Zhua Xia" href="http://www.zhuaxia.com/add_channel.php?url=#{request.contextPath}/feed"><span>Zhua Xia</span></a></li>
+                                            <li id="yahoo_reader"><a class="reader" title="Subscribe with My Yahoo!"	href="http://add.my.yahoo.com/rss?url=#{request.contextPath}/feed"><span>My Yahoo!</span></a></li>
+                                            <li id="newsgator_reader"><a class="reader" title="Subscribe with newsgator"	href="http://www.newsgator.com/ngs/subscriber/subfext.aspx?url=#{request.contextPath}/feed"><span>newsgator</span></a></li>
+                                            <li id="bloglines_reader"><a class="reader" title="Subscribe with Bloglines"	href="http://www.bloglines.com/sub/#{request.contextPath}/feed"><span>Bloglines</span></a></li>
+                                            <li id="inezha_reader"><a class="reader" title="Subscribe with iNezha"	href="http://inezha.com/add?url=#{request.contextPath}/feed"><span>iNezha</span></a></li>
+                                        </ul>
+
+                                    </div>
+                                    <div class="fixed"></div>
+                                </div>
+                            </div>
+
+                            <!-- tag cloud -->
+                            <div id="tag_cloud" class="widget">
+                                <h3>Tag Cloud</h3>
+                            </div>
+
+                        </div>
+                        <!-- sidebar north END -->
+
+                        <div id="centersidebar">
+
+                            <!-- sidebar east START -->
+                            <div id="eastsidebar" class="sidebar">
+                                <!-- categories -->
+                                <div class="widget widget_categories">
+                                    <h3>Categories</h3>
+                                    <ul>
+                                        <li class="cat-item cat-item-6"><a href="#{request.contextPath}/category/general-information" title="View all posts filed under General Information">General Information</a></li>
+                                        <li class="cat-item cat-item-5"><a href="#{request.contextPath}/category/meetings" title="View all posts filed under Meeting Information">Meeting Information</a></li>
+                                        <li class="cat-item cat-item-3"><a href="#{request.contextPath}/category/bios" title="View all posts filed under Speaker Bios">Speaker Bios</a></li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                            <!-- sidebar east END -->
+
+                            <!-- sidebar west START -->
+                            <div id="westsidebar" class="sidebar">
+                                <!-- archives -->
+                                <div class="widget widget_archive">
+                                    <h3>Archives</h3>
+                                    <ul>
+                                        <li><a href='#{request.contextPath}/2009/10' title='October 2009'>October 2009</a></li>
+                                        <li><a href='#{request.contextPath}/2009/09' title='September 2009'>September 2009</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- sidebar west END -->
+                            <div class="fixed"></div>
+                        </div>
+
+                        <!-- sidebar south START -->
+                        <div id="southsidebar" class="sidebar">
+                            <!-- meta -->
+                            <div class="widget">
+                                <h3>Meta</h3>
+                                <ul>
+                                    <li><a href="#{request.contextPath}/wp-admin/">Site Admin</a></li>
+                                    <li><a href="#{request.contextPath}/wp-login.php?action=logout&amp;_wpnonce=a3bc0301ef">Log out</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- sidebar south END -->
+                    </div>
+                    <!-- sidebar END -->
+                    <div class="fixed"></div>
+                </div>
+                <!-- content END -->
+
+                <!-- footer START -->
+                <div id="footer">
+                    <a id="gotop" href="#" onclick="MGJS.goTop();return false;">Top</a>
+                    <a id="powered" href="http://wordpress.org/">WordPress</a>
+                    <div id="copyright">Copyright &#x000A9; 2011 Jason Lee</div>
+                    <div id="themeinfo">
+                        Theme based on inove <a href="http://www.neoease.com/">mg12</a>.
+                    </div>
+                </div>
+                <!-- footer END -->
+            </div>
+            <!-- container END -->
+        </div>
+        <!-- wrap END -->
+    </h:body>
+</html>

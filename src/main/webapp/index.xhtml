@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ice="http://www.icesoft.com/icefaces/component">
+    <head>
+        <title>Should Not Be Displayed</title>
+    </head>
+    <body>
+    <ui:composition id="composition" template="/themes/frenchpress/layout.xhtml">
+        <ui:define name="title">French Press</ui:define>
+        <ui:define name="content">
+            <h:panelGroup id="marker"/>
+            <h:messages layout="table"/>
+            <ui:repeat id="blogsTable" value="#{postBean.getPosts(5)}" var="entry" varStatus="status">
+                <div id="post-#{entry.id}" class="post" style="padding-bottom: 10px;">
+                    <h2 class="title"><a href="#{request.contextPath}/?p=#{entry.id}" title="Permalink to #{entry.title}">#{entry.title}</a></h2>
+
+                    <div class="post_info">
+                        <span class="p_author">#{entry.author.firstName} #{entry.author.lastName}</span>
+                        <span class="p_date"><a href="#{request.contextPath}?p=#{entry.id}" title="#{entry.posted}" rel="bookmark">#{entry.posted}</a></span>
+                        <span class="p_catetory"><a href="#{request.contextPath}?cat=1" title="View all posts in Uncategorized" rel="category">Uncategorized</a></span>
+                        <span class="p_comment"><span>Comments Off</span></span>
+                    </div>
+                    <div class="clear"></div>
+
+                    <div class="entry">
+                        #{entry.body}
+                    </div><!-- END entry -->
+                </div><!-- END post -->
+            </ui:repeat>
+        </ui:define>
+        <ui:remove>
+            <div id="blogEntry_#{status.index}" class="blogEntry post">
+                <div class="info">
+                    <div id="entryTitle" class="entryTitle">
+                        #{entry.title}
+                    </div>
+                    <div id="entryByLine" class="date" style="float: none;">
+                        Posted by #{entry.author.firstName} #{entry.author.lastName} on #{entry.posted}
+                        <ui:remove>
+                            <h:outputText value="#{entry.startPublishing}">
+                                <f:convertDateTime dateStyle="long"/>
+                            </h:outputText>
+                        </ui:remove>
+                    </div>
+                </div>
+                <div id="entryBody" class="entryBody">
+                    <h:outputText value="#{entry.body}" escape="false"/>
+                </div>
+            </div>
+        </ui:remove>
+    </ui:composition>
+</body>
+</html>
