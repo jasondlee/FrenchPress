@@ -14,7 +14,7 @@
         <ui:define name="content">
             <h:panelGroup id="marker"/>
             <h:messages layout="table"/>
-            <ui:repeat id="blogsTable" value="#{postBean.getPosts(5)}" var="entry" varStatus="status">
+            <ui:repeat id="blogsTable" value="#{postBean.getPosts(15)}" var="entry" varStatus="status">
                 <div id="post-#{entry.id}" class="post" style="padding-bottom: 10px;">
                     <h2 class="title"><a href="#{request.contextPath}/?p=#{entry.id}" title="Permalink to #{entry.title}">#{entry.title}</a></h2>
 
@@ -27,7 +27,7 @@
                     <div class="clear"></div>
 
                     <div class="entry">
-                        #{entry.body}
+                        <h:outputText escape="false" value="#{entry.body}"/>
                     </div><!-- END entry -->
                 </div><!-- END post -->
             </ui:repeat>

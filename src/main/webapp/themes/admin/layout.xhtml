@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>FrenchPress Administration</title>
+        <link href="#{request.contextPath}/jquery/css/themes/frenchpress/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css" media="all"/>
+        <script src="#{request.contextPath}/jquery/js/jquery-1.6.2.min.js" type="text/javascript"/>
+        <script src="#{request.contextPath}/jquery/js/jquery-ui-1.8.16.custom.min.js" type="text/javascript"/>
+        <meta name='robots' content='noindex,nofollow' />
+        <style type="text/css">
+            body {
+                margin: 0px;
+                padding: 0px;
+            }
+            .ui-accordion .ui-accordion-header a {
+                padding-top: 0px;
+                padding-bottom: 0px;
+                font-size: small;
+            }
+            .ui-accordion .ui-accordion-content {
+                font-size: small;
+            }
+            
+            .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
+                background-color: #9F714F;
+                color: #FFFFFF;
+                text-decoration: none;
+            }
+            
+            td {
+                vertical-align: top;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <div id="accordion" style="width: 10pc; float: left; padding-right: 10px; border: 1px solid #990000;">
+            <h3><a href="#">Home</a></h3>
+            <div>General Management Links</div>
+            <h3><a href="#">Posts</a></h3>
+            <div>Post Management Links</div>
+            <h3><a href="#">Pages</a></h3>
+            <div>Page Management Links</div>
+            <h3><a href="#">Media</a></h3>
+            <div>Media Management Links</div>
+            <h3><a href="#">Comments</a></h3>
+            <div>Comments Management Links</div>
+        </div>
+        <div id="content">
+            <h3>
+                <h:graphicImage value="/images/fp_logo_32.png" title="FrenchPress logo" alt="FrenchPress logo"/>
+                FrenchPress Administration
+            </h3>
+            <ui:insert name="content">
+                Something's wrong!
+            </ui:insert>
+            <div id="footer">
+                &copy;&nbsp;Copyright&nbsp;2011&nbsp;Jason Lee
+
+                &#8901;&nbsp;Powered&nbsp;by&nbsp;<a href="http://github.com/jasondlee/frenchpress/">FrenchPress</a> 
+            </div><!--footer-->
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $(function() {
+                    $("#accordion").accordion();
+                    $("#accordion").height($("#content").height());
+                });
+            });
+        </script>
+    </h:body>
+</html>

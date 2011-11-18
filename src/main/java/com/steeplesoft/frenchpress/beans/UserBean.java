@@ -6,7 +6,9 @@ package com.steeplesoft.frenchpress.beans;
 
 import com.steeplesoft.frenchpress.model.User;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.enterprise.inject.Model;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -14,7 +16,8 @@ import javax.persistence.PersistenceContext;
  *
  * @author jdlee
  */
-@Model
+@Stateless
+@Named
 public class UserBean {
     @PersistenceContext
     protected EntityManager em;

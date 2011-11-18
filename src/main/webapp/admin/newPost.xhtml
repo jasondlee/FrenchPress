@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="./../themes/admin/layout.xhtml">
+
+    <ui:define name="content">
+        <h3>Add a Post</h3>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel for="title">Title</h:outputLabel>
+                <h:inputText id="title" value="#{newPostBean.post.title}"/>
+                <h:outputLabel for="slug">Slug</h:outputLabel>
+                <h:inputText id="slug" value="#{newPostBean.post.slug}"/>
+                <h:outputLabel for="body">Body</h:outputLabel>
+                <h:inputTextarea id="body" value="#{newPostBean.post.body}" cols="80" rows="20"/>
+            </h:panelGrid>
+            <h:commandButton action="#{newPostBean.save}" value="Create Post"/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

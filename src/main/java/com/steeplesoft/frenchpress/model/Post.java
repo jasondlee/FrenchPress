@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -30,12 +31,14 @@ public class Post implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Version
+    private int version;
     @NotNull
     private String title;
     private String slug;
     private String body;
     @Temporal(TemporalType.TIMESTAMP)
-    private Date posted;
+    private Date posted = new Date();
     @ManyToOne
     private User author;
 
@@ -45,6 +48,14 @@ public class Post implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 
     public User getAuthor() {
