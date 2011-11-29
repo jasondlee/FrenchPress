@@ -6,31 +6,71 @@ package com.steeplesoft.frenchpress.beans;
 
 import com.steeplesoft.frenchpress.model.Post;
 import java.util.List;
-import javax.ejb.Stateless;
-import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import javax.enterprise.inject.Model;
+import javax.faces.component.html.HtmlDataTable;
+import javax.inject.Inject;
 
 /**
  *
  * @author jdlee
  */
-@Stateless
-@Named
+@Model
 public class PostBean {
-    @PersistenceContext
-    protected EntityManager em;
-    
+
+    @Inject
+    private PostService postService;
+    private Post post = new Post();
+    private HtmlDataTable dataTable;
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
+
     public List<Post> getPosts(int limit) {
-        final TypedQuery<Post> query = em.createQuery("SELECT p FROM Post p ORDER BY p.posted DESC", Post.class);
-        if (limit > -1) {
-            query.setMaxResults(limit);
+        return postService.getPosts(limit);
+    }
+
+    public void loadPost() {
+        post = postService.getPost(post.getId());
+    }
+
+    public String update() {
+        Post savedPost = postService.getPost(post.getId());
+        if (savedPost == null) {
+            throw new RuntimeException("Post not found.  Id: " + post.getId());
+        } else {
+            if (savedPost.getVersion() > post.getVersion()) {
+//                throw new MidErrorCollisionException();
+            } else {
+                postService.updatePost(post);
+                return "/admin/index?faces-redirect=true";
+            }
         }
-        return query.getResultList();
+
+        return null;
+    }
+
+    public String save() {
+        postService.createPost(post);
+        return "/admin/index?faces-redirect=true";
     }
     
-    public void createPost(Post post) {
-        em.persist(post);
+    public String delete() {
+        Post post = (Post)dataTable.getRowData();
+        postService.deletePost(post);
+        
+        return null;
+    }
+
+    public HtmlDataTable getDataTable() {
+        return dataTable;
+    }
+
+    public void setDataTable(HtmlDataTable dataTable) {
+        this.dataTable = dataTable;
     }
 }

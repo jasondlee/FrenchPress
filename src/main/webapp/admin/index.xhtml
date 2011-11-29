@@ -7,6 +7,24 @@
 
     <body>
         <ui:composition template="/themes/admin/layout.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <h:dataTable var="post" value="#{postBean.getPosts(-1)}" width="85%" border="1"
+                                 style="margin-left: 10px; border-collapse: collapse;"
+                                 binding="#{postBean.dataTable}">
+                        <h:column>
+                            <f:facet name="header">Title</f:facet>
+                            #{post.title}
+                        </h:column>
+                        <h:column>
+                            <a href="editPost.jsf?postId=#{post.id}">Edit</a>
+                            &#160;|&#160;
+                            <h:commandLink value="Delete" onclick="return confirm('Are you sure you want to delete this post?');"
+                                           action="#{postBean.delete}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </ui:define>
         </ui:composition>
     </body>
 </html>

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/themes/admin/layout.xhtml">
+
+    <ui:define name="content">
+        <f:metadata>
+            <f:viewParam name="postId" value="#{postBean.post.id}" required="true" requiredMessage="Post id is required"/>
+            <f:event type="preRenderView" listener="#{postBean.loadPost}" />
+        </f:metadata>
+        <h3>Edit a Post</h3>
+        <h:form>
+            <h:inputHidden value="#{postBean.post.id}"/>
+            <h:inputHidden value="#{postBean.post.version}"/>
+            <h:panelGrid columns="2">
+                <h:outputLabel for="title">Title</h:outputLabel>
+                <h:inputText id="title" value="#{postBean.post.title}"/>
+                <h:outputLabel for="slug">Slug</h:outputLabel>
+                <h:inputText id="slug" value="#{postBean.post.slug}"/>
+                <h:outputLabel for="body">Body</h:outputLabel>
+                <h:inputTextarea id="body" value="#{postBean.post.body}" cols="80" rows="20"/>
+            </h:panelGrid>
+            <h:commandButton action="#{postBean.update}" value="Update Post"/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

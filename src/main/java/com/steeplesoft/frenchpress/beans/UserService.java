@@ -18,7 +18,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 @Named
-public class UserBean {
+public class UserService {
     @PersistenceContext
     protected EntityManager em;
     

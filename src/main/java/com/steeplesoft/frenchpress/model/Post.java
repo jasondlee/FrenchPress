@@ -38,7 +38,7 @@ public class Post implements Serializable {
     private String slug;
     private String body;
     @Temporal(TemporalType.TIMESTAMP)
-    private Date posted = new Date();
+    private Date posted;
     @ManyToOne
     private User author;
 

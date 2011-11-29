@@ -4,7 +4,7 @@
  */
 package com.steeplesoft.frenchpress.bean;
 
-import com.steeplesoft.frenchpress.beans.UserBean;
+import com.steeplesoft.frenchpress.beans.UserService;
 import com.steeplesoft.frenchpress.model.User;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -25,7 +25,7 @@ public class UserBeanTest {
 
     private EntityManagerFactory emf;
     private EntityManager testEm;
-    private UserBean userBean;
+    private UserService userBean;
 
     public UserBeanTest() {
     }
@@ -34,7 +34,7 @@ public class UserBeanTest {
     public void setUpClass() throws Exception {
         emf = Persistence.createEntityManagerFactory("testEm");
         testEm = emf.createEntityManager();
-        userBean = new UserBean() {{
+        userBean = new UserService() {{
             this.em = testEm;
         }};
         startTransaction();
