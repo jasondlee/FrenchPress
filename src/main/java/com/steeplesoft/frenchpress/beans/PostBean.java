@@ -5,17 +5,20 @@
 package com.steeplesoft.frenchpress.beans;
 
 import com.steeplesoft.frenchpress.model.Post;
+import java.io.Serializable;
 import java.util.List;
-import javax.enterprise.inject.Model;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.html.HtmlDataTable;
 import javax.inject.Inject;
-
+import javax.inject.Named;
 /**
  *
  * @author jdlee
  */
-@Model
-public class PostBean {
+//@Model
+@SessionScoped
+@Named
+public class PostBean implements Serializable {
 
     @Inject
     private PostService postService;
@@ -39,30 +42,32 @@ public class PostBean {
     }
 
     public String update() {
-        Post savedPost = postService.getPost(post.getId());
-        if (savedPost == null) {
-            throw new RuntimeException("Post not found.  Id: " + post.getId());
-        } else {
-            if (savedPost.getVersion() > post.getVersion()) {
-//                throw new MidErrorCollisionException();
-            } else {
-                postService.updatePost(post);
-                return "/admin/index?faces-redirect=true";
-            }
-        }
-
-        return null;
+        /*
+         * Post savedPost = postService.getPost(post.getId()); if (savedPost ==
+         * null) { throw new RuntimeException("Post not found. Id: " +
+         * post.getId()); } else { if (savedPost.getVersion() >
+         * post.getVersion()) { // throw new MidErrorCollisionException(); } else
+         * {
+         */
+        postService.updatePost(post);
+        return "/admin/posts?faces-redirect=true";
+        /*
+         * }
+         * }
+         *
+         * return null;
+         */
     }
 
     public String save() {
         postService.createPost(post);
-        return "/admin/index?faces-redirect=true";
+        return "/admin/posts?faces-redirect=true";
     }
-    
+
     public String delete() {
-        Post post = (Post)dataTable.getRowData();
+        Post post = (Post) dataTable.getRowData();
         postService.deletePost(post);
-        
+
         return null;
     }
 

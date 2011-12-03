@@ -4,7 +4,10 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
-                template="/themes/admin/layout.xhtml">
+                xmlns:ice="http://www.icesoft.com/icefaces/component" 
+                xmlns:icecore="http://www.icefaces.org/icefaces/core"
+                xmlns:ace="http://www.icefaces.org/icefaces/components"
+                template="/admin/layout.xhtml">
 
     <ui:define name="content">
         <f:metadata>
@@ -12,7 +15,8 @@
             <f:event type="preRenderView" listener="#{postBean.loadPost}" />
         </f:metadata>
         <h3>Edit a Post</h3>
-        <h:form>
+        <script type="text/javascript" src="#{request.contextPath}/admin/tiny_mce/tiny_mce.js" target="head"></script>
+        <h:form id="editPostForm">
             <h:inputHidden value="#{postBean.post.id}"/>
             <h:inputHidden value="#{postBean.post.version}"/>
             <h:panelGrid columns="2">
@@ -22,7 +26,33 @@
                 <h:inputText id="slug" value="#{postBean.post.slug}"/>
                 <h:outputLabel for="body">Body</h:outputLabel>
                 <h:inputTextarea id="body" value="#{postBean.post.body}" cols="80" rows="20"/>
+                <h:outputLabel for="author">Author</h:outputLabel>
+                <h:selectOneMenu id="author" value="#{postBean.post.author}" converter="#{userConverter}">
+                    <f:selectItems value="#{userBean.users}" var="user"
+                                   itemLabel="#{user.firstName} #{user.lastName}"
+                                   itemValue="#{user}"/>
+                </h:selectOneMenu>
+                <h:outputLabel for="cal">Posted Date</h:outputLabel>
+                <ace:dateTimeEntry id="cal"
+                                   value="#{postBean.post.posted}"
+                                   pattern="MMM/dd/yyyy HH:mm"
+                                   renderAsPopup="true"/>
             </h:panelGrid>
+            <script type="text/javascript" >
+                tinyMCE.init({
+                    theme : "advanced",
+                    mode : "textareas",
+                    plugins : "fullpage",
+                    skin : "o2k7",
+                    theme_advanced_toolbar_location : "top",
+                    theme_advanced_toolbar_align : "left",
+                    theme_advanced_statusbar_location : "bottom",
+                    theme_advanced_resizing : true,
+                    skin_variant : "silver"
+                    //theme_advanced_buttons3_add : "fullpage"
+                });
+            </script>
+
             <h:commandButton action="#{postBean.update}" value="Update Post"/>
         </h:form>
     </ui:define>

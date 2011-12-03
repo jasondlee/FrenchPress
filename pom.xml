@@ -49,6 +49,16 @@
             <version>1.1.2</version>
         </dependency>
         <dependency>
+            <groupId>org.icefaces</groupId>
+            <artifactId>icefaces</artifactId>
+            <version>2.1.0.BETA2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.icefaces</groupId>
+            <artifactId>icefaces-ace</artifactId>
+            <version>2.1.0.BETA2</version>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>6.0</version>
@@ -129,6 +139,11 @@
             <id>jsf20</id>
             <layout>default</layout>
             <name>Repository for library Library[jsf20]</name>
+        </repository>
+        <repository>
+            <id>ICEsoft</id>
+            <name>ICEsoft</name>
+            <url>http://anonsvn.icefaces.org/repo/maven2/snapshots/</url>
         </repository>
     </repositories>
 </project>

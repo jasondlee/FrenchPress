@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:fp="http://java.sun.com/jsf/composite/frenchpress">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>FrenchPress Administration</title>
@@ -11,9 +12,21 @@
         <script src="#{request.contextPath}/jquery/js/jquery-ui-1.8.16.custom.min.js" type="text/javascript"/>
         <meta name='robots' content='noindex,nofollow' />
         <style type="text/css">
+            html, body {
+                height: 100%;
+            } 
             body {
                 margin: 0px;
                 padding: 0px;
+                background-color: #990000;
+                background: url('#{request.contextPath}/images/fpbackground.png') no-repeat bottom left;
+                /*                background-attachment: fixed;
+                                background-position: bottom, right;
+                                background-repeat: no-repeat;*/
+
+            }
+            .ui-widget {
+                font-size: smaller;
             }
             .ui-accordion .ui-accordion-header a {
                 padding-top: 0px;
@@ -23,13 +36,13 @@
             .ui-accordion .ui-accordion-content {
                 font-size: small;
             }
-            
+
             .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
                 background-color: #9F714F;
                 color: #FFFFFF;
                 text-decoration: none;
             }
-            
+
             td {
                 vertical-align: top;
             }
@@ -38,9 +51,14 @@
     <h:body>
         <div id="accordion" style="width: 15pc; float: left; padding-right: 10px; white-space: nowrap">
             <h3><a href="#">Home</a></h3>
-            <div>General Management Links</div>
+            <div>
+                <fp:link value="/admin/index.jsf">Dashboard</fp:link>
+            </div>
             <h3><a href="#">Posts</a></h3>
-            <div>Post Management Links</div>
+            <div>
+                <fp:link value="/admin/posts.jsf">All Posts</fp:link><br/>
+                <fp:link value="/admin/newPost.jsf">New Post</fp:link>
+            </div>
             <h3><a href="#">Pages</a></h3>
             <div>Page Management Links</div>
             <h3><a href="#">Media</a></h3>
