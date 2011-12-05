@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates and open the template in
  * the editor.
  */
-package com.steeplesoft.frenchpress.beans;
+package com.steeplesoft.frenchpress.service;
 
 import com.steeplesoft.frenchpress.model.User;
 import java.util.List;

@@ -4,20 +4,20 @@
  */
 package com.steeplesoft.frenchpress.beans;
 
+import com.steeplesoft.frenchpress.service.PostService;
 import com.steeplesoft.frenchpress.model.Post;
 import java.io.Serializable;
 import java.util.List;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.inject.Model;
 import javax.faces.component.html.HtmlDataTable;
 import javax.inject.Inject;
-import javax.inject.Named;
 /**
  *
  * @author jdlee
  */
-//@Model
-@SessionScoped
-@Named
+@Model
+//@SessionScoped
+//@Named
 public class PostBean implements Serializable {
 
     @Inject

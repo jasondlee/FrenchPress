@@ -4,6 +4,7 @@
  */
 package com.steeplesoft.frenchpress.beans;
 
+import com.steeplesoft.frenchpress.service.UserService;
 import com.steeplesoft.frenchpress.model.User;
 import java.util.ArrayList;
 import java.util.List;

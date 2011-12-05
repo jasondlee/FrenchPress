@@ -4,7 +4,7 @@
  */
 package com.steeplesoft.frenchpress.model.converter;
 
-import com.steeplesoft.frenchpress.beans.UserService;
+import com.steeplesoft.frenchpress.service.UserService;
 import com.steeplesoft.frenchpress.model.User;
 import javax.ejb.EJB;
 import javax.faces.component.UIComponent;

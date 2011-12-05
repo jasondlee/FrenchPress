@@ -4,7 +4,7 @@
  */
 package com.steeplesoft.frenchpress.bean;
 
-import com.steeplesoft.frenchpress.beans.UserService;
+import com.steeplesoft.frenchpress.service.UserService;
 import com.steeplesoft.frenchpress.model.User;
 import java.util.List;
 import javax.persistence.EntityManager;

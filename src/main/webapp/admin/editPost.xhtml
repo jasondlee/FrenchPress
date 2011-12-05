@@ -4,7 +4,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:ice="http://www.icesoft.com/icefaces/component" 
+                xmlns:ice="http://www.icesoft.com/icefaces/component"
                 xmlns:icecore="http://www.icefaces.org/icefaces/core"
                 xmlns:ace="http://www.icefaces.org/icefaces/components"
                 template="/admin/layout.xhtml">
@@ -20,22 +20,23 @@
             <h:inputHidden value="#{postBean.post.id}"/>
             <h:inputHidden value="#{postBean.post.version}"/>
             <h:panelGrid columns="2">
-                <h:outputLabel for="title">Title</h:outputLabel>
-                <h:inputText id="title" value="#{postBean.post.title}"/>
-                <h:outputLabel for="slug">Slug</h:outputLabel>
-                <h:inputText id="slug" value="#{postBean.post.slug}"/>
-                <h:outputLabel for="body">Body</h:outputLabel>
-                <h:inputTextarea id="body" value="#{postBean.post.body}" cols="80" rows="20"/>
-                <h:outputLabel for="author">Author</h:outputLabel>
+                <ice:outputLabel for="title">Title</ice:outputLabel>
+                <ice:inputText id="title" value="#{postBean.post.title}"/>
+                <ice:outputLabel for="slug">Slug</ice:outputLabel>
+                <ice:inputText id="slug" value="#{postBean.post.slug}"/>
+                <ice:outputLabel for="body">Body</ice:outputLabel>
+                <ice:inputTextarea id="body" value="#{postBean.post.body}" cols="80" rows="20"/>
+                <ice:outputLabel for="author">Author</ice:outputLabel>
                 <h:selectOneMenu id="author" value="#{postBean.post.author}" converter="#{userConverter}">
                     <f:selectItems value="#{userBean.users}" var="user"
                                    itemLabel="#{user.firstName} #{user.lastName}"
                                    itemValue="#{user}"/>
                 </h:selectOneMenu>
-                <h:outputLabel for="cal">Posted Date</h:outputLabel>
+                <ice:outputLabel for="cal">Posted Date</ice:outputLabel>
                 <ace:dateTimeEntry id="cal"
                                    value="#{postBean.post.posted}"
                                    pattern="MMM/dd/yyyy HH:mm"
+                                   stepMinute="5"
                                    renderAsPopup="true"/>
             </h:panelGrid>
             <script type="text/javascript" >

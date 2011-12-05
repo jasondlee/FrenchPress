@@ -53,6 +53,11 @@
             <artifactId>icefaces</artifactId>
             <version>2.1.0.BETA2</version>
         </dependency>
+<!--        <dependency>
+            <groupId>org.icefaces</groupId>
+            <artifactId>icefaces-compat</artifactId>
+            <version>2.1.0.BETA2</version>
+        </dependency>-->
         <dependency>
             <groupId>org.icefaces</groupId>
             <artifactId>icefaces-ace</artifactId>

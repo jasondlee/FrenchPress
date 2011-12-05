@@ -3,7 +3,10 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:fp="http://java.sun.com/jsf/composite/frenchpress">
+      xmlns:fp="http://java.sun.com/jsf/composite/frenchpress"
+      xmlns:ace="http://www.icefaces.org/icefaces/components"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:icecore="http://www.icefaces.org/icefaces/core">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>FrenchPress Administration</title>
@@ -49,23 +52,57 @@
         </style>
     </h:head>
     <h:body>
-        <div id="accordion" style="width: 15pc; float: left; padding-right: 10px; white-space: nowrap">
-            <h3><a href="#">Home</a></h3>
-            <div>
-                <fp:link value="/admin/index.jsf">Dashboard</fp:link>
-            </div>
-            <h3><a href="#">Posts</a></h3>
-            <div>
-                <fp:link value="/admin/posts.jsf">All Posts</fp:link><br/>
-                <fp:link value="/admin/newPost.jsf">New Post</fp:link>
-            </div>
-            <h3><a href="#">Pages</a></h3>
-            <div>Page Management Links</div>
-            <h3><a href="#">Media</a></h3>
-            <div>Media Management Links</div>
-            <h3><a href="#">Comments</a></h3>
-            <div>Comments Management Links</div>
+        <div style="width: 15pc; height: 100pc; float: left; padding-right: 10px; white-space: nowrap">
+            <h:form>
+                <ace:accordion id="nav" collapsible="true" autoHeight="true" 
+                               activeIndex="#{uiBean.activeAccordionIndex}"
+                               paneChangeListener="#{uiBean.onAccordionPaneChange}">
+                    <ace:accordionPane id="home" title="Home">  
+                        <fp:link id="homelink" value="/admin/index.jsf">Dashboard</fp:link>
+                    </ace:accordionPane>
+                    <ace:accordionPane title="Posts">  
+                        <fp:link value="/admin/posts.jsf">All Posts</fp:link><br/>
+                        <fp:link value="/admin/newPost.jsf">New Post</fp:link>
+                    </ace:accordionPane>
+                    <ace:accordionPane title="Pages">  
+                        Page Management Links
+                    </ace:accordionPane>
+                    <ace:accordionPane title="Media">  
+                        Media Management Links
+                    </ace:accordionPane>
+                    <ace:accordionPane title="Comments">  
+                        Comment Management Links
+                    </ace:accordionPane>
+                </ace:accordion>
+            </h:form>
         </div>
+        <ui:remove>
+            <div id="accordion" style="width: 15pc; float: left; padding-right: 10px; white-space: nowrap">
+                <h3><a href="#">Home</a></h3>
+                <div>
+                    <fp:link value="/admin/index.jsf">Dashboard</fp:link>
+                </div>
+                <h3><a href="#">Posts</a></h3>
+                <div>
+                    <fp:link value="/admin/posts.jsf">All Posts</fp:link><br/>
+                    <fp:link value="/admin/newPost.jsf">New Post</fp:link>
+                </div>
+                <h3><a href="#">Pages</a></h3>
+                <div>Page Management Links</div>
+                <h3><a href="#">Media</a></h3>
+                <div>Media Management Links</div>
+                <h3><a href="#">Comments</a></h3>
+                <div>Comments Management Links</div>
+            </div>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $(function() {
+                        $("#accordion").accordion();
+                        $("#accordion").height($("#content").height());
+                    });
+                });
+            </script>
+        </ui:remove>
         <div id="content">
             <h3>
                 <h:graphicImage value="/images/fp_logo_32.png" title="FrenchPress logo" alt="FrenchPress logo"/>
@@ -80,13 +117,5 @@
                 &#8901;&nbsp;Powered&nbsp;by&nbsp;<a href="http://github.com/jasondlee/frenchpress/">FrenchPress</a> 
             </div><!--footer-->
         </div>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $(function() {
-                    $("#accordion").accordion();
-                    $("#accordion").height($("#content").height());
-                });
-            });
-        </script>
     </h:body>
 </html>
