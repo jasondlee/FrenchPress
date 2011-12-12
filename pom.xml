@@ -15,6 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
         <netbeans.hint.j2eeVersion>1.6</netbeans.hint.j2eeVersion>
+        <version.icefaces>2.1.0.BETA2</version.icefaces>
     </properties>
 
     <dependencies>
@@ -50,18 +51,25 @@
         </dependency>
         <dependency>
             <groupId>org.icefaces</groupId>
-            <artifactId>icefaces</artifactId>
-            <version>2.1.0.BETA2</version>
-        </dependency>
-<!--        <dependency>
-            <groupId>org.icefaces</groupId>
             <artifactId>icefaces-compat</artifactId>
-            <version>2.1.0.BETA2</version>
-        </dependency>-->
+            <version>${version.icefaces}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.icepush</groupId>
+            <artifactId>icepush</artifactId>
+            <version>${version.icefaces}</version>
+        </dependency>
         <dependency>
             <groupId>org.icefaces</groupId>
             <artifactId>icefaces-ace</artifactId>
-            <version>2.1.0.BETA2</version>
+            <version>${version.icefaces}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.icefaces</groupId>
+            <artifactId>icefaces</artifactId>
+            <version>${version.icefaces}</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>javax</groupId>
