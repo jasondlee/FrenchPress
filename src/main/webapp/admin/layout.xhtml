@@ -75,38 +75,11 @@
                     </ace:accordionPane>
                     <ace:accordionPane title="Users">  
                         <fp:link value="/admin/users/">All Users</fp:link><br/>
-                        <fp:link value="/admin/users/new.jsf">New Post</fp:link>
+                        <fp:link value="/admin/users/new.jsf">New User</fp:link>
                     </ace:accordionPane>
                 </ace:accordion>
             </h:form>
         </div>
-        <ui:remove>
-            <div id="accordion" style="width: 15pc; float: left; padding-right: 10px; white-space: nowrap">
-                <h3><a href="#">Home</a></h3>
-                <div>
-                    <fp:link value="/admin/index.jsf">Dashboard</fp:link>
-                </div>
-                <h3><a href="#">Posts</a></h3>
-                <div>
-                    <fp:link value="/admin/posts.jsf">All Posts</fp:link><br/>
-                    <fp:link value="/admin/newPost.jsf">New Post</fp:link>
-                </div>
-                <h3><a href="#">Pages</a></h3>
-                <div>Page Management Links</div>
-                <h3><a href="#">Media</a></h3>
-                <div>Media Management Links</div>
-                <h3><a href="#">Comments</a></h3>
-                <div>Comments Management Links</div>
-            </div>
-            <script type="text/javascript">
-                $(document).ready(function() {
-                    $(function() {
-                        $("#accordion").accordion();
-                        $("#accordion").height($("#content").height());
-                    });
-                });
-            </script>
-        </ui:remove>
         <div id="content">
             <h3>
                 <h:graphicImage value="/images/fp_logo_32.png" title="FrenchPress logo" alt="FrenchPress logo"/>

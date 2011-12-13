@@ -18,24 +18,26 @@
             <h:inputHidden value="#{userBean.user.id}"/>
             <h:inputHidden value="#{userBean.user.version}"/>
             <h:panelGrid columns="2">
-                <h:outputLabel for="title">Title</h:outputLabel>
-                <h:inputText id="title" value="#{userBean.user.title}"/>
-                <h:outputLabel for="slug">Slug</h:outputLabel>
-                <h:inputText id="slug" value="#{userBean.user.slug}"/>
-                <h:outputLabel for="body">Body</h:outputLabel>
-                <ice:inputRichText id="body" value="#{userBean.user.body}" height="300"/>
-                <h:outputLabel for="author">Author</h:outputLabel>
-                <h:selectOneMenu id="author" value="#{userBean.user.author}" converter="#{userConverter}">
-                    <f:selectItems value="#{userBean.users}" var="user"
-                                   itemLabel="#{user.firstName} #{user.lastName}"
-                                   itemValue="#{user}"/>
+                <h:outputLabel for="firstName">First Name</h:outputLabel>
+                <h:inputText id="firstName" value="#{userBean.user.firstName}"/>
+
+                <h:outputLabel for="lastName">Last Name</h:outputLabel>
+                <h:inputText id="slug" value="#{userBean.user.lastName}"/>
+
+                <h:outputLabel for="emailAddress">Email Address</h:outputLabel>
+                <h:inputText id="emailAddress" value="#{userBean.user.emailAddress}"/>
+
+                <h:outputLabel for="password1">Password</h:outputLabel>
+                <h:inputSecret id="password1" value="#{userBean.user.password}"/>
+
+                <h:outputLabel for="password2">Password (again)</h:outputLabel>
+                <h:inputSecret id="password2" />
+
+                <h:outputLabel for="role">Role</h:outputLabel>
+                <h:selectOneMenu id="role" value="#{userBean.user.role}">
+                    <f:selectItem itemValue="Administrator"/>
+                    <f:selectItem itemValue="User"/>
                 </h:selectOneMenu>
-                <h:outputLabel for="cal">usered Date</h:outputLabel>
-                <ace:dateTimeEntry id="cal"
-                                   value="#{userBean.user.usered}"
-                                   pattern="MMM/dd/yyyy HH:mm"
-                                   stepMinute="5"
-                                   renderAsPopup="true"/>
             </h:panelGrid>
 
             <h:commandButton action="#{userBean.update}" value="Update user"/>

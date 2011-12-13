@@ -47,14 +47,17 @@ public class UserBean {
     }
     
     public String save() {
-        return null;
+        userService.createUser(user);
+        return "/admin/users/index?faces-redirect=true";
     }
     
     public String update() {
-        return null;
+        userService.updateUser(user);
+        return "/admin/users/index?faces-redirect=true";
     }
     
     public String delete() {
+        userService.deleteUser(user);
         return null;
     }
 }

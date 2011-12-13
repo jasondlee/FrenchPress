@@ -7,7 +7,6 @@ package com.steeplesoft.frenchpress.service;
 import com.steeplesoft.frenchpress.model.User;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.enterprise.inject.Model;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -23,12 +22,11 @@ public class UserService {
     protected EntityManager em;
     
     public List<User> getUsers() {
-        return (List<User>)em.createQuery("SELECT u FROM User u").getResultList();
+        return (List<User>)em.createQuery("SELECT u FROM User u ORDER BY u.firstName, u.lastName").getResultList();
     }
     
-    public User createUser(User user) {
+    public void createUser(User user) {
         em.persist(user);
-        return user;
     }
     
     public User getUser(Long id) {
@@ -38,5 +36,9 @@ public class UserService {
     public void deleteUser(User user) {
         em.merge(user);
         em.remove(user);
+    }
+    
+    public void updateUser(User user) {
+        em.merge(user);
     }
 }

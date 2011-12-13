@@ -11,38 +11,29 @@
     <ui:define name="content">
         <h3>Add a Post</h3>
         <h:form id="form">
-            <h:panelGrid id="pg" columns="2">
-                <h:outputLabel for="title">Title</h:outputLabel>
-                <h:inputText id="title" value="#{postBean.post.title}" onchange="generateSlug(this.value);"/>
-                <h:outputLabel for="slug">Slug</h:outputLabel>
-                <h:inputText id="slug" value="#{postBean.post.slug}" onchange="customSlug = true"/>
-                <h:outputLabel for="body">Body</h:outputLabel>
-                <ice:inputRichText id="body" value="#{postBean.post.body}" height="300"/>
-                <h:outputLabel for="author">Author</h:outputLabel>
-                <h:selectOneMenu id="author" value="#{postBean.post.author}" converter="#{userConverter}">
-                    <f:selectItems value="#{userBean.users}" var="user"
-                                   itemLabel="#{user.firstName} #{user.lastName}"
-                                   itemValue="#{user}"/>
+            <h:panelGrid columns="2">
+                <h:outputLabel for="firstName">First Name</h:outputLabel>
+                <h:inputText id="firstName" value="#{userBean.user.firstName}"/>
+
+                <h:outputLabel for="lastName">Last Name</h:outputLabel>
+                <h:inputText id="slug" value="#{userBean.user.lastName}"/>
+
+                <h:outputLabel for="emailAddress">Email Address</h:outputLabel>
+                <h:inputText id="emailAddress" value="#{userBean.user.emailAddress}"/>
+
+                <h:outputLabel for="password1">Password</h:outputLabel>
+                <h:inputSecret id="password1" value="#{userBean.user.password}"/>
+
+                <h:outputLabel for="password2">Password (again)</h:outputLabel>
+                <h:inputSecret id="password2" />
+
+                <h:outputLabel for="role">Role</h:outputLabel>
+                <h:selectOneMenu id="role" value="#{userBean.user.role}">
+                    <f:selectItem itemValue="Administrator"/>
+                    <f:selectItem itemValue="User"/>
                 </h:selectOneMenu>
-                <h:outputLabel for="cal">Posted Date</h:outputLabel>
-                <ace:dateTimeEntry id="cal"
-                                   value="#{postBean.post.posted}"
-                                   pattern="MMM/dd/yyyy HH:mm"
-                                   stepMinute="5"
-                                   renderAsPopup="true"/>
             </h:panelGrid>
-            <script type="text/javascript">
-                var customSlug = false;
-                function generateSlug(original) {
-                    if (!customSlug) {
-                        var slug = original.toLowerCase()
-                            .replace(/[\.!\?,\*()]/g, '')
-                            .replace(/[^a-z0-9']+/gi, '-');
-                        document.getElementById('form:slug').value = slug;
-                    }
-                }
-            </script>
-            <h:commandButton action="#{postBean.save}" value="Create Post"/>
+            <h:commandButton action="#{userBean.save}" value="Create User"/>
         </h:form>
     </ui:define>
 

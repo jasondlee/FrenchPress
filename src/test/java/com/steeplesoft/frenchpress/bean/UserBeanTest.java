@@ -78,8 +78,8 @@ public class UserBeanTest {
         user.setLastName("Blow");
         user.setEmailAddress("joe@blow.com");
 
-        User newUser = userBean.createUser(user);
-        User user2 = userBean.getUser(newUser.getId());
+        userBean.createUser(user);
+        User user2 = userBean.getUser(user.getId());
         assertNotNull(user2);
         assertEquals(user2, user);
 
@@ -116,6 +116,7 @@ public class UserBeanTest {
         user.setLastName(lastName);
         user.setEmailAddress(emailAddress);
 
-        return userBean.createUser(user);
+        userBean.createUser(user);
+        return user;
     }
 }
