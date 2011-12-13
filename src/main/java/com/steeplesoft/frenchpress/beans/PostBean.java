@@ -11,6 +11,7 @@ import java.util.List;
 import javax.enterprise.inject.Model;
 import javax.faces.component.html.HtmlDataTable;
 import javax.inject.Inject;
+import org.icefaces.ace.component.datatable.DataTable;
 /**
  *
  * @author jdlee
@@ -23,7 +24,7 @@ public class PostBean implements Serializable {
     @Inject
     private PostService postService;
     private Post post = new Post();
-    private HtmlDataTable dataTable;
+    private DataTable dataTable;
 
     public Post getPost() {
         return post;
@@ -71,11 +72,11 @@ public class PostBean implements Serializable {
         return null;
     }
 
-    public HtmlDataTable getDataTable() {
+    public DataTable getDataTable() {
         return dataTable;
     }
 
-    public void setDataTable(HtmlDataTable dataTable) {
+    public void setDataTable(DataTable dataTable) {
         this.dataTable = dataTable;
     }
 }
