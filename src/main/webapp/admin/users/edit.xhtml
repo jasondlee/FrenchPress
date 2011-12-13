@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ace="http://www.icefaces.org/icefaces/components"
+                xmlns:ice="http://www.icesoft.com/icefaces/component"
+                template="/admin/layout.xhtml">
+
+    <ui:define name="content">
+        <f:metadata>
+            <f:viewParam name="userId" value="#{userBean.user.id}" required="true" requiredMessage="User id is required"/>
+            <f:event type="preRenderView" listener="#{userBean.loadUser}" />
+        </f:metadata>
+        <h3>Edit a user</h3>
+        <h:form id="edituserForm">
+            <h:inputHidden value="#{userBean.user.id}"/>
+            <h:inputHidden value="#{userBean.user.version}"/>
+            <h:panelGrid columns="2">
+                <h:outputLabel for="title">Title</h:outputLabel>
+                <h:inputText id="title" value="#{userBean.user.title}"/>
+                <h:outputLabel for="slug">Slug</h:outputLabel>
+                <h:inputText id="slug" value="#{userBean.user.slug}"/>
+                <h:outputLabel for="body">Body</h:outputLabel>
+                <ice:inputRichText id="body" value="#{userBean.user.body}" height="300"/>
+                <h:outputLabel for="author">Author</h:outputLabel>
+                <h:selectOneMenu id="author" value="#{userBean.user.author}" converter="#{userConverter}">
+                    <f:selectItems value="#{userBean.users}" var="user"
+                                   itemLabel="#{user.firstName} #{user.lastName}"
+                                   itemValue="#{user}"/>
+                </h:selectOneMenu>
+                <h:outputLabel for="cal">usered Date</h:outputLabel>
+                <ace:dateTimeEntry id="cal"
+                                   value="#{userBean.user.usered}"
+                                   pattern="MMM/dd/yyyy HH:mm"
+                                   stepMinute="5"
+                                   renderAsPopup="true"/>
+            </h:panelGrid>
+
+            <h:commandButton action="#{userBean.update}" value="Update user"/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

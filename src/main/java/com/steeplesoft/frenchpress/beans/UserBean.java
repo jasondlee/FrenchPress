@@ -4,13 +4,12 @@
  */
 package com.steeplesoft.frenchpress.beans;
 
-import com.steeplesoft.frenchpress.service.UserService;
 import com.steeplesoft.frenchpress.model.User;
-import java.util.ArrayList;
+import com.steeplesoft.frenchpress.service.UserService;
 import java.util.List;
 import javax.enterprise.inject.Model;
-import javax.faces.model.SelectItem;
 import javax.inject.Inject;
+import org.icefaces.ace.component.datatable.DataTable;
 
 /**
  *
@@ -20,17 +19,42 @@ import javax.inject.Inject;
 public class UserBean {
     @Inject
     UserService userService;
+    private DataTable dataTable;
+    private User user = new User();
     
     public List<User> getUsers() {
         return userService.getUsers();
     }
     
-    public List<SelectItem> getUsers1() {
-        List<SelectItem> si = new ArrayList<SelectItem>();
-        for (User user : userService.getUsers()) {
-            si.add(new SelectItem(user, user.getFirstName() + " " + user.getLastName()));
-        }
-        
-        return si;
+    public void loadUser() {
+        user = userService.getUser(user.getId());
+    }
+
+    public DataTable getDataTable() {
+        return dataTable;
+    }
+
+    public void setDataTable(DataTable dataTable) {
+        this.dataTable = dataTable;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
+    public String save() {
+        return null;
+    }
+    
+    public String update() {
+        return null;
+    }
+    
+    public String delete() {
+        return null;
     }
 }

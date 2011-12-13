@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -14,25 +15,25 @@ import javax.validation.constraints.Pattern;
  * @author jdlee
  */
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    
-    @Id @GeneratedValue(strategy=GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+    @Version
+    private int version;
     @NotNull
     private String lastName;
-    
     @NotNull
     private String firstName;
-    
     @NotNull
-    @Pattern(regexp=".+@.+\\.[a-z]+")
+    @Pattern(regexp = ".+@.+\\.[a-z]+")
     private String emailAddress;
-    
     @NotNull
     private String password;
+    private String userRole;
 
     public Long getId() {
         return id;
@@ -40,6 +41,14 @@ public class User implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 
     public String getEmailAddress() {
@@ -72,6 +81,14 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return userRole;
+    }
+
+    public void setRole(String role) {
+        this.userRole = role;
     }
 
     @Override

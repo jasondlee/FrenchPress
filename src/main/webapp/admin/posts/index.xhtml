@@ -14,10 +14,12 @@
                                    value="#{postBean.getPosts(-1)}"
                                    var="post" binding="#{postBean.dataTable}"
                                    style="width: 84%">
-                        <ace:column sortBy="#{post.id}">
-                            <f:facet name="header">ID</f:facet>
-                            #{post.id}
-                        </ace:column>
+                        <ui:remove>
+                            <ace:column sortBy="#{post.id}">
+                                <f:facet name="header">ID</f:facet>
+                                #{post.id}
+                            </ace:column>
+                        </ui:remove>
                         <ace:column sortBy="#{post.title}">
                             <f:facet name="header">title</f:facet>
                             #{post.title}

@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ace="http://www.icefaces.org/icefaces/components">
+
+    <body>
+        <ui:composition template="/admin/layout.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <ace:dataTable id="userTable"
+                                   value="#{userBean.users}"
+                                   var="user" binding="#{userBean.dataTable}"
+                                   style="width: 84%">
+                        <ace:column sortBy="#{user.lastName}">
+                            <f:facet name="header">Last Name</f:facet>
+                            #{user.lastName}
+                        </ace:column>
+                        <ace:column sortBy="#{user.firstName}">
+                            <f:facet name="header">First Name</f:facet>
+                            #{user.firstName}
+                        </ace:column>
+                        <ace:column sortBy="#{user.emailAddress}">
+                            <f:facet name="header">Email Address</f:facet>
+                            #{user.emailAddress}
+                        </ace:column>
+                        <ace:column sortBy="#{user.userRole}">
+                            <f:facet name="header">Role</f:facet>
+                            #{user.role}
+                        </ace:column>
+                        <ace:column>
+                            <a href="edit.jsf?userId=#{user.id}">Edit</a>
+                            &#160;|&#160;
+                            <h:commandLink value="Delete" onclick="return confirm('Are you sure you want to delete this user?');"
+                                           action="#{userBean.delete}"/>
+                        </ace:column>
+                    </ace:dataTable>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
