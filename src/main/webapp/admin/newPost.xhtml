@@ -4,33 +4,43 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ace="http://www.icefaces.org/icefaces/components"
+                xmlns:ice="http://www.icesoft.com/icefaces/component"
                 template="/admin/layout.xhtml">
 
     <ui:define name="content">
         <h3>Add a Post</h3>
-        <script type="text/javascript" src="#{request.contextPath}/admin/tiny_mce/tiny_mce.js" target="head"></script>
-        <h:form>
-            <h:panelGrid columns="2">
+        <h:form id="form">
+            <h:panelGrid id="pg" columns="2">
                 <h:outputLabel for="title">Title</h:outputLabel>
-                <h:inputText id="title" value="#{postBean.post.title}"/>
+                <h:inputText id="title" value="#{postBean.post.title}" onchange="generateSlug(this.value);"/>
                 <h:outputLabel for="slug">Slug</h:outputLabel>
-                <h:inputText id="slug" value="#{postBean.post.slug}"/>
+                <h:inputText id="slug" value="#{postBean.post.slug}" onchange="customSlug = true"/>
                 <h:outputLabel for="body">Body</h:outputLabel>
-                <h:inputTextarea id="body" value="#{postBean.post.body}" cols="80" rows="20"/>
+                <ice:inputRichText id="body" value="#{postBean.post.body}" height="300"/>
+                <h:outputLabel for="author">Author</h:outputLabel>
+                <h:selectOneMenu id="author" value="#{postBean.post.author}" converter="#{userConverter}">
+                    <f:selectItems value="#{userBean.users}" var="user"
+                                   itemLabel="#{user.firstName} #{user.lastName}"
+                                   itemValue="#{user}"/>
+                </h:selectOneMenu>
+                <h:outputLabel for="cal">Posted Date</h:outputLabel>
+                <ace:dateTimeEntry id="cal"
+                                   value="#{postBean.post.posted}"
+                                   pattern="MMM/dd/yyyy HH:mm"
+                                   stepMinute="5"
+                                   renderAsPopup="true"/>
             </h:panelGrid>
-            <script type="text/javascript" >
-                tinyMCE.init({
-                    theme : "advanced",
-                    mode : "textareas",
-                    plugins : "fullpage",
-                    skin : "o2k7",
-                    theme_advanced_toolbar_location : "top",
-                    theme_advanced_toolbar_align : "left",
-                    theme_advanced_statusbar_location : "bottom",
-                    theme_advanced_resizing : true,
-                    skin_variant : "silver"
-                    //theme_advanced_buttons3_add : "fullpage"
-                });
+            <script type="text/javascript">
+                var customSlug = false;
+                function generateSlug(original) {
+                    if (!customSlug) {
+                        var slug = original.toLowerCase()
+                            .replace(/[\.!\?,\*()]/g, '')
+                            .replace(/[^a-z0-9']+/gi, '-');
+                        document.getElementById('form:slug').value = slug;
+                    }
+                }
             </script>
             <h:commandButton action="#{postBean.save}" value="Create Post"/>
         </h:form>

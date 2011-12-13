@@ -14,7 +14,6 @@
             <f:event type="preRenderView" listener="#{postBean.loadPost}" />
         </f:metadata>
         <h3>Edit a Post</h3>
-        <script type="text/javascript" src="#{request.contextPath}/admin/tiny_mce/tiny_mce.js" target="head"></script>
         <h:form id="editPostForm">
             <h:inputHidden value="#{postBean.post.id}"/>
             <h:inputHidden value="#{postBean.post.version}"/>
@@ -24,7 +23,7 @@
                 <h:outputLabel for="slug">Slug</h:outputLabel>
                 <h:inputText id="slug" value="#{postBean.post.slug}"/>
                 <h:outputLabel for="body">Body</h:outputLabel>
-                <ice:inputRichText id="body" value="#{postBean.post.body}" cols="80" rows="40"/>
+                <ice:inputRichText id="body" value="#{postBean.post.body}" height="300"/>
                 <h:outputLabel for="author">Author</h:outputLabel>
                 <h:selectOneMenu id="author" value="#{postBean.post.author}" converter="#{userConverter}">
                     <f:selectItems value="#{userBean.users}" var="user"

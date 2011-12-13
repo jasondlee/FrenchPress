@@ -4,12 +4,11 @@
  */
 package com.steeplesoft.frenchpress.beans;
 
-import com.steeplesoft.frenchpress.service.PostService;
 import com.steeplesoft.frenchpress.model.Post;
+import com.steeplesoft.frenchpress.service.PostService;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.inject.Model;
-import javax.faces.component.html.HtmlDataTable;
 import javax.inject.Inject;
 import org.icefaces.ace.component.datatable.DataTable;
 /**
