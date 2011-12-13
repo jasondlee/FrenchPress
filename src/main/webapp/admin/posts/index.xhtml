@@ -4,8 +4,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ace="http://www.icefaces.org/icefaces/components"
-      xmlns:ice="http://www.icesoft.com/icefaces/component">
+      xmlns:ace="http://www.icefaces.org/icefaces/components">
 
     <body>
         <ui:composition template="/admin/layout.xhtml">
@@ -32,7 +31,7 @@
                             #{post.posted}
                         </ace:column>
                         <ace:column>
-                            <a href="editPost.jsf?postId=#{post.id}">Edit</a>
+                            <a href="edit.jsf?postId=#{post.id}">Edit</a>
                             &#160;|&#160;
                             <h:commandLink value="Delete" onclick="return confirm('Are you sure you want to delete this post?');"
                                            action="#{postBean.delete}"/>
