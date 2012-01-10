@@ -6,9 +6,7 @@ package com.steeplesoft.frenchpress.beans;
 
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.component.UIComponent;
 import javax.inject.Named;
-import org.icefaces.ace.component.accordion.Accordion;
 import org.icefaces.ace.component.accordion.AccordionPane;
 import org.icefaces.ace.event.AccordionPaneChangeEvent;
 

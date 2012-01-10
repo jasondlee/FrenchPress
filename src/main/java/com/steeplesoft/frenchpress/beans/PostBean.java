@@ -9,6 +9,11 @@ import com.steeplesoft.frenchpress.service.PostService;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.inject.Model;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIOutput;
+import javax.faces.component.html.HtmlOutputText;
+import javax.faces.event.AbortProcessingException;
+import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
 import org.icefaces.ace.component.datatable.DataTable;
 /**
@@ -16,9 +21,8 @@ import org.icefaces.ace.component.datatable.DataTable;
  * @author jdlee
  */
 @Model
-//@SessionScoped
-//@Named
 public class PostBean implements Serializable {
+    public static final String VIEW_ADMIN_POSTS_INDEX = "/admin/posts/index.xhtml?faces-redirect=true";
 
     @Inject
     private PostService postService;
@@ -42,26 +46,13 @@ public class PostBean implements Serializable {
     }
 
     public String update() {
-        /*
-         * Post savedPost = postService.getPost(post.getId()); if (savedPost ==
-         * null) { throw new RuntimeException("Post not found. Id: " +
-         * post.getId()); } else { if (savedPost.getVersion() >
-         * post.getVersion()) { // throw new MidErrorCollisionException(); } else
-         * {
-         */
         postService.updatePost(post);
-        return "/admin/posts?faces-redirect=true";
-        /*
-         * }
-         * }
-         *
-         * return null;
-         */
+        return VIEW_ADMIN_POSTS_INDEX;
     }
 
     public String save() {
         postService.createPost(post);
-        return "/admin/posts?faces-redirect=true";
+        return VIEW_ADMIN_POSTS_INDEX;
     }
 
     public String delete() {
@@ -77,5 +68,15 @@ public class PostBean implements Serializable {
 
     public void setDataTable(DataTable dataTable) {
         this.dataTable = dataTable;
+    }
+    
+    public void format(ComponentSystemEvent event) throws AbortProcessingException {
+        UIComponent uic = event.getComponent();
+        if (uic instanceof UIOutput) {
+            UIOutput output = (UIOutput)uic;
+            String value = (String)output.getValue();
+            value = value.replaceAll("\\n", "\n<br/>");
+            output.setValue(value);
+        }
     }
 }

@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,6 +27,9 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name="posts",
         uniqueConstraints=@UniqueConstraint(columnNames="slug"))
+@NamedQueries({
+    @NamedQuery(name="findBySlug", query="SELECT p FROM Post p WHERE p.slug = :SLUG")
+})
 public class Post implements Serializable {
     private static final long serialVersionUID = 1L;
     

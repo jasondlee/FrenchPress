@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -48,5 +49,19 @@ public class PostService {
         if (newPost != null) {
             em.remove(newPost);
         }
+    }
+
+    public Post findPostBySlug(String slug) {
+        Post post = null;
+        
+        List<Post> posts = em.createNamedQuery("findBySlug", Post.class)
+            .setParameter("SLUG", slug)
+            .getResultList();
+        
+        if (!posts.isEmpty()) {
+            post = posts.get(0);
+        }
+        
+        return post;
     }
 }

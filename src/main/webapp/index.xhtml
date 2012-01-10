@@ -16,7 +16,7 @@
             <h:messages layout="table"/>
             <ui:repeat id="blogsTable" value="#{postBean.getPosts(15)}" var="entry" varStatus="status">
                 <div id="post-#{entry.id}" class="post" style="padding-bottom: 10px;">
-                    <h2 class="title"><a href="#{request.contextPath}/?p=#{entry.id}" title="Permalink to #{entry.title}">#{entry.title}</a></h2>
+                    <h2 class="title"><a href="#{request.contextPath}/#{entry.slug}" title="Permalink to #{entry.title}">#{entry.title}</a></h2>
 
                     <div class="post_info">
                         <span class="p_author">#{entry.author.firstName} #{entry.author.lastName}</span>

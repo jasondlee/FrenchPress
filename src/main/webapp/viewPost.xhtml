@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:ice="http://www.icesoft.com/icefaces/component"
+                template="./themes/frenchpress/layout.xhtml">
+
+    <ui:define name="content">
+        <h1 class="postTitle">#{post.title}</h1>
+        <span class="postByline">By #{post.author.firstName} #{post.author.lastName} on
+            <h:outputText value="#{post.posted}">
+                <f:convertDateTime dateStyle="long"/>
+            </h:outputText>
+        </span>
+        <div class="postBody">
+            <h:outputText value="#{post.body}" escape="false"> 
+                <f:event type="preRenderComponent" listener="#{postBean.format}"/>
+            </h:outputText>
+        </div>
+    </ui:define>
+
+</ui:composition>
