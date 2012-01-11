@@ -8,6 +8,9 @@
                 template="./themes/frenchpress/layout.xhtml">
 
     <ui:define name="content">
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{postBean.loadPost}" />
+        </f:metadata>
         <h1 class="postTitle">#{post.title}</h1>
         <span class="postByline">By #{post.author.firstName} #{post.author.lastName} on
             <h:outputText value="#{post.posted}">
@@ -18,6 +21,46 @@
             <h:outputText value="#{post.body}" escape="false"> 
                 <f:event type="preRenderComponent" listener="#{postBean.format}"/>
             </h:outputText>
+            <hr/>
+        </div>
+        <div class="commentsSection">
+            <h:panelGroup rendered="#{!empty post.comments}" style="margin-top: 15px; display: block">
+                <h3>#{post.comments.size()} comments on "#{post.title}"</h3>
+                <table width="100%">
+                    <ui:repeat value="#{post.comments}" var="comment" varStatus="status">
+                        <tr>
+                            <td>
+                                <a name="#{status.index+1}"/>#{status.index+1}.
+                            </td>
+                            <td>
+                                <a href="#{comment.authorUrl}" style="font-weight: bold;">#{comment.authorName}</a><br/>
+                                <h:outputText style="border-bottom: 1px dotted #666666;" value="Post date goes here"/>
+                                <a href="##{status.index+1}">#</a><br/>
+                                <h:outputText value="#{comment.body}" style="display: block; margin: 10px 0px 10px 0px;" 
+                                              escape="false" converter="#{newlineConverter}">
+                                </h:outputText>
+                            </td>
+                        </tr>
+                    </ui:repeat>
+                </table>
+            </h:panelGroup>
+        </div>
+        <div class="commentSection">
+            <h:form id="commentForm">
+                <h:inputHidden value="#{postBean.post.id}"/>
+                <h:panelGrid columns="2">
+                    <h:outputLabel for="name">Name:</h:outputLabel>
+                    <h:inputText id="name" value="#{postBean.comment.authorName}"/>
+                    <h:outputLabel for="email">Email:</h:outputLabel>
+                    <h:inputText id="email" value="#{postBean.comment.authorEmail}"/>
+                    <h:outputLabel for="website">Website:</h:outputLabel>
+                    <h:inputText id="website" value="#{postBean.comment.authorUrl}"/>
+                    <h:outputLabel for="comment">Comment:</h:outputLabel>
+                    <h:inputTextarea id="comment" value="#{postBean.comment.body}" rows="20" cols="80"/>
+                </h:panelGrid>
+                <br/>
+                <h:commandButton action="#{postBean.addComment}" value="Submit Comment"/>
+            </h:form>
         </div>
     </ui:define>
 

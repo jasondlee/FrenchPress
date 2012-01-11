@@ -4,6 +4,7 @@
  */
 package com.steeplesoft.frenchpress.beans;
 
+import com.steeplesoft.frenchpress.model.Comment;
 import com.steeplesoft.frenchpress.model.Post;
 import com.steeplesoft.frenchpress.service.PostService;
 import java.io.Serializable;
@@ -11,10 +12,11 @@ import java.util.List;
 import javax.enterprise.inject.Model;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIOutput;
-import javax.faces.component.html.HtmlOutputText;
+import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
+import javax.servlet.ServletRequest;
 import org.icefaces.ace.component.datatable.DataTable;
 /**
  *
@@ -28,6 +30,7 @@ public class PostBean implements Serializable {
     private PostService postService;
     private Post post = new Post();
     private DataTable dataTable;
+    private Comment comment = new Comment();
 
     public Post getPost() {
         return post;
@@ -38,11 +41,17 @@ public class PostBean implements Serializable {
     }
 
     public List<Post> getPosts(int limit) {
+        if (!FacesContext.getCurrentInstance().getRenderResponse()) {
+            return null;
+        }
+        
         return postService.getPosts(limit);
     }
 
     public void loadPost() {
-        post = postService.getPost(post.getId());
+        Post requestedPost = (Post) ((ServletRequest)FacesContext.getCurrentInstance()
+                .getExternalContext().getRequest()).getAttribute("post");
+        post = (requestedPost != null) ? requestedPost : postService.getPost(post.getId());
     }
 
     public String update() {
@@ -68,6 +77,24 @@ public class PostBean implements Serializable {
 
     public void setDataTable(DataTable dataTable) {
         this.dataTable = dataTable;
+    }
+
+    public Comment getComment() {
+        return comment;
+    }
+
+    public void setComment(Comment comment) {
+        this.comment = comment;
+    }
+    
+    public String addComment() {
+        loadPost();
+        comment.setPost(post);
+        post.getComments().add(comment);
+        postService.updatePost(post);
+        comment = new Comment();
+        
+        return null;
     }
     
     public void format(ComponentSystemEvent event) throws AbortProcessingException {

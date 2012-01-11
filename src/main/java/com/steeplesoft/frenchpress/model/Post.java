@@ -6,13 +6,16 @@ package com.steeplesoft.frenchpress.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -46,6 +49,8 @@ public class Post implements Serializable {
     private Date posted;
     @ManyToOne
     private User author;
+    @OneToMany(mappedBy="post", fetch=FetchType.EAGER)
+    private List<Comment>comments;
 
     public Long getId() {
         return id;
@@ -103,6 +108,14 @@ public class Post implements Serializable {
         this.posted = posted;
     }
 
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -133,8 +146,13 @@ public class Post implements Serializable {
         return hash;
     }
 
+//    @Override
+//    public String toString() {
+//        return "Post{" + "id=" + id + ", title=" + title + ", slug=" + slug + ", body=" + body + ", author=" + author + '}';
+//    }
+
     @Override
     public String toString() {
-        return "Post{" + "id=" + id + ", title=" + title + ", slug=" + slug + ", body=" + body + ", author=" + author + '}';
+        return "Post{" + "id=" + id + ", version=" + version + ", title=" + title + ", slug=" + slug + ", body=" + body + ", posted=" + posted + ", author=" + author + ", comments=" + comments + '}';
     }
 }

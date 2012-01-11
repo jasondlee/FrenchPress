@@ -9,8 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -33,7 +33,10 @@ public class Comment implements Serializable {
     private String authorEmail;
     @ManyToOne
     private User author;
-
+    @ManyToOne
+    @JoinColumn(name="POST_ID")
+    private Post post;
+    
     public User getAuthor() {
         return author;
     }
@@ -80,6 +83,14 @@ public class Comment implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
     }
 
     @Override

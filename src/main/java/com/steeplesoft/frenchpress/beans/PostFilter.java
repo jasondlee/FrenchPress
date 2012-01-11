@@ -23,8 +23,8 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author jdlee
  */
-@WebFilter(filterName="slugFilter", urlPatterns={"/*"})
-public class SlugFilter implements Filter {
+@WebFilter(filterName="postFilter", urlPatterns={"/*"})
+public class PostFilter implements Filter {
     @Inject
     PostService postService;
     
