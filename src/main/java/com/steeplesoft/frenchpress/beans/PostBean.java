@@ -7,8 +7,11 @@ package com.steeplesoft.frenchpress.beans;
 import com.steeplesoft.frenchpress.model.Comment;
 import com.steeplesoft.frenchpress.model.Post;
 import com.steeplesoft.frenchpress.service.PostService;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.inject.Model;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIOutput;
@@ -94,6 +97,10 @@ public class PostBean implements Serializable {
         postService.updatePost(post);
         comment = new Comment();
         
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect(post.getSlug());
+        } catch (IOException ex) {
+        }
         return null;
     }
     

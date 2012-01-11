@@ -59,7 +59,6 @@ public class PostFilter implements Filter {
 
     @Override
     public void destroy() {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }

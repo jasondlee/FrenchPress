@@ -41,17 +41,14 @@ public class StartupBean implements Serializable {
     @PostConstruct
     public void validateDatabase() {
         try {
-            Set<String> tables = new HashSet<String>();
             Connection connection = dataSource.getConnection();
-            DatabaseMetaData dmd = connection.getMetaData();
-            String dbVendor = dmd.getDatabaseProductName();
             Statement stmt = connection.createStatement();
             try {
                 // If the users table does not exist, assume none do, build
                 // the database and load the sample data
                 stmt.executeQuery("select * from users");
             } catch (SQLException ex) {
-                processSqlFile(connection, dbVendor.toLowerCase() + ".ddl");
+                processSqlFile(connection, "ddl.sql");
                 processSqlFile(connection, "sampledata.sql");
             }
             stmt.close();
@@ -73,7 +70,9 @@ public class StartupBean implements Serializable {
         BufferedReader reader = new BufferedReader(new FileReader(new File(file.toURI())));
         String line = reader.readLine();
         while (line != null) {
-            stmt.execute(line);
+            if (!line.isEmpty()) {
+                stmt.execute(line);
+            }
             line = reader.readLine();
         }
         stmt.close();
