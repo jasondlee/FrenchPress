@@ -49,10 +49,18 @@
             td {
                 vertical-align: top;
             }
+            .nav {
+                width: 15pc;
+            }
+            .content {
+                width: 100pc;
+                padding: 0px 10px 0px 10px;
+            }
         </style>
     </h:head>
     <h:body>
-        <div style="width: 15pc; height: 100pc; float: left; padding-right: 10px; white-space: nowrap">
+        <!--        <div style="width: 15pc; height: 100pc; float: left; padding-right: 10px; white-space: nowrap">-->
+        <h:panelGrid columns="2" columnClasses="nav,content" style="margin: 10px 0px 0px 10px" >
             <h:form>
                 <ace:accordion id="nav" collapsible="true" autoHeight="true" fillSpace="false"
                                activeIndex="#{uiBean.activeAccordionIndex}"
@@ -63,9 +71,6 @@
                     <ace:accordionPane title="Posts">  
                         <fp:link value="/admin/posts/">All Posts</fp:link><br/>
                         <fp:link value="/admin/posts/new.jsf">New Post</fp:link>
-                    </ace:accordionPane>
-                    <ace:accordionPane title="Pages">  
-                        Page Management Links
                     </ace:accordionPane>
                     <ace:accordionPane title="Media">  
                         Media Management Links
@@ -79,20 +84,20 @@
                     </ace:accordionPane>
                 </ace:accordion>
             </h:form>
-        </div>
-        <div id="content">
-            <h3>
-                <h:graphicImage value="/images/fp_logo_32.png" title="FrenchPress logo" alt="FrenchPress logo"/>
-                FrenchPress Administration
-            </h3>
-            <ui:insert name="content">
-                Something's wrong!
-            </ui:insert>
-            <div id="footer">
-                &copy;&nbsp;Copyright&nbsp;2011&nbsp;Jason Lee
+            <h:panelGroup layout="block">
+                <h1 style="margin: 0px;">
+                    <h:graphicImage value="/images/fp_logo_32.png" title="FrenchPress logo" alt="FrenchPress logo"/>
+                    FrenchPress Administration
+                </h1>
+                <ui:insert name="content">
+                    Something's wrong!
+                </ui:insert>
+                <div id="footer">
+                    &copy;&nbsp;Copyright&nbsp;2011&nbsp;Jason Lee
 
-                &#8901;&nbsp;Powered&nbsp;by&nbsp;<a href="http://github.com/jasondlee/frenchpress/">FrenchPress</a> 
-            </div><!--footer-->
-        </div>
+                    &#8901;&nbsp;Powered&nbsp;by&nbsp;<a href="http://github.com/jasondlee/frenchpress/">FrenchPress</a> 
+                </div><!--footer-->
+            </h:panelGroup>
+        </h:panelGrid>
     </h:body>
 </html>

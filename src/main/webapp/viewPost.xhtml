@@ -18,7 +18,7 @@
             </h:outputText>
         </span>
         <div class="postBody">
-            <h:outputText value="#{post.body}" escape="false"> 
+            <h:outputText value="#{post.body}" escape="false" converter="#{newlineConverter}"> 
                 <f:event type="preRenderComponent" listener="#{postBean.format}"/>
             </h:outputText>
             <hr/>
