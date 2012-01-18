@@ -11,55 +11,17 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>FrenchPress Administration</title>
         <link href="#{request.contextPath}/jquery/css/themes/frenchpress/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css" media="all"/>
+        <link href="#{request.contextPath}/admin/style.css" rel="stylesheet" type="text/css" media="all"/>
         <script src="#{request.contextPath}/jquery/js/jquery-1.6.2.min.js" type="text/javascript"/>
         <script src="#{request.contextPath}/jquery/js/jquery-ui-1.8.16.custom.min.js" type="text/javascript"/>
         <meta name='robots' content='noindex,nofollow' />
         <style type="text/css">
-            html, body {
-                height: 100%;
-            } 
             body {
-                margin: 0px;
-                padding: 0px;
-                background-color: #990000;
                 background: url('#{request.contextPath}/images/fpbackground.png') no-repeat bottom left;
-                /*                background-attachment: fixed;
-                                background-position: bottom, right;
-                                background-repeat: no-repeat;*/
-
-            }
-            .ui-widget {
-                font-size: smaller;
-            }
-            .ui-accordion .ui-accordion-header a {
-                padding-top: 0px;
-                padding-bottom: 0px;
-                font-size: small;
-            }
-            .ui-accordion .ui-accordion-content {
-                font-size: small;
-            }
-
-            .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
-                background-color: #9F714F;
-                color: #FFFFFF;
-                text-decoration: none;
-            }
-
-            td {
-                vertical-align: top;
-            }
-            .nav {
-                width: 15pc;
-            }
-            .content {
-                width: 100pc;
-                padding: 0px 10px 0px 10px;
             }
         </style>
     </h:head>
     <h:body>
-        <!--        <div style="width: 15pc; height: 100pc; float: left; padding-right: 10px; white-space: nowrap">-->
         <h:panelGrid columns="2" columnClasses="nav,content" style="margin: 10px 0px 0px 10px" >
             <h:form>
                 <ace:accordion id="nav" collapsible="true" autoHeight="true" fillSpace="false"

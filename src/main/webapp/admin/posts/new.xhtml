@@ -10,6 +10,18 @@
 
     <ui:define name="content">
         <h3>Add a Post</h3>
+        <script type="text/javascript">
+            var customSlug = false;
+            function generateSlug(original) {
+                if (!customSlug) {
+                    var slug = original.toLowerCase()
+                    .replace(/[\.!\?,\*()]/g, '')
+                    .replace(/[^a-z0-9']+/gi, '-');
+                    document.getElementById('form:slug').value = slug;
+                }
+            }
+            var baseUrl = '#{request.contextPath}';
+        </script>
         <h:form id="form">
             <h:panelGrid id="pg" columns="2">
                 <h:outputLabel for="title">Title</h:outputLabel>
@@ -17,7 +29,7 @@
                 <h:outputLabel for="slug">Slug</h:outputLabel>
                 <h:inputText id="slug" value="#{postBean.post.slug}" onchange="customSlug = true"/>
                 <h:outputLabel for="body">Body</h:outputLabel>
-                <ice:inputRichText id="body" value="#{postBean.post.body}" height="300"/>
+                <ice:inputRichText id="body" value="#{postBean.post.body}" height="300" customConfigPath="admin/config.js"/>
                 <h:outputLabel for="author">Author</h:outputLabel>
                 <h:selectOneMenu id="author" value="#{postBean.post.author}" converter="#{userConverter}">
                     <f:selectItems value="#{userBean.users}" var="user"
@@ -31,17 +43,6 @@
                                    stepMinute="5"
                                    renderAsPopup="true"/>
             </h:panelGrid>
-            <script type="text/javascript">
-                var customSlug = false;
-                function generateSlug(original) {
-                    if (!customSlug) {
-                        var slug = original.toLowerCase()
-                            .replace(/[\.!\?,\*()]/g, '')
-                            .replace(/[^a-z0-9']+/gi, '-');
-                        document.getElementById('form:slug').value = slug;
-                    }
-                }
-            </script>
             <h:commandButton action="#{postBean.save}" value="Create Post"/>
         </h:form>
     </ui:define>

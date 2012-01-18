@@ -5,10 +5,14 @@
 package com.steeplesoft.frenchpress.model;
 
 import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 /**
@@ -24,6 +28,12 @@ public class MediaItem implements Serializable {
     private Long id;
     private String name;
     private String mimeType;
+    private long fileSize;
+    
+    @Basic(fetch=FetchType.EAGER)
+    @Lob
+    @Column(name="contents")
+    private byte[] contents;
 
     public Long getId() {
         return id;
@@ -47,6 +57,22 @@ public class MediaItem implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public long getFileSize() {
+        return fileSize;
+    }
+
+    public void setFileSize(long fileSize) {
+        this.fileSize = fileSize;
+    }
+
+    public byte[] getContents() {
+        return contents;
+    }
+
+    public void setContents(byte[] contents) {
+        this.contents = contents;
     }
 
     @Override

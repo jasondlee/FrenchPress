@@ -1,0 +1,35 @@
+html, body {
+    height: 100%;
+} 
+body {
+    margin: 0px;
+    padding: 0px;
+}
+.ui-widget {
+    font-size: smaller;
+}
+.ui-accordion .ui-accordion-header a {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-size: small;
+}
+.ui-accordion .ui-accordion-content {
+    font-size: small;
+}
+
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
+    background-color: #9F714F;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+td {
+    vertical-align: top;
+}
+.nav {
+    width: 15pc;
+}
+.content {
+    width: 100pc;
+    padding: 0px 10px 0px 10px;
+}
