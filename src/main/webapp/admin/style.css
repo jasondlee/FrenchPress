@@ -33,3 +33,6 @@ td {
     width: 100pc;
     padding: 0px 10px 0px 10px;
 }
+label {
+    white-space: nowrap;
+}

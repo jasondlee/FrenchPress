@@ -10,27 +10,25 @@ import java.io.ByteArrayOutputStream;
 import java.util.List;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
-import org.icefaces.ace.component.fileentry.FileEntryCallback;
-import org.icefaces.ace.component.fileentry.FileEntryEvent;
-import org.icefaces.ace.component.fileentry.FileEntryResults;
 
 /**
  *
  * @author jdlee
  */
 @Model
-public class MediaBean implements FileEntryCallback {
+public class MediaBean { //implements FileEntryCallback {
     @Inject
     MediaService mediaService;
     
     MediaItem item = new MediaItem();
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-    FileEntryResults results;
+//    FileEntryResults results;
     
     public List<MediaItem> getItems() {
         return mediaService.getItems();
     }
 
+    /*
     @Override
     public void begin(FileEntryResults.FileInfo fi) {
         item.setName(fi.getFileName());
@@ -52,11 +50,6 @@ public class MediaBean implements FileEntryCallback {
         item.setFileSize(fi.getSize());
         item.setContents(baos.toByteArray());
     }
-    
-    public String upload() {
-        return "";
-    }
-    
     public void listener(FileEntryEvent event) {
         System.out.println("Blah");
     }
@@ -68,4 +61,10 @@ public class MediaBean implements FileEntryCallback {
     public void setResults(FileEntryResults results) {
         this.results = results;
     }
+    */
+    
+    public String upload() {
+        return "";
+    }
+    
 }

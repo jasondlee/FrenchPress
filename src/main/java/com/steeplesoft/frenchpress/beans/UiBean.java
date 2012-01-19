@@ -7,8 +7,7 @@ package com.steeplesoft.frenchpress.beans;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import org.icefaces.ace.component.accordion.AccordionPane;
-import org.icefaces.ace.event.AccordionPaneChangeEvent;
+import org.richfaces.component.UIAccordion;
 
 /**
  *
@@ -17,18 +16,22 @@ import org.icefaces.ace.event.AccordionPaneChangeEvent;
 @Named
 @SessionScoped
 public class UiBean implements Serializable {
-    int activeAccordionIndex = 0;
+    private String activeItem ="home";
+    private UIAccordion accordion;
 
-    public int getActiveAccordionIndex() {
-        return activeAccordionIndex;
+    public UIAccordion getAccordion() {
+        return accordion;
     }
 
-    public void setActiveAccordionIndex(int activeAccordionIndex) {
-        this.activeAccordionIndex = activeAccordionIndex;
+    public String getActiveItem() {
+        return activeItem;
     }
 
-    public void onAccordionPaneChange(AccordionPaneChangeEvent event) {
-        AccordionPane pane = event.getTab();
-        activeAccordionIndex = pane.getParent().getChildren().indexOf(pane);
+    public void setActiveItem(String activeItem) {
+        this.activeItem = activeItem;
+    }
+    
+    public void setAccordion(UIAccordion accordion) {
+        this.accordion = accordion;
     }
 }

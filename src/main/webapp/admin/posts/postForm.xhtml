@@ -1,0 +1,27 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich">
+    <h:panelGrid id="pg" columns="2">
+        <h:outputLabel for="title">Title</h:outputLabel>
+        <h:inputText id="title" value="#{postBean.post.title}" onchange="generateSlug(this.value);"/>
+        <h:outputLabel for="slug">Slug</h:outputLabel>
+        <h:inputText id="slug" value="#{postBean.post.slug}" onchange="customSlug = true"/>
+        <h:outputLabel for="body">Body</h:outputLabel>
+        <rich:editor id="body" value="#{postBean.post.body}" height="300" toolbar="full" width="900">
+            <f:facet name="config">
+                filebrowserBrowseUrl: '#{request.contextPath}/admin/media/fileBrowse.jsf',
+                filebrowserImageBrowseUrl: '#{request.contextPath}/admin/media/imageBrowse.jsf'
+            </f:facet>
+        </rich:editor>
+        <h:outputLabel for="author">Author</h:outputLabel>
+        <h:selectOneMenu id="author" value="#{postBean.post.author}" converter="#{userConverter}">
+            <f:selectItems value="#{userBean.users}" var="user"
+                           itemLabel="#{user.firstName} #{user.lastName}"
+                           itemValue="#{user}"/>
+        </h:selectOneMenu>
+        <h:outputLabel for="cal">Posted Date</h:outputLabel>
+        <rich:calendar id="cal" datePattern="MM/dd/yyyy HH:mm" />
+    </h:panelGrid>
+</ui:composition>

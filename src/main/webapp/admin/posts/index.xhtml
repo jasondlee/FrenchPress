@@ -4,41 +4,43 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ace="http://www.icefaces.org/icefaces/components">
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
 
     <body>
         <ui:composition template="/admin/layout.xhtml">
             <ui:define name="content">
                 <h:form>
-                    <ace:dataTable id="postTable"
-                                   value="#{postBean.getPosts(-1)}"
-                                   var="post" binding="#{postBean.dataTable}"
-                                   style="width: 100%">
+                    <rich:dataTable id="postTable"
+                                    value="#{postBean.getPosts(-1)}"
+                                    var="post" 
+                                    binding="#{postBean.dataTable}"
+                                    style="width: 100%">
                         <ui:remove>
-                            <ace:column sortBy="#{post.id}">
+                            <rich:column sortBy="#{post.id}">
                                 <f:facet name="header">ID</f:facet>
                                 #{post.id}
-                            </ace:column>
+                            </rich:column>
                         </ui:remove>
-                        <ace:column sortBy="#{post.title}">
+                        <rich:column sortBy="#{post.title}">
                             <f:facet name="header">title</f:facet>
                             #{post.title}
-                        </ace:column>
-                        <ace:column sortBy="#{post.author}">
+                        </rich:column>
+                        <rich:column sortBy="#{post.author}">
                             <f:facet name="header">Author</f:facet>
                             #{post.author.firstName} #{post.author.lastName}
-                        </ace:column>
-                        <ace:column sortBy="#{post.posted}">
+                        </rich:column>
+                        <rich:column sortBy="#{post.posted}">
                             <f:facet name="header">Posted Date</f:facet>
                             #{post.posted}
-                        </ace:column>
-                        <ace:column>
+                        </rich:column>
+                        <rich:column>
                             <a href="edit.jsf?postId=#{post.id}">Edit</a>
                             &#160;|&#160;
                             <h:commandLink value="Delete" onclick="return confirm('Are you sure you want to delete this post?');"
                                            action="#{postBean.delete}"/>
-                        </ace:column>
-                    </ace:dataTable>
+                        </rich:column>
+                    </rich:dataTable>
                 </h:form>
             </ui:define>
         </ui:composition>

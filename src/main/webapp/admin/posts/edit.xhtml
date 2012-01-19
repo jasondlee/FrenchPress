@@ -4,8 +4,8 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:ace="http://www.icefaces.org/icefaces/components"
-                xmlns:ice="http://www.icesoft.com/icefaces/component"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich"
                 template="/admin/layout.xhtml">
 
     <ui:define name="content">
@@ -17,27 +17,7 @@
         <h:form id="editPostForm">
             <h:inputHidden value="#{postBean.post.id}"/>
             <h:inputHidden value="#{postBean.post.version}"/>
-            <h:panelGrid columns="2">
-                <h:outputLabel for="title">Title</h:outputLabel>
-                <h:inputText id="title" value="#{postBean.post.title}"/>
-                <h:outputLabel for="slug">Slug</h:outputLabel>
-                <h:inputText id="slug" value="#{postBean.post.slug}"/>
-                <h:outputLabel for="body">Body</h:outputLabel>
-                <ice:inputRichText id="body" value="#{postBean.post.body}" height="300"/>
-                <h:outputLabel for="author">Author</h:outputLabel>
-                <h:selectOneMenu id="author" value="#{postBean.post.author}" converter="#{userConverter}">
-                    <f:selectItems value="#{userBean.users}" var="user"
-                                   itemLabel="#{user.firstName} #{user.lastName}"
-                                   itemValue="#{user}"/>
-                </h:selectOneMenu>
-                <h:outputLabel for="cal">Posted Date</h:outputLabel>
-                <ace:dateTimeEntry id="cal"
-                                   value="#{postBean.post.posted}"
-                                   pattern="MMM/dd/yyyy HH:mm"
-                                   stepMinute="5"
-                                   renderAsPopup="true"/>
-            </h:panelGrid>
-
+            <ui:include src="postForm.xhtml"/>
             <h:commandButton action="#{postBean.update}" value="Update Post"/>
         </h:form>
     </ui:define>

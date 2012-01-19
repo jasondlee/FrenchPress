@@ -16,7 +16,20 @@
         <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
         <netbeans.hint.j2eeVersion>1.6</netbeans.hint.j2eeVersion>
         <version.icefaces>3.0.0.RC1</version.icefaces>
+        <org.richfaces.bom.version>4.1.0.Final</org.richfaces.bom.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.richfaces</groupId>
+                <artifactId>richfaces-bom</artifactId>
+                <version>${org.richfaces.bom.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -56,6 +69,23 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>6.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.richfaces.ui</groupId>
+            <artifactId>richfaces-components-ui</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.richfaces.core</groupId>
+            <artifactId>richfaces-core-impl</artifactId>
+        </dependency>
+        
+        <!--
+        <dependency>
             <groupId>org.icefaces</groupId>
             <artifactId>icefaces-compat</artifactId>
             <version>${version.icefaces}</version>
@@ -76,13 +106,15 @@
             <artifactId>icefaces</artifactId>
             <version>${version.icefaces}</version>
             <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.glassfish</groupId>
+                    <artifactId>javax.faces</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>6.0</version>
-            <scope>provided</scope>
-        </dependency>
+        -->
+        
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
@@ -159,6 +191,20 @@
             <id>jsf20</id>
             <layout>default</layout>
             <name>Repository for library Library[jsf20]</name>
+        </repository>
+        <repository>
+            <id>jboss-public-repository-group</id>
+            <name>JBoss Public Maven Repository Group</name>
+            <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </snapshots>
         </repository>
         <repository>
             <id>ICEsoft</id>

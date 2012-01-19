@@ -8,8 +8,8 @@ import com.steeplesoft.frenchpress.model.User;
 import com.steeplesoft.frenchpress.service.UserService;
 import java.util.List;
 import javax.enterprise.inject.Model;
+import javax.faces.component.html.HtmlDataTable;
 import javax.inject.Inject;
-import org.icefaces.ace.component.datatable.DataTable;
 
 /**
  *
@@ -19,7 +19,7 @@ import org.icefaces.ace.component.datatable.DataTable;
 public class UserBean {
     @Inject
     UserService userService;
-    private DataTable dataTable;
+    private HtmlDataTable dataTable;
     private User user = new User();
     
     public List<User> getUsers() {
@@ -30,11 +30,11 @@ public class UserBean {
         user = userService.getUser(user.getId());
     }
 
-    public DataTable getDataTable() {
+    public HtmlDataTable getDataTable() {
         return dataTable;
     }
 
-    public void setDataTable(DataTable dataTable) {
+    public void setDataTable(HtmlDataTable dataTable) {
         this.dataTable = dataTable;
     }
 

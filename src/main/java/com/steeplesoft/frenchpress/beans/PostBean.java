@@ -10,8 +10,6 @@ import com.steeplesoft.frenchpress.service.PostService;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.enterprise.inject.Model;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIOutput;
@@ -20,7 +18,7 @@ import javax.faces.event.AbortProcessingException;
 import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
 import javax.servlet.ServletRequest;
-import org.icefaces.ace.component.datatable.DataTable;
+import org.richfaces.component.UIDataTable;
 /**
  *
  * @author jdlee
@@ -32,7 +30,7 @@ public class PostBean implements Serializable {
     @Inject
     private PostService postService;
     private Post post = new Post();
-    private DataTable dataTable;
+    private UIDataTable dataTable;
     private Comment comment = new Comment();
 
     public Post getPost() {
@@ -74,11 +72,11 @@ public class PostBean implements Serializable {
         return null;
     }
 
-    public DataTable getDataTable() {
+    public UIDataTable getDataTable() {
         return dataTable;
     }
 
-    public void setDataTable(DataTable dataTable) {
+    public void setDataTable(UIDataTable dataTable) {
         this.dataTable = dataTable;
     }
 
