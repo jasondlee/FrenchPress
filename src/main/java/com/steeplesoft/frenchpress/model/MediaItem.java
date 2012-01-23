@@ -5,6 +5,8 @@
 package com.steeplesoft.frenchpress.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,14 +16,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author jdlee
  */
 @Entity
-@Table(name="mediaitems")
+@Table(name = "mediaitems")
 public class MediaItem implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,10 +34,11 @@ public class MediaItem implements Serializable {
     private String name;
     private String mimeType;
     private long fileSize;
-    
-    @Basic(fetch=FetchType.EAGER)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date uploadedDate = new Date();
+    @Basic(fetch = FetchType.EAGER)
     @Lob
-    @Column(name="contents")
+    @Column(name = "contents")
     private byte[] contents;
 
     public Long getId() {
@@ -75,6 +81,14 @@ public class MediaItem implements Serializable {
         this.contents = contents;
     }
 
+    public Date getUploadedDate() {
+        return uploadedDate;
+    }
+
+    public void setUploadedDate(Date uploadedDate) {
+        this.uploadedDate = uploadedDate;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -90,19 +104,30 @@ public class MediaItem implements Serializable {
         if ((this.mimeType == null) ? (other.mimeType != null) : !this.mimeType.equals(other.mimeType)) {
             return false;
         }
+        if (this.fileSize != other.fileSize) {
+            return false;
+        }
+        if (!Arrays.equals(this.contents, other.contents)) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 73 * hash + (this.name != null ? this.name.hashCode() : 0);
-        hash = 73 * hash + (this.mimeType != null ? this.mimeType.hashCode() : 0);
+        int hash = 3;
+        hash = 41 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 41 * hash + (this.name != null ? this.name.hashCode() : 0);
+        hash = 41 * hash + (this.mimeType != null ? this.mimeType.hashCode() : 0);
+        hash = 41 * hash + (int) (this.fileSize ^ (this.fileSize >>> 32));
+        hash = 41 * hash + (this.uploadedDate != null ? this.uploadedDate.hashCode() : 0);
+        hash = 41 * hash + Arrays.hashCode(this.contents);
         return hash;
     }
 
     @Override
     public String toString() {
-        return "MediaItem{" + "id=" + id + ", name=" + name + ", mimeType=" + mimeType + '}';
+        return "MediaItem{" + "id=" + id + ", name=" + name + ", mimeType=" + mimeType + ", fileSize=" + fileSize + 
+                ", uploadedDate=" + uploadedDate + '}';
     }
 }

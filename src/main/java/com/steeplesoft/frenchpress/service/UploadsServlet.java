@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author jdlee
  */
-@WebServlet(urlPatterns = "/uploads/*")
+//@WebServlet(urlPatterns = "/uploads/*")
 public class UploadsServlet extends HttpServlet {
 
     @PersistenceContext
