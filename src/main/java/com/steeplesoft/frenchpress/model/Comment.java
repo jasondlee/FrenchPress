@@ -5,13 +5,18 @@
 package com.steeplesoft.frenchpress.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -20,7 +25,7 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "comments")
-public class Comment implements Serializable {
+public class Comment implements FpEntity, Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -31,6 +36,8 @@ public class Comment implements Serializable {
     private String authorName;
     private String authorUrl;
     private String authorEmail;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date commentDate;
     @ManyToOne
     private User author;
     @ManyToOne
@@ -91,6 +98,14 @@ public class Comment implements Serializable {
 
     public void setPost(Post post) {
         this.post = post;
+    }
+
+    public Date getCommentDate() {
+        return commentDate;
+    }
+
+    public void setCommentDate(Date commentDate) {
+        this.commentDate = commentDate;
     }
 
     @Override

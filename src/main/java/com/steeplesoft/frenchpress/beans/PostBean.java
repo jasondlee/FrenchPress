@@ -25,8 +25,6 @@ import org.richfaces.component.UIDataTable;
  */
 @Model
 public class PostBean implements Serializable {
-    public static final String VIEW_ADMIN_POSTS_INDEX = "/admin/posts/index.xhtml?faces-redirect=true";
-
     @Inject
     private PostService postService;
     private Post post = new Post();
@@ -57,17 +55,17 @@ public class PostBean implements Serializable {
 
     public String update() {
         postService.updatePost(post);
-        return VIEW_ADMIN_POSTS_INDEX;
+        return Constants.VIEW_ADMIN_POSTS_INDEX;
     }
 
     public String save() {
         postService.createPost(post);
-        return VIEW_ADMIN_POSTS_INDEX;
+        return Constants.VIEW_ADMIN_POSTS_INDEX;
     }
 
     public String delete() {
-        Post post = (Post) dataTable.getRowData();
-        postService.deletePost(post);
+        Post toDelete = (Post) dataTable.getRowData();
+        postService.deletePost(toDelete);
 
         return null;
     }

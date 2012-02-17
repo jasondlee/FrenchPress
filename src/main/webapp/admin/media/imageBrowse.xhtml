@@ -1,46 +1,41 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:a4j="http://richfaces.org/a4j"
       xmlns:rich="http://richfaces.org/rich">
     <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>FrenchPress Administration - Media Upload</title>
-<!--        <link href="#{request.contextPath}/jquery/css/themes/frenchpress/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css" media="all"/>-->
         <link href="#{request.contextPath}/admin/style.css" rel="stylesheet" type="text/css" media="all"/>
-<!--        <script src="#{request.contextPath}/jquery/js/jquery-1.6.2.min.js" type="text/javascript"/>
-        <script src="#{request.contextPath}/jquery/js/jquery-ui-1.8.16.custom.min.js" type="text/javascript"/>-->
         <meta name='robots' content='noindex,nofollow' />
     </h:head>
     <h:body>
         <h:messages/>
         <h:form id="mediaForm">
-                <div style="float: left; width: 49%; padding:3px;">
-                    Upload
-                    <rich:fileUpload id="fileEntryComp"
-                                     fileUploadListener="#{mediaBean.uploadListener}">
-                        <f:ajax event="uploadcomplete"/>
-                    </rich:fileUpload>
-                </div>
-                <div style="float: right; width: 49%; padding:3px;">
-                    Right
-                    <!--
-                    <ice:dataTable value="#{mediaBean.items}" var="item" width="95%">
-                        <ice:column>
-                            thumb
-                        </ice:column>
-                        <ice:column>
-                            <f:facet name="header">Name</f:facet>
-                            <a href="#" onclick="window.close(); window.opener.CKEDITOR.tools.callFunction(#{param.CKEditorFuncNum}, '/uploads/#{item.name}');">#{item.name}</a>
-                        </ice:column>
-                        <ice:column>
-                            <f:facet name="header">Type</f:facet>
-                            #{item.mimeType}
-                        </ice:column>
-                    </ice:dataTable>
-                    -->
-                </div>
+            <div style="float: left; width: 49%; padding:3px;">
+                Upload
+                <rich:fileUpload id="fileEntryComp"
+                                 fileUploadListener="#{mediaBean.listener}">
+                    <f:ajax event="uploadcomplete"/>
+                </rich:fileUpload>
+            </div>
+            <div style="float: right; width: 49%; padding:3px;">
+                Right
+                <!--
+                <ice:dataTable value="#{mediaBean.items}" var="item" width="95%">
+                    <ice:column>
+                        thumb
+                    </ice:column>
+                    <ice:column>
+                        <f:facet name="header">Name</f:facet>
+                        <a href="#" onclick="window.close(); window.opener.CKEDITOR.tools.callFunction(#{param.CKEditorFuncNum}, '/uploads/#{item.name}');">#{item.name}</a>
+                    </ice:column>
+                    <ice:column>
+                        <f:facet name="header">Type</f:facet>
+                #{item.mimeType}
+            </ice:column>
+        </ice:dataTable>
+                -->
+            </div>
         </h:form>
     </h:body>
 </html>

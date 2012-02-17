@@ -16,7 +16,7 @@
         <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
         <netbeans.hint.j2eeVersion>1.6</netbeans.hint.j2eeVersion>
         <version.icefaces>3.0.0.RC1</version.icefaces>
-        <org.richfaces.bom.version>4.1.0.Final</org.richfaces.bom.version>
+        <org.richfaces.bom.version>4.2.0.CR1</org.richfaces.bom.version>
     </properties>
 
     <dependencyManagement>
