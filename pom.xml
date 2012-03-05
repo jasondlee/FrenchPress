@@ -16,7 +16,9 @@
         <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
         <netbeans.hint.j2eeVersion>1.6</netbeans.hint.j2eeVersion>
         <version.icefaces>3.0.0.RC1</version.icefaces>
-        <org.richfaces.bom.version>4.2.0.CR1</org.richfaces.bom.version>
+        <org.richfaces.bom.version>4.2.0.Final</org.richfaces.bom.version>
+        <javax-persistence-api.version>2.0.3</javax-persistence-api.version>
+        <eclipselink.version>2.2.0</eclipselink.version>
     </properties>
 
     <dependencyManagement>
@@ -35,25 +37,25 @@
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>eclipselink</artifactId>
-            <version>2.4.0-M9</version>
+            <version>${eclipselink.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>javax.persistence</artifactId>
-            <version>2.0.3</version>
+            <version>${javax-persistence-api.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.sun.faces</groupId>
             <artifactId>jsf-api</artifactId>
-            <version>2.1.6</version>
+            <version>2.1.7</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.sun.faces</groupId>
             <artifactId>jsf-impl</artifactId>
-            <version>2.1.6</version>
+            <version>2.1.7</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -124,7 +126,7 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.3.1</version>
+            <version>6.4</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -179,6 +181,7 @@
             </plugin>
         </plugins>
     </build>
+    <!--
     <repositories>
         <repository>
             <url>http://download.eclipse.org/rt/eclipselink/maven.repo/</url>
@@ -212,4 +215,5 @@
             <url>http://anonsvn.icefaces.org/repo/maven2/snapshots/</url>
         </repository>
     </repositories>
+    -->
 </project>
