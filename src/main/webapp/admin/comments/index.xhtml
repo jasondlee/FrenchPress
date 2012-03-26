@@ -11,7 +11,8 @@
         <ui:composition template="/admin/layout.xhtml">
             <ui:define name="content">
                 <h:form>
-                    <rich:dataTable id="commentTable" rows="10"
+                    <rich:dataTable id="commentTable" 
+                                    rows="10"
                                     value="#{commentModel}"
                                     var="comment" 
                                     binding="#{commentsBean.dataTable}"
