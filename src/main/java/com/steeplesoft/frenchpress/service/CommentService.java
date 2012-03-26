@@ -36,6 +36,10 @@ public class CommentService {
 
         return comments;
     }
+    
+    public Comment getComment(Long id) {
+        return em.find(Comment.class, id);
+    }
 
     public void updateComment(Comment comment) {
         em.merge(comment);

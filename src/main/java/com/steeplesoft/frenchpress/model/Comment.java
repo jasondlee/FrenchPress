@@ -17,6 +17,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -31,6 +32,8 @@ public class Comment implements FpEntity, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+//    @Version
+//    private int version;
     @NotNull
     private String body;
     private String authorName;
@@ -107,6 +110,14 @@ public class Comment implements FpEntity, Serializable {
     public void setCommentDate(Date commentDate) {
         this.commentDate = commentDate;
     }
+
+//    public int getVersion() {
+//        return version;
+//    }
+//
+//    public void setVersion(int version) {
+//        this.version = version;
+//    }
 
     @Override
     public boolean equals(Object obj) {

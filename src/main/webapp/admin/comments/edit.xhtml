@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich"
+                template="/admin/layout.xhtml">
+
+    <ui:define name="content">
+        <f:metadata>
+            <f:viewParam name="commentId" value="#{commentsBean.comment.id}" required="true" requiredMessage="Comment id is required"/>
+            <f:event type="preRenderView" listener="#{commentsBean.loadComment}" />
+        </f:metadata>
+        <h3>Edit a comment</h3>
+        <h:form id="editcommentForm">
+            <h:inputHidden value="#{commentsBean.comment.id}"/>
+
+            <h:panelGrid id="pg" columns="2">
+                <h:outputLabel for="post">Post</h:outputLabel>
+                <h:outputText id="post" value="#{commentsBean.comment.post.title}"/>
+                
+                <h:outputLabel for="author">Author Name</h:outputLabel>
+                <h:inputText id="author" value="#{commentsBean.comment.authorName}"/>
+                
+                <h:outputLabel for="url">Author URL</h:outputLabel>
+                <h:inputText id="url" value="#{commentsBean.comment.authorUrl}"/>
+                
+                <h:outputLabel for="email">Author Email:</h:outputLabel>
+                <h:inputText id="email" value="#{commentsBean.comment.authorEmail}"/>
+                
+                <h:outputLabel for="cal">Posted Date:</h:outputLabel>
+                <h:outputText id="commentDate" value="#{commentsBean.comment.commentDate}"/>
+
+                <h:outputLabel for="comment">Comment:</h:outputLabel>
+                <h:inputTextarea id="comment" value="#{commentsBean.comment.body}" rows="20" cols="80"/>
+            </h:panelGrid>
+
+            <h:commandButton action="#{commentsBean.update}" value="Update comment"/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
