@@ -1,0 +1,16 @@
+deploy
+faces-config.NavData
+foo
+jdbc.txt
+frenchpress-data.sql
+yui
+target
+*.zip
+*.db
+*.sh
+.idea
+*.iml
+common.xml
+insertmedia.php
+nb-configuration.xml
+sample.png
