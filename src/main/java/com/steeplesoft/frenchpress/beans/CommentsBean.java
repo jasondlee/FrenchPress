@@ -57,6 +57,7 @@ public class CommentsBean {
     }
 
     public String update() {
+        comment.setPost(commentService.getComment(comment.getId()).getPost());
         commentService.updateComment(comment);
         return Constants.VIEW_ADMIN_COMMENTS_INDEX;
     }
@@ -77,8 +78,12 @@ public class CommentsBean {
     }
 
     public void loadComment() {
-        Comment requestedComment = (Comment) ((ServletRequest)FacesContext.getCurrentInstance()
-                .getExternalContext().getRequest()).getAttribute("commentId");
-        comment = (requestedComment != null) ? requestedComment : commentService.getComment(comment.getId());
+        final FacesContext facesContext = FacesContext.getCurrentInstance();
+        if (!facesContext.isPostback()) {
+            Comment requestedComment = (Comment) ((ServletRequest) facesContext.getExternalContext().getRequest())
+                    .getAttribute("commentId");
+            comment = (requestedComment != null) ? requestedComment : 
+                    commentService.getComment(comment.getId());
+        }
     }
 }

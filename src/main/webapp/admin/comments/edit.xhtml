@@ -31,7 +31,7 @@
                 <h:inputText id="email" value="#{commentsBean.comment.authorEmail}"/>
                 
                 <h:outputLabel for="cal">Posted Date:</h:outputLabel>
-                <h:outputText id="commentDate" value="#{commentsBean.comment.commentDate}"/>
+                <rich:calendar id="commentDate" datePattern="MM/dd/yyyy HH:mm" value="#{commentsBean.comment.commentDate}"/>
 
                 <h:outputLabel for="comment">Comment:</h:outputLabel>
                 <h:inputTextarea id="comment" value="#{commentsBean.comment.body}" rows="20" cols="80"/>

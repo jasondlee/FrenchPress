@@ -27,6 +27,10 @@
                             #{comment.authorName}
                         </rich:column>
                         <rich:column>
+                            <f:facet name="header">Post</f:facet>
+                            #{comment.post.title}
+                        </rich:column>
+                        <rich:column>
                             <f:facet name="header">Comment</f:facet>
                             #{comment.body}
                         </rich:column>

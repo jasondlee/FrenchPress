@@ -22,6 +22,6 @@
                            itemValue="#{user}"/>
         </h:selectOneMenu>
         <h:outputLabel for="cal">Posted Date</h:outputLabel>
-        <rich:calendar id="cal" datePattern="MM/dd/yyyy HH:mm" />
+        <rich:calendar id="cal" datePattern="MM/dd/yyyy HH:mm" value="#{postBean.post.posted}"/>
     </h:panelGrid>
 </ui:composition>
