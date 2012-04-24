@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -62,17 +63,30 @@ public class StartupBean implements Serializable {
         if (file == null) {
             throw new RuntimeException("Could not find the specified SQL file: " + fileName);
         }
+        
+        String vendor = getDatabaseVendor(connection);
+        boolean isPsql = vendor.contains("PostgreSQL");
+        boolean isMySQL = !isPsql; //for now...
 
         Statement stmt = connection.createStatement();
         BufferedReader reader = new BufferedReader(new FileReader(new File(file.toURI())));
         String line = reader.readLine();
         while (line != null) {
             if (!line.isEmpty()) {
+                if (isPsql) {
+                    line = line.replace("LONGBLOB", "bytea");
+                }
                 stmt.execute(line);
             }
             line = reader.readLine();
         }
         stmt.close();
         reader.close();
+    }
+    
+    private String getDatabaseVendor(Connection conn) throws SQLException {
+        DatabaseMetaData md = conn.getMetaData();
+        String name = md.getDatabaseProductName();
+        return name;
     }
 }
