@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates and open the template in
  * the editor.
  */
-package com.steeplesoft.frenchpress.beans;
+package com.steeplesoft.frenchpress.util;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -29,7 +29,7 @@ import javax.sql.DataSource;
  * @author jdlee
  */
 @WebListener
-public class StartupBean implements Serializable, ServletContextListener {
+public class StartupListener implements Serializable, ServletContextListener {
 
     private static final long serialVersionUID = 1L;
     @Resource(mappedName = "jdbc/frenchpress")
@@ -60,7 +60,7 @@ public class StartupBean implements Serializable, ServletContextListener {
             connection.close();
 
         } catch (Exception ex) {
-            Logger.getLogger(StartupBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StartupListener.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
