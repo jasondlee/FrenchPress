@@ -18,25 +18,32 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import javax.faces.bean.ApplicationScoped;
-import javax.faces.bean.ManagedBean;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
 import javax.sql.DataSource;
 
 /**
  *
  * @author jdlee
  */
-@ManagedBean(eager = true)
-@ApplicationScoped
-public class StartupBean implements Serializable {
+@WebListener
+public class StartupBean implements Serializable, ServletContextListener {
 
     private static final long serialVersionUID = 1L;
     @Resource(mappedName = "jdbc/frenchpress")
     private DataSource dataSource;
 
-    @PostConstruct
+    @Override
+    public void contextInitialized(ServletContextEvent sce) {
+        validateDatabase();
+    }
+
+    @Override
+    public void contextDestroyed(ServletContextEvent sce) {
+    }
+
     public void validateDatabase() {
         try {
             Connection connection = dataSource.getConnection();
@@ -66,7 +73,7 @@ public class StartupBean implements Serializable {
         
         String vendor = getDatabaseVendor(connection);
         boolean isPsql = vendor.contains("PostgreSQL");
-        boolean isMySQL = !isPsql; //for now...
+//        boolean isMySQL = !isPsql;
 
         Statement stmt = connection.createStatement();
         BufferedReader reader = new BufferedReader(new FileReader(new File(file.toURI())));
