@@ -107,10 +107,28 @@ function setVendor() {
     echo Database vendor set to $DB_VENDOR
 }
 
+function installGlassFish() {
+    # This function needs to take into account $SERVER_DIR during extraction
+    if [ ! -e glassfish-3.1.2.zip ] ; then
+        wget http://download.java.net/glassfish/3.1.2/release/glassfish-3.1.2.zip
+    fi
+
+    echo Extracting GlassFish
+    unzip glassfish-3.1.2.zip > /dev/null
+}
+
+function reinstallGlassFish() {
+    stopServer &> /dev/null
+    rm -rf $SERVER_DIR
+    installGlassFish
+}
+
 function usage() {
     echo "The arguments to use are:"
     echo "  -c : Open SQL shell"
     echo "  -d : Drop the existing tables"
+    echo "  -g : Install GlassFish, downloading if necessary"
+    echo "  -G : Reinstall GlassFish"
     echo "  -i : Install Frenchpress"
     echo "  -j : Configure the JDBC resources on the server"
     echo "  -l : Load sample media data and exit"
@@ -121,11 +139,13 @@ function usage() {
     echo "  -v : Set Database vendor"
 }
 
-while getopts cdijlrstuv: opt
+while getopts cdgGijlrstuv: opt
 do
     case "$opt" in
         c) sqlShell ;;
         d) dropTables ;;
+        g) installGlassFish ;;
+        G) reinstallGlassFish ;;
         i) install ;;
         j) configureJdbc ;;
         l) loadSampleData ;;
