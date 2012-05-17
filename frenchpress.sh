@@ -134,12 +134,13 @@ function usage() {
     echo "  -l : Load sample media data and exit"
     echo "  -r : Restart the server"
     echo "  -s : Start the server"
+    echo "  -S : Stop the server"
     echo "  -t : Tail the server log"
     echo "  -u : Uninstall FrenchPress"
     echo "  -v : Set Database vendor"
 }
 
-while getopts cdgGijlrstuv: opt
+while getopts cdgGijlrsStuv: opt
 do
     case "$opt" in
         c) sqlShell ;;
@@ -151,6 +152,7 @@ do
         l) loadSampleData ;;
         r) stopServer ; startServer ;;
         s) startServer ;;
+        S) stopServer ;;
         t) tail -f $SERVER_DIR/glassfish/domains/domain1/logs/server.log ;;
         u) uninstall ;;
         v) setVendor $OPTARG ;;
