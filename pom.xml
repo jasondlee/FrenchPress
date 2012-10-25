@@ -16,7 +16,7 @@
         <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
         <netbeans.hint.j2eeVersion>1.6</netbeans.hint.j2eeVersion>
         <version.icefaces>3.0.0.RC1</version.icefaces>
-        <org.richfaces.bom.version>4.2.1.Final</org.richfaces.bom.version>
+        <org.richfaces.bom.version>4.2.3.Final</org.richfaces.bom.version>
         <javax-persistence-api.version>2.0.3</javax-persistence-api.version>
         <eclipselink.version>2.2.0</eclipselink.version>
     </properties>
@@ -30,10 +30,18 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
+            <dependency>
+                <groupId>org.jboss.arquillian</groupId>
+                <artifactId>arquillian-bom</artifactId>
+                <version>1.0.3.Final</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
+        <!--
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>eclipselink</artifactId>
@@ -49,13 +57,13 @@
         <dependency>
             <groupId>com.sun.faces</groupId>
             <artifactId>jsf-api</artifactId>
-            <version>2.1.7</version>
+            <version>2.2.0-m05</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.sun.faces</groupId>
             <artifactId>jsf-impl</artifactId>
-            <version>2.1.7</version>
+            <version>2.2.0-m05</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -76,7 +84,14 @@
             <version>6.0</version>
             <scope>provided</scope>
         </dependency>
-
+        -->
+        <dependency>
+            <groupId>org.jboss.spec</groupId>
+            <artifactId>jboss-javaee-6.0</artifactId>
+            <version>1.0.0.Final</version>
+            <type>pom</type>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>org.richfaces.ui</groupId>
             <artifactId>richfaces-components-ui</artifactId>
@@ -126,7 +141,7 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.5.1</version>
+            <version>6.8</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
