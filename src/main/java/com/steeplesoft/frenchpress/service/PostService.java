@@ -7,17 +7,16 @@ package com.steeplesoft.frenchpress.service;
 import com.steeplesoft.frenchpress.model.Post;
 import java.util.Date;
 import java.util.List;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
  *
  * @author jdlee
  */
-@Stateless
+@RequestScoped
 public class PostService {
 
     @PersistenceContext

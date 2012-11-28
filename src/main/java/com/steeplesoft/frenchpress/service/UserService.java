@@ -6,7 +6,6 @@ package com.steeplesoft.frenchpress.service;
 
 import com.steeplesoft.frenchpress.model.User;
 import java.util.List;
-import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
@@ -16,7 +15,6 @@ import javax.persistence.PersistenceContext;
  *
  * @author jdlee
  */
-@Stateless
 @Named
 public class UserService {
     @PersistenceContext

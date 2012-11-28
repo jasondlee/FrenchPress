@@ -26,24 +26,24 @@
     </servlet-mapping>
     -->
 
-	<servlet>
-		<servlet-name>jersey-serlvet</servlet-name>
-		<servlet-class>
-                     com.sun.jersey.spi.container.servlet.ServletContainer
-                </servlet-class>
-		<init-param>
-		     <param-name>com.sun.jersey.config.property.packages</param-name>
-		     <param-value>com.steeplesoft.frenchpress.service,com.steeplesoft.frenchpress.rest</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
+    <servlet>
+        <servlet-name>jersey-serlvet</servlet-name>
+        <servlet-class>
+            com.sun.jersey.spi.container.servlet.ServletContainer
+        </servlet-class>
+        <init-param>
+            <param-name>com.sun.jersey.config.property.packages</param-name>
+            <param-value>com.steeplesoft.frenchpress.service,com.steeplesoft.frenchpress.rest</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
  
-	<servlet-mapping>
-		<servlet-name>jersey-serlvet</servlet-name>
-		<url-pattern>/rest/*</url-pattern>
-	</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>jersey-serlvet</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+    </servlet-mapping>
         
-        <welcome-file-list>
+    <welcome-file-list>
         <welcome-file>index.jsf</welcome-file>
     </welcome-file-list>
 </web-app>

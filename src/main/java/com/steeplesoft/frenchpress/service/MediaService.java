@@ -8,7 +8,7 @@ import com.steeplesoft.frenchpress.model.MediaItem;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -16,7 +16,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
-@Stateless
+@RequestScoped
 @Path("/uploads")
 public class MediaService {
     @PersistenceContext
