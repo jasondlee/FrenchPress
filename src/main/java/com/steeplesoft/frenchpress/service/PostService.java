@@ -7,7 +7,6 @@ package com.steeplesoft.frenchpress.service;
 import com.steeplesoft.frenchpress.model.Post;
 import java.util.Date;
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -16,7 +15,7 @@ import javax.persistence.TypedQuery;
  *
  * @author jdlee
  */
-@RequestScoped
+@Transactional
 public class PostService {
 
     @PersistenceContext
@@ -42,7 +41,7 @@ public class PostService {
     public void updatePost(Post post) {
         em.merge(post);
     }
-    
+
     public void deletePost(Post post) {
         Post newPost = getPost(post.getId());
         if (newPost != null) {
@@ -52,15 +51,15 @@ public class PostService {
 
     public Post findPostBySlug(String slug) {
         Post post = null;
-        
+
         List<Post> posts = em.createNamedQuery("findBySlug", Post.class)
             .setParameter("SLUG", slug)
             .getResultList();
-        
+
         if (!posts.isEmpty()) {
             post = posts.get(0);
         }
-        
+
         return post;
     }
 }

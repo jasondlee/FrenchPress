@@ -7,7 +7,6 @@ package com.steeplesoft.frenchpress.service;
 import com.steeplesoft.frenchpress.model.Comment;
 import java.util.Collections;
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -16,7 +15,6 @@ import javax.persistence.TypedQuery;
  *
  * @author jdlee
  */
-@RequestScoped
 public class CommentService {
 
     @PersistenceContext
