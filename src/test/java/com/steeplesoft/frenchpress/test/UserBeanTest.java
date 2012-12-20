@@ -43,14 +43,16 @@ public class UserBeanTest {
                 .addPackages(true, "com.steeplesoft.frenchpress")
                 .addAsWebInfResource(new FileAsset(new File("src/main/webapp/WEB-INF/web.xml")), "web.xml")
                 .addAsResource("persistence.xml", "META-INF/persistence.xml")
+                .addAsWebInfResource(new FileAsset(new File("src/main/resources-glassfish-managed/META-INF/glassfish-resources.xml")),
+                    "glassfish-resources.xml")
                 .addAsLibraries(
                     resolver.artifacts("org.richfaces.ui:richfaces-components-ui",
                     "org.richfaces.core:richfaces-core-impl",
-                    "org.atmosphere:atmosphere-runtime" 
+                    "org.atmosphere:atmosphere-runtime"
                 ).resolveAsFiles())
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
     }
-    
+
     public static Archive createBaseDeployment() {
         return createDeployment();
 //                .addPackages(true, UserService.class.getPackage());
