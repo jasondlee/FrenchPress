@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
@@ -34,7 +33,9 @@
                             </td>
                             <td>
                                 <a href="#{comment.authorUrl}" style="font-weight: bold;">#{comment.authorName}</a><br/>
-                                <h:outputText style="border-bottom: 1px dotted #666666;" value="Post date goes here"/>
+                                <h:outputText style="border-bottom: 1px dotted #666666;" value="#{post.posted}">
+                                    <f:convertDateTime dateStyle="long" timeStyle="full"/>
+                                </h:outputText>
                                 <a href="##{status.index+1}">#</a><br/>
                                 <h:outputText value="#{comment.body}" style="display: block; margin: 10px 0px 10px 0px;" 
                                               escape="false" converter="#{newlineConverter}">

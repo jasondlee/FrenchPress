@@ -1,48 +1,16 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:a4j="http://richfaces.org/a4j"
-      xmlns:rich="http://richfaces.org/rich">
-
-    <body>
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        
+    </h:head>
+    <h:body>
         <ui:composition template="/admin/layout.xhtml">
             <ui:define name="content">
-                <h:form>
-                    <rich:dataTable id="postTable"
-                                    value="#{postBean.getPosts(-1)}"
-                                    var="post" 
-                                    binding="#{postBean.dataTable}"
-                                    style="width: 100%">
-                        <ui:remove>
-                            <rich:column sortBy="#{post.id}">
-                                <f:facet name="header">ID</f:facet>
-                                #{post.id}
-                            </rich:column>
-                        </ui:remove>
-                        <rich:column sortBy="#{post.title}">
-                            <f:facet name="header">title</f:facet>
-                            #{post.title}
-                        </rich:column>
-                        <rich:column sortBy="#{post.author}">
-                            <f:facet name="header">Author</f:facet>
-                            #{post.author.firstName} #{post.author.lastName}
-                        </rich:column>
-                        <rich:column sortBy="#{post.posted}">
-                            <f:facet name="header">Posted Date</f:facet>
-                            #{post.posted}
-                        </rich:column>
-                        <rich:column>
-                            <a href="edit.jsf?postId=#{post.id}">Edit</a>
-                            &#160;|&#160;
-                            <h:commandLink value="Delete" onclick="return confirm('Are you sure you want to delete this post?');"
-                                           action="#{postBean.delete}"/>
-                        </rich:column>
-                    </rich:dataTable>
-                </h:form>
+                <ui:include src="table.xhtml"/>
             </ui:define>
         </ui:composition>
-    </body>
+    </h:body>
 </html>

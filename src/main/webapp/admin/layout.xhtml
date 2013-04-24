@@ -1,11 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:fp="http://java.sun.com/jsf/composite/frenchpress"
-      xmlns:a4j="http://richfaces.org/a4j"
       xmlns:rich="http://richfaces.org/rich">
+    <!--
+      xmlns:a4j="http://richfaces.org/a4j"
+    -->
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>FrenchPress Administration</title>
@@ -21,31 +23,32 @@
         </style>
     </h:head>
     <h:body>
+        <!--  collapsible="true" autoHeight="true" fillSpace="false" -->
         <h:panelGrid columns="2" columnClasses="nav,content" style="margin: 10px 0px 0px 10px" >
-            <h:form id="navForm">
-                <rich:accordion id="nav" collapsible="true" autoHeight="true" fillSpace="false"
-                                switchType="client"
-                                activeItem="#{uiBean.activeItem}">
-                    <f:ajax/>
-                    <rich:accordionItem id="home" header="Home">  
-                        <fp:link id="homelink" value="/admin/index.jsf">Dashboard</fp:link>
-                    </rich:accordionItem>
-                    <rich:accordionItem id="posts" header="Posts">  
-                        <fp:link value="/admin/posts/">All Posts</fp:link><br/>
-                        <fp:link value="/admin/posts/new.jsf">New Post</fp:link>
-                    </rich:accordionItem>
-                    <rich:accordionItem id="media" header="Media">  
-                        Media Management Links
-                    </rich:accordionItem>
-                    <rich:accordionItem id="comments" header="Comments">  
-                        <fp:link value="/admin/comments/">All Comments</fp:link><br/>
-                    </rich:accordionItem>
-                    <rich:accordionItem id="users" header="Users">  
-                        <fp:link value="/admin/users/">All Users</fp:link><br/>
-                        <fp:link value="/admin/users/new.jsf">New User</fp:link>
-                    </rich:accordionItem>
-                </rich:accordion>
-            </h:form>
+            <h:panelGroup>
+                <h:form id="navForm">
+                    <rich:accordion id="nav" switchType="client" activeItem="#{uiBean.activeItem}">
+                        <f:ajax/>
+                        <rich:accordionItem id="home" header="Home">  
+                            <fp:link id="homelink" value="/admin/index.jsf">Dashboard</fp:link>
+                        </rich:accordionItem>
+                        <rich:accordionItem id="posts" header="Posts">  
+                            <fp:link value="/admin/posts/">All Posts</fp:link><br/>
+                            <fp:link value="/admin/posts/new.jsf">New Post</fp:link>
+                        </rich:accordionItem>
+                        <rich:accordionItem id="media" header="Media">  
+                            Media Management Links
+                        </rich:accordionItem>
+                        <rich:accordionItem id="comments" header="Comments">  
+                            <fp:link value="/admin/comments/">All Comments</fp:link><br/>
+                        </rich:accordionItem>
+                        <rich:accordionItem id="users" header="Users">  
+                            <fp:link value="/admin/users/">All Users</fp:link><br/>
+                            <fp:link value="/admin/users/new.jsf">New User</fp:link>
+                        </rich:accordionItem>
+                    </rich:accordion>
+                </h:form>
+            </h:panelGroup>
             <h:panelGroup layout="block">
                 <h1 style="margin: 0px;">
                     <h:graphicImage value="/images/fp_logo_32.png" title="FrenchPress logo" alt="FrenchPress logo"/>
@@ -55,9 +58,9 @@
                     Something's wrong!
                 </ui:insert>
                 <div id="footer">
-                    &copy;&nbsp;Copyright&nbsp;2011&nbsp;Jason Lee
+                    &#169;&#160;Copyright&#160;2011&#160;Jason Lee
 
-                    &#8901;&nbsp;Powered&nbsp;by&nbsp;<a href="http://github.com/jasondlee/frenchpress/">FrenchPress</a> 
+                    &#8901;&#160;Powered&#160;by&#160;<a href="http://github.com/jasondlee/frenchpress/">FrenchPress</a> 
                 </div><!--footer-->
             </h:panelGroup>
         </h:panelGrid>

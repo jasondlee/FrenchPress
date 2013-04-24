@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SERVER_DIR=glassfish3
+SERVER_DIR=glassfish4
 JAR_DIR=~/Downloads/jars
 DB_VENDOR=pgsql
 DB_USER=frenchpress
@@ -109,12 +109,13 @@ function setVendor() {
 
 function installGlassFish() {
     # This function needs to take into account $SERVER_DIR during extraction
-    if [ ! -e glassfish-3.1.2.zip ] ; then
-        wget http://download.java.net/glassfish/3.1.2/release/glassfish-3.1.2.zip
+    if [ ! -e glassfish.zip ] ; then
+        wget http://dlc.sun.com.edgesuite.net/glassfish/4.0/nightly/glassfish-4.0-web-b86-04_24_2013.zip -O glassfish.zip
+            #http://download.java.net/glassfish/3.1.2/release/glassfish-3.1.2.zip
     fi
 
     echo Extracting GlassFish
-    unzip glassfish-3.1.2.zip > /dev/null
+    unzip glassfish.zip > /dev/null
 }
 
 function reinstallGlassFish() {
