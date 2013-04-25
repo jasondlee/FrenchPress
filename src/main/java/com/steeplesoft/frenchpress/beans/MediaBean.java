@@ -9,9 +9,8 @@ import com.steeplesoft.frenchpress.service.MediaService;
 import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 import java.util.List;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.inject.Model;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.richfaces.event.FileUploadEvent;
 import org.richfaces.model.UploadedFile;
@@ -20,8 +19,9 @@ import org.richfaces.model.UploadedFile;
  *
  * @author jdlee
  */
-@Named
-@SessionScoped
+//@Named
+//@SessionScoped
+@Model
 public class MediaBean implements Serializable { //implements FileEntryCallback {
     @Inject
     MediaService mediaService;

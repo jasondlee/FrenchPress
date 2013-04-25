@@ -3,103 +3,98 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
-    <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>FrenchPress</title>
-        <link rel="shortcut icon" href="#{request.contextPath}/images/fplogo.png"/>
-        <link rel="stylesheet" type="text/css" media="all" href="#{request.contextPath}/themes/frenchpress/style.css" />
-<!--        <link rel="stylesheet" type="text/css" media="all" href="http://wp-themes.com/wp-content/themes/chocolate-lite/style.css" />-->
-        <meta name='robots' content='noindex,nofollow' />
-    </h:head>
-    <h:body class="home blog">
-        <div id="header_wrap">
-            <div id="header">
-                <h1>
-                    <h:graphicImage value="/images/fp_logo_64.png" style="padding: 15px; float: left;"/>
-                    <a href="#{request.contextPath}">FrenchPress</a>
-                </h1>
-                <h2>Previewing Another WordPress Blog</h2>
+    <f:view transient="true">
+        <h:head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <title>FrenchPress</title>
+            <link rel="shortcut icon" href="#{request.contextPath}/images/fplogo.png"/>
+            <link rel="stylesheet" type="text/css" media="all" href="#{request.contextPath}/themes/frenchpress/style.css" />
+        </h:head>
+        <h:body class="home blog">
+            <div id="header_wrap">
+                <div id="header">
+                    <h1>
+                        <h:graphicImage value="/images/fp_logo_64.png" style="padding: 15px; float: left;"/>
+                        <a href="#{request.contextPath}">FrenchPress</a>
+                    </h1>
+                    <h2>A FrenchPress Blog</h2>
 
-                <div id="menus">
-                    <div class="menu"><ul><li class="page_item page-item-2"><a href="http://wp-themes.com/?page_id=2" title="About">About</a></li><li class="page_item page-item-46"><a href="http://wp-themes.com/?page_id=46" title="Parent Page">Parent Page</a><ul class='children'><li class="page_item page-item-49"><a href="http://wp-themes.com/?page_id=49" title="Sub-page">Sub-page</a></li></ul></li></ul></div>
-                    <ul><li class="current_page_item"><a href="http://wp-themes.com">Home</a></li></ul>
-                </div>
-                <div id="rss_search">
-                    <div id="rss"><a href="http://wp-themes.com/?feed=rss2" rel="nofollow" title="RSS Feed">RSS Feed</a></div>
-
-                    <div id="search"><form id="searchform" method="get" action="http://wp-themes.com/">
-                            <input type="text" value="type, hit enter" onfocus="if (this.value == 'type, hit enter') {this.value = '';}" onblur="if (this.value == '') {this.value = 'type, hit enter';}" size="35" maxlength="50" name="s" id="s" />
-                            <input type="submit" id="searchsubmit" value="SEARCH" />
-                        </form></div>
+                    <div id="menus">
+                        <div class="menu">
+                            <ul>
+                                <li class="page_item page-item-2">
+                                    <a href="#" title="About">About</a>
+                                </li>
+                                <li class="page_item page-item-46">
+                                    <a href="#" title="Parent Page">Parent Page</a>
+                                    <ul class='children'>
+                                        <li class="page_item page-item-49">
+                                            <a href="#" title="Sub-page">Sub-page</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <ul>
+                            <li class="current_page_item">
+                                <a href="#{request.contextPath}">Home</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="rss_search">
+                        <div id="rss">
+                            <a href="#{request.contextPath}/feed.atom" rel="nofollow" title="RSS Feed">RSS Feed</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div id="wrapper">
-            <div id="content">
-                <h:messages />
-                <ui:insert name="content">
-                    Something's wrong!
-                </ui:insert>
-            </div><!--content-->
-
-            <div id="sidebar">
-                <div class="widget rc_widget">
-                    <h3>Recent Comments</h3>
-
-                    <ul>
-                        <li>
-                            <span class="rc_author">Joseph Scott: </span>
-                            <a href="http://wp-themes.com/?p=1&amp;cpage=1#comment-509" title="on Hello world!">Need a comment with a real Gravatar.</a>
-                        </li>
-                        <li>
-                            <span class="rc_author">Mr WordPress: </span>
-
-                            <a href="http://wp-themes.com/?p=1&amp;cpage=1#comment-1" title="on Hello world!">Hi, this is a comment.To delete a comment, just log in and view the post&#039;s comments. There you will have the option to edit or delete them.</a>
-                        </li>
-                    </ul>
+            <div id="wrapper">
+                <div id="content">
+                    <h:messages />
+                    <ui:insert name="content">
+                        Something's wrong!
+                    </ui:insert>
                 </div>
+                <div id="sidebar">
+                    <div class="widget rc_widget">
+                        <h3>Recent Comments</h3>
+                        <ul>
+                            <li>
+                                <span class="rc_author">Joseph Scott: </span>
+                                <a href="#" title="on Hello world!">Need a comment with a real Gravatar.</a>
+                            </li>
+                            <li>
+                                <span class="rc_author">Mr WordPress: </span>
+                                <a href="#" title="on Hello world!">
+                                    Hi, this is a comment.To delete a comment, just log in and view the post&#039;s comments. There you will have the option to edit or delete them.
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
 
-                <div class="widget">
-                    <h3><span>Random Posts<span class="s_title_l"></span><span class="s_title_r"></span></span></h3>
-                    <ul>
+                    <div class="widget">
+                        <h3>Links</h3>
+                        <ul>
+                            <li><a href="#">Documentation</a></li>
+                        </ul>
+                    </div>
 
-                        <li><a href="http://wp-themes.com/?p=36">Elements</a></li>
-                        <li><a href="http://wp-themes.com/?p=14">More Tags</a></li>
-                        <li><a href="http://wp-themes.com/?p=6">Links</a></li>
-                        <li><a href="http://wp-themes.com/?p=8">HTML</a></li>
-                        <li><a href="http://wp-themes.com/?p=4">Category Hierarchy</a></li>
-                    </ul>
+                    <div class="widget">
+                        <h3>Meta</h3>
+                        <ul>
+                            <li>
+                                <a href="#">Log in</a>
+                            </li>
+                        </ul>
+                    </div>
 
                 </div>
-
-                <div class="widget">
-                    <h3>Links</h3>
-                    <ul>
-                        <li><a href="http://codex.wordpress.org/">Documentation</a></li>
-                        <li><a href="http://wordpress.org/development/">Development Blog</a></li>
-                        <li><a href="http://wordpress.org/extend/ideas/">Suggest Ideas</a></li>
-                        <li><a href="http://wordpress.org/support/">Support Forum</a></li>
-
-                        <li><a href="http://wordpress.org/extend/plugins/">Plugins</a></li>
-                        <li><a href="http://wordpress.org/extend/themes/">Themes</a></li>
-                        <li><a href="http://planet.wordpress.org/">WordPress Planet</a></li>
-                    </ul>
-                </div>
-
-                <div class="widget">
-                    <h3>Meta</h3>
-                    <ul>
-
-                        <li><a href="http://wp-themes.com/wp/wp-login.php">Log in</a></li>
-                    </ul>
-                </div>
-
-            </div></div><!--wrapper-->
-        <div class="clear"></div>
-        <div id="footer">
-            &#169;&#160;Copyright&#160;2011&#160;Jason Lee &#8901;&#160;Theme&#160;by&#160;zwwooooo&#160;&amp;&#160;<a href="http://schiy.com/">schiy</a>
-
-            &#8901;&#160;Powered&#160;by&#160;<a href="http://github.com/jasondlee/frenchpress/">FrenchPress</a>
-        </div><!--footer-->
-    </h:body>
+            </div>
+            <div class="clear"></div>
+            <div id="footer">
+                &#169;&#160;Copyright&#160;2011&#160;Jason Lee &#8901;&#160;Theme&#160;by&#160;zwwooooo&#160;&amp;&#160;<a href="http://schiy.com/">schiy</a>
+                &#8901;&#160;Powered&#160;by&#160;<a href="http://github.com/jasondlee/frenchpress/">FrenchPress</a>
+            </div>
+        </h:body>
+    </f:view>
 </html>
