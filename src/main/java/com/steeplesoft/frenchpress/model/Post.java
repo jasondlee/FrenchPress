@@ -24,7 +24,8 @@ public class Post implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @TableGenerator(name="seq_gen", table = "sequence", pkColumnName = "seq_name", valueColumnName = "seq_count")
+    @GeneratedValue(generator="seq_gen", strategy = GenerationType.TABLE)
     private Long id;
     @Version
     private int version;

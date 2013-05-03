@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -21,7 +22,8 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @TableGenerator(name="seq_gen", table = "sequence", pkColumnName = "seq_name", valueColumnName = "seq_count")
+    @GeneratedValue(generator="seq_gen", strategy = GenerationType.TABLE)
     private Long id;
     @Version
     private int version;

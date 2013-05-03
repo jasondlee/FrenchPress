@@ -52,6 +52,7 @@ public class MediaService {
                 .getResultList();
     }
     
+    @Transactional
     public void addItem(MediaItem item) {
         em.persist(item);
     }
