@@ -15,6 +15,9 @@ import javax.persistence.TypedQuery;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
+import javax.ws.rs.core.Response.Status;
 
 @RequestScoped
 @Path("/uploads")
@@ -24,14 +27,14 @@ public class MediaService {
     protected EntityManager em;
     
     @GET
-    @Path("{id}/")
+    @Path("/id/{id}/")
     public MediaItem getItem(@PathParam("id") Long id) {
         return em.find(MediaItem.class, id);
     }
 
     @GET
     @Path("{year}/{month}/{name}")
-    public MediaItem getItem(
+    public Response getItem(
             @PathParam("year") int year, 
             @PathParam("month") int month, 
             @PathParam("name") String name
@@ -44,7 +47,12 @@ public class MediaService {
         query.setParameter("START", startDate.getTime());
         query.setParameter("END", endDate.getTime());
         query.setParameter("NAME", name);
-        return query.getSingleResult();
+        final MediaItem item = query.getSingleResult();
+        if (item != null) {
+            return Response.ok(item.getContents(), item.getMimeType()).build();
+        } else {
+            return Response.status(Status.NOT_FOUND).build();
+        }
     }
 
     public List<MediaItem> getItems() {

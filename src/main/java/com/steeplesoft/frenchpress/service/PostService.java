@@ -15,7 +15,6 @@ import javax.persistence.TypedQuery;
  *
  * @author jdlee
  */
-@Transactional
 public class PostService {
 
     @PersistenceContext
@@ -33,15 +32,18 @@ public class PostService {
         return em.find(Post.class, id);
     }
 
+    @Transactional
     public void createPost(Post post) {
         post.setPosted(new Date());
         em.persist(post);
     }
 
+    @Transactional
     public void updatePost(Post post) {
         em.merge(post);
     }
 
+    @Transactional
     public void deletePost(Post post) {
         Post newPost = getPost(post.getId());
         if (newPost != null) {

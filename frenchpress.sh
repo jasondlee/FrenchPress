@@ -129,6 +129,14 @@ function installServer() {
     fi
 }
 
+function reinstallServer() {
+    if [ "$SERVER" == "glassfish" ] ; then
+        reinstallGlassFish
+    elif [ "$SERVER" == "tomee" ] ; then
+        reinstallTomee
+    fi
+}
+
 function installGlassFish() {
     # This function needs to take into account $SERVER_DIR during extraction
     if [ ! -e glassfish.zip ] ; then
@@ -188,8 +196,8 @@ function usage() {
     echo "  -c : Open SQL shell"
     echo "  -d : Install Frenchpress"
     echo "  -D : Drop the existing tables"
-    echo "  -i : Install GlassFish, downloading if necessary"
-    echo "  -I : Reinstall GlassFish"
+    echo "  -i : Install the server, downloading if necessary"
+    echo "  -I : Reinstall the server"
     echo "  -j : Configure the JDBC resources on the server"
     echo "  -l : Load sample media data and exit"
     echo "  -r : Restart the server"
@@ -197,10 +205,10 @@ function usage() {
     echo "  -S : Stop the server"
     echo "  -t : Tail the server log"
     echo "  -u : Uninstall FrenchPress"
-    echo "  -v : Set Database vendor"
+    echo "  -v : Set database vendor"
 }
 
-while getopts cdgGijlrsStuv: opt
+while getopts cDdiIjlrsStuv: opt
 do
     case "$opt" in
         c) sqlShell ;;

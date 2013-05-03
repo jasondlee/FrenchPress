@@ -8,19 +8,35 @@
         <title>FrenchPress Administration - Media Upload</title>
         <link href="#{request.contextPath}/admin/style.css" rel="stylesheet" type="text/css" media="all"/>
         <meta name='robots' content='noindex,nofollow' />
+        <script type="text/javascript">
+                function getUrlParam(paramName) {
+                  var reParam = new RegExp('(?:[\?&amp;]|&amp;amp;)' + paramName + '=([^&amp;]+)', 'i') ;
+                  var match = window.location.search.match(reParam) ;
+
+                  return (match &amp;&amp; match.length > 1) ? match[1] : '' ;
+                }
+        </script>
     </h:head>
     <h:body>
         <h:messages/>
         <h:form id="mediaForm">
-            <div style="float: left; width: 49%; padding:3px;">
+            <div style="float: left; width: 400px; padding:3px;">
                 Upload
                 <rich:fileUpload id="fileEntryComp"
                                  fileUploadListener="#{mediaBean.listener}">
                     <f:ajax event="uploadcomplete"/>
                 </rich:fileUpload>
             </div>
-            <div style="float: right; width: 49%; padding:3px;">
-                Right
+            <div style="float: right; width: 600px; padding:3px;">
+                <h:dataTable id="items" var="item" value="#{mediaBean.items}">
+                    <h:column>#{item.name}</h:column>
+                    <h:column>
+                        <a href="#" onclick="alert(getUrlParam('CKEditorFuncNum')); window.opener.CKEDITOR.tools.callFunction( getUrlParam('CKEditorFuncNum'), '#{request.contextPath}/uploads/#{item.uploadedYear}/#{item.uploadedMonth}/#{item.name}' ); window.close();">
+                            <h:graphicImage value="/uploads/#{item.uploadedYear}/#{item.uploadedMonth}/#{item.name}"
+                                            width="200px"/>
+                        </a>
+                    </h:column> 
+                </h:dataTable>
             </div>
         </h:form>
     </h:body>
