@@ -1,5 +1,6 @@
 #!/bin/bash
 
+SERVER=glassfish
 SERVER_DIR=glassfish4
 JAR_DIR=~/Downloads/jars
 DB_VENDOR=pgsql
@@ -13,11 +14,20 @@ if [ -e frenchpress.properties ] ; then
 fi
 
 function startServer() {
-    $SERVER_DIR/bin/asadmin start-domain
+    if [ "$SERVER" == "glassfish" ] ; then
+        $SERVER_DIR/bin/asadmin start-domain --debug
+    elif [ "$SERVER" == "tomee" ] ; then
+        export JPDA_ADDRESS=9009
+        $SERVER_DIR/bin/catalina.sh jpda start
+    fi
 }
 
 function stopServer() {
-    $SERVER_DIR/bin/asadmin stop-domain
+    if [ "$SERVER" == "glassfish" ] ; then
+        $SERVER_DIR/bin/asadmin stop-domain
+    elif [ "$SERVER" == "tomee" ] ; then
+        $SERVER_DIR/bin/catalina.sh stop
+    fi
 }
 
 function dropTables() {
@@ -37,55 +47,59 @@ function dropTables() {
     fi
 }
 
-function install() {
-    mvn -Dmaven.test.skip=true package && 
-        $SERVER_DIR/bin/asadmin deploy --force target/frenchpress*/
+function deploy() {
+    mvn -Dmaven.test.skip=true package
+    if [ $? -eq 0 ] ; then
+        if [ "$SERVER" == "glassfish" ] ; then
+            $SERVER_DIR/bin/asadmin deploy --force target/frenchpress*/
+        elif [ "$SERVER" == "tomee" ] ; then
+            cp target/frenchpress*war $SERVER_DIR/webapps/frenchpress.war
+        fi
+    fi
 }
 
 function uninstall() {
-    $SERVER_DIR/bin/asadmin undeploy `$SERVER_DIR/bin/asadmin list-applications | grep frenchpress | cut -f 1 -d " "`
+    if [ "$SERVER" == "glassfish" ] ; then
+        $SERVER_DIR/bin/asadmin undeploy `$SERVER_DIR/bin/asadmin list-applications | grep frenchpress | cut -f 1 -d " "`
+    elif [ "$SERVER" == "tomee" ] ; then
+        rm $SERVER_DIR/webapps/frenchpress.war
+    fi
 }
 
 function configureJdbc() {
-    for JAR in $JAR_DIR/*.jar ; do
-        FILE=`basename $JAR`
-        if [ ! -e $SERVER_DIR/glassfish/lib/$FILE ] ; then
-            cp $JAR $SERVER_DIR/glassfish/lib
-            COPIED=true
+    if [ "$SERVER" == "glassfish" ] ; then
+        $SERVER_DIR/glassfish/bin/asadmin delete-jdbc-resource jdbc/frenchpress &> /dev/null
+        $SERVER_DIR/glassfish/bin/asadmin delete-jdbc-connection-pool FrenchPressPool &> /dev/null
+
+        if [ "$DB_VENDOR" == "pgsql" ] ; then
+            RES_TYPE=javax.sql.XADataSource
+            DS_CLASS_NAME=org.postgresql.xa.PGXADataSource
+            PROPERTIES=user=$DB_USER:password=$DB_PASS:serverName=$DB_HOST:databaseName=$DB_NAME
+        elif [ "$DB_VENDOR" == "mysql" ] ; then
+            RES_TYPE=javax.sql.DataSource
+            DS_CLASS_NAME=com.mysql.jdbc.jdbc2.optional.MysqlDataSource
+            PROPERTIES=User=$DB_USER:Password=$DB_PASS:Host=$DB_HOST:DatabaseName=$DB_NAME
         fi
-    done
-    if [ "$COPIED" == "true" ] ; then
-        echo JDBC Drivers have been copied to the server.  New restarting the server to allow the changes to take effect
-        $SERVER_DIR/bin/asadmin restart-domain
-    fi
 
-    $SERVER_DIR/glassfish/bin/asadmin delete-jdbc-resource jdbc/frenchpress &> /dev/null
-    $SERVER_DIR/glassfish/bin/asadmin delete-jdbc-connection-pool FrenchPressPool &> /dev/null
+        echo Creating connection pool
+        $SERVER_DIR/glassfish/bin/asadmin create-jdbc-connection-pool --restype=$RES_TYPE \
+            --datasourceclassname=$DS_CLASS_NAME --property=$PROPERTIES FrenchPressPool > /dev/null
 
-    if [ "$DB_VENDOR" == "pgsql" ] ; then
-        RES_TYPE=javax.sql.XADataSource
-        DS_CLASS_NAME=org.postgresql.xa.PGXADataSource
-        PROPERTIES=user=$DB_USER:password=$DB_PASS:serverName=$DB_HOST:databaseName=$DB_NAME
-    elif [ "$DB_VENDOR" == "mysql" ] ; then
-        RES_TYPE=javax.sql.DataSource
-        DS_CLASS_NAME=com.mysql.jdbc.jdbc2.optional.MysqlDataSource
-        PROPERTIES=User=$DB_USER:Password=$DB_PASS:Host=$DB_HOST:DatabaseName=$DB_NAME
-    fi
+        echo Creating JDBC resource
+        $SERVER_DIR/glassfish/bin/asadmin create-jdbc-resource --connectionpoolid=FrenchPressPool \
+            jdbc/frenchpress > /dev/null
 
-    echo Creating connection pool
-    $SERVER_DIR/glassfish/bin/asadmin create-jdbc-connection-pool --restype=$RES_TYPE \
-        --datasourceclassname=$DS_CLASS_NAME --property=$PROPERTIES FrenchPressPool > /dev/null
+        echo Pinging connection pool
+        $SERVER_DIR/glassfish/bin/asadmin ping-connection-pool FrenchPressPool   
 
-    echo Creating JDBC resource
-    $SERVER_DIR/glassfish/bin/asadmin create-jdbc-resource --connectionpoolid=FrenchPressPool \
-        jdbc/frenchpress > /dev/null
-
-    echo Pinging connection pool
-    $SERVER_DIR/glassfish/bin/asadmin ping-connection-pool FrenchPressPool   
-
-    if [ $? -ne 0 ] ; then
-        echo Ping the database server failed.  Please correct the error and try again.
-        exit -1
+        if [ $? -ne 0 ] ; then
+            echo Ping the database server failed.  Please correct the error and try again.
+            exit -1
+        fi
+    elif [ "$SERVER" == "tomee" ] ; then
+        if [ "$DB_VENDOR" == "pgsql" ] ; then
+            echo -e "<tomee><Resource id=\"frenchpress\" type=\"DataSource\">\nJdbcDriver   org.postgresql.Driver\nJdbcUrl  jdbc:postgresql://$DB_HOST/$DB_NAME\nUserName $DB_USER\nPassword $DB_PASS\n</Resource></tomee>" > $SERVER_DIR/conf/tomee.xml
+        fi
     fi
 }
 
@@ -107,6 +121,14 @@ function setVendor() {
     echo Database vendor set to $DB_VENDOR
 }
 
+function installServer() {
+    if [ "$SERVER" == "glassfish" ] ; then
+        installGlassFish
+    elif [ "$SERVER" == "tomee" ] ; then
+        installTomee
+    fi
+}
+
 function installGlassFish() {
     # This function needs to take into account $SERVER_DIR during extraction
     if [ ! -e glassfish.zip ] ; then
@@ -116,6 +138,28 @@ function installGlassFish() {
 
     echo Extracting GlassFish
     unzip glassfish.zip > /dev/null
+    sed -i -e "s/9009\"/9009\" debug-enabled=\"true\"/" glassfish4/glassfish/domains/domain1/config/domain.xml
+    copyJdbcJars $SERVER_DIR/glassfish/lib
+}
+
+function installTomee() {
+    if [ ! -e tomee.tar.gz ] ; then
+        wget http://www.globalish.com/am/tomee/tomee-1.5.2/apache-tomee-1.5.2-jaxrs.tar.gz -O tomee.tar.gz
+    fi
+    
+    echo Extracting Tomee
+    tar xf tomee.tar.gz
+    mv apache-tomee-jaxrs* tomee
+    copyJdbcJars $SERVER_DIR/lib
+}
+
+function copyJdbcJars() {
+    for JAR in $JAR_DIR/*.jar ; do
+        FILE=`basename $JAR`
+        if [ ! -e $1/$FILE ] ; then
+            cp $JAR $1
+        fi
+    done
 }
 
 function reinstallGlassFish() {
@@ -124,13 +168,28 @@ function reinstallGlassFish() {
     installGlassFish
 }
 
+function reinstallTomee() {
+    stopServer &> /dev/null
+    rm -rf $SERVER_DIR
+    installTomee
+}
+
+function tailLog() {
+    if [ "$SERVER" == "glassfish" ] ; then
+        tail -f $SERVER_DIR/glassfish/domains/domain1/logs/server.log
+    elif [ "$SERVER" == "tomee" ] ; then
+        tail -f $SERVER_DIR/logs/catalina.out
+    fi
+}
+    
+
 function usage() {
     echo "The arguments to use are:"
     echo "  -c : Open SQL shell"
-    echo "  -d : Drop the existing tables"
-    echo "  -g : Install GlassFish, downloading if necessary"
-    echo "  -G : Reinstall GlassFish"
-    echo "  -i : Install Frenchpress"
+    echo "  -d : Install Frenchpress"
+    echo "  -D : Drop the existing tables"
+    echo "  -i : Install GlassFish, downloading if necessary"
+    echo "  -I : Reinstall GlassFish"
     echo "  -j : Configure the JDBC resources on the server"
     echo "  -l : Load sample media data and exit"
     echo "  -r : Restart the server"
@@ -145,16 +204,16 @@ while getopts cdgGijlrsStuv: opt
 do
     case "$opt" in
         c) sqlShell ;;
-        d) dropTables ;;
-        g) installGlassFish ;;
-        G) reinstallGlassFish ;;
-        i) install ;;
+        D) dropTables ;;
+        d) deploy ;;
+        i) installServer ;;
+        I) reinstallServer ;;
         j) configureJdbc ;;
         l) loadSampleData ;;
         r) stopServer ; startServer ;;
         s) startServer ;;
         S) stopServer ;;
-        t) tail -f $SERVER_DIR/glassfish/domains/domain1/logs/server.log ;;
+        t) tailLog ;;
         u) uninstall ;;
         v) setVendor $OPTARG ;;
         *) usage ; exit -1 ;;

@@ -33,6 +33,7 @@ public class UserConverter implements Converter {
         if (o instanceof Long) {
             return o.toString();
         }
-        return ((User)o).getId().toString();
+        
+        return (o != null) ? ((User)o).getId().toString() : null;
     }
 }

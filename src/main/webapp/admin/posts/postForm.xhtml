@@ -7,7 +7,7 @@
         <h:outputLabel for="title">Title</h:outputLabel>
         <h:inputText id="title" value="#{postBean.post.title}" onchange="generateSlug(this.value);"/>
         <h:outputLabel for="slug">Slug</h:outputLabel>
-        <h:inputText id="slug" value="#{postBean.post.slug}" onchange="customSlug = true"/>
+        <h:inputText id="slug" value="#{postBean.post.slug}" onchange="customSlug = true;"/>
         <h:outputLabel for="body">Body</h:outputLabel>
         <rich:editor id="body" value="#{postBean.post.body}" height="300" toolbar="full" width="900">
             <f:facet name="config">
