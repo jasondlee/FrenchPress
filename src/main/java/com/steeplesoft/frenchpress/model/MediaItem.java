@@ -94,20 +94,6 @@ public class MediaItem implements Serializable {
     public void setUploadedDate(Date uploadedDate) {
         this.uploadedDate = uploadedDate;
     }
-    
-    public String getUploadedMonth() {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(uploadedDate);
-        final String month = "0"+(cal.get(Calendar.MONTH) + 1);
-        return month.substring(month.length()-2);
-    }
-
-    public String getUploadedYear() {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(uploadedDate);
-        final String month = "0000"+(cal.get(Calendar.YEAR));
-        return month.substring(month.length()-4);
-    }
 
     @Override
     public boolean equals(Object obj) {

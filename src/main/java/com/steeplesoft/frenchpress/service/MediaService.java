@@ -10,13 +10,13 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
 
 @RequestScoped
@@ -25,6 +25,11 @@ public class MediaService {
     @PersistenceContext
 //    @Inject
     protected EntityManager em;
+    
+    @GET
+    public String list() {
+        return "hi!";
+    }
     
     @GET
     @Path("/id/{id}/")
@@ -47,10 +52,10 @@ public class MediaService {
         query.setParameter("START", startDate.getTime());
         query.setParameter("END", endDate.getTime());
         query.setParameter("NAME", name);
-        final MediaItem item = query.getSingleResult();
-        if (item != null) {
+        try {
+            final MediaItem item = query.getSingleResult();
             return Response.ok(item.getContents(), item.getMimeType()).build();
-        } else {
+        } catch (NoResultException nre) {
             return Response.status(Status.NOT_FOUND).build();
         }
     }

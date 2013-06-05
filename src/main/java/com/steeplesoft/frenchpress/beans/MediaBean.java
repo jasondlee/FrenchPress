@@ -8,9 +8,11 @@ import com.steeplesoft.frenchpress.model.MediaItem;
 import com.steeplesoft.frenchpress.service.MediaService;
 import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.List;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
+import org.richfaces.component.UIDataTable;
 
 import org.richfaces.event.FileUploadEvent;
 import org.richfaces.model.UploadedFile;
@@ -19,15 +21,14 @@ import org.richfaces.model.UploadedFile;
  *
  * @author jdlee
  */
-//@Named
-//@SessionScoped
 @Model
 public class MediaBean implements Serializable { //implements FileEntryCallback {
     @Inject
-    MediaService mediaService;
+    protected MediaService mediaService;
+    protected UIDataTable dataTable;
     
-    MediaItem item = new MediaItem();
-    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    protected MediaItem item = new MediaItem();
+    protected ByteArrayOutputStream baos = new ByteArrayOutputStream();
     
     public List<MediaItem> getItems() {
         return mediaService.getItems();
@@ -47,4 +48,21 @@ public class MediaBean implements Serializable { //implements FileEntryCallback 
         return "";
     }
     
+    public String getMediaItemUrl(MediaItem item) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(item.getUploadedDate());
+        final String month = "0"+(cal.get(Calendar.MONTH) + 1);
+        final String year = "0000"+(cal.get(Calendar.YEAR));
+        return "/rest/uploads/" + year.substring(year.length()-4) + "/" + 
+                month.substring(month.length()-2) + "/" + 
+                item.getName();
+    }
+
+    public UIDataTable getDataTable() {
+        return dataTable;
+    }
+
+    public void setDataTable(UIDataTable dataTable) {
+        this.dataTable = dataTable;
+    }
 }

@@ -139,13 +139,14 @@ function reinstallServer() {
 
 function installGlassFish() {
     # This function needs to take into account $SERVER_DIR during extraction
-    if [ ! -e glassfish.zip ] ; then
-        wget http://dlc.sun.com.edgesuite.net/glassfish/4.0/nightly/glassfish-4.0-web-b86-04_24_2013.zip -O glassfish.zip
+    FILE=glassfish-4.0-b90-05_28_2013.zip  
+    if [ ! -e $FILE ] ; then
+        wget http://dlc.sun.com.edgesuite.net/glassfish/4.0/nightly/$FILE
             #http://download.java.net/glassfish/3.1.2/release/glassfish-3.1.2.zip
     fi
 
     echo Extracting GlassFish
-    unzip glassfish.zip > /dev/null
+    unzip $FILE > /dev/null
     sed -i -e "s/9009\"/9009\" debug-enabled=\"true\"/" glassfish4/glassfish/domains/domain1/config/domain.xml
     copyJdbcJars $SERVER_DIR/glassfish/lib
 }

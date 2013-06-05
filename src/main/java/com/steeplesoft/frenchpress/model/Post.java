@@ -24,8 +24,11 @@ public class Post implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @TableGenerator(name="seq_gen", table = "sequence", pkColumnName = "seq_name", valueColumnName = "seq_count")
-    @GeneratedValue(generator="seq_gen", strategy = GenerationType.TABLE)
+//    @TableGenerator(name="post_seq", table = "sequence", 
+//            pkColumnName = "seq_name", valueColumnName = "seq_count",
+//            pkColumnValue = "post_seq")
+    @SequenceGenerator(name = "post_seq", sequenceName = "post_seq")
+    @GeneratedValue(generator="post_seq", strategy = GenerationType.SEQUENCE)
     private Long id;
     @Version
     private int version;

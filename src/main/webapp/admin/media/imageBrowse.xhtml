@@ -9,12 +9,9 @@
         <link href="#{request.contextPath}/admin/style.css" rel="stylesheet" type="text/css" media="all"/>
         <meta name='robots' content='noindex,nofollow' />
         <script type="text/javascript">
-                function getUrlParam(paramName) {
-                  var reParam = new RegExp('(?:[\?&amp;]|&amp;amp;)' + paramName + '=([^&amp;]+)', 'i') ;
-                  var match = window.location.search.match(reParam) ;
-
-                  return (match &amp;&amp; match.length > 1) ? match[1] : '' ;
-                }
+            function getUrlParam(paramName) {
+                return window.location.search.substr(window.location.search.indexOf(paramName)+(paramName.length+1), 1);
+            }
         </script>
     </h:head>
     <h:body>
@@ -24,15 +21,15 @@
                 Upload
                 <rich:fileUpload id="fileEntryComp"
                                  fileUploadListener="#{mediaBean.listener}">
-                    <f:ajax event="uploadcomplete"/>
+                    <f:ajax event="uploadcomplete" render="mediaForm:items"/>
                 </rich:fileUpload>
             </div>
             <div style="float: right; width: 600px; padding:3px;">
                 <h:dataTable id="items" var="item" value="#{mediaBean.items}">
                     <h:column>#{item.name}</h:column>
                     <h:column>
-                        <a href="#" onclick="alert(getUrlParam('CKEditorFuncNum')); window.opener.CKEDITOR.tools.callFunction( getUrlParam('CKEditorFuncNum'), '#{request.contextPath}/uploads/#{item.uploadedYear}/#{item.uploadedMonth}/#{item.name}' ); window.close();">
-                            <h:graphicImage value="/uploads/#{item.uploadedYear}/#{item.uploadedMonth}/#{item.name}"
+                        <a href="#" onclick="window.opener.CKEDITOR.tools.callFunction( getUrlParam('CKEditorFuncNum'), '#{request.contextPath}#{mediaBean.getMediaItemUrl(item)}' ); window.close();">
+                            <h:graphicImage value="#{mediaBean.getMediaItemUrl(item)}"
                                             width="200px"/>
                         </a>
                     </h:column> 
