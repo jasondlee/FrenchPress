@@ -16,13 +16,13 @@
     </h:head>
     <h:body>
         <h:messages/>
-        <h:form id="mediaForm">
+        <h:form id="mediaForm" enctype="multipart/form-data">
             <div style="float: left; width: 400px; padding:3px;">
                 Upload
-                <rich:fileUpload id="fileEntryComp"
-                                 fileUploadListener="#{mediaBean.listener}">
-                    <f:ajax event="uploadcomplete" render="mediaForm:items"/>
-                </rich:fileUpload>
+                <h:inputFile value="#{mediaBean.uploadedFile}"/>
+                <br/>
+                <h:commandButton action="#{mediaBean.upload()}" value="Upload">
+                </h:commandButton>
             </div>
             <div style="float: right; width: 600px; padding:3px;">
                 <h:dataTable id="items" var="item" value="#{mediaBean.items}">
@@ -32,7 +32,7 @@
                             <h:graphicImage value="#{mediaBean.getMediaItemUrl(item)}"
                                             width="200px"/>
                         </a>
-                    </h:column> 
+                    </h:column>
                 </h:dataTable>
             </div>
         </h:form>

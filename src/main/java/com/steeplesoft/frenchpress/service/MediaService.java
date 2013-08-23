@@ -18,6 +18,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import javax.transaction.Transactional;
 
 @RequestScoped
 @Path("/uploads")
@@ -25,12 +26,12 @@ public class MediaService {
     @PersistenceContext
 //    @Inject
     protected EntityManager em;
-    
+
     @GET
     public String list() {
         return "hi!";
     }
-    
+
     @GET
     @Path("/id/{id}/")
     public MediaItem getItem(@PathParam("id") Long id) {
@@ -40,8 +41,8 @@ public class MediaService {
     @GET
     @Path("{year}/{month}/{name}")
     public Response getItem(
-            @PathParam("year") int year, 
-            @PathParam("month") int month, 
+            @PathParam("year") int year,
+            @PathParam("month") int month,
             @PathParam("name") String name
             ) {
         Calendar startDate = new GregorianCalendar(year, month-1, 1);
@@ -64,10 +65,14 @@ public class MediaService {
         return em.createQuery("SELECT mi from MediaItem mi", MediaItem.class)
                 .getResultList();
     }
-    
+
     @Transactional
     public void addItem(MediaItem item) {
-        em.persist(item);
+        try {
+            em.persist(item);
+        }catch (Exception e) {
+            throw new RuntimeException (e);
+        }
     }
-    
+
 }

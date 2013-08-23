@@ -12,13 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -31,8 +28,7 @@ public class Comment implements FpEntity, Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @TableGenerator(name="seq_gen", table = "sequence", pkColumnName = "seq_name", valueColumnName = "seq_count")
-    @GeneratedValue(generator="seq_gen", strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 //    @Version
 //    private int version;
@@ -48,7 +44,7 @@ public class Comment implements FpEntity, Serializable {
     @ManyToOne
     @JoinColumn(name="POST_ID")
     private Post post;
-    
+
     public User getAuthor() {
         return author;
     }

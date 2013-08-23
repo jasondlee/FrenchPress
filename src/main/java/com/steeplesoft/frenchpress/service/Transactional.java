@@ -15,10 +15,10 @@ import javax.interceptor.InterceptorBinding;
  *
  * @author jdlee
  */
-@Inherited
-@InterceptorBinding
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.TYPE})
-public @interface Transactional {
+//@Inherited
+//@InterceptorBinding
+//@Retention(RetentionPolicy.RUNTIME)
+//@Target({ElementType.METHOD, ElementType.TYPE})
+public interface Transactional {
 
 }

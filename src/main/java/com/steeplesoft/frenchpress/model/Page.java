@@ -23,8 +23,7 @@ import javax.validation.constraints.NotNull;
 public class Page implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @TableGenerator(name="seq_gen", table = "sequence", pkColumnName = "seq_name", valueColumnName = "seq_count")
-    @GeneratedValue(generator="seq_gen", strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @NotNull
     private String title;

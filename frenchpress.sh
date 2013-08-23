@@ -48,7 +48,7 @@ function dropTables() {
 }
 
 function deploy() {
-    mvn -Dmaven.test.skip=true package
+    mvn -Dmaven.test.skip=true $CLEAN package
     if [ $? -eq 0 ] ; then
         if [ "$SERVER" == "glassfish" ] ; then
             $SERVER_DIR/bin/asadmin deploy --force target/frenchpress*/
@@ -194,7 +194,8 @@ function tailLog() {
 
 function usage() {
     echo "The arguments to use are:"
-    echo "  -c : Open SQL shell"
+    echo "  -c : Clean the project"
+    echo "  -C : Open SQL shell"
     echo "  -d : Install Frenchpress"
     echo "  -D : Drop the existing tables"
     echo "  -i : Install the server, downloading if necessary"
@@ -212,7 +213,8 @@ function usage() {
 while getopts cDdiIjlrsStuv: opt
 do
     case "$opt" in
-        c) sqlShell ;;
+        c) CLEAN=clean ;;
+        C) sqlShell ;;
         D) dropTables ;;
         d) deploy ;;
         i) installServer ;;

@@ -6,7 +6,6 @@ package com.steeplesoft.frenchpress.model;
 
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -28,12 +27,12 @@ import javax.persistence.Version;
  */
 @Entity
 @Table(name = "mediaitems")
+@TableGenerator(name = "sequence", pkColumnName = "seq_name", valueColumnName = "seq_count" )
 public class MediaItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @TableGenerator(name="seq_gen", table = "sequence", pkColumnName = "seq_name", valueColumnName = "seq_count")
-    @GeneratedValue(generator="seq_gen", strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Version
     private int version;
@@ -133,7 +132,7 @@ public class MediaItem implements Serializable {
 
     @Override
     public String toString() {
-        return "MediaItem{" + "id=" + id + ", name=" + name + ", mimeType=" + mimeType + ", fileSize=" + fileSize + 
+        return "MediaItem{" + "id=" + id + ", name=" + name + ", mimeType=" + mimeType + ", fileSize=" + fileSize +
                 ", uploadedDate=" + uploadedDate + '}';
     }
 }

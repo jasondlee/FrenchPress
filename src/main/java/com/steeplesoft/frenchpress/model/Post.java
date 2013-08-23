@@ -22,13 +22,9 @@ import javax.validation.constraints.NotNull;
 })
 public class Post implements Serializable {
     private static final long serialVersionUID = 1L;
-    
+
     @Id
-//    @TableGenerator(name="post_seq", table = "sequence", 
-//            pkColumnName = "seq_name", valueColumnName = "seq_count",
-//            pkColumnValue = "post_seq")
-    @SequenceGenerator(name = "post_seq", sequenceName = "post_seq")
-    @GeneratedValue(generator="post_seq", strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Version
     private int version;

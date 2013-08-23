@@ -11,13 +11,14 @@ import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 import javax.transaction.Status;
 import javax.transaction.UserTransaction;
+import javax.transaction.Transactional;
 
 /**
  *
  * @author jdlee
  */
-@Transactional
-@Interceptor
+//@Transactional
+//@Interceptor
 public class TransactionalInterceptor implements Serializable {
     @Resource
     protected UserTransaction utx;

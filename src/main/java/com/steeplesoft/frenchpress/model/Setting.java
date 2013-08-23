@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.TableGenerator;
 
 /**
  *
@@ -21,8 +20,7 @@ import javax.persistence.TableGenerator;
 public class Setting implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @TableGenerator(name="seq_gen", table = "sequence", pkColumnName = "seq_name", valueColumnName = "seq_count")
-    @GeneratedValue(generator="seq_gen", strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     public Long getId() {
@@ -57,5 +55,5 @@ public class Setting implements Serializable {
     public String toString() {
         return "com.steeplesoft.frenchpress.model.Setting[ id=" + id + " ]";
     }
-    
+
 }
