@@ -16,3 +16,4 @@ nb-configuration.xml
 sample.png
 glassfish4
 hide
+/.nb-gradle/profiles/private/
