@@ -13,12 +13,13 @@ import java.util.List;
 import javax.enterprise.inject.Model;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIOutput;
+import javax.faces.component.html.HtmlDataTable;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
 import javax.servlet.ServletRequest;
-import org.richfaces.component.UIDataTable;
+//import org.richfaces.component.UIDataTable;
 /**
  *
  * @author jdlee
@@ -28,7 +29,7 @@ public class PostBean implements Serializable {
     @Inject
     private PostService postService;
     private Post post = new Post();
-    private UIDataTable dataTable;
+    private HtmlDataTable dataTable;
     private Comment comment = new Comment();
 
     public Post getPost() {
@@ -43,7 +44,7 @@ public class PostBean implements Serializable {
         if (!FacesContext.getCurrentInstance().getRenderResponse()) {
             return null;
         }
-        
+
         return postService.getPosts(limit);
     }
 
@@ -70,11 +71,11 @@ public class PostBean implements Serializable {
         return null;
     }
 
-    public UIDataTable getDataTable() {
+    public HtmlDataTable getDataTable() {
         return dataTable;
     }
 
-    public void setDataTable(UIDataTable dataTable) {
+    public void setDataTable(HtmlDataTable dataTable) {
         this.dataTable = dataTable;
     }
 
@@ -85,21 +86,21 @@ public class PostBean implements Serializable {
     public void setComment(Comment comment) {
         this.comment = comment;
     }
-    
+
     public String addComment() {
         loadPost();
         comment.setPost(post);
         post.getComments().add(comment);
         postService.updatePost(post);
         comment = new Comment();
-        
+
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect(post.getSlug());
         } catch (IOException ex) {
         }
         return null;
     }
-    
+
     public void format(ComponentSystemEvent event) throws AbortProcessingException {
         UIComponent uic = event.getComponent();
         if (uic instanceof UIOutput) {

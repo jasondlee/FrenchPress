@@ -3,15 +3,12 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:fp="http://java.sun.com/jsf/composite/frenchpress"
-      xmlns:rich="http://richfaces.org/rich">
-    <!--
-      xmlns:a4j="http://richfaces.org/a4j"
-    -->
+      xmlns:fp="http://java.sun.com/jsf/composite/frenchpress">
     <f:view transient="true">
         <h:head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
             <title>FrenchPress Administration</title>
+
             <link href="#{request.contextPath}/jquery/css/themes/frenchpress/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css" media="all"/>
             <link href="#{request.contextPath}/admin/style.css" rel="stylesheet" type="text/css" media="all"/>
             <script src="#{request.contextPath}/jquery/js/jquery-1.6.2.min.js" type="text/javascript"/>
@@ -19,36 +16,53 @@
             <meta name='robots' content='noindex,nofollow' />
             <style type="text/css">
                 body {
-                    background: url('#{request.contextPath}/images/fpbackground.png') no-repeat bottom left;
+                    background: url('#{request.contextPath}/images/fpbackground.png') no-repeat bottom right;
                 }
             </style>
+
+            <h:outputStylesheet  library="webjars/bootstrap/3.0.0/css"  name="bootstrap.min.css"/>
+            <h:outputScript library="webjars/bootstrap/3.0.0/js" name="bootstrap.min.js"/>
         </h:head>
         <h:body>
             <!--  collapsible="true" autoHeight="true" fillSpace="false" -->
             <h:panelGrid columns="2" columnClasses="nav,content" style="margin: 10px 0px 0px 10px" >
                 <h:panelGroup>
                     <h:form id="navForm">
-                        <rich:accordion id="nav" switchType="client" activeItem="#{uiBean.activeItem}">
-                            <f:ajax/>
-                            <rich:accordionItem id="home" header="Home">  
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Home</h4>
+                            </div>
+                            <div class="panel-body">
                                 <fp:link id="homelink" value="/admin/index.jsf">Dashboard</fp:link>
-                            </rich:accordionItem>
-                            <rich:accordionItem id="posts" header="Posts">  
+                            </div>
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Posts</h4>
+                            </div>
+                            <div class="panel-body">
                                 <fp:link value="/admin/posts/">All Posts</fp:link><br/>
                                 <fp:link value="/admin/posts/new.jsf">New Post</fp:link>
-                            </rich:accordionItem>
-                            <rich:accordionItem id="media" header="Media">  
+                            </div>
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Media</h4>
+                            </div>
+                            <div class="panel-body">
                                 <fp:link value="/admin/media/">All Items</fp:link><br/>
                                 <fp:link value="/admin/media/new.jsf">New Item</fp:link>
-                            </rich:accordionItem>
-                            <rich:accordionItem id="comments" header="Comments">  
+                            </div>
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Comments</h4>
+                            </div>
+                            <div class="panel-body">
                                 <fp:link value="/admin/comments/">All Comments</fp:link><br/>
-                            </rich:accordionItem>
-                            <rich:accordionItem id="users" header="Users">  
+                            </div>
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Users</h4>
+                            </div>
+                            <div class="panel-body">
                                 <fp:link value="/admin/users/">All Users</fp:link><br/>
                                 <fp:link value="/admin/users/new.jsf">New User</fp:link>
-                            </rich:accordionItem>
-                        </rich:accordion>
+                            </div>
+                        </div>
                     </h:form>
                 </h:panelGroup>
                 <h:panelGroup layout="block">
@@ -62,7 +76,7 @@
                     <div id="footer">
                         &#169;&#160;Copyright&#160;2011&#160;Jason Lee
 
-                        &#8901;&#160;Powered&#160;by&#160;<a href="http://github.com/jasondlee/frenchpress/">FrenchPress</a> 
+                        &#8901;&#160;Powered&#160;by&#160;<a href="http://github.com/jasondlee/frenchpress/">FrenchPress</a>
                     </div><!--footer-->
                 </h:panelGroup>
             </h:panelGrid>

@@ -6,33 +6,27 @@ package com.steeplesoft.frenchpress.beans;
 
 import com.steeplesoft.frenchpress.model.MediaItem;
 import com.steeplesoft.frenchpress.service.MediaService;
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 import javax.enterprise.inject.Model;
+import javax.faces.component.html.HtmlDataTable;
 import javax.inject.Inject;
 import javax.servlet.http.Part;
-import org.richfaces.component.UIDataTable;
-
-import org.richfaces.event.FileUploadEvent;
-import org.richfaces.exception.FileUploadException;
-import org.richfaces.model.UploadedFile;
+//import org.richfaces.component.UIDataTable;
 
 /**
  *
  * @author jdlee
  */
 @Model
-public class MediaBean implements Serializable { //implements FileEntryCallback {
-
+public class MediaBean implements Serializable {
     @Inject
     protected MediaService mediaService;
-    protected UIDataTable dataTable;
+    protected HtmlDataTable dataTable;
 
     protected MediaItem item = new MediaItem();
     protected Part uploadedFile;
@@ -86,11 +80,11 @@ public class MediaBean implements Serializable { //implements FileEntryCallback 
                 + item.getName();
     }
 
-    public UIDataTable getDataTable() {
+    public HtmlDataTable getDataTable() {
         return dataTable;
     }
 
-    public void setDataTable(UIDataTable dataTable) {
+    public void setDataTable(HtmlDataTable dataTable) {
         this.dataTable = dataTable;
     }
 

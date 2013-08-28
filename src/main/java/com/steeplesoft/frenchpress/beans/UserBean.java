@@ -10,7 +10,7 @@ import java.util.List;
 import javax.enterprise.inject.Model;
 import javax.faces.component.html.HtmlDataTable;
 import javax.inject.Inject;
-import org.richfaces.component.UIDataTable;
+//import org.richfaces.component.UIDataTable;
 
 /**
  *
@@ -20,13 +20,13 @@ import org.richfaces.component.UIDataTable;
 public class UserBean {
     @Inject
     private UserService userService;
-    private UIDataTable dataTable;
+    private HtmlDataTable dataTable;
     private User user = new User();
-    
+
     public List<User> getUsers() {
         return userService.getUsers();
     }
-    
+
     public void loadUser() {
         user = userService.getUser(user.getId());
     }
@@ -38,27 +38,27 @@ public class UserBean {
     public void setUser(User user) {
         this.user = user;
     }
-    
+
     public String save() {
         userService.createUser(user);
         return "/admin/users/index?faces-redirect=true";
     }
-    
+
     public String update() {
         userService.updateUser(user);
         return "/admin/users/index?faces-redirect=true";
     }
-    
+
     public String delete() {
         userService.deleteUser(user);
         return null;
     }
 
-    public UIDataTable getDataTable() {
+    public HtmlDataTable getDataTable() {
         return dataTable;
     }
 
-    public void setDataTable(UIDataTable dataTable) {
+    public void setDataTable(HtmlDataTable dataTable) {
         this.dataTable = dataTable;
     }
 }

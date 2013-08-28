@@ -1,0 +1,29 @@
+apply plugin: 'war'
+apply plugin: 'idea'
+
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+configurations {
+    provided
+}
+sourceSets {
+    main { compileClasspath += configurations.provided }
+}
+
+dependencies {
+    compile 'javax:javaee-api:7.0'
+    compile 'org.webjars:bootstrap:3.0.0'
+
+    //compile 'org.richfaces.core:richfaces-core-impl:4.3.1.Final'
+    //compile 'org.richfaces.ui:richfaces-components-ui:4.3.1.Final'
+    //runtime 'org.atmosphere:atmosphere-runtime:1.0.10'
+
+    testCompile 'junit:junit:4.11'
+    testCompile 'org.jboss.arquillian.junit:arquillian-junit-container:1.0.3.Final'
+    testCompile 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-impl-maven:2.0.0-beta-3'
+}

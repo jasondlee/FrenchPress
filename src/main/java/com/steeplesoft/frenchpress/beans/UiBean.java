@@ -7,7 +7,7 @@ package com.steeplesoft.frenchpress.beans;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import org.richfaces.component.UIAccordion;
+//import org.richfaces.component.UIAccordion;
 
 /**
  *
@@ -17,11 +17,15 @@ import org.richfaces.component.UIAccordion;
 @SessionScoped
 public class UiBean implements Serializable {
     private String activeItem ="home";
-    private UIAccordion accordion;
-
-    public UIAccordion getAccordion() {
-        return accordion;
-    }
+//    private UIAccordion accordion;
+//
+//    public UIAccordion getAccordion() {
+//        return accordion;
+//    }
+//
+//    public void setAccordion(UIAccordion accordion) {
+//        this.accordion = accordion;
+//    }
 
     public String getActiveItem() {
         return activeItem;
@@ -29,9 +33,5 @@ public class UiBean implements Serializable {
 
     public void setActiveItem(String activeItem) {
         this.activeItem = activeItem;
-    }
-    
-    public void setAccordion(UIAccordion accordion) {
-        this.accordion = accordion;
     }
 }

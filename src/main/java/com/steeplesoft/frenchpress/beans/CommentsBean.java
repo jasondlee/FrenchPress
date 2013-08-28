@@ -5,14 +5,14 @@
 package com.steeplesoft.frenchpress.beans;
 
 import com.steeplesoft.frenchpress.model.Comment;
-import com.steeplesoft.frenchpress.model.Post;
 import com.steeplesoft.frenchpress.service.CommentService;
 import java.util.List;
 import javax.enterprise.inject.Model;
+import javax.faces.component.html.HtmlDataTable;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.ServletRequest;
-import org.richfaces.component.UIDataTable;
+//import org.richfaces.component.UIDataTable;
 
 /**
  *
@@ -22,17 +22,17 @@ import org.richfaces.component.UIDataTable;
 public class CommentsBean {
     @Inject
     private CommentService commentService;
-    private UIDataTable dataTable;
+    private HtmlDataTable dataTable;
     private Comment comment = new Comment();
 
     private int start = 0;
     private int number = 25;
 
-    public UIDataTable getDataTable() {
+    public HtmlDataTable getDataTable() {
         return dataTable;
     }
 
-    public void setDataTable(UIDataTable dataTable) {
+    public void setDataTable(HtmlDataTable dataTable) {
         this.dataTable = dataTable;
     }
 
@@ -51,7 +51,7 @@ public class CommentsBean {
     public void setStart(int start) {
         this.start = start;
     }
-    
+
     public List<Comment> getComments() {
         return commentService.getComments(start, number);
     }
@@ -63,8 +63,9 @@ public class CommentsBean {
     }
 
     public String delete() {
-        Comment toDelete = (Comment) dataTable.getRowData();
-        commentService.deleteComment(toDelete);
+        // TODO
+//        Comment toDelete = (Comment) dataTable.getRowData();
+//        commentService.deleteComment(toDelete);
 
         return null;
     }
@@ -82,7 +83,7 @@ public class CommentsBean {
         if (!facesContext.isPostback()) {
             Comment requestedComment = (Comment) ((ServletRequest) facesContext.getExternalContext().getRequest())
                     .getAttribute("commentId");
-            comment = (requestedComment != null) ? requestedComment : 
+            comment = (requestedComment != null) ? requestedComment :
                     commentService.getComment(comment.getId());
         }
     }
