@@ -18,6 +18,8 @@ sourceSets {
 dependencies {
     compile 'javax:javaee-api:7.0'
     compile 'org.webjars:bootstrap:3.0.0'
+    compile 'org.webjars:jquery:1.10.2'
+    compile 'org.webjars:jquery-ui:1.10.2'
 
     //compile 'org.richfaces.core:richfaces-core-impl:4.3.1.Final'
     //compile 'org.richfaces.ui:richfaces-components-ui:4.3.1.Final'
@@ -27,3 +29,25 @@ dependencies {
     testCompile 'org.jboss.arquillian.junit:arquillian-junit-container:1.0.3.Final'
     testCompile 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-impl-maven:2.0.0-beta-3'
 }
+
+def getCkEditor() {
+    if (!file( "src/main/webapp/js/ckeditor").exists() ) {
+        ant.get(src: 'http://download.cksource.com/CKEditor/CKEditor/CKEditor%204.2/ckeditor_4.2_standard.zip',
+            dest : "$buildDir/dependency-cache/",
+            usetimestamp : true,
+            verbose:true)
+        ant.unzip(src:"$buildDir/dependency-cache/ckeditor_4.2_standard.zip",
+            dest: "src/main/webapp/js")
+    }
+}
+
+war.doLast {
+    getCkEditor()
+    ant.unzip(src: war.archivePath, dest: "$buildDir/exploded")
+}
+
+task cleanExtra(type: Delete) {
+    delete 'src/main/webapp/js/ckeditor'
+}
+
+clean.dependsOn cleanExtra

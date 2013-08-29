@@ -17,3 +17,4 @@ sample.png
 glassfish4
 hide
 /.nb-gradle/profiles/private/
+src/main/webapp/js
