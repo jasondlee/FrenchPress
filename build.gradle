@@ -41,8 +41,11 @@ def getCkEditor() {
     }
 }
 
-war.doLast {
+compileJava.doLast {
     getCkEditor()
+}
+
+war.doLast {
     ant.unzip(src: war.archivePath, dest: "$buildDir/exploded")
 }
 
