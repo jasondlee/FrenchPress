@@ -30,7 +30,9 @@
         </h:selectOneMenu>
 
         <h:outputLabel for="cal">Posted Date</h:outputLabel>
-        <h:inputText id="cal" value="#{postBean.post.posted}"/>
+        <h:inputText id="cal" value="#{postBean.post.posted}">
+            <f:convertDateTime pattern="mm/dd/yyyy"/>
+        </h:inputText>
     </h:panelGrid>
 
     <h:outputScript>
