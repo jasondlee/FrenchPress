@@ -21,7 +21,7 @@
 
         <h:outputLabel for="cal">Posted Date</h:outputLabel>
         <h:inputText id="cal" value="#{postBean.post.posted}">
-            <f:convertDateTime pattern="mm/dd/yyyy"/>
+            <f:convertDateTime pattern="yyyy/MM/dd"/>
         </h:inputText>
     </h:panelGrid>
 
@@ -34,7 +34,9 @@
             }
         );
         $(function() {
-            $( "#form\\:cal" ).datepicker();
+            $( "#form\\:cal" ).datepicker({
+                dateFormat: "yy/mm/dd"
+            });
         });
     </h:outputScript>
 </ui:composition>

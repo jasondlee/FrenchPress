@@ -16,7 +16,6 @@ import javax.enterprise.inject.Model;
 import javax.faces.component.html.HtmlDataTable;
 import javax.inject.Inject;
 import javax.servlet.http.Part;
-//import org.richfaces.component.UIDataTable;
 
 /**
  *

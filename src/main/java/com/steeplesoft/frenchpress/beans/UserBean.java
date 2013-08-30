@@ -10,7 +10,6 @@ import java.util.List;
 import javax.enterprise.inject.Model;
 import javax.faces.component.html.HtmlDataTable;
 import javax.inject.Inject;
-//import org.richfaces.component.UIDataTable;
 
 /**
  *

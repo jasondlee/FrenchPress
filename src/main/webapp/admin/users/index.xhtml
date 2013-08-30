@@ -2,50 +2,46 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:a4j="http://richfaces.org/a4j"
-      xmlns:rich="http://richfaces.org/rich">
+      xmlns:f="http://java.sun.com/jsf/core">
 
     <body>
         <ui:composition template="/admin/layout.xhtml">
             <ui:define name="content">
                 <h:form>
-                    <rich:dataTable id="userTable" 
+                    <h:dataTable id="userTable"
                                     rows="10"
                                     value="#{userBean.users}"
-                                    var="comment" 
+                                    var="comment"
                                     binding="#{userBean.dataTable}"
                                     style="width: 100%">
-                        <f:facet name="header"><rich:dataScroller/></f:facet>
-                        <rich:column>
+                        <h:column>
                             <f:facet name="header">Last Name</f:facet>
                             #{user.lastName}
-                        </rich:column>
-                        <rich:column>
+                        </h:column>
+                        <h:column>
                             <f:facet name="header">First Name</f:facet>
                             #{user.firstName}
-                        </rich:column>
-                        <rich:column>
+                        </h:column>
+                        <h:column>
                             <f:facet name="header">Email Address</f:facet>
                             #{user.emailAddress}
-                        </rich:column>
-                        <rich:column>
+                        </h:column>
+                        <h:column>
                             <f:facet name="header">Role</f:facet>
                             #{user.role}
-                        </rich:column>
-                        <rich:column>
+                        </h:column>
+                        <h:column>
                             <a href="edit.jsf?userId=#{user.id}">Edit</a>
                             &#160;|&#160;
                             <h:commandLink value="Delete" onclick="return confirm('Are you sure you want to delete this user?');"
                                            action="#{userBean.delete}"/>
-                        </rich:column>
-                        <f:facet name="footer"><rich:dataScroller/></f:facet>
-                    </rich:dataTable>
-                    <rich:dataTable id="userTable"
+                        </h:column>
+                    </h:dataTable>
+                    <h:dataTable id="userTable"
                                    value="#{userBean.users}"
                                    var="user" binding="#{userBean.dataTable}"
                                    style="width: 100%">
-                    </rich:dataTable>
+                    </h:dataTable>
                 </h:form>
             </ui:define>
         </ui:composition>

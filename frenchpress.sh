@@ -52,7 +52,7 @@ function deploy() {
     gradle --daemon $CLEAN assemble
     if [ $? -eq 0 ] ; then
         if [ "$SERVER" == "glassfish" ] ; then
-            $SERVER_DIR/bin/asadmin deploy --force build/libs/frenchpress-1.0-SNAPSHOT.war
+            $SERVER_DIR/bin/asadmin deploy --force build/exploded
         elif [ "$SERVER" == "tomee" ] ; then
             cp target/frenchpress*war $SERVER_DIR/webapps/frenchpress.war
         fi

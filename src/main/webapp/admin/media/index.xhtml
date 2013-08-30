@@ -3,8 +3,7 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:rich="http://richfaces.org/rich">
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
 
     </h:head>
@@ -12,36 +11,36 @@
         <ui:composition template="/admin/layout.xhtml">
             <ui:define name="content">
                 <h:form id="form">
-                    <rich:dataTable id="mediaTable"
+                    <h:dataTable id="mediaTable"
                                     value="#{mediaBean.getItems()}"
                                     var="item"
                                     binding="#{mediaBean.dataTable}"
                                     style="width: 100%">
                         <ui:remove>
-                            <rich:column sortBy="#{item.id}">
+                            <h:column>
                                 <f:facet name="header">ID</f:facet>
                                     #{item.id}
-                            </rich:column>
+                            </h:column>
                         </ui:remove>
-                        <rich:column sortBy="#{item.name}">
+                        <h:column>
                             <f:facet name="header">Name</f:facet>
                                 #{item.name}
-                        </rich:column>
-                        <rich:column sortBy="#{item.mimeType}">
+                        </h:column>
+                        <h:column>
                             <f:facet name="header">Mime Type</f:facet>
                                 #{item.mimeType}
-                        </rich:column>
-                        <rich:column sortBy="#{item.fileSize}">
+                        </h:column>
+                        <h:column>
                             <f:facet name="header">File Size</f:facet>
                                 #{item.fileSize}
-                        </rich:column>
-                        <rich:column>
+                        </h:column>
+                        <h:column>
                             <a href="#{request.contextPath}/admin/media/edit.jsf?itemId=#{item.id}">Edit</a>
                             &#160;|&#160;
                             <h:commandLink value="Delete" onclick="return confirm('Are you sure you want to delete this item?');"
                                            action="#{mediaBean.delete}"/>
-                        </rich:column>
-                    </rich:dataTable>
+                        </h:column>
+                    </h:dataTable>
                 </h:form>
             </ui:define>
         </ui:composition>

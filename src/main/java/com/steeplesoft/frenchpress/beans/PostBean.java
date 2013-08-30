@@ -19,7 +19,7 @@ import javax.faces.event.AbortProcessingException;
 import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
 import javax.servlet.ServletRequest;
-//import org.richfaces.component.UIDataTable;
+
 /**
  *
  * @author jdlee

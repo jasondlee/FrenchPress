@@ -3,8 +3,6 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:a4j="http://richfaces.org/a4j"
-                xmlns:rich="http://richfaces.org/rich"
                 template="/admin/layout.xhtml">
 
     <ui:define name="content">
@@ -19,16 +17,16 @@
             <h:panelGrid id="pg" columns="2">
                 <h:outputLabel for="post">Post</h:outputLabel>
                 <h:outputText id="post" value="#{commentsBean.comment.post.title}"/>
-                
+
                 <h:outputLabel for="author">Author Name</h:outputLabel>
                 <h:inputText id="author" value="#{commentsBean.comment.authorName}"/>
-                
+
                 <h:outputLabel for="url">Author URL</h:outputLabel>
                 <h:inputText id="url" value="#{commentsBean.comment.authorUrl}"/>
-                
+
                 <h:outputLabel for="email">Author Email:</h:outputLabel>
                 <h:inputText id="email" value="#{commentsBean.comment.authorEmail}"/>
-                
+
                 <h:outputLabel for="cal">Posted Date:</h:outputLabel>
                 <rich:calendar id="commentDate" datePattern="MM/dd/yyyy HH:mm" value="#{commentsBean.comment.commentDate}"/>
 

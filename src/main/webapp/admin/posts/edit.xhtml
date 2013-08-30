@@ -3,8 +3,6 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:a4j="http://richfaces.org/a4j"
-                xmlns:rich="http://richfaces.org/rich"
                 template="/admin/layout.xhtml">
 
     <ui:define name="content">
@@ -13,7 +11,7 @@
             <f:event type="preRenderView" listener="#{postBean.loadPost}" />
         </f:metadata>
         <h3>Edit a Post</h3>
-        <h:form id="editPostForm">
+        <h:form id="form">
             <h:inputHidden value="#{postBean.post.id}"/>
             <h:inputHidden value="#{postBean.post.version}"/>
             <ui:include src="postForm.xhtml"/>

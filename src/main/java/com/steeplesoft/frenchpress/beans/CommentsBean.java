@@ -12,7 +12,6 @@ import javax.faces.component.html.HtmlDataTable;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.ServletRequest;
-//import org.richfaces.component.UIDataTable;
 
 /**
  *
