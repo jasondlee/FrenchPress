@@ -9,6 +9,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 /**
  *
@@ -31,6 +32,7 @@ public class UserService {
                 .getResultList();
     }
 
+    @Transactional
     public void createUser(User user) {
         em.persist(user);
     }
@@ -43,7 +45,7 @@ public class UserService {
         }
     }
 
-    @javax.transaction.Transactional
+    @Transactional
     public void deleteUser(User user) {
         List<User> admins = getUsersForRole("Administrator");
         if (!admins.isEmpty()) {
@@ -55,7 +57,7 @@ public class UserService {
         em.remove(user);
     }
 
-    @javax.transaction.Transactional
+    @Transactional
     public void updateUser(User user) {
         em.merge(user);
     }

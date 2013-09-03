@@ -2,11 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:fp="http://java.sun.com/jsf/composite/frenchpress">
 
     <body>
         <ui:composition template="/admin/layout.xhtml">
             <ui:define name="content">
+                <fp:link value="/admin/users/new.jsf">Add a New User</fp:link>
+                <br/>
                 <h:form>
                     <h:dataTable id="userTable"
                                     rows="10"
@@ -43,6 +46,7 @@
                                    style="width: 100%">
                     </h:dataTable>
                 </h:form>
+                <fp:link value="/admin/users/new.jsf">Add a New User</fp:link>
             </ui:define>
         </ui:composition>
     </body>

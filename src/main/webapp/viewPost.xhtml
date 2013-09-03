@@ -17,7 +17,7 @@
             </h:outputText>
         </span>
         <div class="postBody">
-            <h:outputText value="#{post.body}" escape="false" converter="#{newlineConverter}"> 
+            <h:outputText value="#{post.body}" escape="false" converter="#{newlineConverter}">
                 <f:event type="preRenderComponent" listener="#{postBean.format}"/>
             </h:outputText>
             <hr/>
@@ -37,7 +37,7 @@
                                     <f:convertDateTime dateStyle="long" timeStyle="full"/>
                                 </h:outputText>
                                 <a href="##{status.index+1}">#</a><br/>
-                                <h:outputText value="#{comment.body}" style="display: block; margin: 10px 0px 10px 0px;" 
+                                <h:outputText value="#{comment.body}" style="display: block; margin: 10px 0px 10px 0px;"
                                               escape="false" converter="#{newlineConverter}">
                                 </h:outputText>
                             </td>
@@ -51,11 +51,11 @@
                 <h:inputHidden value="#{postBean.post.id}"/>
                 <h:panelGrid columns="2">
                     <h:outputLabel for="name">Name:</h:outputLabel>
-                    <h:inputText id="name" value="#{postBean.comment.authorName}"/>
+                    <h:inputText id="name" value="#{postBean.comment.authorName}" size="40"/>
                     <h:outputLabel for="email">Email:</h:outputLabel>
-                    <h:inputText id="email" value="#{postBean.comment.authorEmail}"/>
-                    <h:outputLabel for="website">Website:</h:outputLabel>
-                    <h:inputText id="website" value="#{postBean.comment.authorUrl}"/>
+                    <h:inputText id="email" value="#{postBean.comment.authorEmail}" size="40"/>
+                    <h:outputLabel for="website">Web site:</h:outputLabel>
+                    <h:inputText id="website" value="#{postBean.comment.authorUrl}" size="80"/>
                     <h:outputLabel for="comment">Comment:</h:outputLabel>
                     <h:inputTextarea id="comment" value="#{postBean.comment.body}" rows="20" cols="80"/>
                 </h:panelGrid>

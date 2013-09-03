@@ -51,6 +51,10 @@ public class CommentsBean {
         this.start = start;
     }
 
+    public List<Comment> getComments(int limit) {
+        return commentService.getComments(limit);
+    }
+
     public List<Comment> getComments() {
         return commentService.getComments(start, number);
     }
@@ -63,8 +67,8 @@ public class CommentsBean {
 
     public String delete() {
         // TODO
-//        Comment toDelete = (Comment) dataTable.getRowData();
-//        commentService.deleteComment(toDelete);
+        Comment toDelete = (Comment) dataTable.getRowData();
+        commentService.deleteComment(toDelete);
 
         return null;
     }

@@ -10,7 +10,7 @@
                 <h:form>
                     <h:dataTable id="commentTable"
                                     rows="10"
-                                    value="#{commentModel}"
+                                    value="#{commentsBean.getComments(-1)}"
                                     var="comment"
                                     binding="#{commentsBean.dataTable}"
                                     style="width: 100%">
