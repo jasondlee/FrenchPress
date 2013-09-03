@@ -1,6 +1,23 @@
+buildscript {
+    repositories {
+//        mavenRepo(url: 'http://jcenter.bintray.com')
+        mavenLocal()
+    }
+
+    dependencies {
+        classpath 'org.jboss.arquillian.gradle:arquillian-gradle-plugin:0.1-jason'
+    }
+}
+
 apply plugin: 'war'
 apply plugin: 'idea'
+apply plugin: 'arquillian'
 
+//try {
+//    apply from: profile + '-profile.gradle'
+//} catch (Exception e) {
+//
+//}
 version = '1.0-SNAPSHOT'
 
 repositories {
@@ -11,6 +28,7 @@ repositories {
 configurations {
     provided
 }
+
 sourceSets {
     main { compileClasspath += configurations.provided }
 }
@@ -27,7 +45,39 @@ dependencies {
 
     testCompile 'junit:junit:4.11'
     testCompile 'org.jboss.arquillian.junit:arquillian-junit-container:1.0.3.Final'
-    testCompile 'org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-impl-maven:2.0.0-beta-3'
+}
+
+arquillian {
+    debug = true
+    deployable = file("$buildDir/libs/frenchpress-${version}.war")
+
+    containers {
+
+        glassfish {
+            version = '3.1'
+            type = 'remote'
+        }
+
+        jetty {
+            version = '8'
+            type = 'embedded'
+            config = ['bindHttpPort': 8085, 'bindAddress': '127.0.0.1', 'jettyPlus': false]
+
+            dependencies {
+                adapter 'org.jboss.arquillian.container:arquillian-jetty-embedded-7:1.0.0.CR2'
+                container 'org.eclipse.jetty:jetty-webapp:8.1.11.v20130520'
+                container group: 'org.eclipse.jetty', name: 'jetty-plus', version: '8.1.11.v20130520'
+            }
+        }
+
+        //        glassfish {
+        //            version = '3.1'
+        //            type = 'remote'
+        //            dependencies {
+        //                adapter 'org.jboss.arquillian.container:arquillian-glassfish-remote-3.1:1.0.0.CR4'
+        //            }
+        //        }
+    }
 }
 
 def getCkEditor() {
@@ -41,16 +91,16 @@ def getCkEditor() {
     }
 }
 
+task cleanExtra(type: Delete) {
+    delete 'src/main/webapp/js/ckeditor'
+}
+
 compileJava.doLast {
     getCkEditor()
 }
 
 war.doLast {
     ant.unzip(src: war.archivePath, dest: "$buildDir/exploded")
-}
-
-task cleanExtra(type: Delete) {
-    delete 'src/main/webapp/js/ckeditor'
 }
 
 clean.dependsOn cleanExtra
