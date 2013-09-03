@@ -9,7 +9,7 @@
 
     <ui:define name="content">
         <f:metadata>
-            <f:viewParam name="userId" value="#{userBean.user.id}" required="true" requiredMessage="User id is required"/>
+            <f:viewParam name="userId" value="#{userBean.user.id}" required="false" requiredMessage="User id is required"/>
             <f:event type="preRenderView" listener="#{userBean.loadUser}" />
         </f:metadata>
         <h3>Edit a user</h3>

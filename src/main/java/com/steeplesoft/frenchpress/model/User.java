@@ -31,7 +31,7 @@ public class User implements Serializable {
     @NotNull
     @Pattern(regexp = ".+@.+\\.[a-z]+")
     private String emailAddress;
-    @NotNull
+//    @NotNull
     private String password;
     private String userRole;
 

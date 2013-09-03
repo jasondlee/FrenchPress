@@ -15,30 +15,35 @@ import javax.persistence.PersistenceContext;
  * @author jdlee
  */
 public class UserService {
+
     @PersistenceContext
     protected EntityManager em;
-
     @Inject
     PostService postService;
-    
+
     public List<User> getUsers() {
-        return (List<User>)em.createQuery("SELECT u FROM User u ORDER BY u.firstName, u.lastName").getResultList();
+        return (List<User>) em.createQuery("SELECT u FROM User u ORDER BY u.firstName, u.lastName").getResultList();
     }
 
     public List<User> getUsersForRole(String role) {
-        return (List<User>)em.createQuery("SELECT u FROM User u WHERE u.userRole = :role")
+        return (List<User>) em.createQuery("SELECT u FROM User u WHERE u.userRole = :role")
                 .setParameter("role", role)
                 .getResultList();
     }
-    
+
     public void createUser(User user) {
         em.persist(user);
     }
-    
+
     public User getUser(Long id) {
-        return em.find(User.class, id);
+        if (id != null) {
+            return em.find(User.class, id);
+        } else {
+            return null;
+        }
     }
-    
+
+    @javax.transaction.Transactional
     public void deleteUser(User user) {
         List<User> admins = getUsersForRole("Administrator");
         if (!admins.isEmpty()) {
@@ -49,7 +54,8 @@ public class UserService {
         em.merge(user);
         em.remove(user);
     }
-    
+
+    @javax.transaction.Transactional
     public void updateUser(User user) {
         em.merge(user);
     }
