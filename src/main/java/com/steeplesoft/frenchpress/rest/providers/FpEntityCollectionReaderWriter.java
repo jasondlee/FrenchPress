@@ -33,8 +33,6 @@ public class FpEntityCollectionReaderWriter implements MessageBodyWriter<List<Fp
 
     @Override
     public boolean isWriteable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
-        System.out.println("***** type = " + type.getName());
-        System.out.println("***** genericType = " + genericType.toString());
         boolean isWritable;
         if (List.class.isAssignableFrom(type)
                 && genericType instanceof ParameterizedType) {
@@ -46,27 +44,15 @@ public class FpEntityCollectionReaderWriter implements MessageBodyWriter<List<Fp
         }
 
         return isWritable;
-//        if (genericType instanceof ParameterizedType) {
-//            ParameterizedType pt = (ParameterizedType)genericType;
-//            for (Type actual : pt.getActualTypeArguments()) {
-//                System.out.println("***** actual = " + actual.toString());
-//                if (FpEntity.class.equals(actual)) {
-//                    return true;
-//                }
-//            }
-//        }
-//
-//        return false;
     }
 
     @Override
     public long getSize(List<FpEntity> t, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return -1;
     }
 
     @Override
     public void writeTo(List<FpEntity> t, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream) throws IOException, WebApplicationException {
-//        String list = gson.toJson(t);
         StringBuilder sb = new StringBuilder("[");
         String sep = "";
         for (FpEntity entity : (List<FpEntity>)t) {

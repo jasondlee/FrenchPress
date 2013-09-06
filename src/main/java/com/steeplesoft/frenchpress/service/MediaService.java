@@ -20,31 +20,20 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.transaction.Transactional;
 
-@RequestScoped
-@Path("/uploads")
 public class MediaService {
     @PersistenceContext
 //    @Inject
     protected EntityManager em;
 
-    @GET
     public String list() {
         return "hi!";
     }
 
-    @GET
-    @Path("/id/{id}/")
-    public MediaItem getItem(@PathParam("id") Long id) {
+    public MediaItem getItem(Long id) {
         return em.find(MediaItem.class, id);
     }
 
-    @GET
-    @Path("{year}/{month}/{name}")
-    public Response getItem(
-            @PathParam("year") int year,
-            @PathParam("month") int month,
-            @PathParam("name") String name
-            ) {
+    public MediaItem getItem(int year, int month, String name) throws NoResultException {
         Calendar startDate = new GregorianCalendar(year, month-1, 1);
         Calendar endDate = new GregorianCalendar(year, month-1, startDate.getActualMaximum(Calendar.DAY_OF_MONTH));
         TypedQuery<MediaItem> query = em.createQuery(
@@ -53,12 +42,7 @@ public class MediaService {
         query.setParameter("START", startDate.getTime());
         query.setParameter("END", endDate.getTime());
         query.setParameter("NAME", name);
-        try {
-            final MediaItem item = query.getSingleResult();
-            return Response.ok(item.getContents(), item.getMimeType()).build();
-        } catch (NoResultException nre) {
-            return Response.status(Status.NOT_FOUND).build();
-        }
+        return query.getSingleResult();
     }
 
     public List<MediaItem> getItems() {
