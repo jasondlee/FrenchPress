@@ -27,7 +27,7 @@ import javax.ws.rs.ext.Provider;
  */
 @Provider
 @Produces(MediaType.APPLICATION_JSON)
-public class FpEntityCollectionReaderWriter implements MessageBodyWriter<Collection> {
+public class FpEntityCollectionReaderWriter implements MessageBodyWriter<List<FpEntity>> {
 
     private final Gson gson = new Gson();
 
@@ -60,12 +60,12 @@ public class FpEntityCollectionReaderWriter implements MessageBodyWriter<Collect
     }
 
     @Override
-    public long getSize(Collection t, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
+    public long getSize(List<FpEntity> t, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void writeTo(Collection t, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream) throws IOException, WebApplicationException {
+    public void writeTo(List<FpEntity> t, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream) throws IOException, WebApplicationException {
 //        String list = gson.toJson(t);
         StringBuilder sb = new StringBuilder("[");
         String sep = "";

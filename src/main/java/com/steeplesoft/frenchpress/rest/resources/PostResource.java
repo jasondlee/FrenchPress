@@ -32,8 +32,7 @@ public class PostResource {
 
     @GET
     public GenericEntity<List<Post>> getPosts(@QueryParam("limit") @DefaultValue("-1") int limit) {
-        return new GenericEntity<List<Post>>(postService.getPosts(limit)) {
-        };
+        return new GenericEntity<List<Post>>(postService.getPosts(limit)) {};
     }
 
     @GET
