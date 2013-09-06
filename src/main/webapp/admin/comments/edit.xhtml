@@ -7,7 +7,7 @@
 
     <ui:define name="content">
         <f:metadata>
-            <f:viewParam name="commentId" value="#{commentsBean.comment.id}" required="true" requiredMessage="Comment id is required"/>
+            <f:viewParam name="commentId" value="#{commentsBean.comment.id}" required="false" requiredMessage="Comment id is required"/>
             <f:event type="preRenderView" listener="#{commentsBean.loadComment}" />
         </f:metadata>
         <h3>Edit a comment</h3>
@@ -21,14 +21,16 @@
                 <h:outputLabel for="author">Author Name</h:outputLabel>
                 <h:inputText id="author" value="#{commentsBean.comment.authorName}"/>
 
-                <h:outputLabel for="url">Author URL</h:outputLabel>
+                <h:outputLabel for="url">Author Web Site</h:outputLabel>
                 <h:inputText id="url" value="#{commentsBean.comment.authorUrl}"/>
 
                 <h:outputLabel for="email">Author Email:</h:outputLabel>
                 <h:inputText id="email" value="#{commentsBean.comment.authorEmail}"/>
 
                 <h:outputLabel for="cal">Posted Date:</h:outputLabel>
-                <rich:calendar id="commentDate" datePattern="MM/dd/yyyy HH:mm" value="#{commentsBean.comment.commentDate}"/>
+                <h:inputText id="commentDate" value="#{commentsBean.comment.commentDate}">
+                    <f:convertDateTime pattern="yyyy/MM/dd HH:mm"/>
+                </h:inputText>
 
                 <h:outputLabel for="comment">Comment:</h:outputLabel>
                 <h:inputTextarea id="comment" value="#{commentsBean.comment.body}" rows="20" cols="80"/>

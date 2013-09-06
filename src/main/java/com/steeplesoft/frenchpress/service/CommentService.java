@@ -21,7 +21,7 @@ public class CommentService {
     @PersistenceContext
     protected EntityManager em;
 
-        public List<Comment> getComments(int limit) {
+    public List<Comment> getComments(int limit) {
         final TypedQuery<Comment> query = em.createQuery("SELECT c FROM Comment c ORDER BY c.commentDate", Comment.class);
         if (limit > -1) {
             query.setMaxResults(limit);

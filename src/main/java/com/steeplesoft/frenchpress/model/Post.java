@@ -20,7 +20,7 @@ import javax.validation.constraints.NotNull;
 @NamedQueries({
     @NamedQuery(name="findBySlug", query="SELECT p FROM Post p WHERE p.slug = :SLUG")
 })
-public class Post implements Serializable {
+public class Post implements Serializable, FpEntity {
     private static final long serialVersionUID = 1L;
 
     @Id

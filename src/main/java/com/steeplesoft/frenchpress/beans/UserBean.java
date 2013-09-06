@@ -9,6 +9,7 @@ import com.steeplesoft.frenchpress.service.UserService;
 import java.util.List;
 import javax.enterprise.inject.Model;
 import javax.faces.component.html.HtmlDataTable;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 /**
@@ -27,7 +28,9 @@ public class UserBean {
     }
 
     public void loadUser() {
-        user = userService.getUser(user.getId());
+        if (!FacesContext.getCurrentInstance().isPostback()) {
+            user = userService.getUser(user.getId());
+        }
     }
 
     public User getUser() {

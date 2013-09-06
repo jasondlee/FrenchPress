@@ -32,7 +32,12 @@
                                 <a name="#{status.index+1}"/>#{status.index+1}.
                             </td>
                             <td>
-                                <a href="#{comment.authorUrl}" style="font-weight: bold;">#{comment.authorName}</a><br/>
+                                <ui:fragment rendered="#{!empty comment.authorUrl}">
+                                    <a href="#{comment.authorUrl}" style="font-weight: bold;">#{comment.authorName}</a><br/>
+                                </ui:fragment>
+                                <ui:fragment rendered="#{empty comment.authorUrl}">
+                                    #{comment.authorName}<br/>
+                                </ui:fragment>
                                 <h:outputText style="border-bottom: 1px dotted #666666;" value="#{post.posted}">
                                     <f:convertDateTime dateStyle="long" timeStyle="full"/>
                                 </h:outputText>

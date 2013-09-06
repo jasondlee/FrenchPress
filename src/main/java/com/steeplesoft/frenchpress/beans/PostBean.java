@@ -26,6 +26,7 @@ import javax.servlet.ServletRequest;
  */
 @Model
 public class PostBean implements Serializable {
+
     @Inject
     private PostService postService;
     private Post post = new Post();
@@ -49,8 +50,7 @@ public class PostBean implements Serializable {
     }
 
     public void loadPost() {
-        Post requestedPost = (Post) ((ServletRequest)FacesContext.getCurrentInstance()
-                .getExternalContext().getRequest()).getAttribute("post");
+        Post requestedPost = (Post) ((ServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).getAttribute("post");
         post = (requestedPost != null) ? requestedPost : postService.getPost(post.getId());
     }
 
@@ -104,8 +104,8 @@ public class PostBean implements Serializable {
     public void format(ComponentSystemEvent event) throws AbortProcessingException {
         UIComponent uic = event.getComponent();
         if (uic instanceof UIOutput) {
-            UIOutput output = (UIOutput)uic;
-            String value = (String)output.getValue();
+            UIOutput output = (UIOutput) uic;
+            String value = (String) output.getValue();
             value = value.replaceAll("\\n", "\n<br/>");
             output.setValue(value);
         }
