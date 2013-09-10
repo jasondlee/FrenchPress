@@ -40,13 +40,13 @@ public class MediaResource {
     @Context
     private UriInfo uriInfo;
 
-    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss a");
-
     @GET
     public Response getItems() {
         JsonArrayBuilder factory = Json.createArrayBuilder();
         for (MediaItem item : service.getItems()) {
-            factory = factory.add(serializeMediaItem(item));
+            factory = factory.add(item.toJson()
+                .add("_ref", uriInfo.getAbsolutePathBuilder().path("id").path(""+item.getId()).build().toString())
+                .build());
         }
         return Response.ok(factory.build()).build();
     }
@@ -55,7 +55,10 @@ public class MediaResource {
     @Path("/id/{id}/")
     public Response getItem(@PathParam("id") Long id) {
         final MediaItem item = service.getItem(id);
-        return Response.ok(serializeMediaItem(item)).build();
+        final JsonObject json = item.toJson()
+                .add("_ref", uriInfo.getAbsolutePathBuilder().build().toString())
+                .build();
+        return Response.ok(json).build();
     }
 
     @GET
@@ -70,20 +73,5 @@ public class MediaResource {
         } catch (NoResultException nre) {
             throw new WebApplicationException(Status.NOT_FOUND);
         }
-    }
-
-    public JsonObject serializeMediaItem(MediaItem mi) {
-        JsonObjectBuilder factory = Json.createObjectBuilder();
-        URI uri = uriInfo.getAbsolutePathBuilder().path("id").path(""+mi.getId()).build();
-        JsonObject json = factory
-                .add("id", mi.getId())
-                .add("name", mi.getName())
-                .add("mimeType", mi.getMimeType())
-                .add("fileSize", mi.getFileSize())
-                .add("uploadedDate", sdf.format(mi.getUploadedDate()))
-                .add("_ref", uri.toString())
-                .build();
-
-        return json;
     }
 }

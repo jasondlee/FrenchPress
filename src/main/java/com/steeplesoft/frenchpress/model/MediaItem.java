@@ -4,9 +4,13 @@
  */
 package com.steeplesoft.frenchpress.model;
 
+import com.steeplesoft.frenchpress.util.Util;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -134,5 +138,15 @@ public class MediaItem implements Serializable {
     public String toString() {
         return "MediaItem{" + "id=" + id + ", name=" + name + ", mimeType=" + mimeType + ", fileSize=" + fileSize +
                 ", uploadedDate=" + uploadedDate + '}';
+    }
+
+    public JsonObjectBuilder toJson() {
+        return Json.createObjectBuilder()
+                .add("id", getId())
+                .add("name", getName())
+                .add("mimeType", getMimeType())
+                .add("fileSize", getFileSize())
+                .addNull("contents")
+                .add("uploadedDate", Util.formatDate(getUploadedDate()));
     }
 }
