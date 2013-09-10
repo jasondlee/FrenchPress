@@ -1,103 +1,65 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
-    <f:view transient="true">
-        <h:head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-            <title>FrenchPress</title>
-            <link rel="shortcut icon" href="#{request.contextPath}/images/fplogo.png"/>
-            <h:outputStylesheet  library="webjars/bootstrap/3.0.0/css"  name="bootstrap.min.css"/>
-            <link rel="stylesheet" type="text/css" media="all" href="#{request.contextPath}/themes/frenchpress/style.css" />
+    <h:head>
+        <title>FrenchPress</title>
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/themes/frenchpress/styles.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/themes/frenchpress/print.css" media="print" />
+        <h:outputScript library="webjars/jquery/1.10.2" name="jquery.min.js"/>
+        <script type="text/javascript" src="#{request.contextPath}/themes/frenchpress/js/equalcolumns.js"></script>
+        <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    </h:head>
+    <body>
+        <h:messages />
+        <header>
+            <h1>FrenchPress</h1>
+        </header>
+        <nav>
+            <ul>
+                <li class="selected"><a href="#{request.contextPath}">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Support</a></li>
+            </ul>
+        </nav>
+        <section id="intro">
+            <header>
+                <h2>Your Spiffy Tag Line Goes Here</h2>
+            </header>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.</p>
+            <img src="#{request.contextPath}/themes/frenchpress/images/introimage.png" alt="lime" />
+        </section>
 
-            <h:outputScript library="webjars/bootstrap/3.0.0/js" name="bootstrap.min.js"/>
-        </h:head>
-        <h:body class="home blog">
-            <div id="header_wrap">
-                <div id="header">
-                    <h1>
-                        <h:graphicImage value="/images/fp_logo_64.png" style="padding: 15px; float: left;"/>
-                        <a href="#{request.contextPath}">FrenchPress</a>
-                    </h1>
-                    <h2>A FrenchPress Blog</h2>
+        <section id="content">
+            <ui:insert name="content">
+                Something's wrong!
+            </ui:insert>
+        </section>
 
-                    <div id="menus">
-                        <div class="menu">
-                            <ul>
-                                <li class="page_item page-item-2">
-                                    <a href="#" title="About">About</a>
-                                </li>
-                                <li class="page_item page-item-46">
-                                    <a href="#" title="Parent Page">Parent Page</a>
-                                    <ul class='children'>
-                                        <li class="page_item page-item-49">
-                                            <a href="#" title="Sub-page">Sub-page</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <ul>
-                            <li class="current_page_item">
-                                <a href="#{request.contextPath}">Home</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div id="rss_search">
-                        <div id="rss">
-                            <a href="#{request.contextPath}/feed.atom" rel="nofollow" title="RSS Feed">RSS Feed</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="wrapper">
-                <div id="content">
-                    <h:messages />
-                    <ui:insert name="content">
-                        Something's wrong!
-                    </ui:insert>
-                </div>
-                <div id="sidebar">
-                    <div class="widget rc_widget">
-                        <h3>Recent Comments</h3>
-                        <ul>
-                            <li>
-                                <span class="rc_author">Joseph Scott: </span>
-                                <a href="#" title="on Hello world!">Need a comment with a real Gravatar.</a>
-                            </li>
-                            <li>
-                                <span class="rc_author">Mr WordPress: </span>
-                                <a href="#" title="on Hello world!">
-                                    Hi, this is a comment.To delete a comment, just log in and view the post&#039;s comments. There you will have the option to edit or delete them.
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+        <footer>
+            <section>
+                <h3>Left Stuff</h3>
+                <p>Left aligned text here. Proin metus odio, ultricies eu pharetra dictum, laoreet id odio. Curabitur in odio augue. Morbi congue auctor interdum. Phasellus sit amet metus justo.</p>
+                <p>Next line here</p>
+            </section>
 
-                    <div class="widget">
-                        <h3>Links</h3>
-                        <ul>
-                            <li><a href="#">Documentation</a></li>
-                        </ul>
-                    </div>
+            <section>
+                <h3>Center Stuff</h3>
+                <p>Center Text here. Proin metus odio, ultricies eu pharetra dictum, laoreet id odio. Curabitur in odio augue. Morbi congue auctor interdum. Phasellus sit amet metus justo.</p>
+                <p>Next line here</p>
+            </section>
 
-                    <div class="widget">
-                        <h3>Meta</h3>
-                        <ul>
-                            <li>
-                                <a href="#">Log in</a>
-                            </li>
-                        </ul>
-                    </div>
+            <section>
+                <h3>Right Stuff</h3>
+                <p>&#169; 2010 <a href="http://steeplesoft.com" title="Jason Lee">Jason Lee</a> All rights reserved.</p>
+                <p>Based on the CoffeeCols theme from <a href="http://freehtml5templates.com">Free HTML5 Templates</a>.</p>
+            </section>
 
-                </div>
-            </div>
-            <div class="clear"></div>
-            <div id="footer">
-                &#169;&#160;Copyright&#160;2011&#160;Jason Lee &#8901;&#160;Theme&#160;by&#160;zwwooooo&#160;&amp;&#160;<a href="http://schiy.com/">schiy</a>
-                &#8901;&#160;Powered&#160;by&#160;<a href="http://github.com/jasondlee/frenchpress/">FrenchPress</a>
-            </div>
-        </h:body>
-    </f:view>
+        </footer>
+        <!-- Free template created by http://freehtml5templates.com -->
+    </body>
 </html>
