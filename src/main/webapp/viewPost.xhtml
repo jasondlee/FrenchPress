@@ -10,64 +10,132 @@
         <f:metadata>
             <f:event type="preRenderView" listener="#{postBean.loadPost}" />
         </f:metadata>
-        <h1 class="postTitle">#{post.title}</h1>
-        <span class="postByline">By #{post.author.firstName} #{post.author.lastName} on
-            <h:outputText value="#{post.posted}">
-                <f:convertDateTime dateStyle="long"/>
-            </h:outputText>
-        </span>
-        <div class="postBody">
-            <h:outputText value="#{post.body}" escape="false" converter="#{newlineConverter}">
-                <f:event type="preRenderComponent" listener="#{postBean.format}"/>
-            </h:outputText>
-            <hr/>
+
+        <div id="innercontent">
+            <article class="articlecontent">
+                <header>
+                    <h2>#{post.title}</h2>
+                </header>
+                <span class="postByline">By #{post.author.firstName} #{post.author.lastName} on
+                    <h:outputText value="#{post.posted}">
+                        <f:convertDateTime dateStyle="long"/>
+                    </h:outputText>
+                </span>
+
+                <h:outputText value="#{post.body}" escape="false" converter="#{newlineConverter}">
+                    <f:event type="preRenderComponent" listener="#{postBean.format}"/>
+                </h:outputText>
+
+                <div class="commentsSection" style="border-top: 1px solid #F2EDE7; margin: 2px;">
+                    <h:panelGroup rendered="#{!empty post.comments}" style="margin-top: 15px; display: block">
+                        <h3>#{post.comments.size()} comments on "#{post.title}"</h3>
+                        <table width="100%">
+                            <ui:repeat value="#{post.comments}" var="comment" varStatus="status">
+                                <tr>
+                                    <td>
+                                        <a name="#{status.index+1}"/>#{status.index+1}.
+                                    </td>
+                                    <td>
+                                        <ui:fragment rendered="#{!empty comment.authorUrl}">
+                                            <a href="#{comment.authorUrl}" style="font-weight: bold;">#{comment.authorName}</a><br/>
+                                        </ui:fragment>
+                                        <ui:fragment rendered="#{empty comment.authorUrl}">
+                                            #{comment.authorName}<br/>
+                                        </ui:fragment>
+                                        <h:outputText style="border-bottom: 1px dotted #666666;" value="#{post.posted}">
+                                            <f:convertDateTime dateStyle="long" timeStyle="full"/>
+                                        </h:outputText>
+                                        <a href="##{status.index+1}">#</a><br/>
+                                        <h:outputText value="#{comment.body}" style="display: block; margin: 10px 0px 10px 0px;"
+                                                      escape="false" converter="#{newlineConverter}">
+                                        </h:outputText>
+                                    </td>
+                                </tr>
+                            </ui:repeat>
+                        </table>
+                    </h:panelGroup>
+                </div>
+                <div class="commentSection">
+                    <h:form id="commentForm">
+                        <h:inputHidden value="#{postBean.post.id}"/>
+                        <h:panelGrid columns="2">
+                            <h:outputLabel for="name">Name:</h:outputLabel>
+                            <h:inputText id="name" value="#{postBean.comment.authorName}" size="30"/>
+                            <h:outputLabel for="email">Email:</h:outputLabel>
+                            <h:inputText id="email" value="#{postBean.comment.authorEmail}" size="30"/>
+                            <h:outputLabel for="website">Web site:</h:outputLabel>
+                            <h:inputText id="website" value="#{postBean.comment.authorUrl}" size="70"/>
+                            <h:outputLabel for="comment">Comment:</h:outputLabel>
+                            <h:inputTextarea id="comment" value="#{postBean.comment.body}" rows="20" cols="70"/>
+                        </h:panelGrid>
+                        <br/>
+                        <h:commandButton action="#{postBean.addComment}" value="Submit Comment"/>
+                    </h:form>
+                </div>
+            </article>
         </div>
-        <div class="commentsSection">
-            <h:panelGroup rendered="#{!empty post.comments}" style="margin-top: 15px; display: block">
-                <h3>#{post.comments.size()} comments on "#{post.title}"</h3>
-                <table width="100%">
-                    <ui:repeat value="#{post.comments}" var="comment" varStatus="status">
-                        <tr>
-                            <td>
-                                <a name="#{status.index+1}"/>#{status.index+1}.
-                            </td>
-                            <td>
-                                <ui:fragment rendered="#{!empty comment.authorUrl}">
-                                    <a href="#{comment.authorUrl}" style="font-weight: bold;">#{comment.authorName}</a><br/>
-                                </ui:fragment>
-                                <ui:fragment rendered="#{empty comment.authorUrl}">
-                                    #{comment.authorName}<br/>
-                                </ui:fragment>
-                                <h:outputText style="border-bottom: 1px dotted #666666;" value="#{post.posted}">
-                                    <f:convertDateTime dateStyle="long" timeStyle="full"/>
-                                </h:outputText>
-                                <a href="##{status.index+1}">#</a><br/>
-                                <h:outputText value="#{comment.body}" style="display: block; margin: 10px 0px 10px 0px;"
-                                              escape="false" converter="#{newlineConverter}">
-                                </h:outputText>
-                            </td>
-                        </tr>
-                    </ui:repeat>
-                </table>
-            </h:panelGroup>
-        </div>
-        <div class="commentSection">
-            <h:form id="commentForm">
-                <h:inputHidden value="#{postBean.post.id}"/>
-                <h:panelGrid columns="2">
-                    <h:outputLabel for="name">Name:</h:outputLabel>
-                    <h:inputText id="name" value="#{postBean.comment.authorName}" size="40"/>
-                    <h:outputLabel for="email">Email:</h:outputLabel>
-                    <h:inputText id="email" value="#{postBean.comment.authorEmail}" size="40"/>
-                    <h:outputLabel for="website">Web site:</h:outputLabel>
-                    <h:inputText id="website" value="#{postBean.comment.authorUrl}" size="80"/>
-                    <h:outputLabel for="comment">Comment:</h:outputLabel>
-                    <h:inputTextarea id="comment" value="#{postBean.comment.body}" rows="20" cols="80"/>
-                </h:panelGrid>
-                <br/>
-                <h:commandButton action="#{postBean.addComment}" value="Submit Comment"/>
-            </h:form>
-        </div>
+
+        <aside>
+            <section>
+                <header>
+                    <h3>Categories</h3>
+                </header>
+                <ul>
+                    <li><a href="#">Plain</a></li>
+                    <li><a href="#">Fancy</a></li>
+                    <li><a href="#">Coffee Makers</a></li>
+                    <li><a href="#">Sides</a></li>
+                    <li><a href="#">Miscellaneous</a></li>
+                </ul>
+            </section>
+
+            <section>
+                <header>
+                    <h3>Sponsors</h3>
+                </header>
+                <img src="images/ad125.jpg" alt="ad" /> <img src="images/ad125.jpg" alt="ad" />
+                <br />
+                <img src="images/ad125.jpg" alt="ad" /> <img src="images/ad125.jpg" alt="ad" />
+                <br /><br />
+            </section>
+
+            <section>
+                <header>
+                    <h3>Connect With Us</h3>
+                </header>
+                <ul>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Google Buzz</a></li>
+                </ul>
+            </section>
+
+            <section>
+                <header>
+                    <h3>Recent Articles</h3>
+                </header>
+                <ul>
+                    <li><a href="#">Perfect Espresso Every Time</a></li>
+                    <li><a href="#">Got Milk?</a></li>
+                </ul>
+            </section>
+
+        </aside>
+
+        <ui:remove>
+            <h1 class="postTitle">#{post.title}</h1>
+            <span class="postByline">By #{post.author.firstName} #{post.author.lastName} on
+                <h:outputText value="#{post.posted}">
+                    <f:convertDateTime dateStyle="long"/>
+                </h:outputText>
+            </span>
+            <div class="postBody">
+                <h:outputText value="#{post.body}" escape="false" converter="#{newlineConverter}">
+                    <f:event type="preRenderComponent" listener="#{postBean.format}"/>
+                </h:outputText>
+                <hr/>
+            </div>
+        </ui:remove>
     </ui:define>
 
 </ui:composition>
