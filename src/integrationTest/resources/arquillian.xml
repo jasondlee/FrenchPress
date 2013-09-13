@@ -8,7 +8,7 @@
     <container qualifier="glassfish-embedded" default="true">
          <configuration>
              <!--<property name="bindHttpPort">7070</property>-->
-             <property name="resourcesXml">src/test/resources/glassfish-resources.xml</property>
+             <property name="resourcesXml">src/integrationTest/resources/glassfish-resources.xml</property>
          </configuration>
     </container>
 
