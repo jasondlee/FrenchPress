@@ -1,21 +1,22 @@
 apply plugin: 'war'
 apply plugin: 'idea'
-//apply plugin: 'arquillian'
 
 version = '1.0-SNAPSHOT'
 
 ext.libraryVersions = [
-    junit: '4.11',
     arquillian: '1.1.1.Final',
-    glassfish: '4.0',
-    jbossJavaeeSpec: '1.0.0.Final',
-    hamcrest: '1.2',
-    jbossAS7: '7.1.1.Final',
-    shrinkwrapDesc: '2.0.0-alpha-3',
-    javaee: '7.0',
+    arquillian_glassfish: '1.0.0.CR4',
     bootstrap: '3.0.0',
+    glassfish: '4.0',
+    gson: '2.2.4',
+    hamcrest: '1.2',
+    javaee: '7.0',
+    jbossAS7: '7.1.1.Final',
+    jbossJavaeeSpec: '1.0.0.Final',
     jquery: '1.10.2',
-    gson: '2.2.4'
+    junit: '4.11',
+    postgresql: '9.2-1003-jdbc4',
+    shrinkwrapDesc: '2.0.0-alpha-3'
 ]
 
 repositories {
@@ -69,11 +70,11 @@ dependencies {
     jbossAS7ManagedTestRuntime "org.jboss.as:jboss-as-arquillian-container-managed:$libraryVersions.jbossAS7"
     jbossAS7ManagedTestRuntime "org.jboss.spec:jboss-javaee-6.0:$libraryVersions.jbossJavaeeSpec"
 
-    glassfishEmbeddedTestRuntime "org.jboss.arquillian.container:arquillian-glassfish-embedded-3.1:1.0.0.CR4"
+    glassfishEmbeddedTestRuntime "org.jboss.arquillian.container:arquillian-glassfish-embedded-3.1:$libraryVersions.arquillian_glassfish"
     glassfishEmbeddedTestRuntime "org.glassfish.main.extras:glassfish-embedded-all:$libraryVersions.glassfish"
-    glassfishEmbeddedTestRuntime "org.postgresql:postgresql:9.2-1003-jdbc4"
+    glassfishEmbeddedTestRuntime "org.postgresql:postgresql:$libraryVersions.postgresql"
 
-    glassfishManagedTestRuntime "org.jboss.arquillian.container:arquillian-glassfish-managed-3.1:1.0.0.CR4'"
+    glassfishManagedTestRuntime "org.jboss.arquillian.container:arquillian-glassfish-managed-3.1:$libraryVersions.arquillian_glassfish"
 }
 
 task jbossAS7ManagedTest(type: Test)
@@ -83,7 +84,6 @@ task glassfishEmbeddedTest(type: Test)
 task glassfishManagedTest(type: Test)
 
 tasks.withType(Test).matching({ t-> t.name.endsWith('Test') } as Spec).each { t ->
-    t.dependsOn 'test'
     t.testClassesDir = project.sourceSets.integrationTest.output.classesDir
     t.classpath = project.configurations.getByName(t.name + 'Runtime') +
         project.sourceSets.main.output +
