@@ -37,6 +37,7 @@ import javax.ws.rs.core.UriInfo;
 public class MediaResource {
     @Inject
     private MediaService service;
+
     @Context
     private UriInfo uriInfo;
 

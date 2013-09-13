@@ -1,36 +1,37 @@
-buildscript {
-    repositories {
-//        mavenRepo(url: 'http://jcenter.bintray.com')
-        mavenLocal()
-    }
-
-    dependencies {
-        classpath 'org.jboss.arquillian.gradle:arquillian-gradle-plugin:0.1-jason'
-    }
-}
-
 apply plugin: 'war'
 apply plugin: 'idea'
-apply plugin: 'arquillian'
+//apply plugin: 'arquillian'
 
-//try {
-//    apply from: profile + '-profile.gradle'
-//} catch (Exception e) {
-//
-//}
 version = '1.0-SNAPSHOT'
+
+ext.libraryVersions = [
+    junit: '4.8.1', arquillian: '1.1.1.Final', jbossJavaeeSpec: '1.0.0.Final', weld: '1.1.1.Final',
+    slf4j: '1.5.10', log4j: '1.2.14', jbossAS6: '6.0.0.Final', glassfish: '4.0', cdi: '1.0-SP4',
+    hamcrest: '1.2', jbossAS7: '7.1.1.Final', shrinkwrapDesc: '2.0.0-alpha-3'
+]
 
 repositories {
     mavenCentral()
     mavenLocal()
+    mavenRepo url: 'http://repository.jboss.org/nexus/content/groups/public'
+    mavenRepo url: 'http://repository.jboss.org/nexus/content/repositories/deprecated'
 }
 
 configurations {
     provided
+    jbossAS7ManagedTestRuntime { extendsFrom testRuntime, compileOnly }
+//    jbossAS7RemoteTestRuntime { extendsFrom testRuntime, compileOnly }
+    glassfishEmbeddedTestRuntime { extendsFrom testRuntime }
+    glassfishManagedTestRuntime { extendsFrom testRuntime }
 }
 
 sourceSets {
-    main { compileClasspath += configurations.provided }
+    main {
+        compileClasspath = configurations.compile + configurations.compileOnly
+    }
+    test {
+        compileClasspath = compileClasspath + configurations.compileOnly
+    }
 }
 
 dependencies {
@@ -45,39 +46,39 @@ dependencies {
     //runtime 'org.atmosphere:atmosphere-runtime:1.0.10'
 
     testCompile 'junit:junit:4.11'
-    testCompile 'org.jboss.arquillian.junit:arquillian-junit-container:1.0.3.Final'
+
+    testCompile group: 'org.hamcrest', name: 'hamcrest-core', version: libraryVersions.hamcrest
+    testCompile group: 'org.jboss.arquillian.junit', name: 'arquillian-junit-container', version: libraryVersions.arquillian
+    testCompile group: 'org.jboss.shrinkwrap.descriptors', name: 'shrinkwrap-descriptors-api-javaee', version: libraryVersions.shrinkwrapDesc
+
+    testRuntime group: 'org.jboss.shrinkwrap.descriptors', name: 'shrinkwrap-descriptors-impl-javaee', version: libraryVersions.shrinkwrapDesc
+
+    jbossAS7ManagedTestRuntime group: 'org.jboss.as', name: 'jboss-as-arquillian-container-managed', version: libraryVersions.jbossAS7
+    jbossAS7ManagedTestRuntime group: 'org.jboss.spec', name: 'jboss-javaee-6.0', version: libraryVersions.jbossJavaeeSpec
+
+//    jbossAS7RemoteTestRuntime group: 'org.jboss.as', name: 'jboss-as-arquillian-container-remote', version: libraryVersions.jbossAS7
+//    jbossAS7RemoteTestRuntime group: 'org.jboss.spec', name: 'jboss-javaee-6.0', version: libraryVersions.jbossJavaeeSpec
+
+    glassfishEmbeddedTestRuntime 'org.jboss.arquillian.container:arquillian-glassfish-embedded-3.1:1.0.0.CR4'
+    glassfishEmbeddedTestRuntime "org.glassfish.main.extras:glassfish-embedded-all:$libraryVersions.glassfish"
+    glassfishEmbeddedTestRuntime 'org.postgresql:postgresql:9.2-1003-jdbc4'
+
+    glassfishManagedTestRuntime group: 'org.jboss.arquillian.container', name: 'arquillian-glassfish-managed-3.1', version: '1.0.0.CR4'
+//    glassfishManagedTestRuntime group: 'org.glassfish.main.distributions', name: 'glassfish', version: '4.0'
 }
 
-arquillian {
-    debug = true
-    deployable = file("$buildDir/libs/frenchpress-${version}.war")
+task jbossAS7ManagedTest(type: Test)
 
-    containers {
+//task jbossAS7RemoteTest(type: Test)
 
-        glassfish {
-            version = '3.1'
-            type = 'remote'
-        }
+task glassfishEmbeddedTest(type: Test)
 
-        jetty {
-            version = '8'
-            type = 'embedded'
-            config = ['bindHttpPort': 8085, 'bindAddress': '127.0.0.1', 'jettyPlus': false]
+task glassfishManagedTest(type: Test)
 
-            dependencies {
-                adapter 'org.jboss.arquillian.container:arquillian-jetty-embedded-7:1.0.0.CR2'
-                container 'org.eclipse.jetty:jetty-webapp:8.1.11.v20130520'
-                container group: 'org.eclipse.jetty', name: 'jetty-plus', version: '8.1.11.v20130520'
-            }
-        }
-
-        //        glassfish {
-        //            version = '3.1'
-        //            type = 'remote'
-        //            dependencies {
-        //                adapter 'org.jboss.arquillian.container:arquillian-glassfish-remote-3.1:1.0.0.CR4'
-        //            }
-        //        }
+tasks.withType(Test).matching({ t-> t.name.endsWith('Test') } as Spec).each { t ->
+    t.classpath = project.configurations.getByName(t.name + 'Runtime') + project.sourceSets.main.output + project.sourceSets.test.output
+    if (t.name.startsWith('jbossas')) {
+      t.classpath += files('src/test/resources-jbossas')
     }
 }
 
