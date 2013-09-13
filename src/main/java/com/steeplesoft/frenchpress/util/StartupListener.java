@@ -21,14 +21,14 @@ import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import javax.servlet.annotation.WebListener;
 import javax.sql.DataSource;
 
 /**
  *
  * @author jdlee
  */
-@WebListener
+//@WebListener
+//@RequestScoped
 public class StartupListener implements Serializable, ServletContextListener {
 
     private static final long serialVersionUID = 1L;
@@ -70,7 +70,7 @@ public class StartupListener implements Serializable, ServletContextListener {
         if (file == null) {
             throw new RuntimeException("Could not find the specified SQL file: " + fileName);
         }
-        
+
         String vendor = getDatabaseVendor(connection);
         boolean isPsql = vendor.contains("PostgreSQL");
 //        boolean isMySQL = !isPsql;
@@ -90,7 +90,7 @@ public class StartupListener implements Serializable, ServletContextListener {
         stmt.close();
         reader.close();
     }
-    
+
     private String getDatabaseVendor(Connection conn) throws SQLException {
         DatabaseMetaData md = conn.getMetaData();
         String name = md.getDatabaseProductName();

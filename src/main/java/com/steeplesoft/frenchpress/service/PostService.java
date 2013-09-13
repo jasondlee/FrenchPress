@@ -7,6 +7,7 @@ package com.steeplesoft.frenchpress.service;
 import com.steeplesoft.frenchpress.model.Post;
 import java.util.Date;
 import java.util.List;
+import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -16,6 +17,7 @@ import javax.transaction.Transactional;
  *
  * @author jdlee
  */
+@RequestScoped
 public class PostService {
 
     @PersistenceContext

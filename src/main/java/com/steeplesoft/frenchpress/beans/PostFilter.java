@@ -14,7 +14,6 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 
 
@@ -23,11 +22,12 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author jdlee
  */
-@WebFilter(filterName="postFilter", urlPatterns={"/*"})
+//@WebFilter(filterName="postFilter", urlPatterns={"/*"})
+//@RequestScoped
 public class PostFilter implements Filter {
     @Inject
     PostService postService;
-    
+
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -39,7 +39,7 @@ public class PostFilter implements Filter {
         String path = hsr.getServletPath();
         if (!path.startsWith("/javax.faces.resource/")) {
             Post post = null;
-            
+
             String postId = request.getParameter("p");
             if (postId != null) {
                 Long id = Long.parseLong(postId);
@@ -60,5 +60,5 @@ public class PostFilter implements Filter {
     @Override
     public void destroy() {
     }
-    
+
 }
