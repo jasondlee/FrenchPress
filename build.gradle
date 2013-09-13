@@ -38,7 +38,7 @@ configurations {
 
 sourceSets {
     main {
-        compileClasspath = configurations.compile + configurations.provided
+        compileClasspath += configurations.provided
     }
     integrationTest {
         java {
@@ -47,13 +47,13 @@ sourceSets {
         resources {
             srcDir 'src/integrationTest/resources'
         }
-        compileClasspath += main.output + configurations.provided
-        runtimeClasspath += main.output + configurations.provided
+        compileClasspath += main.output + configurations.provided + main.compileClasspath
+        runtimeClasspath += main.output + configurations.provided + main.compileClasspath + main.runtimeClasspath
     }
 }
 
 dependencies {
-    provided "javax:javaee-api:$libraryVersions.javaee"
+    compile "javax:javaee-api:$libraryVersions.javaee"
     compile "org.webjars:bootstrap:$libraryVersions.bootstrap"
     compile "org.webjars:jquery:$libraryVersions.jquery"
     compile "org.webjars:jquery-ui:$libraryVersions.jquery"
@@ -62,10 +62,10 @@ dependencies {
     testCompile "junit:junit:$libraryVersions.junit"
     testCompile "org.hamcrest:hamcrest-core:$libraryVersions.hamcrest"
 
-    integrationTestCompile "org.jboss.arquillian.junit:arquillian-junit-container:$libraryVersions.arquillian"
-    integrationTestCompile "org.jboss.shrinkwrap.descriptors:shrinkwrap-descriptors-api-javaee:$libraryVersions.shrinkwrapDesc"
+    testCompile "org.jboss.arquillian.junit:arquillian-junit-container:$libraryVersions.arquillian"
+    testCompile "org.jboss.shrinkwrap.descriptors:shrinkwrap-descriptors-api-javaee:$libraryVersions.shrinkwrapDesc"
 
-    integrationTestRuntime "org.jboss.shrinkwrap.descriptors:shrinkwrap-descriptors-impl-javaee:$libraryVersions.shrinkwrapDesc"
+    testRuntime "org.jboss.shrinkwrap.descriptors:shrinkwrap-descriptors-impl-javaee:$libraryVersions.shrinkwrapDesc"
 
     jbossAS7ManagedTestRuntime "org.jboss.as:jboss-as-arquillian-container-managed:$libraryVersions.jbossAS7"
     jbossAS7ManagedTestRuntime "org.jboss.spec:jboss-javaee-6.0:$libraryVersions.jbossJavaeeSpec"

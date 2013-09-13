@@ -5,14 +5,14 @@
     <engine>
          <property name="deploymentExportPath">build/libs</property>
     </engine>
+    
     <container qualifier="glassfish-embedded" default="true">
          <configuration>
-             <!--<property name="bindHttpPort">7070</property>-->
              <property name="resourcesXml">src/integrationTest/resources/glassfish-resources.xml</property>
          </configuration>
     </container>
 
-    <container qualifier="jbossas-remote-7">
+    <container qualifier="jbossas-managed-7">
         <configuration>
             <property name="jbossHome">jboss7</property>
         </configuration>

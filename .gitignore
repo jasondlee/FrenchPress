@@ -9,7 +9,6 @@ target
 *.db
 *.sh
 .idea
-*.iml
 common.xml
 insertmedia.php
 nb-configuration.xml

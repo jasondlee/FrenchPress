@@ -211,7 +211,7 @@ function usage() {
     echo "  -v : Set database vendor"
 }
 
-while getopts cDdiIjlrsStuv: opt
+while getopts cCDdiIjlrsStuv: opt
 do
     case "$opt" in
         c) CLEAN=clean ;;

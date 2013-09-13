@@ -36,14 +36,16 @@ public class PostService {
     }
 
     @Transactional
-    public void createPost(Post post) {
+    public Post createPost(Post post) {
         post.setPosted(new Date());
         em.persist(post);
+
+        return post;
     }
 
     @Transactional
-    public void updatePost(Post post) {
-        em.merge(post);
+    public Post updatePost(Post post) {
+        return em.merge(post);
     }
 
     @Transactional
