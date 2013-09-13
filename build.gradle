@@ -5,9 +5,17 @@ apply plugin: 'idea'
 version = '1.0-SNAPSHOT'
 
 ext.libraryVersions = [
-    junit: '4.8.1', arquillian: '1.1.1.Final', jbossJavaeeSpec: '1.0.0.Final', weld: '1.1.1.Final',
-    slf4j: '1.5.10', log4j: '1.2.14', jbossAS6: '6.0.0.Final', glassfish: '4.0', cdi: '1.0-SP4',
-    hamcrest: '1.2', jbossAS7: '7.1.1.Final', shrinkwrapDesc: '2.0.0-alpha-3'
+    junit: '4.11',
+    arquillian: '1.1.1.Final',
+    glassfish: '4.0',
+    jbossJavaeeSpec: '1.0.0.Final',
+    hamcrest: '1.2',
+    jbossAS7: '7.1.1.Final',
+    shrinkwrapDesc: '2.0.0-alpha-3',
+    javaee: '7.0',
+    bootstrap: '3.0.0',
+    jquery: '1.10.2',
+    gson: '2.2.4'
 ]
 
 repositories {
@@ -23,7 +31,6 @@ configurations {
     integrationTestRuntime.extendsFrom testRuntime
 
     jbossAS7ManagedTestRuntime { extendsFrom integrationTestRuntime, provided }
-    //    jbossAS7RemoteTestRuntime { extendsFrom testRuntime, compileOnly }
     glassfishEmbeddedTestRuntime { extendsFrom integrationTestRuntime }
     glassfishManagedTestRuntime { extendsFrom integrationTestRuntime }
 }
@@ -45,29 +52,28 @@ sourceSets {
 }
 
 dependencies {
-    provided 'javax:javaee-api:7.0'
-    compile 'org.webjars:bootstrap:3.0.0'
-    compile 'org.webjars:jquery:1.10.2'
-    compile 'org.webjars:jquery-ui:1.10.2'
-    compile 'com.google.code.gson:gson:2.2.4'
+    provided "javax:javaee-api:$libraryVersions.javaee"
+    compile "org.webjars:bootstrap:$libraryVersions.bootstrap"
+    compile "org.webjars:jquery:$libraryVersions.jquery"
+    compile "org.webjars:jquery-ui:$libraryVersions.jquery"
+    compile "com.google.code.gson:gson:$libraryVersions.gson"
 
-    testCompile 'junit:junit:4.11'
-    testCompile group: 'org.hamcrest', name: 'hamcrest-core', version: libraryVersions.hamcrest
+    testCompile "junit:junit:$libraryVersions.junit"
+    testCompile "org.hamcrest:hamcrest-core:$libraryVersions.hamcrest"
 
-    integrationTestCompile group: 'org.jboss.arquillian.junit', name: 'arquillian-junit-container', version: libraryVersions.arquillian
-    integrationTestCompile group: 'org.jboss.shrinkwrap.descriptors', name: 'shrinkwrap-descriptors-api-javaee', version: libraryVersions.shrinkwrapDesc
+    integrationTestCompile "org.jboss.arquillian.junit:arquillian-junit-container:$libraryVersions.arquillian"
+    integrationTestCompile "org.jboss.shrinkwrap.descriptors:shrinkwrap-descriptors-api-javaee:$libraryVersions.shrinkwrapDesc"
 
-    integrationTestRuntime group: 'org.jboss.shrinkwrap.descriptors', name: 'shrinkwrap-descriptors-impl-javaee', version: libraryVersions.shrinkwrapDesc
+    integrationTestRuntime "org.jboss.shrinkwrap.descriptors:shrinkwrap-descriptors-impl-javaee:$libraryVersions.shrinkwrapDesc"
 
-    jbossAS7ManagedTestRuntime group: 'org.jboss.as', name: 'jboss-as-arquillian-container-managed', version: libraryVersions.jbossAS7
-    jbossAS7ManagedTestRuntime group: 'org.jboss.spec', name: 'jboss-javaee-6.0', version: libraryVersions.jbossJavaeeSpec
+    jbossAS7ManagedTestRuntime "org.jboss.as:jboss-as-arquillian-container-managed:$libraryVersions.jbossAS7"
+    jbossAS7ManagedTestRuntime "org.jboss.spec:jboss-javaee-6.0:$libraryVersions.jbossJavaeeSpec"
 
-    glassfishEmbeddedTestRuntime 'org.jboss.arquillian.container:arquillian-glassfish-embedded-3.1:1.0.0.CR4'
+    glassfishEmbeddedTestRuntime "org.jboss.arquillian.container:arquillian-glassfish-embedded-3.1:1.0.0.CR4"
     glassfishEmbeddedTestRuntime "org.glassfish.main.extras:glassfish-embedded-all:$libraryVersions.glassfish"
-    glassfishEmbeddedTestRuntime 'org.postgresql:postgresql:9.2-1003-jdbc4'
+    glassfishEmbeddedTestRuntime "org.postgresql:postgresql:9.2-1003-jdbc4"
 
-    glassfishManagedTestRuntime group: 'org.jboss.arquillian.container', name: 'arquillian-glassfish-managed-3.1', version: '1.0.0.CR4'
-    //    glassfishManagedTestRuntime group: 'org.glassfish.main.distributions', name: 'glassfish', version: '4.0'
+    glassfishManagedTestRuntime "org.jboss.arquillian.container:arquillian-glassfish-managed-3.1:1.0.0.CR4'"
 }
 
 task jbossAS7ManagedTest(type: Test)
