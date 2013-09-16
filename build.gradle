@@ -53,6 +53,7 @@ dependencies {
 
     testCompile "junit:junit:$libraryVersions.junit"
     testCompile "org.hamcrest:hamcrest-core:$libraryVersions.hamcrest"
+    testCompile "org.hsqldb:hsqldb:2.0.0"
 
     testCompile "org.jboss.arquillian.junit:arquillian-junit-container:$libraryVersions.arquillian"
     testCompile "org.jboss.shrinkwrap.descriptors:shrinkwrap-descriptors-api-javaee:$libraryVersions.shrinkwrapDesc"

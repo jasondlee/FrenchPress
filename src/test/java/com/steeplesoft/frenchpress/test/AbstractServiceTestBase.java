@@ -24,6 +24,14 @@ public class AbstractServiceTestBase {
     @Inject
     protected UserTransaction utx;
 
+    @Deployment
+    public static WebArchive createTestArchive() {
+        return ShrinkWrap.create(WebArchive.class)
+                .addPackages(true, "com.steeplesoft.frenchpress")
+                .addAsResource("persistence.xml", "META-INF/persistence.xml")
+                .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
+                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+    }
 
     protected static int generateRandomNumber() {
         Random r = new Random();
@@ -38,15 +46,6 @@ public class AbstractServiceTestBase {
 
     @After
     public void commitTransaction() throws Exception {
-        utx.rollback();
-    }
-
-    @Deployment
-    public static WebArchive createTestArchive() {
-        return ShrinkWrap.create(WebArchive.class)
-                .addPackages(true, "com.steeplesoft.frenchpress")
-                .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
-                .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+        utx.commit();
     }
 }

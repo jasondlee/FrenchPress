@@ -12,6 +12,7 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
@@ -34,25 +35,28 @@ public class PostServiceTest extends AbstractServiceTestBase {
     private PostService postService;
 
     @Test
-    public void testGetPosts() {
+    public void postCrud() {
         List<Post> posts = postService.getPosts(-1);
         assertNotNull(posts);
+
+        Post newPost = testCreatePost();
+        testUpdatePost(newPost);
+        testFindingBySlug(newPost);
+        testDeletePost(newPost);
     }
 
-    @Test
-    public void testCreatePost() {
+    public Post testCreatePost() {
         Post post = createPost();
         postService.createPost(post);
         assertNotNull(post.getId());
 
         Post newPost = postService.getPost(post.getId());
         assertNotNull(newPost);
+
+        return newPost;
     }
 
-    @Test
-    public void testDeletePost() {
-        Post post = createPost();
-        postService.createPost(post);
+    public void testDeletePost(Post post) {
         Long id = post.getId();
         assertNotNull(id);
 
@@ -61,10 +65,7 @@ public class PostServiceTest extends AbstractServiceTestBase {
         assertNull(post);
     }
 
-    @Test
-    public void testUpdatePost() {
-        Post post = createPost();
-        postService.createPost(post);
+    public void testUpdatePost(Post post) {
         Long id = post.getId();
         assertNotNull(id);
 
@@ -75,13 +76,9 @@ public class PostServiceTest extends AbstractServiceTestBase {
         assertEquals(post.getBody(), anotherPost.getBody());
     }
 
-    @Test
-    public void testFindingBySlug() {
-        Post post = createPost();
-        postService.createPost(post);
+    public void testFindingBySlug(Post post) {
         Post post2 = postService.findPostBySlug(post.getSlug());
         assertEquals(post, post2);
-        postService.deletePost(post);
     }
 
     private Post createPost() {

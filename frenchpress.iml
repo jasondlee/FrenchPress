@@ -44,6 +44,7 @@
     <orderEntry type="library" scope="TEST" name="shrinkwrap-spi-1.1.2" level="project" />
     <orderEntry type="library" scope="TEST" name="shrinkwrap-impl-base-1.1.2" level="project" />
     <orderEntry type="library" scope="TEST" name="shrinkwrap-descriptors-impl-base-2.0.0-alpha-3" level="project" />
+    <orderEntry type="library" scope="TEST" name="hsqldb-2.0.0" level="project" />
   </component>
 </module>
 
