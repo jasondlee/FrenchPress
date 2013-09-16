@@ -56,6 +56,7 @@ dependencies {
 
     testCompile "org.jboss.arquillian.junit:arquillian-junit-container:$libraryVersions.arquillian"
     testCompile "org.jboss.shrinkwrap.descriptors:shrinkwrap-descriptors-api-javaee:$libraryVersions.shrinkwrapDesc"
+    testCompile "org.glassfish.jersey.core:jersey-client:2.2"
 
     testRuntime "org.jboss.shrinkwrap.descriptors:shrinkwrap-descriptors-impl-javaee:$libraryVersions.shrinkwrapDesc"
     testRuntime "org.hsqldb:hsqldb:2.0.0"

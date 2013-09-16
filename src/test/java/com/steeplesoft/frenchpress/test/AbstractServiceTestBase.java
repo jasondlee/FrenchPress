@@ -5,6 +5,7 @@ import com.steeplesoft.frenchpress.service.UserService;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
+import org.jboss.shrinkwrap.api.asset.FileAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.After;
 import org.junit.Before;
@@ -13,6 +14,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
+import java.io.File;
 import java.util.Random;
 
 /**
@@ -29,6 +31,7 @@ public class AbstractServiceTestBase {
         return ShrinkWrap.create(WebArchive.class)
                 .addPackages(true, "com.steeplesoft.frenchpress")
                 .addAsResource("persistence.xml", "META-INF/persistence.xml")
+                .addAsWebInfResource(new FileAsset(new File("src/main/webapp/WEB-INF/web.xml")), "web.xml")
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }

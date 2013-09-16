@@ -47,10 +47,15 @@ public class PostService {
     }
 
     @Transactional
+    public void deletePost(Long id) {
+        deletePost(getPost(id));
+
+    }
+
+    @Transactional
     public void deletePost(Post post) {
-        Post newPost = getPost(post.getId());
-        if (newPost != null) {
-            em.remove(newPost);
+        if (post != null) {
+            em.remove(post);
         }
     }
 

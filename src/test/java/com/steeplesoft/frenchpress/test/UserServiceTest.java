@@ -3,6 +3,7 @@ package com.steeplesoft.frenchpress.test;
 import com.steeplesoft.frenchpress.model.User;
 import com.steeplesoft.frenchpress.service.UserService;
 import org.jboss.arquillian.junit.Arquillian;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
@@ -19,6 +20,7 @@ import static org.junit.Assert.assertNull;
  */
 @RunWith(Arquillian.class)
 @Category(IntegrationTests.class)
+@Ignore
 public class UserServiceTest extends AbstractServiceTestBase {
     @Inject
     protected UserService userService;

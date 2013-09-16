@@ -3,6 +3,7 @@ package com.steeplesoft.frenchpress.test;
 import com.steeplesoft.frenchpress.model.MediaItem;
 import com.steeplesoft.frenchpress.service.MediaService;
 import org.jboss.arquillian.junit.Arquillian;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
@@ -31,6 +32,7 @@ import static org.junit.Assert.assertNull;
  */
 @RunWith(Arquillian.class)
 @Category(IntegrationTests.class)
+@Ignore
 public class MediaServiceTest extends AbstractServiceTestBase {
     @Inject
     protected MediaService mediaService;
