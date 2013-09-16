@@ -1,0 +1,5 @@
+README
+------
+
+FrenchPress is a Java EE-based blogging system. It is intended to be a simple, yet non-trivial example of how one can
+build Java EE applications, using a variety of the technologies available in the platform.
