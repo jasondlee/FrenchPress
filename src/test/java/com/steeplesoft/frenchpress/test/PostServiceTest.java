@@ -31,7 +31,6 @@ import static org.junit.Assert.assertNotNull;
  */
 @RunWith(Arquillian.class)
 @Category(IntegrationTests.class)
-@Ignore
 public class PostServiceTest extends AbstractServiceTestBase {
     @Inject
     private PostService postService;

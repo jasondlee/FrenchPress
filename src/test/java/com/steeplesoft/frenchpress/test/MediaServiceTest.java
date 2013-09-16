@@ -32,7 +32,6 @@ import static org.junit.Assert.assertNull;
  */
 @RunWith(Arquillian.class)
 @Category(IntegrationTests.class)
-@Ignore
 public class MediaServiceTest extends AbstractServiceTestBase {
     @Inject
     protected MediaService mediaService;

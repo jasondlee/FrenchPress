@@ -20,7 +20,6 @@ import static org.junit.Assert.assertNull;
  */
 @RunWith(Arquillian.class)
 @Category(IntegrationTests.class)
-@Ignore
 public class UserServiceTest extends AbstractServiceTestBase {
     @Inject
     protected UserService userService;
