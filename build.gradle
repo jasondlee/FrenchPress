@@ -53,19 +53,18 @@ dependencies {
 
     testCompile "junit:junit:$libraryVersions.junit"
     testCompile "org.hamcrest:hamcrest-core:$libraryVersions.hamcrest"
-    testCompile "org.hsqldb:hsqldb:2.0.0"
 
     testCompile "org.jboss.arquillian.junit:arquillian-junit-container:$libraryVersions.arquillian"
     testCompile "org.jboss.shrinkwrap.descriptors:shrinkwrap-descriptors-api-javaee:$libraryVersions.shrinkwrapDesc"
 
     testRuntime "org.jboss.shrinkwrap.descriptors:shrinkwrap-descriptors-impl-javaee:$libraryVersions.shrinkwrapDesc"
+    testRuntime "org.hsqldb:hsqldb:2.0.0"
 
     jbossAS7ManagedTestRuntime "org.jboss.as:jboss-as-arquillian-container-managed:$libraryVersions.jbossAS7"
     jbossAS7ManagedTestRuntime "org.jboss.spec:jboss-javaee-6.0:$libraryVersions.jbossJavaeeSpec"
 
     glassfishEmbeddedTestRuntime "org.jboss.arquillian.container:arquillian-glassfish-embedded-3.1:$libraryVersions.arquillian_glassfish"
     glassfishEmbeddedTestRuntime "org.glassfish.main.extras:glassfish-embedded-all:$libraryVersions.glassfish"
-    glassfishEmbeddedTestRuntime "org.postgresql:postgresql:$libraryVersions.postgresql"
 
     glassfishManagedTestRuntime "org.jboss.arquillian.container:arquillian-glassfish-managed-3.1:$libraryVersions.arquillian_glassfish"
 }
