@@ -18,12 +18,7 @@ import javax.transaction.Transactional;
 @RequestScoped
 public class MediaService {
     @PersistenceContext
-//    @Inject
     protected EntityManager em;
-
-    public String list() {
-        return "hi!";
-    }
 
     public MediaItem getItem(Long id) {
         return em.find(MediaItem.class, id);
@@ -55,4 +50,15 @@ public class MediaService {
         }
     }
 
+    @Transactional
+    public void deleteItem(Long id) {
+        deleteItem(getItem(id));
+    }
+
+    @Transactional
+    public void deleteItem(MediaItem item) {
+        if (item != null) {
+            em.remove(item);
+        }
+    }
 }

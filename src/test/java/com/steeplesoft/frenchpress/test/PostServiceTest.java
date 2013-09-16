@@ -36,8 +36,7 @@ public class PostServiceTest extends AbstractServiceTestBase {
 
     @Test
     public void postCrud() {
-        List<Post> posts = postService.getPosts(-1);
-        assertNotNull(posts);
+        assertNotNull(postService.getPosts(-1));
 
         Post newPost = testCreatePost();
         testUpdatePost(newPost);
@@ -49,36 +48,25 @@ public class PostServiceTest extends AbstractServiceTestBase {
         Post post = createPost();
         postService.createPost(post);
         assertNotNull(post.getId());
+        assertNotNull(postService.getPost(post.getId()));
 
-        Post newPost = postService.getPost(post.getId());
-        assertNotNull(newPost);
-
-        return newPost;
+        return post;
     }
 
     public void testDeletePost(Post post) {
         Long id = post.getId();
-        assertNotNull(id);
 
         postService.deletePost(post);
-        post = postService.getPost(id);
-        assertNull(post);
+        assertNull(postService.getPost(id));
     }
 
     public void testUpdatePost(Post post) {
-        Long id = post.getId();
-        assertNotNull(id);
-
         post.setBody("This is an updated body");
-        Post updatedPost = postService.updatePost(post);
-        assertEquals(post.getBody(), updatedPost.getBody());
-        Post anotherPost = postService.getPost(post.getId());
-        assertEquals(post.getBody(), anotherPost.getBody());
+        assertEquals(post.getBody(), postService.getPost(post.getId()).getBody());
     }
 
     public void testFindingBySlug(Post post) {
-        Post post2 = postService.findPostBySlug(post.getSlug());
-        assertEquals(post, post2);
+        assertEquals(post, postService.findPostBySlug(post.getSlug()));
     }
 
     private Post createPost() {

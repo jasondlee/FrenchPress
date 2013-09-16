@@ -45,8 +45,7 @@ public class UserServiceTest extends AbstractServiceTestBase {
         user.setEmailAddress("fake@example.com");
         userService.updateUser(user);
 
-        User updated = userService.getUser(user.getId());
-        assertEquals(user, updated);
+        assertEquals(user, userService.getUser(user.getId()));
     }
 
     private User testCreateUser(String role) {
