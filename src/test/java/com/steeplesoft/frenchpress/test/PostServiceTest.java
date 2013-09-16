@@ -12,11 +12,9 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.Assert;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
-import org.junit.After;
-import org.junit.Before;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -30,6 +28,7 @@ import static org.junit.Assert.assertNotNull;
  * @author jdlee
  */
 @RunWith(Arquillian.class)
+@Category(IntegrationTests.class)
 public class PostServiceTest extends AbstractServiceTestBase {
     @Inject
     private PostService postService;

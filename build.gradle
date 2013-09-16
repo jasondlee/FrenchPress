@@ -28,25 +28,17 @@ repositories {
 
 configurations {
     provided
-    integrationTestCompile.extendsFrom testCompile
-    integrationTestRuntime.extendsFrom testRuntime
 
-    jbossAS7ManagedTestRuntime { extendsFrom integrationTestRuntime, provided }
-    glassfishEmbeddedTestRuntime { extendsFrom integrationTestRuntime }
-    glassfishManagedTestRuntime { extendsFrom integrationTestRuntime }
+    jbossAS7ManagedTestRuntime { extendsFrom testRuntime, provided }
+    glassfishEmbeddedTestRuntime { extendsFrom testRuntime }
+    glassfishManagedTestRuntime { extendsFrom testRuntime }
 }
 
 sourceSets {
     main {
         compileClasspath += configurations.provided
     }
-    integrationTest {
-        java {
-            srcDir 'src/integrationTest/java'
-        }
-        resources {
-            srcDir 'src/integrationTest/resources'
-        }
+    test {
         compileClasspath += main.output + configurations.provided + main.compileClasspath
         runtimeClasspath += main.output + configurations.provided + main.compileClasspath + main.runtimeClasspath
     }
@@ -77,6 +69,12 @@ dependencies {
     glassfishManagedTestRuntime "org.jboss.arquillian.container:arquillian-glassfish-managed-3.1:$libraryVersions.arquillian_glassfish"
 }
 
+test {
+    useJUnit {
+        excludeCategories 'com.steeplesoft.frenchpress.test.IntegrationTests'
+    }
+}
+
 task jbossAS7ManagedTest(type: Test)
 
 task glassfishEmbeddedTest(type: Test)
@@ -84,12 +82,12 @@ task glassfishEmbeddedTest(type: Test)
 task glassfishManagedTest(type: Test)
 
 tasks.withType(Test).matching({ t-> t.name.endsWith('Test') } as Spec).each { t ->
-    t.testClassesDir = project.sourceSets.integrationTest.output.classesDir
+    t.testClassesDir = project.sourceSets.test.output.classesDir
     t.classpath = project.configurations.getByName(t.name + 'Runtime') +
-        project.sourceSets.main.output +
-        project.sourceSets.integrationTest.output
+    project.sourceSets.main.output +
+    project.sourceSets.test.output
     if (t.name.startsWith('jbossas')) {
-        t.classpath += files('src/integrationTest/resources-jbossas')
+        t.classpath += files('src/test/resources-jbossas')
     }
 }
 
