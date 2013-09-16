@@ -33,15 +33,6 @@ public class PostServiceTest extends AbstractServiceTestBase {
     @Inject
     private PostService postService;
 
-    @Deployment
-    public static WebArchive createTestArchive() {
-        return ShrinkWrap.create(WebArchive.class, "postServiceTest.war")
-                .addPackages(true, "com.steeplesoft.frenchpress")
-                .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
-                .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
-    }
-
     @Test
     public void testGetPosts() {
         List<Post> posts = postService.getPosts(-1);

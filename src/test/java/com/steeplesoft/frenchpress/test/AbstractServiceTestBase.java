@@ -1,5 +1,11 @@
 package com.steeplesoft.frenchpress.test;
 
+import com.steeplesoft.frenchpress.service.PostService;
+import com.steeplesoft.frenchpress.service.UserService;
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.EmptyAsset;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.After;
 import org.junit.Before;
 
@@ -18,6 +24,7 @@ public class AbstractServiceTestBase {
     @Inject
     protected UserTransaction utx;
 
+
     protected static int generateRandomNumber() {
         Random r = new Random();
         return Math.abs(r.nextInt()) + 1;
@@ -34,4 +41,12 @@ public class AbstractServiceTestBase {
         utx.rollback();
     }
 
+    @Deployment
+    public static WebArchive createTestArchive() {
+        return ShrinkWrap.create(WebArchive.class)
+                .addPackages(true, "com.steeplesoft.frenchpress")
+                .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
+                .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
+                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+    }
 }
