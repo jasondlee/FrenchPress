@@ -1,5 +1,38 @@
 README
 ------
-
 FrenchPress is a Java EE-based blogging system. It is intended to be a simple, yet non-trivial example of how one can
 build Java EE applications, using a variety of the technologies available in the platform.
+
+Building
+========
+
+FrenchPress uses http://gradle.org[Gradle] to build. To build the deployable archive, execute:
+
+[source,bash]
+----
+$ gradle assemble
+:compileJava UP-TO-DATE
+:processResources UP-TO-DATE
+:classes UP-TO-DATE
+:war
+:assemble
+
+BUILD SUCCESSFUL
+
+Total time: 7.958 secs
+-----
+
+Testing
+=======
+Unit tests can be run with via the `test` task, though most of the tests are integration tests, which are run via
+http://arquillian.org[Arquillian]. Currently, the build supports two containers in two modes:
+
+[options="header"]
+|====================
+| Container | Mode | Task Name
+| GlassFish 4 | Managed | glassfishManagedTest
+| | Embedded  | glassfishEmbeddedTest
+| JBoss AS 7 | Managed | jbossManagedTest
+|====================
+
+
