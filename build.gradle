@@ -32,6 +32,7 @@ configurations {
     jbossAS7ManagedTestRuntime { extendsFrom testRuntime, provided }
     glassfishEmbeddedTestRuntime { extendsFrom testRuntime }
     glassfishManagedTestRuntime { extendsFrom testRuntime }
+    glassfishRemoteTestRuntime { extendsFrom testRuntime }
 }
 
 sourceSets {
@@ -69,6 +70,8 @@ dependencies {
     glassfishEmbeddedTestRuntime "org.glassfish.main.extras:glassfish-embedded-all:$libraryVersions.glassfish"
 
     glassfishManagedTestRuntime "org.jboss.arquillian.container:arquillian-glassfish-managed-3.1:$libraryVersions.arquillian_glassfish"
+
+    glassfishRemoteTestRuntime "org.jboss.arquillian.container:arquillian-glassfish-remote-3.1:$libraryVersions.arquillian_glassfish"
 }
 
 test {
@@ -89,6 +92,10 @@ task glassfishEmbeddedTest(type: Test) {
 
 task glassfishManagedTest(type: Test) {
     systemProperty 'arquillian.launch', "glassfish-managed"
+}
+
+task glassfishRemoteTest(type: Test) {
+    systemProperty 'arquillian.launch', "glassfish-remote"
 }
 
 tasks.withType(Test).matching({ t-> t.name.endsWith('Test') } as Spec).each { t ->
