@@ -2,14 +2,12 @@
 <!DOCTYPE resources PUBLIC "-//GlassFish.org//DTD GlassFish Application Server 3.1 Resource Definitions//EN"
         "http://glassfish.org/dtds/glassfish-resources_1_5.dtd">
 <resources>
-    <jdbc-connection-pool is-isolation-level-guaranteed="true" name="HsqldbPool"
-                          driver-classname="org.hsqldb.jdbcDriver"
-                          res-type="java.sql.Driver">
-        <property name="PortNumber" value="9001"/>
-        <property name="Password" value=""/>
-        <property name="User" value="sa"/>
-        <property name="serverName" value="localhost"/>
-        <property name="URL" value="jdbc:hsqldb:file:fp.db"/>
+    <jdbc-connection-pool driver-classname="org.hsqldb.jdbcDriver" res-type="java.sql.Driver" name="FrenchPressPool">
+        <property name="PortNumber" value="9001" />
+        <property name="Password" value="" />
+        <property name="User" value="sa" />
+        <property name="serverName" value="localhost" />
+        <property name="URL" value="jdbc:hsqldb:mem:foobar" />
     </jdbc-connection-pool>
-    <jdbc-resource pool-name="HsqldbPool" jndi-name="jdbc/frenchpress"></jdbc-resource>
+    <jdbc-resource pool-name="FrenchPressPool" jndi-name="jdbc/frenchpress"></jdbc-resource>
 </resources>

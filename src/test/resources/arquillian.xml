@@ -5,10 +5,20 @@
     <engine>
          <property name="deploymentExportPath">build/libs</property>
     </engine>
-    
+
     <container qualifier="glassfish-embedded" default="true">
-         <configuration>
-         </configuration>
+        <configuration>
+            <property name="bindHttpPort">49152</property>
+            <property name="resourcesXml">src/test/resources/glassfish-resources.xml</property>
+        </configuration>
+    </container>
+
+    <container qualifier="glassfish-managed">
+        <configuration>
+            <property name="glassFishHome">glassfish4</property>
+            <property name="debug">true</property>
+            <property name="allowConnectingToRunningServer">true</property>
+        </configuration>
     </container>
 
     <container qualifier="jbossas-managed-7">

@@ -78,9 +78,17 @@ test {
 
 task jbossAS7ManagedTest(type: Test)
 
-task glassfishEmbeddedTest(type: Test)
+jbossAS7ManagedTest {
+    systemProperty 'arquillian.launch', "jbossas-managed-7"
+}
 
-task glassfishManagedTest(type: Test)
+task glassfishEmbeddedTest(type: Test) {
+    systemProperty 'arquillian.launch', "glassfish-embedded"
+}
+
+task glassfishManagedTest(type: Test) {
+    systemProperty 'arquillian.launch', "glassfish-managed"
+}
 
 tasks.withType(Test).matching({ t-> t.name.endsWith('Test') } as Spec).each { t ->
     t.testClassesDir = project.sourceSets.test.output.classesDir
