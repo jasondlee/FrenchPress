@@ -10,7 +10,10 @@ import org.junit.runner.RunWith;
 
 import javax.inject.Inject;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -69,13 +72,19 @@ public class MediaServiceTest extends AbstractServiceTestBase {
 
     private void getBytes(MediaItem item) {
         try {
-            Path path = FileSystems.getDefault().getPath("src/main/webapp/images/fp_logo_32.png");
-            FileChannel channel = FileChannel.open(path);
-            ByteBuffer buffer = ByteBuffer.allocate((int) channel.size());
-            int count = channel.read(buffer);
-            assertEquals(channel.size(), count);
-            item.setContents(buffer.array());
-            item.setFileSize(count);
+            InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("image.png");
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            byte[] buffer = new byte[8192];
+            int read = is.read(buffer);
+            int totalRead = 0;
+            while (read > -1) {
+                baos.write(buffer, 0, read);
+                totalRead += read;
+                read = is.read(buffer);
+            }
+            item.setContents(baos.toByteArray());
+            item.setFileSize(totalRead);
+            is.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

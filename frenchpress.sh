@@ -2,7 +2,6 @@
 
 SERVER=glassfish
 SERVER_DIR=glassfish4
-JAR_DIR=~/Downloads/jars
 DB_VENDOR=pgsql
 DB_USER=frenchpress
 DB_NAME=frenchpress
@@ -72,21 +71,25 @@ function configureJdbc() {
         $SERVER_DIR/glassfish/bin/asadmin delete-jdbc-resource jdbc/frenchpress &> /dev/null
         $SERVER_DIR/glassfish/bin/asadmin delete-jdbc-connection-pool FrenchPressPool &> /dev/null
 
-        if [ "$DB_VENDOR" == "pgsql" ] ; then
-            RES_TYPE=javax.sql.XADataSource
-            DS_CLASS_NAME=org.postgresql.xa.PGXADataSource
-            PROPERTIES=user=$DB_USER:password=$DB_PASS:serverName=$DB_HOST:databaseName=$DB_NAME
-        elif [ "$DB_VENDOR" == "mysql" ] ; then
-            RES_TYPE=javax.sql.DataSource
-            DS_CLASS_NAME=com.mysql.jdbc.jdbc2.optional.MysqlDataSource
-            PROPERTIES=User=$DB_USER:Password=$DB_PASS:Host=$DB_HOST:DatabaseName=$DB_NAME
-        fi
+        #if [ "$DB_VENDOR" == "pgsql" ] ; then
+        #    RES_TYPE=javax.sql.XADataSource
+        #    DS_CLASS_NAME=org.postgresql.xa.PGXADataSource
+        #    PROPERTIES=user=$DB_USER:password=$DB_PASS:serverName=$DB_HOST:databaseName=$DB_NAME
+        #elif [ "$DB_VENDOR" == "mysql" ] ; then
+        #    RES_TYPE=javax.sql.DataSource
+        #    DS_CLASS_NAME=com.mysql.jdbc.jdbc2.optional.MysqlDataSource
+        #    PROPERTIES=User=$DB_USER:Password=$DB_PASS:Host=$DB_HOST:DatabaseName=$DB_NAME
+        #fi
 
         echo Creating connection pool
-        $SERVER_DIR/glassfish/bin/asadmin create-jdbc-connection-pool --restype=$RES_TYPE \
-            --datasourceclassname=$DS_CLASS_NAME --property=$PROPERTIES FrenchPressPool > /dev/null
+        $SERVER_DIR/glassfish/bin/asadmin create-jdbc-connection-pool --restype=java.sql.Driver \
+            --driverclassname=org.hsqldb.jdbcDriver --property=User=sa:Password=\(\):PortNumber=9001:serverName=localhost:URL=jdbc\\:hsqldb\\:mem\\:`pwd`/fp FrenchPressPool > /dev/null
+        #$SERVER_DIR/glassfish/bin/asadmin create-jdbc-connection-pool --restype=$RES_TYPE \
+        #    --datasourceclassname=$DS_CLASS_NAME --property=$PROPERTIES FrenchPressPool > /dev/null
 
         echo Creating JDBC resource
+        #$SERVER_DIR/glassfish/bin/asadmin create-jdbc-resource --connectionpoolid=HsqlPool \
+        #    jdbc/frenchpress_test > /dev/null
         $SERVER_DIR/glassfish/bin/asadmin create-jdbc-resource --connectionpoolid=FrenchPressPool \
             jdbc/frenchpress > /dev/null
 
@@ -140,16 +143,15 @@ function reinstallServer() {
 
 function installGlassFish() {
     # This function needs to take into account $SERVER_DIR during extraction
-    FILE=glassfish-4.0-b90-05_28_2013.zip  
+    FILE=glassfish-4.0.zip  
     if [ ! -e $FILE ] ; then
-        wget http://dlc.sun.com.edgesuite.net/glassfish/4.0/nightly/$FILE
-            #http://download.java.net/glassfish/3.1.2/release/glassfish-3.1.2.zip
+        wget http://download.java.net/glassfish/4.0/release/glassfish-4.0.zip
     fi
 
     echo Extracting GlassFish
     unzip $FILE > /dev/null
     sed -i -e "s/9009\"/9009\" debug-enabled=\"true\"/" glassfish4/glassfish/domains/domain1/config/domain.xml
-    copyJdbcJars $SERVER_DIR/glassfish/lib
+    installJars $SERVER_DIR/glassfish/lib
 }
 
 function installTomee() {
@@ -160,16 +162,21 @@ function installTomee() {
     echo Extracting Tomee
     tar xf tomee.tar.gz
     mv apache-tomee-jaxrs* tomee
-    copyJdbcJars $SERVER_DIR/lib
+    installJars $SERVER_DIR/lib
 }
 
-function copyJdbcJars() {
-    for JAR in $JAR_DIR/*.jar ; do
-        FILE=`basename $JAR`
-        if [ ! -e $1/$FILE ] ; then
-            cp $JAR $1
-        fi
-    done
+function installJars() {
+    cd $1
+    wget -N http://search.maven.org/remotecontent?filepath=org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar -O jackson-mapper-asl-1.9.13.jar
+    wget -N http://hivelocity.dl.sourceforge.net/project/hsqldb/hsqldb/hsqldb_2_3/hsqldb-2.3.0.zip
+    unzip -j hsqldb-2.3.0.zip hsqldb-2.3.0/hsqldb/lib/hsqldb.jar
+    cd -
+    #for JAR in $JAR_DIR/*.jar ; do
+    #    FILE=`basename $JAR`
+    #    if [ ! -e $1/$FILE ] ; then
+    #        cp $JAR $1
+    #    fi
+    #done
 }
 
 function reinstallGlassFish() {

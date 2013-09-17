@@ -60,6 +60,7 @@ dependencies {
 
     testRuntime "org.jboss.shrinkwrap.descriptors:shrinkwrap-descriptors-impl-javaee:$libraryVersions.shrinkwrapDesc"
     testRuntime "org.hsqldb:hsqldb:2.0.0"
+    testRuntime "org.codehaus.jackson:jackson-mapper-asl:1.9.13"
 
     jbossAS7ManagedTestRuntime "org.jboss.as:jboss-as-arquillian-container-managed:$libraryVersions.jbossAS7"
     jbossAS7ManagedTestRuntime "org.jboss.spec:jboss-javaee-6.0:$libraryVersions.jbossJavaeeSpec"

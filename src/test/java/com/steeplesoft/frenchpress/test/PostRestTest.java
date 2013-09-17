@@ -19,11 +19,9 @@ import org.junit.runners.model.InitializationError;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
 import java.io.File;
 import java.net.URISyntaxException;
 
@@ -48,6 +46,8 @@ public class PostRestTest extends Arquillian {
     public static WebArchive createTestArchive() {
         return ShrinkWrap.create(WebArchive.class)
                 .addPackages(true, "com.steeplesoft.frenchpress")
+                .addPackages(true, "org.codehaus")
+                .addPackages(true, "com.google.gson")
                 .addAsResource("persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource(new FileAsset(new File("src/main/webapp/WEB-INF/web.xml")), "web.xml")
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
@@ -71,7 +71,7 @@ public class PostRestTest extends Arquillian {
         post.setTitle("REST Test");
         post.setSlug("rest-test");
 
-        response = target.request(MediaType.APPLICATION_JSON).post(Entity.entity(post,MediaType.APPLICATION_JSON));
+        response = target.request(MediaType.APPLICATION_JSON).post(Entity.entity(post, MediaType.APPLICATION_JSON));
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
 
         Post newPost = response.readEntity(Post.class);
@@ -79,7 +79,7 @@ public class PostRestTest extends Arquillian {
 
         // Update Post
         newPost.setTitle("Updated");
-        response = target.path("id").path(newPost.getId().toString()).request().put(Entity.entity(newPost,MediaType.APPLICATION_JSON));
+        response = target.path("id").path(newPost.getId().toString()).request().put(Entity.entity(newPost, MediaType.APPLICATION_JSON));
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
 
         // Delete Post

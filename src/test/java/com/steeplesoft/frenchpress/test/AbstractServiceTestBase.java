@@ -31,6 +31,7 @@ public class AbstractServiceTestBase {
         return ShrinkWrap.create(WebArchive.class)
                 .addPackages(true, "com.steeplesoft.frenchpress")
                 .addAsResource("persistence.xml", "META-INF/persistence.xml")
+                .addAsResource(new FileAsset(new File("src/main/webapp/images/fp_logo_32.png")), "image.png")
                 .addAsWebInfResource(new FileAsset(new File("src/main/webapp/WEB-INF/web.xml")), "web.xml")
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
